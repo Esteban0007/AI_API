@@ -11,10 +11,10 @@ def generate_admin_key():
     """Generate a secure admin API key."""
     # Generate 40 random characters (more than enough entropy)
     admin_key = "rapi_" + secrets.token_urlsafe(40)
-    
-    print("\n" + "="*70)
+
+    print("\n" + "=" * 70)
     print("🔐 ADMIN API KEY GENERATOR")
-    print("="*70)
+    print("=" * 70)
     print("\n🔑 Your secure admin API key:")
     print(f"\n   {admin_key}")
     print("\n📝 Add this to your .env file:")
@@ -31,7 +31,7 @@ def generate_admin_key():
     print("   • No daily/monthly limits")
     print("   • Instant access to everything")
     print("   • No billing involved")
-    print("\n" + "="*70 + "\n")
+    print("\n" + "=" * 70 + "\n")
 
 
 if __name__ == "__main__":

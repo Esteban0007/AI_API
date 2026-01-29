@@ -79,12 +79,12 @@ python scripts/list_users.py
 
 ## 📊 Comparación
 
-| Aspecto | Clave Admin | Cliente Free | Cliente Pro |
-|---------|------------|--------------|-----------|
-| Búsquedas/día | ♾️ Ilimitado | 100 | 10,000 |
-| Búsquedas/mes | ♾️ Ilimitado | 1,000 | 200,000 |
-| Rate Limiting | ❌ NO | ✅ SÍ | ✅ SÍ |
-| Costo | $0 | $0 | $29/mes |
+| Aspecto       | Clave Admin  | Cliente Free | Cliente Pro |
+| ------------- | ------------ | ------------ | ----------- |
+| Búsquedas/día | ♾️ Ilimitado | 100          | 10,000      |
+| Búsquedas/mes | ♾️ Ilimitado | 1,000        | 200,000     |
+| Rate Limiting | ❌ NO        | ✅ SÍ        | ✅ SÍ       |
+| Costo         | $0           | $0           | $29/mes     |
 
 ## Documentación Completa
 

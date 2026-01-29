@@ -102,8 +102,7 @@ async def validate_api_key(
         raise HTTPException(
             status_code=status.HTTP_402_PAYMENT_REQUIRED,
             detail=f"Subscription {user.subscription_status}. Please update payment.",
-        )is_admin": False,
-        "
+        )
 
     # Update last used timestamp
     api_key_record.last_used_at = datetime.utcnow()

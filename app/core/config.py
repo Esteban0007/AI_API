@@ -48,7 +48,9 @@ class Settings(BaseSettings):
 
     # Security Configuration
     API_KEY_HEADER: str = "X-API-Key"
-    ADMIN_API_KEY: str = "rapi_admin_change_me_in_env"  # Your personal admin key - CHANGE THIS!
+    ADMIN_API_KEY: str = (
+        "rapi_admin_change_me_in_env"  # Your personal admin key - CHANGE THIS!
+    )
     ENABLE_HTTPS: bool = False  # Set to True in production
     SSL_CERT_FILE: str = "./certs/cert.pem"
     SSL_KEY_FILE: str = "./certs/key.pem"
