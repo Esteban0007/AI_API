@@ -2,7 +2,22 @@
 Example data file for testing.
 """
 import json
-
+cat > requirements.txt << 'REQS'
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+sentence-transformers==3.0.1
+numpy>=1.26.0
+chromadb==0.4.21
+scikit-learn>=1.3.2
+torch>=2.2.0
+transformers>=4.35.2
+python-multipart==0.0.6
+python-dotenv==1.0.0
+sqlalchemy==2.0.23
+alembic==1.12.1
+REQS
 # Create sample documents
 sample_documents = [
     {

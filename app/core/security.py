@@ -16,7 +16,8 @@ logger = logging.getLogger(__name__)
 
 
 async def validate_api_key(
-    x_api_key: Optional[str] = Header(None), db: Session = Depends(get_db_session)
+    x_api_key: Optional[str] = Header(None),
+    db: Session = Depends(get_db_session),
 ) -> dict:
     """
     Validate API key from request header and return user context.
@@ -32,6 +33,7 @@ async def validate_api_key(
     # Check if it's the ADMIN API KEY (highest priority)
     if x_api_key and x_api_key == settings.ADMIN_API_KEY:
         logger.info("Admin API key used - unlimited access granted")
+        # Admin has its own isolated tenant
         return {
             "user_id": None,
             "email": "admin@readyapi.net",
@@ -39,6 +41,7 @@ async def validate_api_key(
             "plan": "admin",
             "is_admin": True,
             "api_key": x_api_key,
+            "tenant_id": "admin",
         }
 
     # In development, allow requests without API key
@@ -50,6 +53,7 @@ async def validate_api_key(
             "plan": "free",
             "is_admin": False,
             "api_key": "dev-key",
+            "tenant_id": "dev",
         }
 
     # Production: require API key
@@ -116,6 +120,7 @@ async def validate_api_key(
         "name": user.name,
         "plan": user.plan.name,
         "api_key": x_api_key,
+        "tenant_id": str(user.id),
     }
 
 

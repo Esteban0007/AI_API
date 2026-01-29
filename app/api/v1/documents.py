@@ -17,13 +17,19 @@ router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
 
 # Global instances
 embedder = Embedder()
-vector_store = VectorStore(embedder=embedder)
+_vector_store_cache: dict[str, VectorStore] = {}
+
+
+def _get_vector_store_for_tenant(tenant_id: str) -> VectorStore:
+    if tenant_id not in _vector_store_cache:
+        _vector_store_cache[tenant_id] = VectorStore(embedder=embedder, tenant_id=tenant_id)
+    return _vector_store_cache[tenant_id]
 
 
 @router.post("/upload", response_model=DocumentUploadResponse)
 async def upload_documents(
     batch: DocumentBatch,
-    api_key: str = Depends(validate_api_key)
+    user_context: dict = Depends(validate_api_key)
 ) -> DocumentUploadResponse:
     """
     Upload and index documents.
@@ -82,6 +88,9 @@ async def upload_documents(
                 }
             })
         
+        tenant_id = user_context["tenant_id"]
+        vector_store = _get_vector_store_for_tenant(tenant_id)
+
         # Upload to vector store
         success_count, fail_count = vector_store.add_documents_batch(docs_to_upload)
         
@@ -103,7 +112,7 @@ async def upload_documents(
 
 
 @router.get("/stats")
-async def get_stats(api_key: str = Depends(validate_api_key)) -> dict:
+async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
     """
     Get statistics about the document collection.
     
@@ -114,6 +123,8 @@ async def get_stats(api_key: str = Depends(validate_api_key)) -> dict:
     - `model`: Model used for embeddings
     """
     try:
+        tenant_id = user_context["tenant_id"]
+        vector_store = _get_vector_store_for_tenant(tenant_id)
         stats = vector_store.get_collection_stats()
         return stats
     except Exception as e:
@@ -127,7 +138,7 @@ async def get_stats(api_key: str = Depends(validate_api_key)) -> dict:
 @router.delete("/{doc_id}")
 async def delete_document(
     doc_id: str,
-    api_key: str = Depends(validate_api_key)
+    user_context: dict = Depends(validate_api_key)
 ) -> dict:
     """
     Delete a document by ID.
@@ -140,6 +151,8 @@ async def delete_document(
     - `message`: Result message
     """
     try:
+        tenant_id = user_context["tenant_id"]
+        vector_store = _get_vector_store_for_tenant(tenant_id)
         success = vector_store.delete_document(doc_id)
         
         if not success:

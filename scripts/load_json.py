@@ -9,6 +9,7 @@ import json
 import logging
 import sys
 from pathlib import Path
+import argparse
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -74,13 +75,21 @@ def validate_document(doc: dict) -> bool:
 
 def main():
     """Main entry point for the script."""
-    if len(sys.argv) < 2:
-        print("Usage: python scripts/load_json.py <path_to_json_file>")
-        print("\nExample:")
-        print("  python scripts/load_json.py data/documents.json")
-        sys.exit(1)
-    
-    file_path = sys.argv[1]
+    parser = argparse.ArgumentParser(description="Load JSON documents into vector store")
+    parser.add_argument(
+        "file_path",
+        type=str,
+        help="Path to JSON file containing documents",
+    )
+    parser.add_argument(
+        "--tenant",
+        type=str,
+        default="admin",
+        help="Tenant ID (default: admin)",
+    )
+    args = parser.parse_args()
+
+    file_path = args.file_path
     
     logger.info(f"Starting document loading process...")
     logger.info(f"File: {file_path}")
@@ -103,7 +112,7 @@ def main():
     # Initialize vector store
     logger.info("Initializing vector store...")
     embedder = Embedder()
-    vector_store = VectorStore(embedder=embedder)
+    vector_store = VectorStore(embedder=embedder, tenant_id=args.tenant)
     
     # Upload documents
     logger.info(f"Uploading {len(valid_docs)} documents...")

@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException, status, Depends
 import logging
 
 from ...models.search import SearchQuery, SearchResponse, SearchResult
-from ...core.security import validate_api_key, check_rate_limit
+from ...core.security import check_rate_limit
 from ...engine.searcher import SearchEngine
 from ...engine.store import VectorStore
 from ...engine.embedder import Embedder
@@ -17,8 +17,25 @@ router = APIRouter(prefix="/api/v1/search", tags=["search"])
 
 # Global instances
 embedder = Embedder()
-vector_store = VectorStore(embedder=embedder)
-search_engine = SearchEngine(vector_store=vector_store, embedder=embedder)
+_vector_store_cache: dict[str, VectorStore] = {}
+_search_engine_cache: dict[str, SearchEngine] = {}
+
+
+def _get_vector_store_for_tenant(tenant_id: str) -> VectorStore:
+    if tenant_id not in _vector_store_cache:
+        _vector_store_cache[tenant_id] = VectorStore(
+            embedder=embedder, tenant_id=tenant_id
+        )
+    return _vector_store_cache[tenant_id]
+
+
+def _get_search_engine_for_tenant(tenant_id: str) -> SearchEngine:
+    if tenant_id not in _search_engine_cache:
+        vector_store = _get_vector_store_for_tenant(tenant_id)
+        _search_engine_cache[tenant_id] = SearchEngine(
+            vector_store=vector_store, embedder=embedder
+        )
+    return _search_engine_cache[tenant_id]
 
 
 @router.post("/query", response_model=SearchResponse)
@@ -63,6 +80,9 @@ async def search(
     """
     try:
         logger.info(f"Received search query: '{search_query.query}'")
+
+        tenant_id = user_context["tenant_id"]
+        search_engine = _get_search_engine_for_tenant(tenant_id)
 
         # Perform search
         results, execution_time = search_engine.search(
@@ -112,14 +132,11 @@ async def health_check() -> dict:
     **Returns:**
     - `status`: Service status
     - `message`: Status message
-    - `collection_stats`: Statistics about the document collection
     """
     try:
-        stats = search_engine.get_collection_stats()
         return {
             "status": "healthy",
             "message": "Search service is running",
-            "collection_stats": stats,
         }
     except Exception as e:
         logger.error(f"Health check failed: {e}")
