@@ -38,7 +38,7 @@ async def validate_api_key(
             "name": "Administrator",
             "plan": "admin",
             "is_admin": True,
-            "api_key": x_api_key
+            "api_key": x_api_key,
         }
 
     # In development, allow requests without API key
