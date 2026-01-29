@@ -1,85 +1,196 @@
-"""
-Example data file for testing.
-"""
+"""Generate a large, realistic medical dataset for search testing."""
+
+import argparse
 import json
-cat > requirements.txt << 'REQS'
-fastapi==0.104.1
-uvicorn==0.24.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
-sentence-transformers==3.0.1
-numpy>=1.26.0
-chromadb==0.4.21
-scikit-learn>=1.3.2
-torch>=2.2.0
-transformers>=4.35.2
-python-multipart==0.0.6
-python-dotenv==1.0.0
-sqlalchemy==2.0.23
-alembic==1.12.1
-REQS
-# Create sample documents
-sample_documents = [
-    {
-        "id": "doc-001",
-        "title": "Introducción a Machine Learning",
-        "content": "Machine Learning es una rama de la inteligencia artificial que permite a las máquinas aprender de los datos sin ser programadas explícitamente. Los algoritmos de aprendizaje automático pueden identificar patrones en los datos y hacer predicciones basadas en esos patrones. Esto es diferente a la programación tradicional donde especificas cada regla que la máquina debe seguir.",
-        "keywords": ["machine-learning", "ai", "algorithms", "learning"],
-        "metadata": {
-            "category": "tutorial",
-            "language": "es",
-            "source": "https://example.com/ml-intro"
-        }
-    },
-    {
-        "id": "doc-002",
-        "title": "Redes Neuronales Profundas",
-        "content": "Las redes neuronales profundas son modelos inspirados en el funcionamiento del cerebro humano. Consisten en capas de neuronas artificiales conectadas entre sí que procesan información. El aprendizaje profundo ha revolucionado campos como la visión por computadora, procesamiento de lenguaje natural y reconocimiento de voz.",
-        "keywords": ["neural-networks", "deep-learning", "ai"],
-        "metadata": {
-            "category": "advanced",
-            "language": "es",
-            "source": "https://example.com/neural-networks"
-        }
-    },
-    {
-        "id": "doc-003",
-        "title": "Procesamiento de Lenguaje Natural",
-        "content": "El Procesamiento de Lenguaje Natural (NLP) es un campo de la inteligencia artificial que se enfoca en la interacción entre computadoras y lenguaje humano. Permite a las máquinas entender, interpretar y generar texto de manera similar a como lo hacen los humanos. Los transformers y modelos como BERT han revolucionado este campo.",
-        "keywords": ["nlp", "language", "text-processing", "transformers"],
-        "metadata": {
-            "category": "nlp",
-            "language": "es",
-            "source": "https://example.com/nlp-intro"
-        }
-    },
-    {
-        "id": "doc-004",
-        "title": "Visión por Computadora",
-        "content": "La Visión por Computadora es la disciplina que permite a las máquinas interpretar y entender imágenes digitales. Utiliza algoritmos de procesamiento de imágenes y aprendizaje profundo para reconocer objetos, detectar características y analizar contenido visual. Aplicaciones incluyen reconocimiento facial, conducción autónoma y diagnóstico médico.",
-        "keywords": ["computer-vision", "image-processing", "deep-learning"],
-        "metadata": {
-            "category": "computer-vision",
-            "language": "es",
-            "source": "https://example.com/vision-intro"
-        }
-    },
-    {
-        "id": "doc-005",
-        "title": "Sistemas de Recomendación",
-        "content": "Los sistemas de recomendación son algoritmos que predicen las preferencias de los usuarios y sugieren items relevantes. Existen tres enfoques principales: filtrado colaborativo, filtrado basado en contenido e híbridos. Estos sistemas son fundamentales en plataformas de comercio electrónico, streaming de video y redes sociales.",
-        "keywords": ["recommendation-systems", "collaborative-filtering", "algorithms"],
-        "metadata": {
-            "category": "machine-learning",
-            "language": "es",
-            "source": "https://example.com/recommendation"
-        }
-    }
+import random
+from datetime import datetime
+from pathlib import Path
+
+
+SPECIALTIES = [
+    "cardiología",
+    "endocrinología",
+    "neurología",
+    "oncología",
+    "pediatría",
+    "dermatología",
+    "neumología",
+    "gastroenterología",
+    "medicina interna",
+    "urgencias",
+    "cirugía general",
+    "radiología",
+    "farmacología",
+    "epidemiología",
+    "cuidados intensivos",
 ]
 
-# Save to file
-with open("data/sample_documents.json", "w", encoding="utf-8") as f:
-    json.dump(sample_documents, f, ensure_ascii=False, indent=2)
+DOC_TYPES = [
+    "Guía clínica",
+    "Protocolo",
+    "Resumen de evidencia",
+    "Nota de investigación",
+    "Caso clínico",
+    "Checklist",
+]
 
-print(f"✅ Sample documents created: data/sample_documents.json")
-print(f"   Total documents: {len(sample_documents)}")
+CONDITIONS = [
+    {
+        "name": "hipertensión arterial",
+        "symptoms": ["cefalea", "mareo", "visión borrosa", "palpitaciones"],
+        "tests": ["tensión arterial", "ECG", "perfil lipídico", "función renal"],
+        "treatments": ["cambios en estilo de vida", "IECA", "ARA-II", "diuréticos"],
+    },
+    {
+        "name": "diabetes tipo 2",
+        "symptoms": ["poliuria", "polidipsia", "fatiga", "visión borrosa"],
+        "tests": ["HbA1c", "glucemia en ayunas", "perfil lipídico", "microalbuminuria"],
+        "treatments": ["dieta", "ejercicio", "metformina", "iSGLT2"],
+    },
+    {
+        "name": "asma",
+        "symptoms": ["disnea", "sibilancias", "tos nocturna", "opresión torácica"],
+        "tests": ["espirometría", "FEV1", "peak flow", "pruebas alérgicas"],
+        "treatments": ["SABA", "corticoides inhalados", "LABA", "plan de acción"],
+    },
+    {
+        "name": "EPOC",
+        "symptoms": ["disnea crónica", "tos productiva", "exacerbaciones"],
+        "tests": ["espirometría", "gasometría", "radiografía de tórax"],
+        "treatments": ["bronco-dilatadores", "rehabilitación pulmonar", "vacunación"],
+    },
+    {
+        "name": "infarto agudo de miocardio",
+        "symptoms": ["dolor torácico", "diaforesis", "náuseas", "disnea"],
+        "tests": ["ECG", "troponinas", "angiografía"],
+        "treatments": ["antiagregación", "reperfusión", "betabloqueantes"],
+    },
+    {
+        "name": "ictus isquémico",
+        "symptoms": ["hemiparesia", "afasia", "desviación facial"],
+        "tests": ["TC craneal", "RM", "angiografía"],
+        "treatments": ["trombólisis", "antiagregación", "rehabilitación"],
+    },
+    {
+        "name": "infección urinaria",
+        "symptoms": ["disuria", "polaquiuria", "dolor suprapúbico"],
+        "tests": ["urocultivo", "tira reactiva", "sedimento"],
+        "treatments": ["antibióticos", "hidratación", "control de síntomas"],
+    },
+    {
+        "name": "neumonía adquirida en la comunidad",
+        "symptoms": ["fiebre", "tos", "expectoración", "dolor torácico"],
+        "tests": ["radiografía de tórax", "PCR", "hemocultivos"],
+        "treatments": ["antibióticos", "oxigenoterapia", "soporte"],
+    },
+    {
+        "name": "insuficiencia cardíaca",
+        "symptoms": ["disnea", "edemas", "ortopnea"],
+        "tests": ["BNP", "ecocardiograma", "radiografía"],
+        "treatments": ["diuréticos", "IECA", "betabloqueantes"],
+    },
+    {
+        "name": "anemia ferropénica",
+        "symptoms": ["fatiga", "palidez", "taquicardia"],
+        "tests": ["hemograma", "ferritina", "hierro sérico"],
+        "treatments": ["suplementos de hierro", "evaluar sangrado"],
+    },
+    {
+        "name": "migraña",
+        "symptoms": ["cefalea pulsátil", "fotofobia", "náuseas"],
+        "tests": ["anamnesis", "descartar banderas rojas"],
+        "treatments": ["AINEs", "triptanes", "profilaxis"],
+    },
+    {
+        "name": "hipotiroidismo",
+        "symptoms": ["fatiga", "aumento de peso", "frío"],
+        "tests": ["TSH", "T4 libre"],
+        "treatments": ["levotiroxina"],
+    },
+]
+
+EVIDENCE_NOTES = [
+    "La evidencia reciente sugiere optimizar el control de comorbilidades.",
+    "Se recomienda individualizar objetivos terapéuticos según riesgo.",
+    "El seguimiento estrecho reduce reingresos y complicaciones.",
+    "El cribado oportuno mejora el pronóstico a largo plazo.",
+]
+
+
+def build_document(index: int, rng: random.Random, language: str) -> dict:
+    condition = rng.choice(CONDITIONS)
+    specialty = rng.choice(SPECIALTIES)
+    doc_type = rng.choice(DOC_TYPES)
+
+    title = f"{doc_type}: {condition['name'].capitalize()} en {specialty}"
+    symptoms = ", ".join(condition["symptoms"])
+    tests = ", ".join(condition["tests"])
+    treatments = ", ".join(condition["treatments"])
+    evidence = rng.choice(EVIDENCE_NOTES)
+    guideline = rng.choice(["GPC 2023", "NICE 2022", "OMS 2021", "ESC 2024"])
+
+    content = (
+        f"Resumen clínico: Documento de referencia para {condition['name']} en el área de {specialty}.\n\n"
+        f"Síntomas frecuentes: {symptoms}.\n"
+        f"Factores de riesgo: edad, comorbilidades, hábitos de vida.\n"
+        f"Pruebas recomendadas: {tests}.\n"
+        f"Tratamiento inicial: {treatments}.\n"
+        f"Seguimiento: control periódico y ajuste terapéutico según respuesta.\n"
+        f"Notas de evidencia: {evidence}\n"
+        f"Guía de referencia: {guideline}.\n"
+        "Advertencia: material informativo para pruebas técnicas, no sustituye criterio clínico."
+    )
+
+    keywords = list(
+        {
+            condition["name"],
+            specialty,
+            "protocolo",
+            "diagnóstico",
+            "tratamiento",
+        }
+    )
+
+    return {
+        "id": f"med-{index:06d}",
+        "title": title,
+        "content": content,
+        "keywords": keywords,
+        "metadata": {
+            "category": specialty,
+            "language": language,
+            "source": "synthetic://medical-dataset",
+            "created_at": datetime.utcnow().isoformat(),
+            "condition": condition["name"],
+            "doc_type": doc_type,
+        },
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate synthetic medical documents")
+    parser.add_argument("--count", type=int, default=500, help="Number of documents")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed")
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="data/sample_documents.json",
+        help="Output JSON path",
+    )
+    parser.add_argument("--language", type=str, default="es", help="Language code")
+    args = parser.parse_args()
+
+    rng = random.Random(args.seed)
+    documents = [build_document(i + 1, rng, args.language) for i in range(args.count)]
+
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as f:
+        json.dump(documents, f, ensure_ascii=False, indent=2)
+
+    print(f"✅ Sample documents created: {output_path}")
+    print(f"   Total documents: {len(documents)}")
+
+
+if __name__ == "__main__":
+    main()
