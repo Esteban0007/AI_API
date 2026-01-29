@@ -46,6 +46,12 @@ data/chroma_db/
 *.sqlite
 *.sqlite3
 
+# SSL Certificates
+certs/
+*.pem
+*.crt
+*.key
+
 # Logs
 *.log
 logs/
