@@ -29,6 +29,18 @@ async def validate_api_key(
     """
     settings = get_settings()
 
+    # Check if it's the ADMIN API KEY (highest priority)
+    if x_api_key and x_api_key == settings.ADMIN_API_KEY:
+        logger.info("Admin API key used - unlimited access granted")
+        return {
+            "user_id": None,
+            "email": "admin@readyapi.net",
+            "name": "Administrator",
+            "plan": "admin",
+            "is_admin": True,
+            "api_key": x_api_key
+        }
+
     # In development, allow requests without API key
     if settings.DEBUG and not x_api_key:
         logger.warning("Development mode: Request without API key")
@@ -36,6 +48,7 @@ async def validate_api_key(
             "user_id": None,
             "email": "dev@localhost",
             "plan": "free",
+            "is_admin": False,
             "api_key": "dev-key",
         }
 
@@ -89,7 +102,8 @@ async def validate_api_key(
         raise HTTPException(
             status_code=status.HTTP_402_PAYMENT_REQUIRED,
             detail=f"Subscription {user.subscription_status}. Please update payment.",
-        )
+        )is_admin": False,
+        "
 
     # Update last used timestamp
     api_key_record.last_used_at = datetime.utcnow()
@@ -124,16 +138,13 @@ async def check_rate_limit(
         return user_context
 
     user_id = user_context["user_id"]
+    # Admin users bypass all rate limiting
+    if user_context.get("is_admin"):
+        user_context["rate_limited"] = False
+        return user_context
 
     # Get user and plan
     user = db.query(User).filter(User.id == user_id).first()
-    
-    # Skip rate limiting for admin users
-    if user.is_admin:
-        user_context["is_admin"] = True
-        user_context["rate_limited"] = False
-        return user_context
-    
     plan = user.plan
 
     # Get or create today's usage record

@@ -44,17 +44,11 @@ def list_all_users():
             print(f"   👤 Name: {user.name}")
             if user.company:
                 print(f"   🏢 Company: {user.company}")
-            
-            # Show admin status
-            if user.is_admin:
-                print(f"   ⭐ Status: ADMIN (Unlimited Access)")
-            else:
-                print(
-                    f"   📦 Plan: {user.plan.display_name} (${user.plan.price_monthly}/month)"
-                )
-            
+            print(
+                f"   📦 Plan: {user.plan.display_name} (${user.plan.price_monthly}/month)"
+            )
             print(f"   🆔 User ID: {user.id}")
-            print(f"   ✅ Active: {'Yes' if user.is_active else 'No'}")
+            print(f"   ✅ Status: {'Active' if user.is_active else 'Inactive'}")
             print(f"   💳 Subscription: {user.subscription_status}")
             print(f"   📅 Created: {user.created_at.strftime('%Y-%m-%d %H:%M')}")
 
