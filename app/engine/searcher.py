@@ -150,8 +150,6 @@ class SearchEngine:
                     query, candidates, include_content
                 )
                 results.extend(ranked_candidates)
-                )
-                results.extend(ranked_candidates)
 
             # Step 5: Apply top_k limit
             final_top_k = top_k or self.rerank_top_k
