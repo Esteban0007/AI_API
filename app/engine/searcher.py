@@ -4,6 +4,7 @@ Search engine with cross-encoder re-ranking for improved relevance.
 
 import logging
 from typing import List, Dict, Tuple
+import re
 import numpy as np
 from sentence_transformers import CrossEncoder
 from time import time
@@ -147,10 +148,15 @@ class SearchEngine:
             # Create results with scores
             results = []
             for candidate, score in zip(candidates, reranked_scores):
+                title = candidate["metadata"].get("title", "")
+                bonus = self._title_match_bonus(query, title)
+                final_score = float(score) + bonus
+                if final_score > 1.0:
+                    final_score = 1.0
                 result = {
                     "id": candidate["id"],
-                    "title": candidate["metadata"].get("title", ""),
-                    "score": float(score),
+                    "title": title,
+                    "score": final_score,
                     "metadata": candidate["metadata"],
                 }
 
@@ -190,6 +196,44 @@ class SearchEngine:
             Sigmoid-normalized array
         """
         return 1 / (1 + np.exp(-x))
+
+    @staticmethod
+    def _normalize_text(text: str) -> str:
+        """Normalize text for title matching."""
+        if not text:
+            return ""
+        text = text.lower()
+        text = re.sub(r"[^a-z0-9\s]", " ", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
+
+    def _title_match_bonus(self, query: str, title: str) -> float:
+        """
+        Compute a bonus score for strong title matches.
+
+        Strategy (hybrid ranking):
+        - Exact normalized match: +0.40
+        - Query substring in title or title in query: +0.25
+        - All query tokens contained in title: +0.15
+        """
+        nq = self._normalize_text(query)
+        nt = self._normalize_text(title)
+
+        if not nq or not nt:
+            return 0.0
+
+        if nq == nt:
+            return 0.40
+
+        if nq in nt or nt in nq:
+            return 0.25
+
+        q_tokens = nq.split(" ")
+        t_tokens = set(nt.split(" "))
+        if q_tokens and all(token in t_tokens for token in q_tokens):
+            return 0.15
+
+        return 0.0
 
     def get_collection_stats(self) -> Dict:
         """Get statistics about the search engine."""
