@@ -84,30 +84,17 @@ class SearchEngine:
             return [], 0
 
         try:
-            # Step 1: Exact title matches (hybrid ranking)
+            # Step 1: Exact title matches (fastest - no embedding needed)
             exact_title_matches = self.vector_store.get_exact_title_matches(query)
             exact_ids = {doc["id"] for doc in exact_title_matches}
 
-            # Step 2: Fast title token matching (for partial title queries)
+            # Step 2: Fast title token matching (no embedding needed)
             token_title_matches = self.vector_store.get_title_token_matches(query)
             exact_ids.update(doc["id"] for doc in token_title_matches)
 
-            # Step 3: Generate query embedding
-            query_embedding = self.embedder.embed_text(query)
-
-            # Step 4: Vector search to get candidates (with optional filters)
-            # Use smaller candidate pool - exact/token matches reduce need for semantic search
-            candidate_k = min(20, self.rerank_top_k * 2)  # Max 20 candidates
-            candidates = self.vector_store.search(
-                query_embedding, top_k=candidate_k, filters=filters
-            )
-
-            # Remove duplicates already matched by exact title
-            if exact_ids:
-                candidates = [c for c in candidates if c["id"] not in exact_ids]
-
             # Prepare final results
             results = []
+            final_top_k = top_k or self.rerank_top_k
 
             # Add exact matches with score 1.0
             if exact_title_matches:
@@ -135,11 +122,34 @@ class SearchEngine:
                         }
                     )
 
+            # If we have enough results from exact/token matches, return immediately (skip semantic search)
+            if len(results) >= final_top_k:
+                execution_time = (time() - start_time) * 1000
+                logger.info(
+                    f"Fast path: '{query}' completed in {execution_time:.2f}ms (exact/token match)"
+                )
+                return results[:final_top_k], execution_time
+
+            # Step 3: Generate query embedding (only if needed)
+            query_embedding = self.embedder.embed_text(query)
+
+            # Step 4: Vector search to get candidates (with optional filters)
+            # Use smaller candidate pool - exact/token matches reduce need for semantic search
+            candidate_k = min(20, self.rerank_top_k * 2)  # Max 20 candidates
+            candidates = self.vector_store.search(
+                query_embedding, top_k=candidate_k, filters=filters
+            )
+
+            # Remove duplicates already matched by exact title
+            if exact_ids:
+                candidates = [c for c in candidates if c["id"] not in exact_ids]
+
             # Only use cross-encoder re-ranking if we need more results (performance optimization)
-            final_top_k = top_k or self.rerank_top_k
             if len(results) < final_top_k and candidates:
                 ranked_candidates = self._rerank_results(
                     query, candidates, include_content
+                )
+                results.extend(ranked_candidates)
                 )
                 results.extend(ranked_candidates)
 
