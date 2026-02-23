@@ -372,64 +372,48 @@ class VectorStore:
     def get_title_token_matches(self, query: str) -> List[Dict]:
         """
         Fast title token matching for partial title queries.
-        Uses token-based matching instead of full embedding.
+        Uses title_normalized field for fast lookups.
 
         Args:
             query: Query string
 
         Returns:
-            List of documents whose title contains query tokens
+            List of documents whose title contains query tokens (max 10)
         """
         if not query:
             return []
 
-        results: List[Dict] = []
-        seen_ids: set[str] = set()
-
         try:
-            # Normalize and tokenize
+            # Normalize query
             nq = self._normalize_title(query)
-            if not nq:
+            if not nq or len(nq) < 2:  # Skip very short queries
                 return []
 
-            query_tokens = nq.split(" ")
+            # Use ChromaDB's WHERE clause with $contains operator for fast search
+            # This leverages the indexed title_normalized field
+            where_clause = {"title_normalized": {"$contains": nq}}
+            
+            result = self.collection.get(
+                where=where_clause,
+                include=["documents", "metadatas"],
+                limit=10,  # Limit to top 10 for speed
+            )
 
-            # Retrieve ALL documents and filter by token match
-            all_docs = self.collection.get(include=["documents", "metadatas"])
-
-            if not all_docs.get("ids"):
+            if not result.get("ids"):
                 return []
 
-            # Score each document by how many tokens match
-            scored_docs = []
-            for idx, doc_id in enumerate(all_docs["ids"]):
-                title = all_docs["metadatas"][idx].get("title", "")
-                title_norm = self._normalize_title(title)
-                title_tokens = set(title_norm.split(" ")) if title_norm else set()
-
-                # Count matching tokens
-                matching_tokens = sum(
-                    1 for token in query_tokens if token in title_tokens
+            # Format results
+            results = []
+            for idx, doc_id in enumerate(result["ids"]):
+                results.append(
+                    {
+                        "id": doc_id,
+                        "distance": 0.0,
+                        "similarity_score": 0.95,
+                        "content": result["documents"][idx],
+                        "metadata": result["metadatas"][idx],
+                    }
                 )
-
-                if matching_tokens > 0:
-                    score = matching_tokens / len(query_tokens)
-                    scored_docs.append(
-                        (
-                            score,
-                            {
-                                "id": doc_id,
-                                "distance": 0.0,
-                                "similarity_score": score,
-                                "content": all_docs["documents"][idx],
-                                "metadata": all_docs["metadatas"][idx],
-                            },
-                        )
-                    )
-
-            # Sort by score (descending) and return
-            scored_docs.sort(key=lambda x: x[0], reverse=True)
-            results = [doc for _, doc in scored_docs]
 
             return results
         except Exception as e:
