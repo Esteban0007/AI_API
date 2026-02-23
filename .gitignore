@@ -73,3 +73,9 @@ Thumbs.db
 node_modules/
 dist/
 build/
+
+# Large dataset files
+dataset_*.json
+data/chroma_db.backup/
+data/*.json
+data/*.csv

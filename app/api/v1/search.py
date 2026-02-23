@@ -84,10 +84,7 @@ async def search(
     **Available filter fields:**
     Any field in metadata with simple types (str, int, float, bool).
 
-    Auto-indexed fields: id, language
-
-    You can also add and filter by any custom fields in metadata
-
+    Auto-indexed field: language
     **Response:**
     - `query`: The original search query
     - `total_results`: Number of results found

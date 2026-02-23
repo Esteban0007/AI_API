@@ -69,12 +69,11 @@ Usa el campo `filters` en tu búsqueda:
 
 ## 📊 Campos Filtrables Predefinidos
 
-El sistema automáticamente indexa estos campos mínimos si están en `metadata`:
+El sistema automáticamente indexa este campo mínimo si está en `metadata`:
 
-- **`id`** - Identificador personalizado adicional (el documento ya tiene su id propio)
 - **`language`** - Código de idioma (es, en, fr) o lenguaje de programación (python, javascript, java)
 
-**Nota:** Puedes agregar cualquier otro campo personalizado en `metadata` y será guardado completo en el documento, pero solo estos dos se indexan automáticamente para filtrado rápido.
+**Nota:** Puedes agregar cualquier otro campo personalizado en `metadata` y será guardado completo en el documento. ChromaDB los indexará bajo demanda cuando los uses en un filtro.
 
 ## 🎯 Ejemplos de Uso
 

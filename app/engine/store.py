@@ -75,9 +75,8 @@ class VectorStore:
         """
         filterable = {}
         
-        # Minimal universal fields - programmers can add more as needed
+        # Minimal universal field - only language
         common_fields = [
-            "id",              # custom identifier field
             "language",        # language code or programming language
         ]
         
