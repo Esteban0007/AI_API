@@ -99,7 +99,11 @@ async def search(
                 title=result["title"],
                 score=result["score"],
                 content=result.get("content"),
-                metadata=result.get("metadata"),
+                metadata={
+                    k: v
+                    for k, v in result.get("metadata", {}).items()
+                    if k != "tenant_id"
+                },
             )
             for result in results
         ]

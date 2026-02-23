@@ -78,8 +78,21 @@ class VectorStore:
             True if successful
         """
         try:
-            # Generate embedding
-            embedding = self.embedder.embed_text(content)
+            # Generate embedding from title + content + keywords
+            title = metadata.get("title", "")
+            keywords = metadata.get("keywords", [])
+
+            # Build text to embed
+            parts = []
+            if title:
+                parts.append(title)
+            parts.append(content)
+            if keywords:
+                keywords_str = ", ".join(keywords)
+                parts.append(f"Keywords: {keywords_str}")
+
+            text_to_embed = "\n\n".join(parts)
+            embedding = self.embedder.embed_text(text_to_embed)
 
             # Prepare metadata
             chroma_metadata = {
@@ -143,10 +156,24 @@ class VectorStore:
         full_documents = []
 
         try:
-            # Generate all embeddings at once
+            # Generate all embeddings at once from title + content + keywords
             for doc in documents:
                 doc_ids.append(doc["id"])
-                contents.append(doc["content"])
+                title = doc.get("title", "")
+                keywords = doc.get("keywords", [])
+                content = doc["content"]
+
+                # Build text to embed
+                parts = []
+                if title:
+                    parts.append(title)
+                parts.append(content)
+                if keywords:
+                    keywords_str = ", ".join(keywords)
+                    parts.append(f"Keywords: {keywords_str}")
+
+                text_to_embed = "\n\n".join(parts)
+                contents.append(text_to_embed)
 
             embeddings_list = self.embedder.embed_texts(contents)
             embeddings = [e.tolist() for e in embeddings_list]
