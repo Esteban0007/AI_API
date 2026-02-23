@@ -70,23 +70,23 @@ class VectorStore:
         """
         Extract common filterable fields from metadata for ChromaDB indexing.
         Only extracts fields with simple types (str, int, float, bool).
-        
+
         Universal fields for any use case.
         """
         filterable = {}
-        
+
         # Minimal universal field - only language
         common_fields = [
-            "language",        # language code or programming language
+            "language",  # language code or programming language
         ]
-        
+
         for field in common_fields:
             if field in metadata:
                 value = metadata[field]
                 # Only add if it's a simple type that ChromaDB can index
                 if isinstance(value, (str, int, float, bool)):
                     filterable[field] = value
-        
+
         return filterable
 
     def add_document(self, doc_id: str, content: str, metadata: Dict) -> bool:
@@ -264,7 +264,7 @@ class VectorStore:
                 "n_results": top_k,
                 "include": ["distances", "documents", "metadatas"],
             }
-            
+
             # Add filters if provided
             if filters:
                 # Build where clause for ChromaDB
@@ -272,15 +272,11 @@ class VectorStore:
                 for key, value in filters.items():
                     if value is not None:
                         where_clause[key] = value
-                
+
                 if where_clause:
                     query_params["where"] = where_clause
-            
+
             results = self.collection.query(**query_params)
-                query_embeddings=[query_embedding.tolist()],
-                n_results=top_k,
-                include=["distances", "documents", "metadatas"],
-            )
 
             # Process results
             search_results = []
