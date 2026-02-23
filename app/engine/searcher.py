@@ -88,13 +88,15 @@ class SearchEngine:
             exact_title_matches = self.vector_store.get_exact_title_matches(query)
             exact_ids = {doc["id"] for doc in exact_title_matches}
 
-            # Step 2: Generate query embedding
+            # Step 2: Fast title token matching (for partial title queries)
+            token_title_matches = self.vector_store.get_title_token_matches(query)
+            exact_ids.update(doc["id"] for doc in token_title_matches)
+
+            # Step 3: Generate query embedding
             query_embedding = self.embedder.embed_text(query)
 
-            # Step 3: Vector search to get candidates (with optional filters)
-            candidate_k = self.rerank_top_k
-            if self._is_short_title_query(query):
-                candidate_k = max(candidate_k, 200)
+            # Step 4: Vector search to get candidates (with optional filters)
+            candidate_k = self.rerank_top_k * 5  # 50 candidates for better recall
             candidates = self.vector_store.search(
                 query_embedding, top_k=candidate_k, filters=filters
             )
@@ -111,7 +113,7 @@ class SearchEngine:
             # Step 4: Re-rank using cross-encoder
             results = self._rerank_results(query, candidates, include_content)
 
-            # Promote exact title matches to the top with a strong score
+            # Promote exact title matches AND token matches to the top with a strong score
             if exact_title_matches:
                 exact_results = []
                 for match in exact_title_matches:
@@ -125,6 +127,22 @@ class SearchEngine:
                         }
                     )
                 results = exact_results + results
+
+            # Add token-matched results with high score (0.95) if not already in results
+            if token_title_matches:
+                existing_ids = {r["id"] for r in results}
+                for match in token_title_matches:
+                    if match["id"] not in existing_ids:
+                        results.insert(
+                            len([r for r in results if r["score"] >= 0.95]),
+                            {
+                                "id": match["id"],
+                                "title": match["metadata"].get("title", ""),
+                                "score": 0.95,
+                                "metadata": match["metadata"],
+                                "content": match["content"] if include_content else None,
+                            },
+                        )
 
             # Step 5: Apply top_k limit
             final_top_k = top_k or self.rerank_top_k
@@ -267,9 +285,7 @@ class SearchEngine:
         if not nq:
             return False
         tokens = nq.split(" ")
-        return len(tokens) <= 2 and len(nq) <= 20
-
-    def get_collection_stats(self) -> Dict:
+        return len(tokens) <= 2 and len(nq) <= 20    def get_collection_stats(self) -> Dict:
         """Get statistics about the search engine."""
         return self.vector_store.get_collection_stats()
 

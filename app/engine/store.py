@@ -369,6 +369,73 @@ class VectorStore:
 
         return results
 
+    def get_title_token_matches(self, query: str) -> List[Dict]:
+        """
+        Fast title token matching for partial title queries.
+        Uses token-based matching instead of full embedding.
+
+        Args:
+            query: Query string
+
+        Returns:
+            List of documents whose title contains query tokens
+        """
+        if not query:
+            return []
+
+        results: List[Dict] = []
+        seen_ids: set[str] = set()
+
+        try:
+            # Normalize and tokenize
+            nq = self._normalize_title(query)
+            if not nq:
+                return []
+
+            query_tokens = nq.split(" ")
+
+            # Retrieve ALL documents and filter by token match
+            all_docs = self.collection.get(include=["documents", "metadatas"])
+
+            if not all_docs.get("ids"):
+                return []
+
+            # Score each document by how many tokens match
+            scored_docs = []
+            for idx, doc_id in enumerate(all_docs["ids"]):
+                title = all_docs["metadatas"][idx].get("title", "")
+                title_norm = self._normalize_title(title)
+                title_tokens = set(title_norm.split(" ")) if title_norm else set()
+
+                # Count matching tokens
+                matching_tokens = sum(
+                    1 for token in query_tokens if token in title_tokens
+                )
+
+                if matching_tokens > 0:
+                    score = matching_tokens / len(query_tokens)
+                    scored_docs.append(
+                        (
+                            score,
+                            {
+                                "id": doc_id,
+                                "distance": 0.0,
+                                "similarity_score": score,
+                                "content": all_docs["documents"][idx],
+                                "metadata": all_docs["metadatas"][idx],
+                            },
+                        )
+                    )
+
+            # Sort by score (descending) and return
+            scored_docs.sort(key=lambda x: x[0], reverse=True)
+            results = [doc for _, doc in scored_docs]
+
+            return results
+        except Exception as e:
+            logger.error(f"Error in title token matching: {e}")
+            return []
+
     def get_document(self, doc_id: str) -> Optional[Dict]:
         """
         Retrieve a specific document by ID.
