@@ -92,8 +92,11 @@ class SearchEngine:
             query_embedding = self.embedder.embed_text(query)
 
             # Step 3: Vector search to get candidates (with optional filters)
+            candidate_k = self.rerank_top_k
+            if self._is_short_title_query(query):
+                candidate_k = max(candidate_k, 200)
             candidates = self.vector_store.search(
-                query_embedding, top_k=self.rerank_top_k, filters=filters
+                query_embedding, top_k=candidate_k, filters=filters
             )
 
             # Remove duplicates already matched by exact title
@@ -257,6 +260,14 @@ class SearchEngine:
             return 0.15
 
         return 0.0
+
+    def _is_short_title_query(self, query: str) -> bool:
+        """Heuristic: short queries benefit from larger candidate pools."""
+        nq = self._normalize_text(query)
+        if not nq:
+            return False
+        tokens = nq.split(" ")
+        return len(tokens) <= 2 and len(nq) <= 20
 
     def get_collection_stats(self) -> Dict:
         """Get statistics about the search engine."""
