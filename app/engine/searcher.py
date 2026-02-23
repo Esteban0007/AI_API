@@ -140,7 +140,9 @@ class SearchEngine:
                                 "title": match["metadata"].get("title", ""),
                                 "score": 0.95,
                                 "metadata": match["metadata"],
-                                "content": match["content"] if include_content else None,
+                                "content": (
+                                    match["content"] if include_content else None
+                                ),
                             },
                         )
 
@@ -279,13 +281,7 @@ class SearchEngine:
 
         return 0.0
 
-    def _is_short_title_query(self, query: str) -> bool:
-        """Heuristic: short queries benefit from larger candidate pools."""
-        nq = self._normalize_text(query)
-        if not nq:
-            return False
-        tokens = nq.split(" ")
-        return len(tokens) <= 2 and len(nq) <= 20    def get_collection_stats(self) -> Dict:
+    def get_collection_stats(self) -> Dict:
         """Get statistics about the search engine."""
         return self.vector_store.get_collection_stats()
 
