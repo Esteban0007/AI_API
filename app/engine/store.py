@@ -311,7 +311,8 @@ class VectorStore:
 
     def get_exact_title_matches(self, title: str) -> List[Dict]:
         """
-        Retrieve documents whose title matches the query exactly.
+        Retrieve documents with exact normalized title match.
+        Optimized for speed - only one DB query.
 
         Args:
             title: Title string to match
@@ -322,81 +323,16 @@ class VectorStore:
         if not title:
             return []
 
-        results: List[Dict] = []
-        seen_ids: set[str] = set()
-
         try:
-            exact = self.collection.get(
-                where={"title": title}, include=["documents", "metadatas"]
-            )
-            if exact.get("ids"):
-                for idx, doc_id in enumerate(exact["ids"]):
-                    seen_ids.add(doc_id)
-                    results.append(
-                        {
-                            "id": doc_id,
-                            "distance": 0.0,
-                            "similarity_score": 1.0,
-                            "content": exact["documents"][idx],
-                            "metadata": exact["metadatas"][idx],
-                        }
-                    )
-        except Exception as e:
-            logger.error(f"Error fetching exact title matches: {e}")
-
-        try:
+            # Only use normalized title for fast single query
             normalized = self._normalize_title(title)
-            if normalized:
-                exact_norm = self.collection.get(
-                    where={"title_normalized": normalized},
-                    include=["documents", "metadatas"],
-                )
-                if exact_norm.get("ids"):
-                    for idx, doc_id in enumerate(exact_norm["ids"]):
-                        if doc_id in seen_ids:
-                            continue
-                        results.append(
-                            {
-                                "id": doc_id,
-                                "distance": 0.0,
-                                "similarity_score": 1.0,
-                                "content": exact_norm["documents"][idx],
-                                "metadata": exact_norm["metadatas"][idx],
-                            }
-                        )
-        except Exception as e:
-            logger.error(f"Error fetching normalized title matches: {e}")
-
-        return results
-
-    def get_title_token_matches(self, query: str) -> List[Dict]:
-        """
-        Fast title token matching for partial title queries.
-        Uses title_normalized field for fast lookups.
-
-        Args:
-            query: Query string
-
-        Returns:
-            List of documents whose title contains query tokens (max 10)
-        """
-        if not query:
-            return []
-
-        try:
-            # Normalize query
-            nq = self._normalize_title(query)
-            if not nq or len(nq) < 2:  # Skip very short queries
+            if not normalized:
                 return []
 
-            # Use ChromaDB's WHERE clause with $contains operator for fast search
-            # This leverages the indexed title_normalized field
-            where_clause = {"title_normalized": {"$contains": nq}}
-            
             result = self.collection.get(
-                where=where_clause,
+                where={"title_normalized": normalized},
                 include=["documents", "metadatas"],
-                limit=10,  # Limit to top 10 for speed
+                limit=1,  # Only need one exact match
             )
 
             if not result.get("ids"):
@@ -409,16 +345,29 @@ class VectorStore:
                     {
                         "id": doc_id,
                         "distance": 0.0,
-                        "similarity_score": 0.95,
+                        "similarity_score": 1.0,
                         "content": result["documents"][idx],
                         "metadata": result["metadatas"][idx],
                     }
                 )
-
             return results
         except Exception as e:
-            logger.error(f"Error in title token matching: {e}")
+            logger.error(f"Error fetching exact title matches: {e}")
             return []
+
+    def get_title_token_matches(self, query: str) -> List[Dict]:
+        """
+        Fast partial title matching - simplified for speed.
+
+        Args:
+            query: Query string
+
+        Returns:
+            Empty list (disabled for max performance, exact matches only)
+        """
+        # Disabled for performance - token matching with $contains is too slow
+        # Only exact title matches are used for sub-500ms latency
+        return []
 
     def get_document(self, doc_id: str) -> Optional[Dict]:
         """
