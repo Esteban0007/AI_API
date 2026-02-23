@@ -89,6 +89,16 @@ class VectorStore:
 
         return filterable
 
+    @staticmethod
+    def _normalize_title(title: str) -> str:
+        """Normalize title for exact matching."""
+        if not title:
+            return ""
+        text = title.lower()
+        text = re.sub(r"[^a-z0-9\s]", " ", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
+
     def add_document(self, doc_id: str, content: str, metadata: Dict) -> bool:
         """
         Add a single document to the vector store.
@@ -121,6 +131,7 @@ class VectorStore:
             # Prepare metadata - copy all user metadata fields
             chroma_metadata = {
                 "title": metadata.get("title", ""),
+                "title_normalized": self._normalize_title(metadata.get("title", "")),
                 "doc_id": doc_id,
             }
             if self.tenant_id:
@@ -203,6 +214,7 @@ class VectorStore:
             for doc in documents:
                 metadata = {
                     "title": doc.get("title", ""),
+                    "title_normalized": self._normalize_title(doc.get("title", "")),
                     "doc_id": doc["id"],
                 }
                 if self.tenant_id:
@@ -296,6 +308,66 @@ class VectorStore:
         except Exception as e:
             logger.error(f"Error searching vector store: {e}")
             return []
+
+    def get_exact_title_matches(self, title: str) -> List[Dict]:
+        """
+        Retrieve documents whose title matches the query exactly.
+
+        Args:
+            title: Title string to match
+
+        Returns:
+            List of result dicts with id, content, metadata
+        """
+        if not title:
+            return []
+
+        results: List[Dict] = []
+        seen_ids: set[str] = set()
+
+        try:
+            exact = self.collection.get(
+                where={"title": title}, include=["documents", "metadatas"]
+            )
+            if exact.get("ids"):
+                for idx, doc_id in enumerate(exact["ids"]):
+                    seen_ids.add(doc_id)
+                    results.append(
+                        {
+                            "id": doc_id,
+                            "distance": 0.0,
+                            "similarity_score": 1.0,
+                            "content": exact["documents"][idx],
+                            "metadata": exact["metadatas"][idx],
+                        }
+                    )
+        except Exception as e:
+            logger.error(f"Error fetching exact title matches: {e}")
+
+        try:
+            normalized = self._normalize_title(title)
+            if normalized:
+                exact_norm = self.collection.get(
+                    where={"title_normalized": normalized},
+                    include=["documents", "metadatas"],
+                )
+                if exact_norm.get("ids"):
+                    for idx, doc_id in enumerate(exact_norm["ids"]):
+                        if doc_id in seen_ids:
+                            continue
+                        results.append(
+                            {
+                                "id": doc_id,
+                                "distance": 0.0,
+                                "similarity_score": 1.0,
+                                "content": exact_norm["documents"][idx],
+                                "metadata": exact_norm["metadatas"][idx],
+                            }
+                        )
+        except Exception as e:
+            logger.error(f"Error fetching normalized title matches: {e}")
+
+        return results
 
     def get_document(self, doc_id: str) -> Optional[Dict]:
         """

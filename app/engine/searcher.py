@@ -84,23 +84,46 @@ class SearchEngine:
             return [], 0
 
         try:
-            # Step 1: Generate query embedding
+            # Step 1: Exact title matches (hybrid ranking)
+            exact_title_matches = self.vector_store.get_exact_title_matches(query)
+            exact_ids = {doc["id"] for doc in exact_title_matches}
+
+            # Step 2: Generate query embedding
             query_embedding = self.embedder.embed_text(query)
 
-            # Step 2: Vector search to get candidates (with optional filters)
+            # Step 3: Vector search to get candidates (with optional filters)
             candidates = self.vector_store.search(
                 query_embedding, top_k=self.rerank_top_k, filters=filters
             )
+
+            # Remove duplicates already matched by exact title
+            if exact_ids:
+                candidates = [c for c in candidates if c["id"] not in exact_ids]
 
             if not candidates:
                 logger.info(f"No candidates found for query: {query}")
                 execution_time = (time() - start_time) * 1000
                 return [], execution_time
 
-            # Step 3: Re-rank using cross-encoder
+            # Step 4: Re-rank using cross-encoder
             results = self._rerank_results(query, candidates, include_content)
 
-            # Step 4: Apply top_k limit
+            # Promote exact title matches to the top with a strong score
+            if exact_title_matches:
+                exact_results = []
+                for match in exact_title_matches:
+                    exact_results.append(
+                        {
+                            "id": match["id"],
+                            "title": match["metadata"].get("title", ""),
+                            "score": 1.0,
+                            "metadata": match["metadata"],
+                            "content": match["content"] if include_content else None,
+                        }
+                    )
+                results = exact_results + results
+
+            # Step 5: Apply top_k limit
             final_top_k = top_k or self.rerank_top_k
             results = results[:final_top_k]
 
