@@ -96,7 +96,8 @@ class SearchEngine:
             query_embedding = self.embedder.embed_text(query)
 
             # Step 4: Vector search to get candidates (with optional filters)
-            candidate_k = self.rerank_top_k * 5  # 50 candidates for better recall
+            # Use smaller candidate pool - exact/token matches reduce need for semantic search
+            candidate_k = min(20, self.rerank_top_k * 2)  # Max 20 candidates
             candidates = self.vector_store.search(
                 query_embedding, top_k=candidate_k, filters=filters
             )
@@ -105,19 +106,13 @@ class SearchEngine:
             if exact_ids:
                 candidates = [c for c in candidates if c["id"] not in exact_ids]
 
-            if not candidates:
-                logger.info(f"No candidates found for query: {query}")
-                execution_time = (time() - start_time) * 1000
-                return [], execution_time
+            # Prepare final results
+            results = []
 
-            # Step 4: Re-rank using cross-encoder
-            results = self._rerank_results(query, candidates, include_content)
-
-            # Promote exact title matches AND token matches to the top with a strong score
+            # Add exact matches with score 1.0
             if exact_title_matches:
-                exact_results = []
                 for match in exact_title_matches:
-                    exact_results.append(
+                    results.append(
                         {
                             "id": match["id"],
                             "title": match["metadata"].get("title", ""),
@@ -126,25 +121,27 @@ class SearchEngine:
                             "content": match["content"] if include_content else None,
                         }
                     )
-                results = exact_results + results
 
-            # Add token-matched results with high score (0.95) if not already in results
+            # Add token matches with score 0.95
             if token_title_matches:
-                existing_ids = {r["id"] for r in results}
                 for match in token_title_matches:
-                    if match["id"] not in existing_ids:
-                        results.insert(
-                            len([r for r in results if r["score"] >= 0.95]),
-                            {
-                                "id": match["id"],
-                                "title": match["metadata"].get("title", ""),
-                                "score": 0.95,
-                                "metadata": match["metadata"],
-                                "content": (
-                                    match["content"] if include_content else None
-                                ),
-                            },
-                        )
+                    results.append(
+                        {
+                            "id": match["id"],
+                            "title": match["metadata"].get("title", ""),
+                            "score": 0.95,
+                            "metadata": match["metadata"],
+                            "content": match["content"] if include_content else None,
+                        }
+                    )
+
+            # Only use cross-encoder re-ranking if we need more results (performance optimization)
+            final_top_k = top_k or self.rerank_top_k
+            if len(results) < final_top_k and candidates:
+                ranked_candidates = self._rerank_results(
+                    query, candidates, include_content
+                )
+                results.extend(ranked_candidates)
 
             # Step 5: Apply top_k limit
             final_top_k = top_k or self.rerank_top_k
