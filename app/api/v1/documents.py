@@ -1,6 +1,7 @@
 """
 API endpoints for document management.
 """
+
 from fastapi import APIRouter, HTTPException, status, Depends
 import logging
 from typing import List
@@ -22,23 +23,24 @@ _vector_store_cache: dict[str, VectorStore] = {}
 
 def _get_vector_store_for_tenant(tenant_id: str) -> VectorStore:
     if tenant_id not in _vector_store_cache:
-        _vector_store_cache[tenant_id] = VectorStore(embedder=embedder, tenant_id=tenant_id)
+        _vector_store_cache[tenant_id] = VectorStore(
+            embedder=embedder, tenant_id=tenant_id
+        )
     return _vector_store_cache[tenant_id]
 
 
 @router.post("/upload", response_model=DocumentUploadResponse)
 async def upload_documents(
-    batch: DocumentBatch,
-    user_context: dict = Depends(validate_api_key)
+    batch: DocumentBatch, user_context: dict = Depends(validate_api_key)
 ) -> DocumentUploadResponse:
     """
     Upload and index documents.
-    
+
     Generates embeddings and stores documents in the vector database.
-    
+
     **Request Body:**
     - `documents`: List of documents with id, title, content, optional keywords and metadata
-    
+
     **Example:**
     ```json
     {
@@ -57,7 +59,7 @@ async def upload_documents(
         ]
     }
     ```
-    
+
     **Response:**
     - `success`: Whether the operation was successful
     - `uploaded_count`: Number of documents successfully uploaded
@@ -66,48 +68,48 @@ async def upload_documents(
     try:
         if not batch.documents:
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Empty document batch"
+                status_code=status.HTTP_400_BAD_REQUEST, detail="Empty document batch"
             )
-        
+
         logger.info(f"Uploading batch of {len(batch.documents)} documents")
-        
+
         # Prepare documents for batch upload
         docs_to_upload = []
         for doc in batch.documents:
-            docs_to_upload.append({
-                "id": doc.id,
-                "title": doc.title,
-                "content": doc.content,
-                "keywords": doc.keywords or [],
-                "metadata": {
-                    "category": doc.metadata.category if doc.metadata else None,
-                    "language": doc.metadata.language if doc.metadata else "es",
-                    "source": doc.metadata.source if doc.metadata else None,
-                    "metadata_full": doc.metadata.dict() if doc.metadata else {}
+            docs_to_upload.append(
+                {
+                    "id": doc.id,
+                    "title": doc.title,
+                    "content": doc.content,
+                    "keywords": doc.keywords or [],
+                    "metadata": doc.metadata or {},
                 }
-            })
-        
+            )
+
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
 
         # Upload to vector store
         success_count, fail_count = vector_store.add_documents_batch(docs_to_upload)
-        
+
         return DocumentUploadResponse(
             success=fail_count == 0,
-            message=f"Successfully uploaded {success_count} documents" if fail_count == 0 else f"Partial upload: {success_count} succeeded, {fail_count} failed",
+            message=(
+                f"Successfully uploaded {success_count} documents"
+                if fail_count == 0
+                else f"Partial upload: {success_count} succeeded, {fail_count} failed"
+            ),
             uploaded_count=success_count,
-            failed_count=fail_count
+            failed_count=fail_count,
         )
-    
+
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Error uploading documents: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error uploading documents: {str(e)}"
+            detail=f"Error uploading documents: {str(e)}",
         )
 
 
@@ -115,7 +117,7 @@ async def upload_documents(
 async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
     """
     Get statistics about the document collection.
-    
+
     **Returns:**
     - `collection_name`: Name of the vector collection
     - `document_count`: Total number of indexed documents
@@ -131,21 +133,20 @@ async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
         logger.error(f"Error getting stats: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Error retrieving statistics"
+            detail="Error retrieving statistics",
         )
 
 
 @router.delete("/{doc_id}")
 async def delete_document(
-    doc_id: str,
-    user_context: dict = Depends(validate_api_key)
+    doc_id: str, user_context: dict = Depends(validate_api_key)
 ) -> dict:
     """
     Delete a document by ID.
-    
+
     **Parameters:**
     - `doc_id`: The unique identifier of the document to delete
-    
+
     **Returns:**
     - `success`: Whether the deletion was successful
     - `message`: Result message
@@ -154,22 +155,19 @@ async def delete_document(
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
         success = vector_store.delete_document(doc_id)
-        
+
         if not success:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Document {doc_id} not found"
+                detail=f"Document {doc_id} not found",
             )
-        
-        return {
-            "success": True,
-            "message": f"Document {doc_id} deleted successfully"
-        }
+
+        return {"success": True, "message": f"Document {doc_id} deleted successfully"}
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Error deleting document: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Error deleting document"
+            detail="Error deleting document",
         )

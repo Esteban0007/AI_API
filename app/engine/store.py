@@ -65,6 +65,31 @@ class VectorStore:
             logger.error(f"Failed to initialize vector store: {e}")
             raise
 
+    @staticmethod
+    def _extract_filterable_metadata(metadata: Dict) -> Dict:
+        """
+        Extract common filterable fields from metadata for ChromaDB indexing.
+        Only extracts fields with simple types (str, int, float, bool).
+        
+        Universal fields for any use case.
+        """
+        filterable = {}
+        
+        # Minimal universal fields - programmers can add more as needed
+        common_fields = [
+            "id",              # custom identifier field
+            "language",        # language code or programming language
+        ]
+        
+        for field in common_fields:
+            if field in metadata:
+                value = metadata[field]
+                # Only add if it's a simple type that ChromaDB can index
+                if isinstance(value, (str, int, float, bool)):
+                    filterable[field] = value
+        
+        return filterable
+
     def add_document(self, doc_id: str, content: str, metadata: Dict) -> bool:
         """
         Add a single document to the vector store.
@@ -94,7 +119,7 @@ class VectorStore:
             text_to_embed = "\n\n".join(parts)
             embedding = self.embedder.embed_text(text_to_embed)
 
-            # Prepare metadata
+            # Prepare metadata - copy all user metadata fields
             chroma_metadata = {
                 "title": metadata.get("title", ""),
                 "doc_id": doc_id,
@@ -102,13 +127,10 @@ class VectorStore:
             if self.tenant_id:
                 chroma_metadata["tenant_id"] = self.tenant_id
 
-            # Add optional metadata fields
-            if "category" in metadata:
-                chroma_metadata["category"] = metadata["category"]
-            if "language" in metadata:
-                chroma_metadata["language"] = metadata["language"]
-            if "source" in metadata:
-                chroma_metadata["source"] = metadata["source"]
+            # Extract filterable fields from metadata
+            user_metadata = metadata.get("metadata", {})
+            filterable_fields = self._extract_filterable_metadata(user_metadata)
+            chroma_metadata.update(filterable_fields)
 
             # Store the full document JSON for later retrieval
             full_document = {
@@ -116,7 +138,7 @@ class VectorStore:
                 "title": metadata.get("title", ""),
                 "content": content,
                 "keywords": metadata.get("keywords", []),
-                "metadata": metadata.get("metadata_full", {}),
+                "metadata": metadata.get("metadata", {}),
                 "tenant_id": self.tenant_id,
             }
 
@@ -179,7 +201,7 @@ class VectorStore:
             embeddings = [e.tolist() for e in embeddings_list]
 
             # Prepare metadata
-            for doc, emb in zip(documents, embeddings):
+            for doc in documents:
                 metadata = {
                     "title": doc.get("title", ""),
                     "doc_id": doc["id"],
@@ -187,12 +209,10 @@ class VectorStore:
                 if self.tenant_id:
                     metadata["tenant_id"] = self.tenant_id
 
-                if "category" in doc.get("metadata", {}):
-                    metadata["category"] = doc["metadata"]["category"]
-                if "language" in doc.get("metadata", {}):
-                    metadata["language"] = doc["metadata"]["language"]
-                if "source" in doc.get("metadata", {}):
-                    metadata["source"] = doc["metadata"]["source"]
+                # Extract filterable fields from metadata
+                user_metadata = doc.get("metadata", {})
+                filterable_fields = self._extract_filterable_metadata(user_metadata)
+                metadata.update(filterable_fields)
 
                 metadatas.append(metadata)
 
@@ -225,19 +245,39 @@ class VectorStore:
 
         return success_count, failure_count
 
-    def search(self, query_embedding: np.ndarray, top_k: int = 10) -> List[Dict]:
+    def search(
+        self, query_embedding: np.ndarray, top_k: int = 10, filters: Dict = None
+    ) -> List[Dict]:
         """
         Search for similar documents using cosine similarity.
 
         Args:
             query_embedding: Embedding vector of the query
             top_k: Number of results to return
+            filters: Optional metadata filters (e.g., {"category": "news", "language": "es"})
 
         Returns:
             List of result dicts with id, content, distance, metadata
         """
         try:
-            results = self.collection.query(
+            query_params = {
+                "query_embeddings": [query_embedding.tolist()],
+                "n_results": top_k,
+                "include": ["distances", "documents", "metadatas"],
+            }
+            
+            # Add filters if provided
+            if filters:
+                # Build where clause for ChromaDB
+                where_clause = {}
+                for key, value in filters.items():
+                    if value is not None:
+                        where_clause[key] = value
+                
+                if where_clause:
+                    query_params["where"] = where_clause
+            
+            results = self.collection.query(**query_params)
                 query_embeddings=[query_embedding.tolist()],
                 n_results=top_k,
                 include=["distances", "documents", "metadatas"],

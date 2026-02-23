@@ -55,10 +55,10 @@ async def search(
     **Request Body:**
     - `query`: Search query string (required)
     - `top_k`: Number of results to return (1-50, default: 5)
-    - `filters`: Optional metadata filters
+    - `filters`: Optional metadata filters (filter by category, language, author, etc.)
     - `include_content`: Include document content in results (default: true)
 
-    **Example:**
+    **Example without filters:**
     ```json
     {
         "query": "How does machine learning work?",
@@ -66,6 +66,27 @@ async def search(
         "include_content": true
     }
     ```
+
+    **Example with filters:**
+    ```json
+    {
+        "query": "artificial intelligence",
+        "top_k": 10,
+        "filters": {
+            "category": "tutorial",
+            "language": "es",
+            "author": "John Doe"
+        },
+        "include_content": true
+    }
+    ```
+
+    **Available filter fields:**
+    Any field in metadata with simple types (str, int, float, bool).
+
+    Auto-indexed fields: id, language
+
+    You can also add and filter by any custom fields in metadata
 
     **Response:**
     - `query`: The original search query

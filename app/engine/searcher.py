@@ -86,8 +86,10 @@ class SearchEngine:
             # Step 1: Generate query embedding
             query_embedding = self.embedder.embed_text(query)
 
-            # Step 2: Vector search to get candidates
-            candidates = self.vector_store.search(query_embedding, top_k=self.top_k)
+            # Step 2: Vector search to get candidates (with optional filters)
+            candidates = self.vector_store.search(
+                query_embedding, top_k=self.rerank_top_k, filters=filters
+            )
 
             if not candidates:
                 logger.info(f"No candidates found for query: {query}")

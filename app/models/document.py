@@ -1,37 +1,26 @@
 """
 Document models for the API.
 """
+
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 
 
-class DocumentMetadata(BaseModel):
-    """Metadata associated with a document."""
-    category: Optional[str] = None
-    language: Optional[str] = "es"
-    source: Optional[str] = None
-    created_at: Optional[datetime] = None
-    
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "category": "news",
-                "language": "es",
-                "source": "https://example.com/article-1",
-                "created_at": "2025-11-23T10:30:00"
-            }
-        }
-
-
 class DocumentCreate(BaseModel):
     """Document creation request model."""
+
     id: str = Field(..., description="Unique document identifier")
     title: str = Field(..., description="Document title")
     content: str = Field(..., description="Document content for embedding")
-    keywords: Optional[List[str]] = Field(None, description="Optional keywords for filtering")
-    metadata: Optional[DocumentMetadata] = Field(None, description="Optional metadata")
-    
+    keywords: Optional[List[str]] = Field(
+        None, description="Optional keywords for filtering"
+    )
+    metadata: Optional[Dict[str, Any]] = Field(
+        None,
+        description="Optional metadata - can contain any fields (category, language, source, author, date, etc.)",
+    )
+
     class Config:
         json_schema_extra = {
             "example": {
@@ -42,16 +31,22 @@ class DocumentCreate(BaseModel):
                 "metadata": {
                     "category": "tutorial",
                     "language": "es",
-                    "source": "https://example.com/ml-basics"
-                }
+                    "source": "https://example.com/ml-basics",
+                    "author": "John Doe",
+                    "date": "2024-01-15",
+                    "custom_field": "any_value",
+                },
             }
         }
 
 
 class DocumentBatch(BaseModel):
     """Batch of documents for upload."""
-    documents: List[DocumentCreate] = Field(..., description="List of documents to upload")
-    
+
+    documents: List[DocumentCreate] = Field(
+        ..., description="List of documents to upload"
+    )
+
     class Config:
         json_schema_extra = {
             "example": {
@@ -60,7 +55,7 @@ class DocumentBatch(BaseModel):
                         "id": "doc-001",
                         "title": "Title 1",
                         "content": "Content 1...",
-                        "metadata": {}
+                        "metadata": {},
                     }
                 ]
             }
@@ -69,13 +64,14 @@ class DocumentBatch(BaseModel):
 
 class DocumentResponse(BaseModel):
     """Document response model."""
+
     id: str
     title: str
     content: Optional[str] = None  # May be excluded for privacy
     keywords: Optional[List[str]] = None
-    metadata: Optional[DocumentMetadata] = None
+    metadata: Optional[Dict[str, Any]] = None
     score: Optional[float] = None  # Search relevance score
-    
+
     class Config:
         json_schema_extra = {
             "example": {
@@ -84,6 +80,6 @@ class DocumentResponse(BaseModel):
                 "content": "Machine learning is...",
                 "keywords": ["ml", "ai"],
                 "metadata": {},
-                "score": 0.94
+                "score": 0.94,
             }
         }
