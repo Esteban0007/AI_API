@@ -122,13 +122,37 @@ class SearchEngine:
                         }
                     )
 
-            # If we have enough results from exact/token matches, return immediately (skip semantic search)
-            if len(results) >= final_top_k:
+            # If we have at least one exact match, return it immediately (fast-path)
+            # For exact title searches, semantic results are not needed
+            if len(results) > 0:
                 execution_time = (time() - start_time) * 1000
                 logger.info(
-                    f"Fast path: '{query}' completed in {execution_time:.2f}ms (exact/token match)"
+                    f"Fast path: '{query}' completed in {execution_time:.2f}ms (found {len(results)} exact matches)"
                 )
-                return results[:final_top_k], execution_time
+                # Pad with semantic results only if user explicitly wants more
+                remaining = final_top_k - len(results)
+                if remaining > 0:
+                    # Generate embedding and search for additional results
+                    query_embedding = self.embedder.embed_text(query)
+                    candidates = self.vector_store.search(
+                        query_embedding, top_k=remaining, filters=filters
+                    )
+                    # Remove duplicates
+                    if exact_ids:
+                        candidates = [c for c in candidates if c["id"] not in exact_ids]
+                    # Add semantic results without re-ranking (fast)
+                    for c in candidates[:remaining]:
+                        results.append(
+                            {
+                                "id": c["id"],
+                                "title": c["metadata"].get("title", ""),
+                                "score": float(c["similarity_score"]),
+                                "metadata": c["metadata"],
+                                "content": c["content"] if include_content else None,
+                            }
+                        )
+
+                return results[:final_top_k], (time() - start_time) * 1000
 
             # Step 3: Generate query embedding (only if needed)
             query_embedding = self.embedder.embed_text(query)
