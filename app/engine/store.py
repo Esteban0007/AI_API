@@ -108,6 +108,7 @@ class VectorStore:
                 if isinstance(value, list):
                     # Store as JSON string for arrays
                     import json
+
                     filterable[field] = json.dumps(value)
 
         return filterable
@@ -250,6 +251,7 @@ class VectorStore:
 
                 # Store full metadata as JSON string for complete retrieval
                 import json
+
                 metadata["_full_metadata"] = json.dumps(user_metadata)
 
                 metadatas.append(metadata)
@@ -321,20 +323,23 @@ class VectorStore:
             search_results = []
             if results["ids"] and len(results["ids"]) > 0:
                 import json
+
                 for idx, doc_id in enumerate(results["ids"][0]):
                     chroma_metadata = results["metadatas"][0][idx]
-                    
+
                     # Reconstruct full metadata from JSON if available
                     full_metadata = {}
                     if "_full_metadata" in chroma_metadata:
                         try:
-                            full_metadata = json.loads(chroma_metadata["_full_metadata"])
+                            full_metadata = json.loads(
+                                chroma_metadata["_full_metadata"]
+                            )
                         except:
                             pass
-                    
+
                     # Use full metadata, fall back to chroma metadata
                     final_metadata = full_metadata if full_metadata else chroma_metadata
-                    
+
                     result = {
                         "id": doc_id,
                         "distance": results["distances"][0][idx],  # Cosine distance
@@ -382,20 +387,37 @@ class VectorStore:
             # Format results
             results = []
             import json
+
             for idx, doc_id in enumerate(result["ids"]):
                 chroma_metadata = result["metadatas"][idx]
-                
-                # Reconstruct full metadata from JSON if available
-                full_metadata = {}
-                if "_full_metadata" in chroma_metadata:
-                    try:
-                        full_metadata = json.loads(chroma_metadata["_full_metadata"])
-                    except:
-                        pass
-                
-                # Use full metadata, fall back to chroma metadata
-                final_metadata = full_metadata if full_metadata else chroma_metadata
-                
+
+                    # Reconstruct full metadata from JSON if available
+                    full_metadata = {}
+                    if "_full_metadata" in chroma_metadata:
+                        try:
+                            full_metadata = json.loads(chroma_metadata["_full_metadata"])
+                        except:
+                            pass
+
+                    # Use full metadata, fall back to chroma metadata
+                    final_metadata = full_metadata if full_metadata else chroma_metadata
+
+                    # Ensure title fields are present
+                    if "title" not in final_metadata and "title" in chroma_metadata:
+                        final_metadata["title"] = chroma_metadata["title"]
+                    if "title_normalized" not in final_metadata and "title_normalized" in chroma_metadata:
+                        final_metadata["title_normalized"] = chroma_metadata[
+                            "title_normalized"
+                        ]
+
+                    # Ensure title fields are present
+                    if "title" not in final_metadata and "title" in chroma_metadata:
+                        final_metadata["title"] = chroma_metadata["title"]
+                    if "title_normalized" not in final_metadata and "title_normalized" in chroma_metadata:
+                        final_metadata["title_normalized"] = chroma_metadata[
+                            "title_normalized"
+                        ]
+
                 results.append(
                     {
                         "id": doc_id,
