@@ -53,7 +53,7 @@ def improve_document_content(doc: dict) -> dict:
     cast_str = ", ".join(cast) if isinstance(cast, list) else str(cast)
     genres_str = ", ".join(genres) if isinstance(genres, list) else str(genres)
 
-    # Build structured content
+    # Build structured content (without Rating and Keywords - already explained in fields)
     structured_content = f"""Title: {title}
 
 Summary: {summary.strip()}
@@ -61,7 +61,6 @@ Summary: {summary.strip()}
 Director: {director}
 Cast: {cast_str}
 Genres: {genres_str}
-Rating: {rating}/10
 Release Year: {release_year}"""
 
     # Update document with improved content
