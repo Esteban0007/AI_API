@@ -36,6 +36,7 @@ class SearchEngine:
     - Cross-encoder re-ranking only for ambiguous results
     - Title match bonus scoring
     """
+    
 
     def __init__(
         self,
