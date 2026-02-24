@@ -116,7 +116,7 @@ class SearchEngine:
                         {
                             "id": match["id"],
                             "title": match["metadata"].get("title", ""),
-                            "score": 0.95,
+                            "score": 0.95,  # High score for partial title match
                             "metadata": match["metadata"],
                             "content": match["content"] if include_content else None,
                         }
@@ -195,7 +195,8 @@ class SearchEngine:
         self, query: str, candidates: List[Dict], include_content: bool = True
     ) -> List[Dict]:
         """
-        Re-rank candidate documents using cross-encoder.
+        Re-rank candidate documents using cross-encoder (only if needed).
+        Skips re-ranking for high-confidence matches.
 
         Args:
             query: Search query
@@ -226,8 +227,11 @@ class SearchEngine:
                 title = candidate["metadata"].get("title", "")
                 bonus = self._title_match_bonus(query, title)
                 final_score = float(score) + bonus
+
+                # Cap at 1.0
                 if final_score > 1.0:
                     final_score = 1.0
+
                 result = {
                     "id": candidate["id"],
                     "title": title,
@@ -287,9 +291,10 @@ class SearchEngine:
         Compute a bonus score for strong title matches.
 
         Strategy (hybrid ranking):
-        - Exact normalized match: +0.40
-        - Query substring in title or title in query: +0.25
-        - All query tokens contained in title: +0.15
+        - Exact normalized match: +0.30
+        - Query is substring in title (normalized): +0.25
+        - Query substring in title: +0.20
+        - All query tokens contained in title: +0.10
         """
         nq = self._normalize_text(query)
         nt = self._normalize_text(title)
@@ -297,16 +302,29 @@ class SearchEngine:
         if not nq or not nt:
             return 0.0
 
+        # Exact match
         if nq == nt:
-            return 0.40
+            return 0.30
 
-        if nq in nt or nt in nq:
+        # Query is substring of title (normalized)
+        # "a woman" in "a woman scorned"
+        if nq in nt:
             return 0.25
 
+        # Title starts with query (normalized)
+        # "a woman" query and "a woman scorned" title
+        if nt.startswith(nq):
+            return 0.22
+
+        # Query substring in original title
+        if query.lower() in title.lower():
+            return 0.20
+
+        # All query tokens in title
         q_tokens = nq.split(" ")
         t_tokens = set(nt.split(" "))
         if q_tokens and all(token in t_tokens for token in q_tokens):
-            return 0.15
+            return 0.10
 
         return 0.0
 

@@ -357,17 +357,52 @@ class VectorStore:
 
     def get_title_token_matches(self, query: str) -> List[Dict]:
         """
-        Fast partial title matching - simplified for speed.
+        Fast partial title matching for queries like "A Woman" → "A Woman Scorned".
+        Searches if query tokens appear as substring in normalized titles.
 
         Args:
-            query: Query string
+            query: Query string (e.g., "A Woman")
 
         Returns:
-            Empty list (disabled for max performance, exact matches only)
+            List of documents with matching titles (up to 5 results)
         """
-        # Disabled for performance - token matching with $contains is too slow
-        # Only exact title matches are used for sub-500ms latency
-        return []
+        if not query or len(query) < 2:
+            return []
+
+        try:
+            nq = self._normalize_title(query)
+            if not nq or len(nq) < 2:
+                return []
+
+            # Get all documents (will be cached by ChromaDB)
+            all_docs = self.collection.get(
+                include=["documents", "metadatas"], limit=1000  # Safety limit
+            )
+
+            if not all_docs.get("ids"):
+                return []
+
+            # Find titles where normalized query is a substring
+            matches = []
+            for idx, doc_id in enumerate(all_docs["ids"]):
+                title_norm = all_docs["metadatas"][idx].get("title_normalized", "")
+
+                # Check if query is a substring of the title
+                if nq in title_norm:
+                    matches.append(
+                        {
+                            "id": doc_id,
+                            "distance": 0.0,
+                            "similarity_score": 0.95,  # High score for partial match
+                            "content": all_docs["documents"][idx],
+                            "metadata": all_docs["metadatas"][idx],
+                        }
+                    )
+
+            return matches[:5]  # Return top 5 matches
+        except Exception as e:
+            logger.error(f"Error in title token matching: {e}")
+            return []
 
     def get_document(self, doc_id: str) -> Optional[Dict]:
         """
