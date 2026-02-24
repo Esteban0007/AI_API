@@ -357,14 +357,14 @@ class VectorStore:
 
     def get_title_token_matches(self, query: str) -> List[Dict]:
         """
-        Fast partial title matching for queries like "A Woman" → "A Woman Scorned".
-        Searches if query tokens appear as substring in normalized titles.
+        Fast partial title matching - optimized for <100ms.
+        Only scans a sample of documents to maintain speed.
 
         Args:
             query: Query string (e.g., "A Woman")
 
         Returns:
-            List of documents with matching titles (up to 5 results)
+            List of documents with matching titles (max 3 for speed)
         """
         if not query or len(query) < 2:
             return []
@@ -374,18 +374,19 @@ class VectorStore:
             if not nq or len(nq) < 2:
                 return []
 
-            # Get all documents (will be cached by ChromaDB)
-            all_docs = self.collection.get(
-                include=["documents", "metadatas"], limit=1000  # Safety limit
+            # Optimization: only scan first 150 documents (not all 1170)
+            # This trades comprehensive results for fast response time
+            sample = self.collection.get(
+                include=["documents", "metadatas"], limit=150  # Fast scan of sample
             )
 
-            if not all_docs.get("ids"):
+            if not sample.get("ids"):
                 return []
 
             # Find titles where normalized query is a substring
             matches = []
-            for idx, doc_id in enumerate(all_docs["ids"]):
-                title_norm = all_docs["metadatas"][idx].get("title_normalized", "")
+            for idx, doc_id in enumerate(sample["ids"]):
+                title_norm = sample["metadatas"][idx].get("title_normalized", "")
 
                 # Check if query is a substring of the title
                 if nq in title_norm:
@@ -394,12 +395,12 @@ class VectorStore:
                             "id": doc_id,
                             "distance": 0.0,
                             "similarity_score": 0.95,  # High score for partial match
-                            "content": all_docs["documents"][idx],
-                            "metadata": all_docs["metadatas"][idx],
+                            "content": sample["documents"][idx],
+                            "metadata": sample["metadatas"][idx],
                         }
                     )
 
-            return matches[:5]  # Return top 5 matches
+            return matches[:3]  # Return top 3 matches for speed
         except Exception as e:
             logger.error(f"Error in title token matching: {e}")
             return []
