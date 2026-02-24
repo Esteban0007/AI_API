@@ -340,6 +340,12 @@ class VectorStore:
                     # Use full metadata, fall back to chroma metadata
                     final_metadata = full_metadata if full_metadata else chroma_metadata
 
+                    # ALWAYS ensure title fields are present from chroma_metadata
+                    if "title" in chroma_metadata:
+                        final_metadata["title"] = chroma_metadata["title"]
+                    if "title_normalized" in chroma_metadata:
+                        final_metadata["title_normalized"] = chroma_metadata["title_normalized"]
+
                     result = {
                         "id": doc_id,
                         "distance": results["distances"][0][idx],  # Cosine distance
@@ -402,16 +408,12 @@ class VectorStore:
                 # Use full metadata, fall back to chroma metadata
                 final_metadata = full_metadata if full_metadata else chroma_metadata
 
-                # Ensure title fields are present
-                if "title" not in final_metadata and "title" in chroma_metadata:
+                # ALWAYS ensure title fields are present from chroma_metadata
+                # These are indexed fields that should always be available
+                if "title" in chroma_metadata:
                     final_metadata["title"] = chroma_metadata["title"]
-                if (
-                    "title_normalized" not in final_metadata
-                    and "title_normalized" in chroma_metadata
-                ):
-                    final_metadata["title_normalized"] = chroma_metadata[
-                        "title_normalized"
-                    ]
+                if "title_normalized" in chroma_metadata:
+                    final_metadata["title_normalized"] = chroma_metadata["title_normalized"]
 
                 results.append(
                     {
