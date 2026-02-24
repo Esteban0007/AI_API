@@ -14,6 +14,62 @@ from app.engine.embedder import Embedder
 from app.core.config import get_settings
 
 
+def improve_document_content(doc: dict) -> dict:
+    """
+    Restructure document content for better semantic search.
+
+    Converts messy content with newlines/keywords into structured format:
+    Title: ...
+    Summary: ...
+    Director: ...
+    Cast: ...
+    Genres: ...
+    Rating: .../10
+    Release Year: ...
+    """
+    metadata = doc.get("metadata", {})
+    title = doc.get("title", "")
+    original_content = doc.get("content", "")
+
+    # Extract key fields from metadata
+    director = metadata.get("director", "Unknown")
+    cast = metadata.get("cast", [])
+    genres = metadata.get("genres", [])
+    rating = metadata.get("rating", 0)
+    release_date = metadata.get("release_date", "")
+
+    # Extract year from release_date (YYYY-MM-DD format)
+    release_year = release_date.split("-")[0] if release_date else ""
+
+    # Clean up original content - remove "Title\n\n" prefix if exists
+    summary = original_content
+    if "\n\n" in summary:
+        # Take only the first paragraph (before Keywords)
+        summary = summary.split("\n\nKeywords:")[0]
+        if summary.startswith(f"{title}\n\n"):
+            summary = summary[len(title) + 2 :].strip()
+
+    # Format cast as string
+    cast_str = ", ".join(cast) if isinstance(cast, list) else str(cast)
+    genres_str = ", ".join(genres) if isinstance(genres, list) else str(genres)
+
+    # Build structured content
+    structured_content = f"""Title: {title}
+
+Summary: {summary.strip()}
+
+Director: {director}
+Cast: {cast_str}
+Genres: {genres_str}
+Rating: {rating}/10
+Release Year: {release_year}"""
+
+    # Update document with improved content
+    doc["content"] = structured_content
+
+    return doc
+
+
 def load_documents_from_json(json_file: Path):
     """Load documents from a JSON file."""
     with open(json_file, "r", encoding="utf-8") as f:
@@ -65,6 +121,11 @@ def main():
     try:
         documents = load_documents_from_json(json_file)
         print(f"Loaded {len(documents)} documents from JSON")
+
+        # Improve document content for better semantic search
+        print("Improving document content structure...")
+        documents = [improve_document_content(doc) for doc in documents]
+        print("✓ Document content improved for semantic search")
     except Exception as e:
         print(f"Error loading JSON: {e}")
         sys.exit(1)
