@@ -357,53 +357,10 @@ class VectorStore:
 
     def get_title_token_matches(self, query: str) -> List[Dict]:
         """
-        Fast partial title matching - optimized for <100ms.
-        Only scans a sample of documents to maintain speed.
-
-        Args:
-            query: Query string (e.g., "A Woman")
-
-        Returns:
-            List of documents with matching titles (max 3 for speed)
+        Token matching disabled - ChromaDB full table scans are too slow.
+        Partial matches handled by semantic search instead.
         """
-        if not query or len(query) < 2:
-            return []
-
-        try:
-            nq = self._normalize_title(query)
-            if not nq or len(nq) < 2:
-                return []
-
-            # Optimization: only scan first 150 documents (not all 1170)
-            # This trades comprehensive results for fast response time
-            sample = self.collection.get(
-                include=["documents", "metadatas"], limit=150  # Fast scan of sample
-            )
-
-            if not sample.get("ids"):
-                return []
-
-            # Find titles where normalized query is a substring
-            matches = []
-            for idx, doc_id in enumerate(sample["ids"]):
-                title_norm = sample["metadatas"][idx].get("title_normalized", "")
-
-                # Check if query is a substring of the title
-                if nq in title_norm:
-                    matches.append(
-                        {
-                            "id": doc_id,
-                            "distance": 0.0,
-                            "similarity_score": 0.95,  # High score for partial match
-                            "content": sample["documents"][idx],
-                            "metadata": sample["metadatas"][idx],
-                        }
-                    )
-
-            return matches[:3]  # Return top 3 matches for speed
-        except Exception as e:
-            logger.error(f"Error in title token matching: {e}")
-            return []
+        return []
 
     def get_document(self, doc_id: str) -> Optional[Dict]:
         """
