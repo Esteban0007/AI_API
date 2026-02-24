@@ -117,8 +117,7 @@ if __name__ == "__main__":
 
     print(
         f"✅ Dataset successfully generated with {len(data['documents'])} movies in '{args.output}'"
-    )import requests
-import json
+    )
 
 API_KEY = "cc433a69889d3e52798fb4c2cf6a69f4"
 BASE_URL = "https://api.themoviedb.org/3"
