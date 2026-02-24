@@ -344,7 +344,9 @@ class VectorStore:
                     if "title" in chroma_metadata:
                         final_metadata["title"] = chroma_metadata["title"]
                     if "title_normalized" in chroma_metadata:
-                        final_metadata["title_normalized"] = chroma_metadata["title_normalized"]
+                        final_metadata["title_normalized"] = chroma_metadata[
+                            "title_normalized"
+                        ]
 
                     result = {
                         "id": doc_id,
@@ -413,7 +415,9 @@ class VectorStore:
                 if "title" in chroma_metadata:
                     final_metadata["title"] = chroma_metadata["title"]
                 if "title_normalized" in chroma_metadata:
-                    final_metadata["title_normalized"] = chroma_metadata["title_normalized"]
+                    final_metadata["title_normalized"] = chroma_metadata[
+                        "title_normalized"
+                    ]
 
                 results.append(
                     {
@@ -431,10 +435,108 @@ class VectorStore:
 
     def get_title_token_matches(self, query: str) -> List[Dict]:
         """
-        Token matching disabled - ChromaDB full table scans are too slow.
-        Partial matches handled by semantic search instead.
+        Prefix/partial matching for incomplete titles.
+        E.g., "Queen of hea" matches "Queen of Hearts"
+
+        Strategy: Create multiple prefix patterns and return best matches.
+        This is faster than full semantic search for partial title queries.
+
+        Args:
+            query: Partial query string
+
+        Returns:
+            List of matching documents sorted by prefix match quality
         """
-        return []
+        if not query or len(query) < 2:
+            return []
+
+        try:
+            normalized = self._normalize_title(query)
+            if not normalized:
+                return []
+
+            # Get all documents from collection (limited query for performance)
+            # ChromaDB doesn't support prefix queries, so we fetch and filter locally
+            all_docs = self.collection.get(
+                include=["documents", "metadatas"],
+                limit=5000,  # Reasonable limit to avoid huge memory usage
+            )
+
+            if not all_docs.get("ids"):
+                return []
+
+            matches = []
+            query_tokens = normalized.split()
+
+            # Score each document based on prefix match
+            for idx, doc_id in enumerate(all_docs["ids"]):
+                chroma_metadata = all_docs["metadatas"][idx]
+                title_normalized = chroma_metadata.get("title_normalized", "").lower()
+
+                if not title_normalized:
+                    continue
+
+                title_tokens = title_normalized.split()
+
+                # Calculate match score based on:
+                # 1. How many query tokens match title tokens as prefixes
+                # 2. Position of matches (earlier is better)
+                match_score = 0
+                query_token_idx = 0
+
+                for title_token in title_tokens:
+                    if query_token_idx >= len(query_tokens):
+                        break
+
+                    query_token = query_tokens[query_token_idx]
+
+                    # Check if title token starts with query token
+                    if title_token.startswith(query_token):
+                        match_score += 1.0 / (
+                            query_token_idx + 1
+                        )  # Earlier tokens worth more
+                        query_token_idx += 1
+
+                # Only include if we matched at least the first token
+                if query_token_idx > 0:
+                    # Reconstruct full metadata from JSON if available
+                    full_metadata = {}
+                    if "_full_metadata" in chroma_metadata:
+                        try:
+                            full_metadata = json.loads(
+                                chroma_metadata["_full_metadata"]
+                            )
+                        except Exception:
+                            pass
+
+                    final_metadata = full_metadata if full_metadata else chroma_metadata
+
+                    # ALWAYS ensure title fields are present
+                    if "title" in chroma_metadata:
+                        final_metadata["title"] = chroma_metadata["title"]
+                    if "title_normalized" in chroma_metadata:
+                        final_metadata["title_normalized"] = chroma_metadata[
+                            "title_normalized"
+                        ]
+
+                    matches.append(
+                        {
+                            "id": doc_id,
+                            "score": match_score,  # Used for sorting, converted to 0.95 later
+                            "content": all_docs["documents"][idx],
+                            "metadata": final_metadata,
+                        }
+                    )
+
+            # Sort by score descending
+            matches.sort(key=lambda x: x["score"], reverse=True)
+
+            # Return top 10 prefix matches
+            return matches[:10]
+
+        except Exception as e:
+            logger.error(f"Error in prefix title matching: {e}")
+            return []
 
     def get_document(self, doc_id: str) -> Optional[Dict]:
         """
