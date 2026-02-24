@@ -391,32 +391,27 @@ class VectorStore:
             for idx, doc_id in enumerate(result["ids"]):
                 chroma_metadata = result["metadatas"][idx]
 
-                    # Reconstruct full metadata from JSON if available
-                    full_metadata = {}
-                    if "_full_metadata" in chroma_metadata:
-                        try:
-                            full_metadata = json.loads(chroma_metadata["_full_metadata"])
-                        except:
-                            pass
+                # Reconstruct full metadata from JSON if available
+                full_metadata = {}
+                if "_full_metadata" in chroma_metadata:
+                    try:
+                        full_metadata = json.loads(chroma_metadata["_full_metadata"])
+                    except Exception:
+                        pass
 
-                    # Use full metadata, fall back to chroma metadata
-                    final_metadata = full_metadata if full_metadata else chroma_metadata
+                # Use full metadata, fall back to chroma metadata
+                final_metadata = full_metadata if full_metadata else chroma_metadata
 
-                    # Ensure title fields are present
-                    if "title" not in final_metadata and "title" in chroma_metadata:
-                        final_metadata["title"] = chroma_metadata["title"]
-                    if "title_normalized" not in final_metadata and "title_normalized" in chroma_metadata:
-                        final_metadata["title_normalized"] = chroma_metadata[
-                            "title_normalized"
-                        ]
-
-                    # Ensure title fields are present
-                    if "title" not in final_metadata and "title" in chroma_metadata:
-                        final_metadata["title"] = chroma_metadata["title"]
-                    if "title_normalized" not in final_metadata and "title_normalized" in chroma_metadata:
-                        final_metadata["title_normalized"] = chroma_metadata[
-                            "title_normalized"
-                        ]
+                # Ensure title fields are present
+                if "title" not in final_metadata and "title" in chroma_metadata:
+                    final_metadata["title"] = chroma_metadata["title"]
+                if (
+                    "title_normalized" not in final_metadata
+                    and "title_normalized" in chroma_metadata
+                ):
+                    final_metadata["title_normalized"] = chroma_metadata[
+                        "title_normalized"
+                    ]
 
                 results.append(
                     {
