@@ -68,24 +68,47 @@ class VectorStore:
     @staticmethod
     def _extract_filterable_metadata(metadata: Dict) -> Dict:
         """
-        Extract common filterable fields from metadata for ChromaDB indexing.
-        Only extracts fields with simple types (str, int, float, bool).
+        Extract filterable fields from metadata for ChromaDB storage.
+        Only extracts fields with simple types (str, int, float, bool) or arrays of strings.
 
-        Universal fields for any use case.
+        For movies: includes genres, director, release_date, rating, poster_path, etc.
         """
         filterable = {}
 
-        # Minimal universal field - only language
-        common_fields = [
-            "language",  # language code or programming language
+        # Common fields to preserve for any use case
+        simple_fields = [
+            "language",
+            "tmdb_id",
+            "original_title",
+            "director",
+            "release_date",
+            "rating",
+            "poster_path",
+            "category",
+            "source",
         ]
 
-        for field in common_fields:
+        array_fields = [
+            "genres",
+            "cast",
+        ]
+
+        # Add simple fields
+        for field in simple_fields:
             if field in metadata:
                 value = metadata[field]
-                # Only add if it's a simple type that ChromaDB can index
+                # Only add if it's a simple type that ChromaDB can handle
                 if isinstance(value, (str, int, float, bool)):
                     filterable[field] = value
+
+        # Add array fields (ChromaDB can store these as JSON strings)
+        for field in array_fields:
+            if field in metadata:
+                value = metadata[field]
+                if isinstance(value, list):
+                    # Store as JSON string for arrays
+                    import json
+                    filterable[field] = json.dumps(value)
 
         return filterable
 
@@ -225,6 +248,10 @@ class VectorStore:
                 filterable_fields = self._extract_filterable_metadata(user_metadata)
                 metadata.update(filterable_fields)
 
+                # Store full metadata as JSON string for complete retrieval
+                import json
+                metadata["_full_metadata"] = json.dumps(user_metadata)
+
                 metadatas.append(metadata)
 
                 full_documents.append(
@@ -293,14 +320,28 @@ class VectorStore:
             # Process results
             search_results = []
             if results["ids"] and len(results["ids"]) > 0:
+                import json
                 for idx, doc_id in enumerate(results["ids"][0]):
+                    chroma_metadata = results["metadatas"][0][idx]
+                    
+                    # Reconstruct full metadata from JSON if available
+                    full_metadata = {}
+                    if "_full_metadata" in chroma_metadata:
+                        try:
+                            full_metadata = json.loads(chroma_metadata["_full_metadata"])
+                        except:
+                            pass
+                    
+                    # Use full metadata, fall back to chroma metadata
+                    final_metadata = full_metadata if full_metadata else chroma_metadata
+                    
                     result = {
                         "id": doc_id,
                         "distance": results["distances"][0][idx],  # Cosine distance
                         "similarity_score": 1
                         - results["distances"][0][idx],  # Convert to similarity
                         "content": results["documents"][0][idx],
-                        "metadata": results["metadatas"][0][idx],
+                        "metadata": final_metadata,
                     }
                     search_results.append(result)
 
@@ -340,14 +381,28 @@ class VectorStore:
 
             # Format results
             results = []
+            import json
             for idx, doc_id in enumerate(result["ids"]):
+                chroma_metadata = result["metadatas"][idx]
+                
+                # Reconstruct full metadata from JSON if available
+                full_metadata = {}
+                if "_full_metadata" in chroma_metadata:
+                    try:
+                        full_metadata = json.loads(chroma_metadata["_full_metadata"])
+                    except:
+                        pass
+                
+                # Use full metadata, fall back to chroma metadata
+                final_metadata = full_metadata if full_metadata else chroma_metadata
+                
                 results.append(
                     {
                         "id": doc_id,
                         "distance": 0.0,
                         "similarity_score": 1.0,
                         "content": result["documents"][idx],
-                        "metadata": result["metadatas"][idx],
+                        "metadata": final_metadata,
                     }
                 )
             return results

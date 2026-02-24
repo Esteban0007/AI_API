@@ -1,6 +1,7 @@
 """
 Initialize models package.
 """
+
 from .document import DocumentCreate, DocumentBatch, DocumentResponse
 from .search import SearchQuery, SearchResponse, SearchResult, DocumentUploadResponse
 
@@ -11,5 +12,5 @@ __all__ = [
     "SearchQuery",
     "SearchResponse",
     "SearchResult",
-    "DocumentUploadResponse"
+    "DocumentUploadResponse",
 ]

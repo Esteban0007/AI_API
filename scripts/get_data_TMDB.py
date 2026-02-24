@@ -54,6 +54,11 @@ def get_movie_data(pages=100):
                     "language": "en",
                     "original_title": details.get("original_title"),
                     "poster_path": f"https://image.tmdb.org/t/p/w500{details.get('poster_path')}",
+                    "genres": genres,
+                    "director": director,
+                    "cast": cast,
+                    "release_date": details.get("release_date"),
+                    "rating": details.get("vote_average"),
                 },
             }
             final_json["documents"].append(doc)
@@ -61,11 +66,15 @@ def get_movie_data(pages=100):
     return final_json
 
 
-# Run for the first 5 pages to get a solid 100-movie dataset
-data = get_movie_data(pages=5)
+# Run for 40 pages to get ~2000-movie dataset (50 movies per page)
+# Note: TMDB API may return fewer results due to filtering
+print("Downloading movies from TMDB... (this takes a few minutes)")
+data = get_movie_data(pages=40)
 
 # Save the result
-with open("dataset_movies_en.json", "w", encoding="utf-8") as f:
+with open("tmdb_2000_movies.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
-print("Dataset successfully generated in 'dataset_movies_en.json'")
+print(
+    f"✅ Dataset successfully generated with {len(data['documents'])} movies in 'tmdb_2000_movies.json'"
+)
