@@ -24,7 +24,7 @@ class Settings(BaseSettings):
 
     # Embedding Configuration
     EMBEDDING_MODEL: str = (
-        "snowflake/snowflake-arctic-embed-m-v1.5"  # Multilingual, better semantic understanding
+        "snowflake/snowflake-arctic-embed-m-v1.5"  # MTEB #2, multilingual support, 768D
     )
     EMBEDDING_DIMENSION: int = 768  # Arctic uses 768 dimensions
 
@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     TOP_K: int = 10  # Number of candidates to retrieve before re-ranking
     RERANK_TOP_K: int = 5  # Number of final results to return
     RERANK_MODEL: str = (
-        "mixedbread-ai/mxbai-rerank-xsmall-v1"  # Fast multilingual reranker
+        "mixedbread-ai/mxbai-rerank-xsmall-v1"  # 10-20x faster, multilingual optimized
     )
 
     # Database Configuration
