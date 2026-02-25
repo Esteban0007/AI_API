@@ -24,15 +24,15 @@ class Settings(BaseSettings):
 
     # Embedding Configuration
     EMBEDDING_MODEL: str = (
-        "sentence-transformers/all-MiniLM-L6-v2"  # Fast and lightweight
+        "snowflake/snowflake-arctic-embed-m-v1.5"  # Multilingual, better semantic understanding
     )
-    EMBEDDING_DIMENSION: int = 384
+    EMBEDDING_DIMENSION: int = 768  # Arctic uses 768 dimensions
 
     # Search Configuration
     TOP_K: int = 10  # Number of candidates to retrieve before re-ranking
     RERANK_TOP_K: int = 5  # Number of final results to return
     RERANK_MODEL: str = (
-        "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"  # Lightweight cross-encoder
+        "mixedbread-ai/mxbai-rerank-xsmall-v1"  # Fast multilingual reranker
     )
 
     # Database Configuration
