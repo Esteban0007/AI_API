@@ -1,0 +1,2583 @@
+{
+  "model_name": "Arctic-768D-ONNX",
+  "timestamp": "2026-02-25T13:39:38.543554",
+  "queries": [
+    {
+      "query": "Avatar",
+      "type": "exact_match",
+      "description": "Exact title match",
+      "top_k": 5,
+      "latency_ms": 2841.07,
+      "total_results": 1,
+      "top_3_results": [
+        {
+          "title": "Avatar",
+          "score": 1.0,
+          "director": "James Cameron",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Science Fiction"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-19995",
+          "title": "Avatar",
+          "score": 1.0,
+          "content": "Avatar\n\nIn the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+          "metadata": {
+            "tmdb_id": 19995,
+            "language": "en",
+            "original_title": "Avatar",
+            "poster_path": "https://image.tmdb.org/t/p/w500/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
+            "genres": [
+              "Action",
+              "Adventure",
+              "Fantasy",
+              "Science Fiction"
+            ],
+            "director": "James Cameron",
+            "cast": [
+              "Sam Worthington",
+              "Zoe Saldaña",
+              "Sigourney Weaver"
+            ],
+            "release_date": "2009-12-16",
+            "rating": 7.6,
+            "title": "Avatar",
+            "title_normalized": "avatar"
+          }
+        }
+      ]
+    },
+    {
+      "query": "movies about artificial intelligence",
+      "type": "semantic",
+      "description": "Semantic search - AI theme",
+      "top_k": 10,
+      "latency_ms": 9874.37,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "2001: A Space Odyssey",
+          "score": 0.6002,
+          "director": "Stanley Kubrick",
+          "genres": [
+            "Science Fiction",
+            "Mystery",
+            "Adventure"
+          ]
+        },
+        {
+          "title": "Afterlight",
+          "score": 0.5627,
+          "director": "Alison Kohlhardt",
+          "genres": [
+            "Science Fiction"
+          ]
+        },
+        {
+          "title": "The Wild Robot",
+          "score": 0.5306,
+          "director": "Chris Sanders",
+          "genres": [
+            "Animation",
+            "Science Fiction",
+            "Family",
+            "Adventure",
+            "Drama"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-62",
+          "title": "2001: A Space Odyssey",
+          "score": 0.6001521348953247,
+          "content": "2001: A Space Odyssey\n\nHumanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced super computer.",
+          "metadata": {
+            "tmdb_id": 62,
+            "language": "en",
+            "original_title": "2001: A Space Odyssey",
+            "poster_path": "https://image.tmdb.org/t/p/w500/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+            "genres": [
+              "Science Fiction",
+              "Mystery",
+              "Adventure"
+            ],
+            "director": "Stanley Kubrick",
+            "cast": [
+              "Keir Dullea",
+              "Gary Lockwood",
+              "William Sylvester"
+            ],
+            "release_date": "1968-04-02",
+            "rating": 8.1,
+            "title": "2001: A Space Odyssey",
+            "title_normalized": "2001 a space odyssey"
+          }
+        },
+        {
+          "id": "tmdb-1590097",
+          "title": "Afterlight",
+          "score": 0.5626630783081055,
+          "content": "Afterlight\n\nIn a future shaped by war, AI, and fractured timelines, five interconnected sci-fi stories explore humanity’s fight for connection, survival, and meaning across time and space.",
+          "metadata": {
+            "tmdb_id": 1590097,
+            "language": "en",
+            "original_title": "Afterlight",
+            "poster_path": "https://image.tmdb.org/t/p/w500/7bzMCW1E1sOWEbjVuQ8iRGrdpcw.jpg",
+            "genres": [
+              "Science Fiction"
+            ],
+            "director": "Alison Kohlhardt",
+            "cast": [
+              "Anna Fraser",
+              "Ellise Chappell",
+              "Linda-Jean Barry"
+            ],
+            "release_date": "2025-11-27",
+            "rating": 5.107,
+            "title": "Afterlight",
+            "title_normalized": "afterlight"
+          }
+        },
+        {
+          "id": "tmdb-1184918",
+          "title": "The Wild Robot",
+          "score": 0.5306000113487244,
+          "content": "The Wild Robot\n\nAfter a shipwreck, an intelligent robot called Roz is stranded on an uninhabited island. To survive the harsh environment, Roz bonds with the island's animals and cares for an orphaned baby goose.",
+          "metadata": {
+            "tmdb_id": 1184918,
+            "language": "en",
+            "original_title": "The Wild Robot",
+            "poster_path": "https://image.tmdb.org/t/p/w500/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
+            "genres": [
+              "Animation",
+              "Science Fiction",
+              "Family",
+              "Adventure",
+              "Drama"
+            ],
+            "director": "Chris Sanders",
+            "cast": [
+              "Lupita Nyong'o",
+              "Pedro Pascal",
+              "Kit Connor"
+            ],
+            "release_date": "2024-09-12",
+            "rating": 8.312,
+            "title": "The Wild Robot",
+            "title_normalized": "the wild robot"
+          }
+        },
+        {
+          "id": "tmdb-1236153",
+          "title": "Mercy",
+          "score": 0.5160982608795166,
+          "content": "Mercy\n\nIn the near future, a detective stands on trial accused of murdering his wife. He has ninety minutes to prove his innocence to the advanced AI Judge he once championed, before it determines his fate.",
+          "metadata": {
+            "tmdb_id": 1236153,
+            "language": "en",
+            "original_title": "Mercy",
+            "poster_path": "https://image.tmdb.org/t/p/w500/pyok1kZJCfyuFapYXzHcy7BLlQa.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Thriller"
+            ],
+            "director": "Timur Bekmambetov",
+            "cast": [
+              "Chris Pratt",
+              "Rebecca Ferguson",
+              "Kali Reis"
+            ],
+            "release_date": "2026-01-20",
+            "rating": 7.1,
+            "title": "Mercy",
+            "title_normalized": "mercy"
+          }
+        },
+        {
+          "id": "tmdb-1084199",
+          "title": "Companion",
+          "score": 0.5126336812973022,
+          "content": "Companion\n\nDuring a weekend getaway at a secluded lakeside estate, a group of friends finds themselves entangled in a web of secrets, deception, and advanced technology. As tensions rise and loyalties are tested, they uncover unsettling truths about themselves and the world around them.",
+          "metadata": {
+            "tmdb_id": 1084199,
+            "language": "en",
+            "original_title": "Companion",
+            "poster_path": "https://image.tmdb.org/t/p/w500/oCoTgC3UyWGfyQ9thE10ulWR7bn.jpg",
+            "genres": [
+              "Horror",
+              "Science Fiction",
+              "Thriller"
+            ],
+            "director": "Drew Hancock",
+            "cast": [
+              "Sophie Thatcher",
+              "Jack Quaid",
+              "Lukas Gage"
+            ],
+            "release_date": "2025-01-22",
+            "rating": 7.012,
+            "title": "Companion",
+            "title_normalized": "companion"
+          }
+        },
+        {
+          "id": "tmdb-982843",
+          "title": "The Great Flood",
+          "score": 0.5089187026023865,
+          "content": "The Great Flood\n\nWhen a raging flood traps a researcher and her young son, a call to a crucial mission puts their escape — and the future of humanity — on the line.",
+          "metadata": {
+            "tmdb_id": 982843,
+            "language": "en",
+            "original_title": "대홍수",
+            "poster_path": "https://image.tmdb.org/t/p/w500/1tUOZQDgZaGqZtrB21MieiXARL2.jpg",
+            "genres": [
+              "Science Fiction",
+              "Adventure",
+              "Drama"
+            ],
+            "director": "Kim Byung-woo",
+            "cast": [
+              "Kim Da-mi",
+              "Park Hae-soo",
+              "Kwon Eun-seong"
+            ],
+            "release_date": "2025-09-18",
+            "rating": 5.981,
+            "title": "The Great Flood",
+            "title_normalized": "the great flood"
+          }
+        },
+        {
+          "id": "tmdb-106",
+          "title": "Predator",
+          "score": 0.5057927966117859,
+          "content": "Predator\n\nA team of elite commandos on a secret mission in a Central American jungle come to find themselves hunted by an extraterrestrial warrior.",
+          "metadata": {
+            "tmdb_id": 106,
+            "language": "en",
+            "original_title": "Predator",
+            "poster_path": "https://image.tmdb.org/t/p/w500/aN3cdjIK70KGmD84et8MMblU87Q.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Adventure",
+              "Thriller"
+            ],
+            "director": "John McTiernan",
+            "cast": [
+              "Arnold Schwarzenegger",
+              "Carl Weathers",
+              "Kevin Peter Hall"
+            ],
+            "release_date": "1987-06-12",
+            "rating": 7.544,
+            "title": "Predator",
+            "title_normalized": "predator"
+          }
+        },
+        {
+          "id": "tmdb-1033462",
+          "title": "Bureau 749",
+          "score": 0.5039856433868408,
+          "content": "Bureau 749\n\nA traumatized young man with physical abnormalities is forced to join a mysterious bureau to confront a disaster spreading across the earth caused by an unknown creature. He embarks on an adventure uncovering mysteries about his life.",
+          "metadata": {
+            "tmdb_id": 1033462,
+            "language": "en",
+            "original_title": "749局",
+            "poster_path": "https://image.tmdb.org/t/p/w500/flykCMw22y6yv8vKnBjmsW3pneo.jpg",
+            "genres": [
+              "Action",
+              "Adventure",
+              "Science Fiction"
+            ],
+            "director": "Lu Chuan",
+            "cast": [
+              "Karry Wang",
+              "Miao Miao",
+              "Ryan Zheng"
+            ],
+            "release_date": "2024-10-01",
+            "rating": 6.302,
+            "title": "Bureau 749",
+            "title_normalized": "bureau 749"
+          }
+        },
+        {
+          "id": "tmdb-619979",
+          "title": "Deep Water",
+          "score": 0.5022872090339661,
+          "content": "Deep Water\n\nA well-to-do husband who allows his wife to have affairs in order to avoid a divorce becomes a prime suspect in the disappearance of her lovers.",
+          "metadata": {
+            "tmdb_id": 619979,
+            "language": "en",
+            "original_title": "Deep Water",
+            "poster_path": "https://image.tmdb.org/t/p/w500/6yRMyWwjuhKg6IU66uiZIGhaSc8.jpg",
+            "genres": [
+              "Drama",
+              "Mystery",
+              "Thriller"
+            ],
+            "director": "Adrian Lyne",
+            "cast": [
+              "Ben Affleck",
+              "Ana de Armas",
+              "Tracy Letts"
+            ],
+            "release_date": "2022-03-17",
+            "rating": 5.82,
+            "title": "Deep Water",
+            "title_normalized": "deep water"
+          }
+        },
+        {
+          "id": "tmdb-1242501",
+          "title": "Icefall",
+          "score": 0.5022196769714355,
+          "content": "Icefall\n\nA young Indigenous game warden arrests an infamous poacher only to discover that the poacher knows the location of a plane carrying millions of dollars that has crashed in a frozen lake. When a group of criminals and dirty cops are alerted to the poacher’s whereabouts, the warden and the poacher team up to fight back and escape across the treacherous lake before the ice melts.",
+          "metadata": {
+            "tmdb_id": 1242501,
+            "language": "en",
+            "original_title": "Icefall",
+            "poster_path": "https://image.tmdb.org/t/p/w500/5Byv6nznAb2Izd0gHpODOXnuSbo.jpg",
+            "genres": [
+              "Action",
+              "Crime",
+              "Thriller"
+            ],
+            "director": "Stefan Ruzowitzky",
+            "cast": [
+              "Joel Kinnaman",
+              "Cara Jade Myers",
+              "Danny Huston"
+            ],
+            "release_date": "2025-10-16",
+            "rating": 6.4,
+            "title": "Icefall",
+            "title_normalized": "icefall"
+          }
+        }
+      ]
+    },
+    {
+      "query": "películas de robótica",
+      "type": "multilingual",
+      "description": "Multilingual search - Spanish",
+      "top_k": 10,
+      "latency_ms": 9220.95,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "Bugonia",
+          "score": 0.5184,
+          "director": "Yorgos Lanthimos",
+          "genres": [
+            "Science Fiction",
+            "Thriller",
+            "Comedy"
+          ]
+        },
+        {
+          "title": "Predator",
+          "score": 0.5111,
+          "director": "John McTiernan",
+          "genres": [
+            "Science Fiction",
+            "Action",
+            "Adventure",
+            "Thriller"
+          ]
+        },
+        {
+          "title": "Elio",
+          "score": 0.5107,
+          "director": "Domee Shi",
+          "genres": [
+            "Family",
+            "Comedy",
+            "Adventure",
+            "Animation",
+            "Science Fiction"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-701387",
+          "title": "Bugonia",
+          "score": 0.5183976888656616,
+          "content": "Bugonia\n\nTwo conspiracy obsessed young men kidnap the high-powered CEO of a major company, convinced that she is an alien intent on destroying planet Earth.",
+          "metadata": {
+            "tmdb_id": 701387,
+            "language": "en",
+            "original_title": "Bugonia",
+            "poster_path": "https://image.tmdb.org/t/p/w500/rSdOua3wKMEaFWDcKAYWRjXQWOt.jpg",
+            "genres": [
+              "Science Fiction",
+              "Thriller",
+              "Comedy"
+            ],
+            "director": "Yorgos Lanthimos",
+            "cast": [
+              "Emma Stone",
+              "Jesse Plemons",
+              "Aidan Delbis"
+            ],
+            "release_date": "2025-10-23",
+            "rating": 7.343,
+            "title": "Bugonia",
+            "title_normalized": "bugonia"
+          }
+        },
+        {
+          "id": "tmdb-106",
+          "title": "Predator",
+          "score": 0.5111004710197449,
+          "content": "Predator\n\nA team of elite commandos on a secret mission in a Central American jungle come to find themselves hunted by an extraterrestrial warrior.",
+          "metadata": {
+            "tmdb_id": 106,
+            "language": "en",
+            "original_title": "Predator",
+            "poster_path": "https://image.tmdb.org/t/p/w500/aN3cdjIK70KGmD84et8MMblU87Q.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Adventure",
+              "Thriller"
+            ],
+            "director": "John McTiernan",
+            "cast": [
+              "Arnold Schwarzenegger",
+              "Carl Weathers",
+              "Kevin Peter Hall"
+            ],
+            "release_date": "1987-06-12",
+            "rating": 7.544,
+            "title": "Predator",
+            "title_normalized": "predator"
+          }
+        },
+        {
+          "id": "tmdb-1022787",
+          "title": "Elio",
+          "score": 0.5106676816940308,
+          "content": "Elio\n\nElio, a space fanatic with an active imagination, finds himself on a cosmic misadventure where he must form new bonds with eccentric alien lifeforms, navigate a crisis of intergalactic proportions and somehow discover who he is truly meant to be.",
+          "metadata": {
+            "tmdb_id": 1022787,
+            "language": "en",
+            "original_title": "Elio",
+            "poster_path": "https://image.tmdb.org/t/p/w500/7z8jDiTZZco9moIKpTUImFtTy7o.jpg",
+            "genres": [
+              "Family",
+              "Comedy",
+              "Adventure",
+              "Animation",
+              "Science Fiction"
+            ],
+            "director": "Domee Shi",
+            "cast": [
+              "Yonas Kibreab",
+              "Remy Edgerly",
+              "Zoe Saldaña"
+            ],
+            "release_date": "2025-06-18",
+            "rating": 6.9,
+            "title": "Elio",
+            "title_normalized": "elio"
+          }
+        },
+        {
+          "id": "tmdb-434853",
+          "title": "Space/Time",
+          "score": 0.5102067589759827,
+          "content": "Space/Time\n\nAfter a fatal test shuts down their project, a disgraced team of scientists enters the criminal underworld to rebuild a forbidden space-bending engine that could rescue humanity or annihilate it entirely.",
+          "metadata": {
+            "tmdb_id": 434853,
+            "language": "en",
+            "original_title": "Space/Time",
+            "poster_path": "https://image.tmdb.org/t/p/w500/uje1ecKMnNpZp0at5TxlvVgVXqI.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Thriller"
+            ],
+            "director": "Michael O'Halloran",
+            "cast": [
+              "Ashlee Lollback",
+              "Hugh Parker",
+              "Pacharo Mzembe"
+            ],
+            "release_date": "2025-05-01",
+            "rating": 5.859,
+            "title": "Space/Time",
+            "title_normalized": "space time"
+          }
+        },
+        {
+          "id": "tmdb-1184918",
+          "title": "The Wild Robot",
+          "score": 0.5098745226860046,
+          "content": "The Wild Robot\n\nAfter a shipwreck, an intelligent robot called Roz is stranded on an uninhabited island. To survive the harsh environment, Roz bonds with the island's animals and cares for an orphaned baby goose.",
+          "metadata": {
+            "tmdb_id": 1184918,
+            "language": "en",
+            "original_title": "The Wild Robot",
+            "poster_path": "https://image.tmdb.org/t/p/w500/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
+            "genres": [
+              "Animation",
+              "Science Fiction",
+              "Family",
+              "Adventure",
+              "Drama"
+            ],
+            "director": "Chris Sanders",
+            "cast": [
+              "Lupita Nyong'o",
+              "Pedro Pascal",
+              "Kit Connor"
+            ],
+            "release_date": "2024-09-12",
+            "rating": 8.312,
+            "title": "The Wild Robot",
+            "title_normalized": "the wild robot"
+          }
+        },
+        {
+          "id": "tmdb-258362",
+          "title": "Perfect Prey",
+          "score": 0.5097494721412659,
+          "content": "Perfect Prey\n\nA former Texas Ranger is recruited by a Houston police captain to assist a homicide detective in the search for an elusive serial killer who collects antique dolls.",
+          "metadata": {
+            "tmdb_id": 258362,
+            "language": "en",
+            "original_title": "Perfect Prey",
+            "poster_path": "https://image.tmdb.org/t/p/w500/otpeGasEHbG2yHCM14qe2qePxRq.jpg",
+            "genres": [
+              "Thriller",
+              "TV Movie",
+              "Drama"
+            ],
+            "director": "Howard McCain",
+            "cast": [
+              "Kelly McGillis",
+              "Bruce Dern",
+              "D.W. Moffett"
+            ],
+            "release_date": "1998-07-10",
+            "rating": 6.1,
+            "title": "Perfect Prey",
+            "title_normalized": "perfect prey"
+          }
+        },
+        {
+          "id": "tmdb-945961",
+          "title": "Alien: Romulus",
+          "score": 0.5095362067222595,
+          "content": "Alien: Romulus\n\nWhile scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+          "metadata": {
+            "tmdb_id": 945961,
+            "language": "en",
+            "original_title": "Alien: Romulus",
+            "poster_path": "https://image.tmdb.org/t/p/w500/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+            "genres": [
+              "Horror",
+              "Science Fiction"
+            ],
+            "director": "Fede Álvarez",
+            "cast": [
+              "Cailee Spaeny",
+              "David Jonsson",
+              "Archie Renaux"
+            ],
+            "release_date": "2024-08-13",
+            "rating": 7.169,
+            "title": "Alien: Romulus",
+            "title_normalized": "alien romulus"
+          }
+        },
+        {
+          "id": "tmdb-1634858",
+          "title": "Cuerno Azulado",
+          "score": 0.5093784928321838,
+          "content": "Cuerno Azulado\n\n",
+          "metadata": {
+            "tmdb_id": 1634858,
+            "language": "en",
+            "original_title": "Cuerno Azulado",
+            "poster_path": "https://image.tmdb.org/t/p/w500/q0OveDlsh5BNq6ifZqNWKtLKiwb.jpg",
+            "genres": [
+              "Action"
+            ],
+            "director": "Unknown",
+            "cast": [],
+            "release_date": "2025-09-10",
+            "rating": 7.778,
+            "title": "Cuerno Azulado",
+            "title_normalized": "cuerno azulado"
+          }
+        },
+        {
+          "id": "tmdb-823219",
+          "title": "Flow",
+          "score": 0.5062226057052612,
+          "content": "Flow\n\nA solitary cat, displaced by a great flood, finds refuge on a boat with various species and must navigate the challenges of adapting to a transformed world together.",
+          "metadata": {
+            "tmdb_id": 823219,
+            "language": "en",
+            "original_title": "Straume",
+            "poster_path": "https://image.tmdb.org/t/p/w500/zME0Ul0w48MKkYBnFRn40M5qgLh.jpg",
+            "genres": [
+              "Animation",
+              "Adventure",
+              "Fantasy",
+              "Family"
+            ],
+            "director": "Gints Zilbalodis",
+            "cast": [],
+            "release_date": "2024-08-29",
+            "rating": 8.095,
+            "title": "Flow",
+            "title_normalized": "flow"
+          }
+        },
+        {
+          "id": "tmdb-9757",
+          "title": "Norbit",
+          "score": 0.506047248840332,
+          "content": "Norbit\n\nA mild-mannered guy who is engaged to a monstrous woman meets the woman of his dreams, and schemes to find a way to be with her.",
+          "metadata": {
+            "tmdb_id": 9757,
+            "language": "en",
+            "original_title": "Norbit",
+            "poster_path": "https://image.tmdb.org/t/p/w500/XcZ5NzygPp54csxCnzvQKuxFL2.jpg",
+            "genres": [
+              "Comedy"
+            ],
+            "director": "Brian Robbins",
+            "cast": [
+              "Eddie Murphy",
+              "Thandiwe Newton",
+              "Terry Crews"
+            ],
+            "release_date": "2007-02-08",
+            "rating": 5.673,
+            "title": "Norbit",
+            "title_normalized": "norbit"
+          }
+        }
+      ]
+    },
+    {
+      "query": "space exploration science fiction",
+      "type": "semantic",
+      "description": "Semantic search - Space theme",
+      "top_k": 10,
+      "latency_ms": 1071.16,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "Space/Time",
+          "score": 0.95,
+          "director": "Michael O'Halloran",
+          "genres": [
+            "Science Fiction",
+            "Action",
+            "Thriller"
+          ]
+        },
+        {
+          "title": "2001: A Space Odyssey",
+          "score": 0.95,
+          "director": "Stanley Kubrick",
+          "genres": [
+            "Science Fiction",
+            "Mystery",
+            "Adventure"
+          ]
+        },
+        {
+          "title": "Interstellar",
+          "score": 0.5802,
+          "director": "Christopher Nolan",
+          "genres": [
+            "Adventure",
+            "Drama",
+            "Science Fiction"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-434853",
+          "title": "Space/Time",
+          "score": 0.95,
+          "content": "Space/Time\n\nAfter a fatal test shuts down their project, a disgraced team of scientists enters the criminal underworld to rebuild a forbidden space-bending engine that could rescue humanity or annihilate it entirely.",
+          "metadata": {
+            "tmdb_id": 434853,
+            "language": "en",
+            "original_title": "Space/Time",
+            "poster_path": "https://image.tmdb.org/t/p/w500/uje1ecKMnNpZp0at5TxlvVgVXqI.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Thriller"
+            ],
+            "director": "Michael O'Halloran",
+            "cast": [
+              "Ashlee Lollback",
+              "Hugh Parker",
+              "Pacharo Mzembe"
+            ],
+            "release_date": "2025-05-01",
+            "rating": 5.859,
+            "title": "Space/Time",
+            "title_normalized": "space time"
+          }
+        },
+        {
+          "id": "tmdb-62",
+          "title": "2001: A Space Odyssey",
+          "score": 0.95,
+          "content": "2001: A Space Odyssey\n\nHumanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced super computer.",
+          "metadata": {
+            "tmdb_id": 62,
+            "language": "en",
+            "original_title": "2001: A Space Odyssey",
+            "poster_path": "https://image.tmdb.org/t/p/w500/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+            "genres": [
+              "Science Fiction",
+              "Mystery",
+              "Adventure"
+            ],
+            "director": "Stanley Kubrick",
+            "cast": [
+              "Keir Dullea",
+              "Gary Lockwood",
+              "William Sylvester"
+            ],
+            "release_date": "1968-04-02",
+            "rating": 8.1,
+            "title": "2001: A Space Odyssey",
+            "title_normalized": "2001 a space odyssey"
+          }
+        },
+        {
+          "id": "tmdb-157336",
+          "title": "Interstellar",
+          "score": 0.5802497267723083,
+          "content": "Interstellar\n\nThe adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+          "metadata": {
+            "tmdb_id": 157336,
+            "language": "en",
+            "original_title": "Interstellar",
+            "poster_path": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Science Fiction"
+            ],
+            "director": "Christopher Nolan",
+            "cast": [
+              "Matthew McConaughey",
+              "Anne Hathaway",
+              "Michael Caine"
+            ],
+            "release_date": "2014-11-05",
+            "rating": 8.5,
+            "title": "Interstellar",
+            "title_normalized": "interstellar"
+          }
+        },
+        {
+          "id": "tmdb-1590097",
+          "title": "Afterlight",
+          "score": 0.5776195526123047,
+          "content": "Afterlight\n\nIn a future shaped by war, AI, and fractured timelines, five interconnected sci-fi stories explore humanity’s fight for connection, survival, and meaning across time and space.",
+          "metadata": {
+            "tmdb_id": 1590097,
+            "language": "en",
+            "original_title": "Afterlight",
+            "poster_path": "https://image.tmdb.org/t/p/w500/7bzMCW1E1sOWEbjVuQ8iRGrdpcw.jpg",
+            "genres": [
+              "Science Fiction"
+            ],
+            "director": "Alison Kohlhardt",
+            "cast": [
+              "Anna Fraser",
+              "Ellise Chappell",
+              "Linda-Jean Barry"
+            ],
+            "release_date": "2025-11-27",
+            "rating": 5.107,
+            "title": "Afterlight",
+            "title_normalized": "afterlight"
+          }
+        },
+        {
+          "id": "tmdb-126889",
+          "title": "Alien: Covenant",
+          "score": 0.546735942363739,
+          "content": "Alien: Covenant\n\nThe crew of the colony ship Covenant, bound for a remote planet on the far side of the galaxy, discovers what they think is an uncharted paradise but is actually a dark, dangerous world.",
+          "metadata": {
+            "tmdb_id": 126889,
+            "language": "en",
+            "original_title": "Alien: Covenant",
+            "poster_path": "https://image.tmdb.org/t/p/w500/zecMELPbU5YMQpC81Z8ImaaXuf9.jpg",
+            "genres": [
+              "Horror",
+              "Science Fiction"
+            ],
+            "director": "Ridley Scott",
+            "cast": [
+              "Michael Fassbender",
+              "Katherine Waterston",
+              "Billy Crudup"
+            ],
+            "release_date": "2017-05-09",
+            "rating": 6.17,
+            "title": "Alien: Covenant",
+            "title_normalized": "alien covenant"
+          }
+        },
+        {
+          "id": "tmdb-1022787",
+          "title": "Elio",
+          "score": 0.5365349054336548,
+          "content": "Elio\n\nElio, a space fanatic with an active imagination, finds himself on a cosmic misadventure where he must form new bonds with eccentric alien lifeforms, navigate a crisis of intergalactic proportions and somehow discover who he is truly meant to be.",
+          "metadata": {
+            "tmdb_id": 1022787,
+            "language": "en",
+            "original_title": "Elio",
+            "poster_path": "https://image.tmdb.org/t/p/w500/7z8jDiTZZco9moIKpTUImFtTy7o.jpg",
+            "genres": [
+              "Family",
+              "Comedy",
+              "Adventure",
+              "Animation",
+              "Science Fiction"
+            ],
+            "director": "Domee Shi",
+            "cast": [
+              "Yonas Kibreab",
+              "Remy Edgerly",
+              "Zoe Saldaña"
+            ],
+            "release_date": "2025-06-18",
+            "rating": 6.9,
+            "title": "Elio",
+            "title_normalized": "elio"
+          }
+        },
+        {
+          "id": "tmdb-945961",
+          "title": "Alien: Romulus",
+          "score": 0.5285390615463257,
+          "content": "Alien: Romulus\n\nWhile scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+          "metadata": {
+            "tmdb_id": 945961,
+            "language": "en",
+            "original_title": "Alien: Romulus",
+            "poster_path": "https://image.tmdb.org/t/p/w500/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+            "genres": [
+              "Horror",
+              "Science Fiction"
+            ],
+            "director": "Fede Álvarez",
+            "cast": [
+              "Cailee Spaeny",
+              "David Jonsson",
+              "Archie Renaux"
+            ],
+            "release_date": "2024-08-13",
+            "rating": 7.169,
+            "title": "Alien: Romulus",
+            "title_normalized": "alien romulus"
+          }
+        },
+        {
+          "id": "tmdb-605722",
+          "title": "Long Distance",
+          "score": 0.5161195397377014,
+          "content": "Long Distance\n\nAfter crash-landing on an alien planet, an asteroid miner must contend with the challenges of his new surroundings, while making his way across the harsh terrain to the only other survivor – a woman who is trapped in her escape pod.",
+          "metadata": {
+            "tmdb_id": 605722,
+            "language": "en",
+            "original_title": "Long Distance",
+            "poster_path": "https://image.tmdb.org/t/p/w500/m5NKltgQqqyoWJNuK18IqEGRG7J.jpg",
+            "genres": [
+              "Science Fiction",
+              "Comedy",
+              "Action"
+            ],
+            "director": "Josh Gordon",
+            "cast": [
+              "Anthony Ramos",
+              "Naomi Scott",
+              "Kristofer Hivju"
+            ],
+            "release_date": "2024-07-12",
+            "rating": 6.4,
+            "title": "Long Distance",
+            "title_normalized": "long distance"
+          }
+        },
+        {
+          "id": "tmdb-1086260",
+          "title": "The Astronaut",
+          "score": 0.5157394409179688,
+          "content": "The Astronaut\n\nAfter returning from her first space mission, astronaut Sam Walker is placed under NASA’s care at a high security house for rehabilitation and medical testing. However, when disturbing occurrences begin happening around the property, she fears that something extraterrestrial has followed her back to Earth",
+          "metadata": {
+            "tmdb_id": 1086260,
+            "language": "en",
+            "original_title": "The Astronaut",
+            "poster_path": "https://image.tmdb.org/t/p/w500/souvvkJHYhztC1UqZ8lEVUiJa3J.jpg",
+            "genres": [
+              "Science Fiction",
+              "Horror",
+              "Thriller"
+            ],
+            "director": "Jess Varley",
+            "cast": [
+              "Kate Mara",
+              "Laurence Fishburne",
+              "Gabriel Luna"
+            ],
+            "release_date": "2025-09-26",
+            "rating": 5.827,
+            "title": "The Astronaut",
+            "title_normalized": "the astronaut"
+          }
+        },
+        {
+          "id": "tmdb-1241470",
+          "title": "Osiris",
+          "score": 0.5126528143882751,
+          "content": "Osiris\n\nSpecial Forces commandos on a mission are abducted mid-operation by a mysterious spacecraft. Upon waking aboard, they find themselves prey to a relentless alien race in a fight for survival.",
+          "metadata": {
+            "tmdb_id": 1241470,
+            "language": "en",
+            "original_title": "Osiris",
+            "poster_path": "https://image.tmdb.org/t/p/w500/3YtZHtXPNG5AleisgEatEfZOT2w.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Horror"
+            ],
+            "director": "William Kaufman",
+            "cast": [
+              "Max Martini",
+              "Brianna Hildebrand",
+              "LaMonica Garrett"
+            ],
+            "release_date": "2025-07-25",
+            "rating": 6.013,
+            "title": "Osiris",
+            "title_normalized": "osiris"
+          }
+        }
+      ]
+    },
+    {
+      "query": "romantic comedy",
+      "type": "genre",
+      "description": "Genre-based search",
+      "top_k": 10,
+      "latency_ms": 841.68,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "All Over the Guy",
+          "score": 0.6777,
+          "director": "Julie Davis",
+          "genres": [
+            "Comedy",
+            "Romance"
+          ]
+        },
+        {
+          "title": "Untitled Home Invasion Romance",
+          "score": 0.5764,
+          "director": "Jason Biggs",
+          "genres": [
+            "Comedy",
+            "Action",
+            "Thriller",
+            "Romance"
+          ]
+        },
+        {
+          "title": "Kulong",
+          "score": 0.5554,
+          "director": "Sigrid Polon",
+          "genres": [
+            "Drama"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-21055",
+          "title": "All Over the Guy",
+          "score": 0.6777456998825073,
+          "content": "All Over the Guy\n\nA contemporary romantic comedy exploring the unlikely pairing of two 20-somethings thrown together by their respective best friends in hopes of igniting their own romance.",
+          "metadata": {
+            "tmdb_id": 21055,
+            "language": "en",
+            "original_title": "All Over the Guy",
+            "poster_path": "https://image.tmdb.org/t/p/w500/tIO6jd2stGtM6pLvX8Jm85efw9Q.jpg",
+            "genres": [
+              "Comedy",
+              "Romance"
+            ],
+            "director": "Julie Davis",
+            "cast": [
+              "Dan Bucatinsky",
+              "Richard Ruccolo",
+              "Doris Roberts"
+            ],
+            "release_date": "2001-08-10",
+            "rating": 5.7,
+            "title": "All Over the Guy",
+            "title_normalized": "all over the guy"
+          }
+        },
+        {
+          "id": "tmdb-1340076",
+          "title": "Untitled Home Invasion Romance",
+          "score": 0.5764341950416565,
+          "content": "Untitled Home Invasion Romance\n\nAs a last-ditch attempt to save his failing marriage, an actor stages a home invasion during a romantic getaway weekend.",
+          "metadata": {
+            "tmdb_id": 1340076,
+            "language": "en",
+            "original_title": "Untitled Home Invasion Romance",
+            "poster_path": "https://image.tmdb.org/t/p/w500/aBMnVU5yrsP5XMBZhG8aT2w6m9u.jpg",
+            "genres": [
+              "Comedy",
+              "Action",
+              "Thriller",
+              "Romance"
+            ],
+            "director": "Jason Biggs",
+            "cast": [
+              "Jason Biggs",
+              "Meaghan Rath",
+              "Anna Konkle"
+            ],
+            "release_date": "2026-01-27",
+            "rating": 5.553,
+            "title": "Untitled Home Invasion Romance",
+            "title_normalized": "untitled home invasion romance"
+          }
+        },
+        {
+          "id": "tmdb-1266990",
+          "title": "Kulong",
+          "score": 0.5553799867630005,
+          "content": "Kulong\n\nThree friends retreat to a resort to collaborate on a daring screenplay for a contest. Faced with the challenge of writing about passion despite their own dry spells, their journey soon blurs the line between imagination and experience.",
+          "metadata": {
+            "tmdb_id": 1266990,
+            "language": "en",
+            "original_title": "Kulong",
+            "poster_path": "https://image.tmdb.org/t/p/w500/AnzrE2WHg3DtZrtmB9AnEbAh17m.jpg",
+            "genres": [
+              "Drama"
+            ],
+            "director": "Sigrid Polon",
+            "cast": [
+              "Jenn Rosa",
+              "Aica Veloso",
+              "Cariz Manzano"
+            ],
+            "release_date": "2024-05-24",
+            "rating": 6.433,
+            "title": "Kulong",
+            "title_normalized": "kulong"
+          }
+        },
+        {
+          "id": "tmdb-1268609",
+          "title": "Pavane",
+          "score": 0.524869978427887,
+          "content": "Pavane\n\nThree lonely strangers meet at their department store jobs and find solace in each other's company while they explore connection and the nature of love.",
+          "metadata": {
+            "tmdb_id": 1268609,
+            "language": "en",
+            "original_title": "파반느",
+            "poster_path": "https://image.tmdb.org/t/p/w500/wOXc8stx1CLvM6GC0ABKfWOkbYw.jpg",
+            "genres": [
+              "Romance",
+              "Drama"
+            ],
+            "director": "Lee Jong-pil",
+            "cast": [
+              "Ko A-sung",
+              "Byun Yo-han",
+              "Moon Sang-min"
+            ],
+            "release_date": "2026-02-19",
+            "rating": 7.5,
+            "title": "Pavane",
+            "title_normalized": "pavane"
+          }
+        },
+        {
+          "id": "tmdb-48838",
+          "title": "London Boulevard",
+          "score": 0.5233619809150696,
+          "content": "London Boulevard\n\nA parolee falls for a reclusive movie star while trying to evade a ruthless gangster.",
+          "metadata": {
+            "tmdb_id": 48838,
+            "language": "en",
+            "original_title": "London Boulevard",
+            "poster_path": "https://image.tmdb.org/t/p/w500/naQKmThKMtlur92CDgCP6b9aoQE.jpg",
+            "genres": [
+              "Drama",
+              "Crime"
+            ],
+            "director": "William Monahan",
+            "cast": [
+              "Colin Farrell",
+              "Keira Knightley",
+              "David Thewlis"
+            ],
+            "release_date": "2010-11-10",
+            "rating": 5.9,
+            "title": "London Boulevard",
+            "title_normalized": "london boulevard"
+          }
+        },
+        {
+          "id": "tmdb-9757",
+          "title": "Norbit",
+          "score": 0.5200555324554443,
+          "content": "Norbit\n\nA mild-mannered guy who is engaged to a monstrous woman meets the woman of his dreams, and schemes to find a way to be with her.",
+          "metadata": {
+            "tmdb_id": 9757,
+            "language": "en",
+            "original_title": "Norbit",
+            "poster_path": "https://image.tmdb.org/t/p/w500/XcZ5NzygPp54csxCnzvQKuxFL2.jpg",
+            "genres": [
+              "Comedy"
+            ],
+            "director": "Brian Robbins",
+            "cast": [
+              "Eddie Murphy",
+              "Thandiwe Newton",
+              "Terry Crews"
+            ],
+            "release_date": "2007-02-08",
+            "rating": 5.673,
+            "title": "Norbit",
+            "title_normalized": "norbit"
+          }
+        },
+        {
+          "id": "tmdb-1512623",
+          "title": "Risqué",
+          "score": 0.5164646506309509,
+          "content": "Risqué\n\nFired from a strip club, a vengeful dancer masterminds a high-stakes heist with fellow strippers to take down the corrupt boss and the men who underestimate them.",
+          "metadata": {
+            "tmdb_id": 1512623,
+            "language": "en",
+            "original_title": "Risqué",
+            "poster_path": "https://image.tmdb.org/t/p/w500/h6OsRrDwbspLnKMvlFl57QFDP7d.jpg",
+            "genres": [
+              "Action",
+              "Crime",
+              "Thriller"
+            ],
+            "director": "Tony Dean Smith",
+            "cast": [
+              "Leah Gibson",
+              "Eloise Lovell Anderson",
+              "Silvia Orduna"
+            ],
+            "release_date": "2025-08-01",
+            "rating": 7.395,
+            "title": "Risqué",
+            "title_normalized": "risqu"
+          }
+        },
+        {
+          "id": "tmdb-619979",
+          "title": "Deep Water",
+          "score": 0.51612788438797,
+          "content": "Deep Water\n\nA well-to-do husband who allows his wife to have affairs in order to avoid a divorce becomes a prime suspect in the disappearance of her lovers.",
+          "metadata": {
+            "tmdb_id": 619979,
+            "language": "en",
+            "original_title": "Deep Water",
+            "poster_path": "https://image.tmdb.org/t/p/w500/6yRMyWwjuhKg6IU66uiZIGhaSc8.jpg",
+            "genres": [
+              "Drama",
+              "Mystery",
+              "Thriller"
+            ],
+            "director": "Adrian Lyne",
+            "cast": [
+              "Ben Affleck",
+              "Ana de Armas",
+              "Tracy Letts"
+            ],
+            "release_date": "2022-03-17",
+            "rating": 5.82,
+            "title": "Deep Water",
+            "title_normalized": "deep water"
+          }
+        },
+        {
+          "id": "tmdb-60238",
+          "title": "Hidden Secrets",
+          "score": 0.510486900806427,
+          "content": "Hidden Secrets\n\nA young man finds himself torn between his current girlfriend and an old flame at a friend's funeral, where lifestyles and attitudes clash over a long weekend.",
+          "metadata": {
+            "tmdb_id": 60238,
+            "language": "en",
+            "original_title": "Hidden Secrets",
+            "poster_path": "https://image.tmdb.org/t/p/w500/mcMYNa3p8ZqFr8GuohQwTPdojnA.jpg",
+            "genres": [
+              "Comedy",
+              "Drama"
+            ],
+            "director": "Carey Scott",
+            "cast": [
+              "John Schneider",
+              "David A.R. White",
+              "Staci Keanan"
+            ],
+            "release_date": "2006-10-06",
+            "rating": 4.0,
+            "title": "Hidden Secrets",
+            "title_normalized": "hidden secrets"
+          }
+        },
+        {
+          "id": "tmdb-1466115",
+          "title": "Even If This Love Disappears Tonight",
+          "score": 0.5102369785308838,
+          "content": "Even If This Love Disappears Tonight\n\nA high school girl wakes up each day with no memory of yesterday. When she agrees to date a shy classmate, can their love grow with every new beginning?",
+          "metadata": {
+            "tmdb_id": 1466115,
+            "language": "en",
+            "original_title": "오늘 밤, 세계에서 이 사랑이 사라진다 해도",
+            "poster_path": "https://image.tmdb.org/t/p/w500/5eNN8KLDPUXDqIkTdCbmn1gx5P7.jpg",
+            "genres": [
+              "Romance",
+              "Drama"
+            ],
+            "director": "Kim Hye-young",
+            "cast": [
+              "Choo Young-woo",
+              "Shin Sia",
+              "Cho Yu-jung"
+            ],
+            "release_date": "2025-12-24",
+            "rating": 8.2,
+            "title": "Even If This Love Disappears Tonight",
+            "title_normalized": "even if this love disappears tonight"
+          }
+        }
+      ]
+    },
+    {
+      "query": "Christopher Nolan",
+      "type": "director",
+      "description": "Director search",
+      "top_k": 10,
+      "latency_ms": 858.08,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "Interstellar",
+          "score": 0.5331,
+          "director": "Christopher Nolan",
+          "genres": [
+            "Adventure",
+            "Drama",
+            "Science Fiction"
+          ]
+        },
+        {
+          "title": "2001: A Space Odyssey",
+          "score": 0.5326,
+          "director": "Stanley Kubrick",
+          "genres": [
+            "Science Fiction",
+            "Mystery",
+            "Adventure"
+          ]
+        },
+        {
+          "title": "Space/Time",
+          "score": 0.5201,
+          "director": "Michael O'Halloran",
+          "genres": [
+            "Science Fiction",
+            "Action",
+            "Thriller"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-157336",
+          "title": "Interstellar",
+          "score": 0.5330960154533386,
+          "content": "Interstellar\n\nThe adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+          "metadata": {
+            "tmdb_id": 157336,
+            "language": "en",
+            "original_title": "Interstellar",
+            "poster_path": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Science Fiction"
+            ],
+            "director": "Christopher Nolan",
+            "cast": [
+              "Matthew McConaughey",
+              "Anne Hathaway",
+              "Michael Caine"
+            ],
+            "release_date": "2014-11-05",
+            "rating": 8.5,
+            "title": "Interstellar",
+            "title_normalized": "interstellar"
+          }
+        },
+        {
+          "id": "tmdb-62",
+          "title": "2001: A Space Odyssey",
+          "score": 0.5326023697853088,
+          "content": "2001: A Space Odyssey\n\nHumanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced super computer.",
+          "metadata": {
+            "tmdb_id": 62,
+            "language": "en",
+            "original_title": "2001: A Space Odyssey",
+            "poster_path": "https://image.tmdb.org/t/p/w500/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+            "genres": [
+              "Science Fiction",
+              "Mystery",
+              "Adventure"
+            ],
+            "director": "Stanley Kubrick",
+            "cast": [
+              "Keir Dullea",
+              "Gary Lockwood",
+              "William Sylvester"
+            ],
+            "release_date": "1968-04-02",
+            "rating": 8.1,
+            "title": "2001: A Space Odyssey",
+            "title_normalized": "2001 a space odyssey"
+          }
+        },
+        {
+          "id": "tmdb-434853",
+          "title": "Space/Time",
+          "score": 0.52008455991745,
+          "content": "Space/Time\n\nAfter a fatal test shuts down their project, a disgraced team of scientists enters the criminal underworld to rebuild a forbidden space-bending engine that could rescue humanity or annihilate it entirely.",
+          "metadata": {
+            "tmdb_id": 434853,
+            "language": "en",
+            "original_title": "Space/Time",
+            "poster_path": "https://image.tmdb.org/t/p/w500/uje1ecKMnNpZp0at5TxlvVgVXqI.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Thriller"
+            ],
+            "director": "Michael O'Halloran",
+            "cast": [
+              "Ashlee Lollback",
+              "Hugh Parker",
+              "Pacharo Mzembe"
+            ],
+            "release_date": "2025-05-01",
+            "rating": 5.859,
+            "title": "Space/Time",
+            "title_normalized": "space time"
+          }
+        },
+        {
+          "id": "tmdb-982843",
+          "title": "The Great Flood",
+          "score": 0.5155800580978394,
+          "content": "The Great Flood\n\nWhen a raging flood traps a researcher and her young son, a call to a crucial mission puts their escape — and the future of humanity — on the line.",
+          "metadata": {
+            "tmdb_id": 982843,
+            "language": "en",
+            "original_title": "대홍수",
+            "poster_path": "https://image.tmdb.org/t/p/w500/1tUOZQDgZaGqZtrB21MieiXARL2.jpg",
+            "genres": [
+              "Science Fiction",
+              "Adventure",
+              "Drama"
+            ],
+            "director": "Kim Byung-woo",
+            "cast": [
+              "Kim Da-mi",
+              "Park Hae-soo",
+              "Kwon Eun-seong"
+            ],
+            "release_date": "2025-09-18",
+            "rating": 5.981,
+            "title": "The Great Flood",
+            "title_normalized": "the great flood"
+          }
+        },
+        {
+          "id": "tmdb-1387382",
+          "title": "Hunting Season",
+          "score": 0.51347416639328,
+          "content": "Hunting Season\n\nWhen a reclusive survivalist and his daughter rescue a mysterious, wounded woman from a river, they become entangled in a deadly web of violence and revenge, forcing them to confront a brutal criminal to survive.",
+          "metadata": {
+            "tmdb_id": 1387382,
+            "language": "en",
+            "original_title": "Hunting Season",
+            "poster_path": "https://image.tmdb.org/t/p/w500/cbryTyaWdqrKpQCw6K7zm2jrB5v.jpg",
+            "genres": [
+              "Action",
+              "Drama",
+              "Thriller"
+            ],
+            "director": "Raja Collins",
+            "cast": [
+              "Mel Gibson",
+              "Shelley Hennig",
+              "Jordi Mollà"
+            ],
+            "release_date": "2025-12-05",
+            "rating": 7.101,
+            "title": "Hunting Season",
+            "title_normalized": "hunting season"
+          }
+        },
+        {
+          "id": "tmdb-1241470",
+          "title": "Osiris",
+          "score": 0.5126820206642151,
+          "content": "Osiris\n\nSpecial Forces commandos on a mission are abducted mid-operation by a mysterious spacecraft. Upon waking aboard, they find themselves prey to a relentless alien race in a fight for survival.",
+          "metadata": {
+            "tmdb_id": 1241470,
+            "language": "en",
+            "original_title": "Osiris",
+            "poster_path": "https://image.tmdb.org/t/p/w500/3YtZHtXPNG5AleisgEatEfZOT2w.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Horror"
+            ],
+            "director": "William Kaufman",
+            "cast": [
+              "Max Martini",
+              "Brianna Hildebrand",
+              "LaMonica Garrett"
+            ],
+            "release_date": "2025-07-25",
+            "rating": 6.013,
+            "title": "Osiris",
+            "title_normalized": "osiris"
+          }
+        },
+        {
+          "id": "tmdb-701387",
+          "title": "Bugonia",
+          "score": 0.5125532746315002,
+          "content": "Bugonia\n\nTwo conspiracy obsessed young men kidnap the high-powered CEO of a major company, convinced that she is an alien intent on destroying planet Earth.",
+          "metadata": {
+            "tmdb_id": 701387,
+            "language": "en",
+            "original_title": "Bugonia",
+            "poster_path": "https://image.tmdb.org/t/p/w500/rSdOua3wKMEaFWDcKAYWRjXQWOt.jpg",
+            "genres": [
+              "Science Fiction",
+              "Thriller",
+              "Comedy"
+            ],
+            "director": "Yorgos Lanthimos",
+            "cast": [
+              "Emma Stone",
+              "Jesse Plemons",
+              "Aidan Delbis"
+            ],
+            "release_date": "2025-10-23",
+            "rating": 7.343,
+            "title": "Bugonia",
+            "title_normalized": "bugonia"
+          }
+        },
+        {
+          "id": "tmdb-1290821",
+          "title": "Shelter",
+          "score": 0.5108683109283447,
+          "content": "Shelter\n\nA man living in self-imposed exile on a remote island rescues a young girl from a violent storm, setting off a chain of events that forces him out of seclusion to protect her from enemies tied to his past.",
+          "metadata": {
+            "tmdb_id": 1290821,
+            "language": "en",
+            "original_title": "Shelter",
+            "poster_path": "https://image.tmdb.org/t/p/w500/buPFnHZ3xQy6vZEHxbHgL1Pc6CR.jpg",
+            "genres": [
+              "Action",
+              "Crime",
+              "Thriller"
+            ],
+            "director": "Ric Roman Waugh",
+            "cast": [
+              "Jason Statham",
+              "Bodhi Rae Breathnach",
+              "Michael Shaeffer"
+            ],
+            "release_date": "2026-01-28",
+            "rating": 7.4,
+            "title": "Shelter",
+            "title_normalized": "shelter"
+          }
+        },
+        {
+          "id": "tmdb-1084199",
+          "title": "Companion",
+          "score": 0.5092007517814636,
+          "content": "Companion\n\nDuring a weekend getaway at a secluded lakeside estate, a group of friends finds themselves entangled in a web of secrets, deception, and advanced technology. As tensions rise and loyalties are tested, they uncover unsettling truths about themselves and the world around them.",
+          "metadata": {
+            "tmdb_id": 1084199,
+            "language": "en",
+            "original_title": "Companion",
+            "poster_path": "https://image.tmdb.org/t/p/w500/oCoTgC3UyWGfyQ9thE10ulWR7bn.jpg",
+            "genres": [
+              "Horror",
+              "Science Fiction",
+              "Thriller"
+            ],
+            "director": "Drew Hancock",
+            "cast": [
+              "Sophie Thatcher",
+              "Jack Quaid",
+              "Lukas Gage"
+            ],
+            "release_date": "2025-01-22",
+            "rating": 7.012,
+            "title": "Companion",
+            "title_normalized": "companion"
+          }
+        },
+        {
+          "id": "tmdb-619979",
+          "title": "Deep Water",
+          "score": 0.5085797905921936,
+          "content": "Deep Water\n\nA well-to-do husband who allows his wife to have affairs in order to avoid a divorce becomes a prime suspect in the disappearance of her lovers.",
+          "metadata": {
+            "tmdb_id": 619979,
+            "language": "en",
+            "original_title": "Deep Water",
+            "poster_path": "https://image.tmdb.org/t/p/w500/6yRMyWwjuhKg6IU66uiZIGhaSc8.jpg",
+            "genres": [
+              "Drama",
+              "Mystery",
+              "Thriller"
+            ],
+            "director": "Adrian Lyne",
+            "cast": [
+              "Ben Affleck",
+              "Ana de Armas",
+              "Tracy Letts"
+            ],
+            "release_date": "2022-03-17",
+            "rating": 5.82,
+            "title": "Deep Water",
+            "title_normalized": "deep water"
+          }
+        }
+      ]
+    },
+    {
+      "query": "superhero action movie",
+      "type": "semantic",
+      "description": "Semantic search - Superhero theme",
+      "top_k": 10,
+      "latency_ms": 1189.14,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "Batman v Superman: Dawn of Justice",
+          "score": 0.6326,
+          "director": "Zack Snyder",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+          ]
+        },
+        {
+          "title": "Predator",
+          "score": 0.5113,
+          "director": "John McTiernan",
+          "genres": [
+            "Science Fiction",
+            "Action",
+            "Adventure",
+            "Thriller"
+          ]
+        },
+        {
+          "title": "Osiris",
+          "score": 0.511,
+          "director": "William Kaufman",
+          "genres": [
+            "Science Fiction",
+            "Action",
+            "Horror"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-209112",
+          "title": "Batman v Superman: Dawn of Justice",
+          "score": 0.6326256990432739,
+          "content": "Batman v Superman: Dawn of Justice\n\nFearing the actions of a god-like Super Hero left unchecked, Gotham City’s own formidable, forceful vigilante takes on Metropolis’s most revered, modern-day savior, while the world wrestles with what sort of hero it really needs. And with Batman and Superman at war with one another, a new threat quickly arises, putting mankind in greater danger than it’s ever known before.",
+          "metadata": {
+            "tmdb_id": 209112,
+            "language": "en",
+            "original_title": "Batman v Superman: Dawn of Justice",
+            "poster_path": "https://image.tmdb.org/t/p/w500/5UsK3grJvtQrtzEgqNlDljJW96w.jpg",
+            "genres": [
+              "Action",
+              "Adventure",
+              "Fantasy"
+            ],
+            "director": "Zack Snyder",
+            "cast": [
+              "Ben Affleck",
+              "Henry Cavill",
+              "Jesse Eisenberg"
+            ],
+            "release_date": "2016-03-23",
+            "rating": 6.0,
+            "title": "Batman v Superman: Dawn of Justice",
+            "title_normalized": "batman v superman dawn of justice"
+          }
+        },
+        {
+          "id": "tmdb-106",
+          "title": "Predator",
+          "score": 0.5113117098808289,
+          "content": "Predator\n\nA team of elite commandos on a secret mission in a Central American jungle come to find themselves hunted by an extraterrestrial warrior.",
+          "metadata": {
+            "tmdb_id": 106,
+            "language": "en",
+            "original_title": "Predator",
+            "poster_path": "https://image.tmdb.org/t/p/w500/aN3cdjIK70KGmD84et8MMblU87Q.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Adventure",
+              "Thriller"
+            ],
+            "director": "John McTiernan",
+            "cast": [
+              "Arnold Schwarzenegger",
+              "Carl Weathers",
+              "Kevin Peter Hall"
+            ],
+            "release_date": "1987-06-12",
+            "rating": 7.544,
+            "title": "Predator",
+            "title_normalized": "predator"
+          }
+        },
+        {
+          "id": "tmdb-1241470",
+          "title": "Osiris",
+          "score": 0.5110151767730713,
+          "content": "Osiris\n\nSpecial Forces commandos on a mission are abducted mid-operation by a mysterious spacecraft. Upon waking aboard, they find themselves prey to a relentless alien race in a fight for survival.",
+          "metadata": {
+            "tmdb_id": 1241470,
+            "language": "en",
+            "original_title": "Osiris",
+            "poster_path": "https://image.tmdb.org/t/p/w500/3YtZHtXPNG5AleisgEatEfZOT2w.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Horror"
+            ],
+            "director": "William Kaufman",
+            "cast": [
+              "Max Martini",
+              "Brianna Hildebrand",
+              "LaMonica Garrett"
+            ],
+            "release_date": "2025-07-25",
+            "rating": 6.013,
+            "title": "Osiris",
+            "title_normalized": "osiris"
+          }
+        },
+        {
+          "id": "tmdb-1357886",
+          "title": "Django Undisputed",
+          "score": 0.5098487734794617,
+          "content": "Django Undisputed\n\nDetermined to exact his justice, Django faces dangerous challenges and bloody clashes to restore order in a territory dominated by lawlessness and injustice.",
+          "metadata": {
+            "tmdb_id": 1357886,
+            "language": "en",
+            "original_title": "Django Undisputed",
+            "poster_path": "https://image.tmdb.org/t/p/w500/porcUhC4jqFt72TaxbjOQo2lTzL.jpg",
+            "genres": [
+              "Western"
+            ],
+            "director": "Claudio Del Falco",
+            "cast": [
+              "Claudio Del Falco",
+              "Tomas Arana",
+              "Michael Segal"
+            ],
+            "release_date": "2024-04-22",
+            "rating": 5.958,
+            "title": "Django Undisputed",
+            "title_normalized": "django undisputed"
+          }
+        },
+        {
+          "id": "tmdb-1387382",
+          "title": "Hunting Season",
+          "score": 0.509097158908844,
+          "content": "Hunting Season\n\nWhen a reclusive survivalist and his daughter rescue a mysterious, wounded woman from a river, they become entangled in a deadly web of violence and revenge, forcing them to confront a brutal criminal to survive.",
+          "metadata": {
+            "tmdb_id": 1387382,
+            "language": "en",
+            "original_title": "Hunting Season",
+            "poster_path": "https://image.tmdb.org/t/p/w500/cbryTyaWdqrKpQCw6K7zm2jrB5v.jpg",
+            "genres": [
+              "Action",
+              "Drama",
+              "Thriller"
+            ],
+            "director": "Raja Collins",
+            "cast": [
+              "Mel Gibson",
+              "Shelley Hennig",
+              "Jordi Mollà"
+            ],
+            "release_date": "2025-12-05",
+            "rating": 7.101,
+            "title": "Hunting Season",
+            "title_normalized": "hunting season"
+          }
+        },
+        {
+          "id": "tmdb-4232",
+          "title": "Scream",
+          "score": 0.506998598575592,
+          "content": "Scream\n\nA year after the murder of her mother, a teenage girl is terrorized by a masked killer who targets her and her friends by using scary movies as part of a deadly game.",
+          "metadata": {
+            "tmdb_id": 4232,
+            "language": "en",
+            "original_title": "Scream",
+            "poster_path": "https://image.tmdb.org/t/p/w500/lr9ZIrmuwVmZhpZuTCW8D9g0ZJe.jpg",
+            "genres": [
+              "Crime",
+              "Horror",
+              "Mystery"
+            ],
+            "director": "Wes Craven",
+            "cast": [
+              "David Arquette",
+              "Neve Campbell",
+              "Courteney Cox"
+            ],
+            "release_date": "1996-12-20",
+            "rating": 7.427,
+            "title": "Scream",
+            "title_normalized": "scream"
+          }
+        },
+        {
+          "id": "tmdb-1601243",
+          "title": "Oscar Shaw",
+          "score": 0.5068494081497192,
+          "content": "Oscar Shaw\n\nAfter retiring from the police force, a relentless detective haunted by the tragic loss of his closest friend sets out on a perilous quest for vengeance, seeking redemption and fighting to restore justice to the streets he once swore to protect.",
+          "metadata": {
+            "tmdb_id": 1601243,
+            "language": "en",
+            "original_title": "Oscar Shaw",
+            "poster_path": "https://image.tmdb.org/t/p/w500/tsE3nySukwrfUjouz8vzvKTcXNC.jpg",
+            "genres": [
+              "Action",
+              "Crime",
+              "Thriller"
+            ],
+            "director": "R. Ellis Frazier",
+            "cast": [
+              "Michael Jai White",
+              "Tyrese Gibson",
+              "Isaiah Washington"
+            ],
+            "release_date": "2026-01-09",
+            "rating": 6.19,
+            "title": "Oscar Shaw",
+            "title_normalized": "oscar shaw"
+          }
+        },
+        {
+          "id": "tmdb-1290821",
+          "title": "Shelter",
+          "score": 0.5065740942955017,
+          "content": "Shelter\n\nA man living in self-imposed exile on a remote island rescues a young girl from a violent storm, setting off a chain of events that forces him out of seclusion to protect her from enemies tied to his past.",
+          "metadata": {
+            "tmdb_id": 1290821,
+            "language": "en",
+            "original_title": "Shelter",
+            "poster_path": "https://image.tmdb.org/t/p/w500/buPFnHZ3xQy6vZEHxbHgL1Pc6CR.jpg",
+            "genres": [
+              "Action",
+              "Crime",
+              "Thriller"
+            ],
+            "director": "Ric Roman Waugh",
+            "cast": [
+              "Jason Statham",
+              "Bodhi Rae Breathnach",
+              "Michael Shaeffer"
+            ],
+            "release_date": "2026-01-28",
+            "rating": 7.4,
+            "title": "Shelter",
+            "title_normalized": "shelter"
+          }
+        },
+        {
+          "id": "tmdb-578",
+          "title": "Jaws",
+          "score": 0.5065549612045288,
+          "content": "Jaws\n\nWhen the seaside community of Amity finds itself under attack by a dangerous great white shark, the town's chief of police, a young marine biologist, and a grizzled shark hunter embark on a desperate quest to kill the beast before it strikes again.",
+          "metadata": {
+            "tmdb_id": 578,
+            "language": "en",
+            "original_title": "Jaws",
+            "poster_path": "https://image.tmdb.org/t/p/w500/tjbLSFwi0I3phZwh8zoHWNfbsEp.jpg",
+            "genres": [
+              "Horror",
+              "Thriller",
+              "Adventure"
+            ],
+            "director": "Steven Spielberg",
+            "cast": [
+              "Roy Scheider",
+              "Robert Shaw",
+              "Richard Dreyfuss"
+            ],
+            "release_date": "1975-06-20",
+            "rating": 7.679,
+            "title": "Jaws",
+            "title_normalized": "jaws"
+          }
+        },
+        {
+          "id": "tmdb-619979",
+          "title": "Deep Water",
+          "score": 0.5054706931114197,
+          "content": "Deep Water\n\nA well-to-do husband who allows his wife to have affairs in order to avoid a divorce becomes a prime suspect in the disappearance of her lovers.",
+          "metadata": {
+            "tmdb_id": 619979,
+            "language": "en",
+            "original_title": "Deep Water",
+            "poster_path": "https://image.tmdb.org/t/p/w500/6yRMyWwjuhKg6IU66uiZIGhaSc8.jpg",
+            "genres": [
+              "Drama",
+              "Mystery",
+              "Thriller"
+            ],
+            "director": "Adrian Lyne",
+            "cast": [
+              "Ben Affleck",
+              "Ana de Armas",
+              "Tracy Letts"
+            ],
+            "release_date": "2022-03-17",
+            "rating": 5.82,
+            "title": "Deep Water",
+            "title_normalized": "deep water"
+          }
+        }
+      ]
+    },
+    {
+      "query": "The Matrix",
+      "type": "exact_match",
+      "description": "Exact title match - The Matrix",
+      "top_k": 5,
+      "latency_ms": 45.68,
+      "total_results": 1,
+      "top_3_results": [
+        {
+          "title": "The Matrix",
+          "score": 1.0,
+          "director": "Lana Wachowski",
+          "genres": [
+            "Action",
+            "Science Fiction"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-603",
+          "title": "The Matrix",
+          "score": 1.0,
+          "content": "The Matrix\n\nSet in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.",
+          "metadata": {
+            "tmdb_id": 603,
+            "language": "en",
+            "original_title": "The Matrix",
+            "poster_path": "https://image.tmdb.org/t/p/w500/p96dm7sCMn4VYAStA6siNz30G1r.jpg",
+            "genres": [
+              "Action",
+              "Science Fiction"
+            ],
+            "director": "Lana Wachowski",
+            "cast": [
+              "Keanu Reeves",
+              "Laurence Fishburne",
+              "Carrie-Anne Moss"
+            ],
+            "release_date": "1999-03-31",
+            "rating": 8.238,
+            "title": "The Matrix",
+            "title_normalized": "the matrix"
+          }
+        }
+      ]
+    },
+    {
+      "query": "películas de ciencia ficción",
+      "type": "multilingual",
+      "description": "Multilingual search - Spanish SciFi",
+      "top_k": 10,
+      "latency_ms": 9494.54,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "Elio",
+          "score": 0.5206,
+          "director": "Domee Shi",
+          "genres": [
+            "Family",
+            "Comedy",
+            "Adventure",
+            "Animation",
+            "Science Fiction"
+          ]
+        },
+        {
+          "title": "The Great Flood",
+          "score": 0.5166,
+          "director": "Kim Byung-woo",
+          "genres": [
+            "Science Fiction",
+            "Adventure",
+            "Drama"
+          ]
+        },
+        {
+          "title": "Bugonia",
+          "score": 0.5163,
+          "director": "Yorgos Lanthimos",
+          "genres": [
+            "Science Fiction",
+            "Thriller",
+            "Comedy"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-1022787",
+          "title": "Elio",
+          "score": 0.5205920934677124,
+          "content": "Elio\n\nElio, a space fanatic with an active imagination, finds himself on a cosmic misadventure where he must form new bonds with eccentric alien lifeforms, navigate a crisis of intergalactic proportions and somehow discover who he is truly meant to be.",
+          "metadata": {
+            "tmdb_id": 1022787,
+            "language": "en",
+            "original_title": "Elio",
+            "poster_path": "https://image.tmdb.org/t/p/w500/7z8jDiTZZco9moIKpTUImFtTy7o.jpg",
+            "genres": [
+              "Family",
+              "Comedy",
+              "Adventure",
+              "Animation",
+              "Science Fiction"
+            ],
+            "director": "Domee Shi",
+            "cast": [
+              "Yonas Kibreab",
+              "Remy Edgerly",
+              "Zoe Saldaña"
+            ],
+            "release_date": "2025-06-18",
+            "rating": 6.9,
+            "title": "Elio",
+            "title_normalized": "elio"
+          }
+        },
+        {
+          "id": "tmdb-982843",
+          "title": "The Great Flood",
+          "score": 0.5166418552398682,
+          "content": "The Great Flood\n\nWhen a raging flood traps a researcher and her young son, a call to a crucial mission puts their escape — and the future of humanity — on the line.",
+          "metadata": {
+            "tmdb_id": 982843,
+            "language": "en",
+            "original_title": "대홍수",
+            "poster_path": "https://image.tmdb.org/t/p/w500/1tUOZQDgZaGqZtrB21MieiXARL2.jpg",
+            "genres": [
+              "Science Fiction",
+              "Adventure",
+              "Drama"
+            ],
+            "director": "Kim Byung-woo",
+            "cast": [
+              "Kim Da-mi",
+              "Park Hae-soo",
+              "Kwon Eun-seong"
+            ],
+            "release_date": "2025-09-18",
+            "rating": 5.981,
+            "title": "The Great Flood",
+            "title_normalized": "the great flood"
+          }
+        },
+        {
+          "id": "tmdb-701387",
+          "title": "Bugonia",
+          "score": 0.516340434551239,
+          "content": "Bugonia\n\nTwo conspiracy obsessed young men kidnap the high-powered CEO of a major company, convinced that she is an alien intent on destroying planet Earth.",
+          "metadata": {
+            "tmdb_id": 701387,
+            "language": "en",
+            "original_title": "Bugonia",
+            "poster_path": "https://image.tmdb.org/t/p/w500/rSdOua3wKMEaFWDcKAYWRjXQWOt.jpg",
+            "genres": [
+              "Science Fiction",
+              "Thriller",
+              "Comedy"
+            ],
+            "director": "Yorgos Lanthimos",
+            "cast": [
+              "Emma Stone",
+              "Jesse Plemons",
+              "Aidan Delbis"
+            ],
+            "release_date": "2025-10-23",
+            "rating": 7.343,
+            "title": "Bugonia",
+            "title_normalized": "bugonia"
+          }
+        },
+        {
+          "id": "tmdb-157336",
+          "title": "Interstellar",
+          "score": 0.5162590742111206,
+          "content": "Interstellar\n\nThe adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+          "metadata": {
+            "tmdb_id": 157336,
+            "language": "en",
+            "original_title": "Interstellar",
+            "poster_path": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Science Fiction"
+            ],
+            "director": "Christopher Nolan",
+            "cast": [
+              "Matthew McConaughey",
+              "Anne Hathaway",
+              "Michael Caine"
+            ],
+            "release_date": "2014-11-05",
+            "rating": 8.5,
+            "title": "Interstellar",
+            "title_normalized": "interstellar"
+          }
+        },
+        {
+          "id": "tmdb-434853",
+          "title": "Space/Time",
+          "score": 0.5147187113761902,
+          "content": "Space/Time\n\nAfter a fatal test shuts down their project, a disgraced team of scientists enters the criminal underworld to rebuild a forbidden space-bending engine that could rescue humanity or annihilate it entirely.",
+          "metadata": {
+            "tmdb_id": 434853,
+            "language": "en",
+            "original_title": "Space/Time",
+            "poster_path": "https://image.tmdb.org/t/p/w500/uje1ecKMnNpZp0at5TxlvVgVXqI.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Thriller"
+            ],
+            "director": "Michael O'Halloran",
+            "cast": [
+              "Ashlee Lollback",
+              "Hugh Parker",
+              "Pacharo Mzembe"
+            ],
+            "release_date": "2025-05-01",
+            "rating": 5.859,
+            "title": "Space/Time",
+            "title_normalized": "space time"
+          }
+        },
+        {
+          "id": "tmdb-792307",
+          "title": "Poor Things",
+          "score": 0.514291524887085,
+          "content": "Poor Things\n\nBrought back to life by an unorthodox scientist, a young woman runs off with a lawyer on a whirlwind adventure across the continents. Free from the prejudices of her times, she grows steadfast in her purpose to stand for equality and liberation.",
+          "metadata": {
+            "tmdb_id": 792307,
+            "language": "en",
+            "original_title": "Poor Things",
+            "poster_path": "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
+            "genres": [
+              "Science Fiction",
+              "Romance",
+              "Comedy"
+            ],
+            "director": "Yorgos Lanthimos",
+            "cast": [
+              "Emma Stone",
+              "Mark Ruffalo",
+              "Willem Dafoe"
+            ],
+            "release_date": "2023-12-07",
+            "rating": 7.656,
+            "title": "Poor Things",
+            "title_normalized": "poor things"
+          }
+        },
+        {
+          "id": "tmdb-823219",
+          "title": "Flow",
+          "score": 0.513705313205719,
+          "content": "Flow\n\nA solitary cat, displaced by a great flood, finds refuge on a boat with various species and must navigate the challenges of adapting to a transformed world together.",
+          "metadata": {
+            "tmdb_id": 823219,
+            "language": "en",
+            "original_title": "Straume",
+            "poster_path": "https://image.tmdb.org/t/p/w500/zME0Ul0w48MKkYBnFRn40M5qgLh.jpg",
+            "genres": [
+              "Animation",
+              "Adventure",
+              "Fantasy",
+              "Family"
+            ],
+            "director": "Gints Zilbalodis",
+            "cast": [],
+            "release_date": "2024-08-29",
+            "rating": 8.095,
+            "title": "Flow",
+            "title_normalized": "flow"
+          }
+        },
+        {
+          "id": "tmdb-1634858",
+          "title": "Cuerno Azulado",
+          "score": 0.5117248892784119,
+          "content": "Cuerno Azulado\n\n",
+          "metadata": {
+            "tmdb_id": 1634858,
+            "language": "en",
+            "original_title": "Cuerno Azulado",
+            "poster_path": "https://image.tmdb.org/t/p/w500/q0OveDlsh5BNq6ifZqNWKtLKiwb.jpg",
+            "genres": [
+              "Action"
+            ],
+            "director": "Unknown",
+            "cast": [],
+            "release_date": "2025-09-10",
+            "rating": 7.778,
+            "title": "Cuerno Azulado",
+            "title_normalized": "cuerno azulado"
+          }
+        },
+        {
+          "id": "tmdb-9757",
+          "title": "Norbit",
+          "score": 0.5089845061302185,
+          "content": "Norbit\n\nA mild-mannered guy who is engaged to a monstrous woman meets the woman of his dreams, and schemes to find a way to be with her.",
+          "metadata": {
+            "tmdb_id": 9757,
+            "language": "en",
+            "original_title": "Norbit",
+            "poster_path": "https://image.tmdb.org/t/p/w500/XcZ5NzygPp54csxCnzvQKuxFL2.jpg",
+            "genres": [
+              "Comedy"
+            ],
+            "director": "Brian Robbins",
+            "cast": [
+              "Eddie Murphy",
+              "Thandiwe Newton",
+              "Terry Crews"
+            ],
+            "release_date": "2007-02-08",
+            "rating": 5.673,
+            "title": "Norbit",
+            "title_normalized": "norbit"
+          }
+        },
+        {
+          "id": "tmdb-976573",
+          "title": "Elemental",
+          "score": 0.50882887840271,
+          "content": "Elemental\n\nIn a city where fire, water, land and air residents live together, a fiery young woman and a go-with-the-flow guy will discover something elemental: how much they have in common.",
+          "metadata": {
+            "tmdb_id": 976573,
+            "language": "en",
+            "original_title": "Elemental",
+            "poster_path": "https://image.tmdb.org/t/p/w500/4Y1WNkd88JXmGfhtWR7dmDAo1T2.jpg",
+            "genres": [
+              "Family",
+              "Fantasy",
+              "Comedy",
+              "Romance",
+              "Animation"
+            ],
+            "director": "Peter Sohn",
+            "cast": [
+              "Leah Lewis",
+              "Mamoudou Athie",
+              "Ronnie del Carmen"
+            ],
+            "release_date": "2023-06-14",
+            "rating": 7.581,
+            "title": "Elemental",
+            "title_normalized": "elemental"
+          }
+        }
+      ]
+    },
+    {
+      "query": "time travel paradox",
+      "type": "semantic",
+      "description": "Semantic search - Time travel theme",
+      "top_k": 10,
+      "latency_ms": 1620.8,
+      "total_results": 10,
+      "top_3_results": [
+        {
+          "title": "Space/Time",
+          "score": 0.95,
+          "director": "Michael O'Halloran",
+          "genres": [
+            "Science Fiction",
+            "Action",
+            "Thriller"
+          ]
+        },
+        {
+          "title": "Once Upon a Time... in Hollywood",
+          "score": 0.95,
+          "director": "Quentin Tarantino",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Thriller"
+          ]
+        },
+        {
+          "title": "A Time for Bravery",
+          "score": 0.95,
+          "director": "Ariel Winograd",
+          "genres": [
+            "Comedy",
+            "Action"
+          ]
+        }
+      ],
+      "all_results": [
+        {
+          "id": "tmdb-434853",
+          "title": "Space/Time",
+          "score": 0.95,
+          "content": "Space/Time\n\nAfter a fatal test shuts down their project, a disgraced team of scientists enters the criminal underworld to rebuild a forbidden space-bending engine that could rescue humanity or annihilate it entirely.",
+          "metadata": {
+            "tmdb_id": 434853,
+            "language": "en",
+            "original_title": "Space/Time",
+            "poster_path": "https://image.tmdb.org/t/p/w500/uje1ecKMnNpZp0at5TxlvVgVXqI.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Thriller"
+            ],
+            "director": "Michael O'Halloran",
+            "cast": [
+              "Ashlee Lollback",
+              "Hugh Parker",
+              "Pacharo Mzembe"
+            ],
+            "release_date": "2025-05-01",
+            "rating": 5.859,
+            "title": "Space/Time",
+            "title_normalized": "space time"
+          }
+        },
+        {
+          "id": "tmdb-466272",
+          "title": "Once Upon a Time... in Hollywood",
+          "score": 0.95,
+          "content": "Once Upon a Time... in Hollywood\n\nLos Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…",
+          "metadata": {
+            "tmdb_id": 466272,
+            "language": "en",
+            "original_title": "Once Upon a Time... in Hollywood",
+            "poster_path": "https://image.tmdb.org/t/p/w500/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Thriller"
+            ],
+            "director": "Quentin Tarantino",
+            "cast": [
+              "Leonardo DiCaprio",
+              "Brad Pitt",
+              "Margot Robbie"
+            ],
+            "release_date": "2019-07-24",
+            "rating": 7.423,
+            "title": "Once Upon a Time... in Hollywood",
+            "title_normalized": "once upon a time in hollywood"
+          }
+        },
+        {
+          "id": "tmdb-1589891",
+          "title": "A Time for Bravery",
+          "score": 0.95,
+          "content": "A Time for Bravery\n\nA psychoanalyst on community service aids an agent shattered by infidelity; together, they will confront danger and discover second chances.",
+          "metadata": {
+            "tmdb_id": 1589891,
+            "language": "en",
+            "original_title": "La hora de los valientes",
+            "poster_path": "https://image.tmdb.org/t/p/w500/qKKG22O5pFxqglG0oMjWTjQWCNl.jpg",
+            "genres": [
+              "Comedy",
+              "Action"
+            ],
+            "director": "Ariel Winograd",
+            "cast": [
+              "Luis Gerardo Méndez",
+              "Memo Villegas",
+              "Christian Tappán"
+            ],
+            "release_date": "2025-12-18",
+            "rating": 7.5,
+            "title": "A Time for Bravery",
+            "title_normalized": "a time for bravery"
+          }
+        },
+        {
+          "id": "tmdb-311",
+          "title": "Once Upon a Time in America",
+          "score": 0.95,
+          "content": "Once Upon a Time in America\n\nA former Prohibition-era Jewish gangster returns to the Lower East Side of Manhattan over thirty years later, where he once again must confront the ghosts and regrets of his old life.",
+          "metadata": {
+            "tmdb_id": 311,
+            "language": "en",
+            "original_title": "Once Upon a Time in America",
+            "poster_path": "https://image.tmdb.org/t/p/w500/i0enkzsL5dPeneWnjl1fCWm6L7k.jpg",
+            "genres": [
+              "Drama",
+              "Crime"
+            ],
+            "director": "Sergio Leone",
+            "cast": [
+              "Robert De Niro",
+              "James Woods",
+              "Elizabeth McGovern"
+            ],
+            "release_date": "1984-05-23",
+            "rating": 8.387,
+            "title": "Once Upon a Time in America",
+            "title_normalized": "once upon a time in america"
+          }
+        },
+        {
+          "id": "tmdb-370172",
+          "title": "No Time to Die",
+          "score": 0.95,
+          "content": "No Time to Die\n\nBond has left active service and is enjoying a tranquil life in Jamaica. His peace is short-lived when his old friend Felix Leiter from the CIA turns up asking for help. The mission to rescue a kidnapped scientist turns out to be far more treacherous than expected, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
+          "metadata": {
+            "tmdb_id": 370172,
+            "language": "en",
+            "original_title": "No Time to Die",
+            "poster_path": "https://image.tmdb.org/t/p/w500/iUgygt3fscRoKWCV1d0C7FbM9TP.jpg",
+            "genres": [
+              "Action",
+              "Thriller",
+              "Adventure"
+            ],
+            "director": "Cary Joji Fukunaga",
+            "cast": [
+              "Daniel Craig",
+              "Léa Seydoux",
+              "Rami Malek"
+            ],
+            "release_date": "2021-09-29",
+            "rating": 7.3,
+            "title": "No Time to Die",
+            "title_normalized": "no time to die"
+          }
+        },
+        {
+          "id": "tmdb-650524",
+          "title": "Back to the Past",
+          "score": 0.5164572596549988,
+          "content": "Back to the Past\n\nIn the Qin Dynasty, time-traveller Hong Siu-lung has lived in seclusion with his family for twenty years. Yet every step he takes remains under the watchful eye of his former disciple, now the Qin Emperor. On the brink of ultimate power after conquering the six warring states, the emperor is suddenly ambushed by a mysterious team wielding advanced weapons clearly originating from Hong’s time. Drawn together by fate again, Hong and Qin Emperor are forced to confront the long-buried conflict between them, because the future now depends on how they settle their past.",
+          "metadata": {
+            "tmdb_id": 650524,
+            "language": "en",
+            "original_title": "尋秦記",
+            "poster_path": "https://image.tmdb.org/t/p/w500/h3OUaPfCaFmzwB2eMHik50RsXlP.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Comedy"
+            ],
+            "director": "Ng Yuen-Fai",
+            "cast": [
+              "Louis Koo",
+              "Raymond Lam Fung",
+              "Bai Baihe"
+            ],
+            "release_date": "2025-12-31",
+            "rating": 6.4,
+            "title": "Back to the Past",
+            "title_normalized": "back to the past"
+          }
+        },
+        {
+          "id": "tmdb-1590097",
+          "title": "Afterlight",
+          "score": 0.5130069255828857,
+          "content": "Afterlight\n\nIn a future shaped by war, AI, and fractured timelines, five interconnected sci-fi stories explore humanity’s fight for connection, survival, and meaning across time and space.",
+          "metadata": {
+            "tmdb_id": 1590097,
+            "language": "en",
+            "original_title": "Afterlight",
+            "poster_path": "https://image.tmdb.org/t/p/w500/7bzMCW1E1sOWEbjVuQ8iRGrdpcw.jpg",
+            "genres": [
+              "Science Fiction"
+            ],
+            "director": "Alison Kohlhardt",
+            "cast": [
+              "Anna Fraser",
+              "Ellise Chappell",
+              "Linda-Jean Barry"
+            ],
+            "release_date": "2025-11-27",
+            "rating": 5.107,
+            "title": "Afterlight",
+            "title_normalized": "afterlight"
+          }
+        },
+        {
+          "id": "tmdb-1241470",
+          "title": "Osiris",
+          "score": 0.5051694512367249,
+          "content": "Osiris\n\nSpecial Forces commandos on a mission are abducted mid-operation by a mysterious spacecraft. Upon waking aboard, they find themselves prey to a relentless alien race in a fight for survival.",
+          "metadata": {
+            "tmdb_id": 1241470,
+            "language": "en",
+            "original_title": "Osiris",
+            "poster_path": "https://image.tmdb.org/t/p/w500/3YtZHtXPNG5AleisgEatEfZOT2w.jpg",
+            "genres": [
+              "Science Fiction",
+              "Action",
+              "Horror"
+            ],
+            "director": "William Kaufman",
+            "cast": [
+              "Max Martini",
+              "Brianna Hildebrand",
+              "LaMonica Garrett"
+            ],
+            "release_date": "2025-07-25",
+            "rating": 6.013,
+            "title": "Osiris",
+            "title_normalized": "osiris"
+          }
+        },
+        {
+          "id": "tmdb-157336",
+          "title": "Interstellar",
+          "score": 0.504387378692627,
+          "content": "Interstellar\n\nThe adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+          "metadata": {
+            "tmdb_id": 157336,
+            "language": "en",
+            "original_title": "Interstellar",
+            "poster_path": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Science Fiction"
+            ],
+            "director": "Christopher Nolan",
+            "cast": [
+              "Matthew McConaughey",
+              "Anne Hathaway",
+              "Michael Caine"
+            ],
+            "release_date": "2014-11-05",
+            "rating": 8.5,
+            "title": "Interstellar",
+            "title_normalized": "interstellar"
+          }
+        },
+        {
+          "id": "tmdb-792307",
+          "title": "Poor Things",
+          "score": 0.5038580298423767,
+          "content": "Poor Things\n\nBrought back to life by an unorthodox scientist, a young woman runs off with a lawyer on a whirlwind adventure across the continents. Free from the prejudices of her times, she grows steadfast in her purpose to stand for equality and liberation.",
+          "metadata": {
+            "tmdb_id": 792307,
+            "language": "en",
+            "original_title": "Poor Things",
+            "poster_path": "https://image.tmdb.org/t/p/w500/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg",
+            "genres": [
+              "Science Fiction",
+              "Romance",
+              "Comedy"
+            ],
+            "director": "Yorgos Lanthimos",
+            "cast": [
+              "Emma Stone",
+              "Mark Ruffalo",
+              "Willem Dafoe"
+            ],
+            "release_date": "2023-12-07",
+            "rating": 7.656,
+            "title": "Poor Things",
+            "title_normalized": "poor things"
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_queries": 10,
+    "successful_queries": 10,
+    "failed_queries": 0,
+    "average_latency_ms": 3705.75,
+    "min_latency_ms": 45.68,
+    "max_latency_ms": 9874.37
+  }
+}

@@ -36,7 +36,7 @@ class SearchEngine:
     - Cross-encoder re-ranking only for ambiguous results
     - Title match bonus scoring
     """
-    
+
 
     def __init__(
         self,
@@ -108,19 +108,10 @@ class SearchEngine:
         try:
             final_top_k = top_k or self.rerank_top_k
 
-            # Step 1: Exact title matches (fastest - O(1) with cache)
+            # Step 1: Exact title matches (fastest - avoid embeddings entirely)
             exact_title_matches = self.vector_store.get_exact_title_matches(query)
-            exact_ids = {doc["id"] for doc in exact_title_matches}
-
-            # Step 2: Fast title token matching (no embedding needed)
-            token_title_matches = self.vector_store.get_title_token_matches(query)
-            exact_ids.update(doc["id"] for doc in token_title_matches)
-
-            # Prepare results list
-            results = []
-
-            # Add exact matches with score 1.0
             if exact_title_matches:
+                results = []
                 for match in exact_title_matches:
                     results.append(
                         {
@@ -131,6 +122,22 @@ class SearchEngine:
                             "content": match["content"] if include_content else None,
                         }
                     )
+
+                execution_time = (time() - start_time) * 1000
+                logger.info(
+                    f"Fast path (exact title): '{query}' completed in {execution_time:.2f}ms "
+                    f"(found {len(results)} exact matches)"
+                )
+                return results[:final_top_k], execution_time
+
+            exact_ids = set()
+
+            # Step 2: Fast title token matching (no embedding needed)
+            token_title_matches = self.vector_store.get_title_token_matches(query)
+            exact_ids.update(doc["id"] for doc in token_title_matches)
+
+            # Prepare results list
+            results = []
 
             # Add token matches with score 0.95
             if token_title_matches:
@@ -145,17 +152,20 @@ class SearchEngine:
                         }
                     )
 
-            # If we have exact/token matches and we have enough results, return (fast-path)
+            # If we have token matches and we have enough results, return (fast-path)
             if len(results) >= final_top_k:
                 execution_time = (time() - start_time) * 1000
                 logger.info(
-                    f"Fast path: '{query}' completed in {execution_time:.2f}ms "
-                    f"(found {len(results)} exact/token matches)"
+                    f"Fast path (token match): '{query}' completed in {execution_time:.2f}ms "
+                    f"(found {len(results)} token matches)"
                 )
                 return results[:final_top_k], execution_time
 
             # Step 3: Generate query embedding (only if needed)
-            query_embedding = self.embedder.embed_text(query)
+            if hasattr(self.embedder, "embed_query"):
+                query_embedding = self.embedder.embed_query(query)
+            else:
+                query_embedding = self.embedder.embed_text(query)
 
             # Step 4: Vector search to get candidates
             candidate_k = max(MAX_RERANK_CANDIDATES, final_top_k * 2)
