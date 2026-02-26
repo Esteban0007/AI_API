@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
 
+# Maximum docs to embed in a single internal chunk (avoids OOM)
+INTERNAL_CHUNK_SIZE = 50
+
 # Global instances
 embedder = Embedder()
 _vector_store_cache: dict[str, VectorStore] = {}
@@ -89,18 +92,30 @@ async def upload_documents(
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
 
-        # Upload to vector store
-        success_count, fail_count = vector_store.add_documents_batch(docs_to_upload)
+        # Process internally in chunks of INTERNAL_CHUNK_SIZE
+        # so the client never has to worry about batch size limits
+        total_ok = 0
+        total_fail = 0
+        for i in range(0, len(docs_to_upload), INTERNAL_CHUNK_SIZE):
+            chunk = docs_to_upload[i : i + INTERNAL_CHUNK_SIZE]
+            ok, fail = vector_store.add_documents_batch(chunk)
+            total_ok += ok
+            total_fail += fail
+            logger.info(
+                f"Chunk {i // INTERNAL_CHUNK_SIZE + 1}: "
+                f"{ok} ok, {fail} fail "
+                f"(total {total_ok}/{len(docs_to_upload)})"
+            )
 
         return DocumentUploadResponse(
-            success=fail_count == 0,
+            success=total_fail == 0,
             message=(
-                f"Successfully uploaded {success_count} documents"
-                if fail_count == 0
-                else f"Partial upload: {success_count} succeeded, {fail_count} failed"
+                f"Successfully uploaded {total_ok} documents"
+                if total_fail == 0
+                else f"Partial upload: {total_ok} succeeded, {total_fail} failed"
             ),
-            uploaded_count=success_count,
-            failed_count=fail_count,
+            uploaded_count=total_ok,
+            failed_count=total_fail,
         )
 
     except HTTPException:
@@ -134,6 +149,29 @@ async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Error retrieving statistics",
+        )
+
+
+@router.delete("/clear-all")
+async def clear_all_documents(user_context: dict = Depends(validate_api_key)) -> dict:
+    """
+    Delete ALL documents from the collection.
+    Use before re-loading a new dataset.
+    """
+    try:
+        tenant_id = user_context["tenant_id"]
+        vector_store = _get_vector_store_for_tenant(tenant_id)
+        deleted = vector_store.clear_all()
+        return {
+            "success": True,
+            "deleted_count": deleted,
+            "message": f"Deleted {deleted} documents",
+        }
+    except Exception as e:
+        logger.error(f"Error clearing collection: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error clearing collection: {str(e)}",
         )
 
 

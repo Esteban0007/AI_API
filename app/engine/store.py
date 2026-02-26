@@ -618,6 +618,30 @@ class VectorStore:
             logger.error(f"Error deleting document {doc_id}: {e}")
             return False
 
+    def clear_all(self) -> int:
+        """
+        Delete ALL documents from the collection.
+
+        Returns:
+            Number of documents deleted
+        """
+        try:
+            count = self.collection.count()
+            if count == 0:
+                logger.info("Collection is already empty")
+                return 0
+            # Delete and recreate the collection to wipe it cleanly
+            self.client.delete_collection(self.collection_name)
+            self.collection = self.client.get_or_create_collection(
+                name=self.collection_name, metadata={"hnsw:space": "cosine"}
+            )
+            logger.info(f"Cleared {count} documents from collection")
+            return count
+        except Exception as e:
+            logger.error(f"Error clearing collection: {e}")
+            raise
+            return False
+
     def get_collection_stats(self) -> Dict:
         """Get statistics about the collection."""
         try:
