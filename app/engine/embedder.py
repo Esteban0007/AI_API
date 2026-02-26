@@ -3,6 +3,7 @@ Embedding generation module using HuggingFace sentence-transformers.
 """
 
 import logging
+import os
 from typing import List
 
 import numpy as np
@@ -38,6 +39,10 @@ class Embedder:
         self.onnx_dir = settings.EMBEDDING_ONNX_DIR
         self.query_prefix = "Represent this query for retrieval: "
         self._is_onnx = False
+        self._is_int8_quantized = False
+        self.use_int8_quantization = getattr(
+            settings, "EMBEDDING_USE_INT8_QUANTIZATION", True
+        )
 
         logger.info(f"Loading embedding model: {self.model_name}")
         if self.use_onnx and ort is not None:
@@ -47,7 +52,16 @@ class Embedder:
                         "EMBEDDING_ONNX_DIR is required when EMBEDDING_USE_ONNX is true"
                     )
                 self.tokenizer = AutoTokenizer.from_pretrained(self.onnx_dir)
+
+                # Try to load INT8 quantized model first if enabled
                 model_path = f"{self.onnx_dir}/model.onnx"
+                if self.use_int8_quantization:
+                    int8_path = f"{self.onnx_dir}/model_int8.onnx"
+                    if os.path.exists(int8_path):
+                        model_path = int8_path
+                        self._is_int8_quantized = True
+                        logger.info(f"INT8 quantized model found, using: {int8_path}")
+
                 self.onnx_session = ort.InferenceSession(
                     model_path, providers=["CPUExecutionProvider"]
                 )
@@ -56,8 +70,9 @@ class Embedder:
                     o.name for o in self.onnx_session.get_outputs()
                 ]
                 self._is_onnx = True
+                model_type = "INT8 ONNX" if self._is_int8_quantized else "ONNX"
                 logger.info(
-                    f"ONNX embedding model loaded successfully. Dimension: {self.embedding_dim}"
+                    f"{model_type} embedding model loaded successfully. Dimension: {self.embedding_dim}"
                 )
             except Exception as e:
                 logger.warning(
@@ -194,3 +209,7 @@ class Embedder:
     def get_model_name(self) -> str:
         """Get the model name being used."""
         return self.model_name
+
+    def is_int8_quantized(self) -> bool:
+        """Check if INT8 quantized model is loaded."""
+        return self._is_int8_quantized

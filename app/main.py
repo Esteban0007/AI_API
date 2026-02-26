@@ -107,8 +107,27 @@ def create_app() -> FastAPI:
     # Health check endpoint
     @app.get("/health")
     async def health():
-        """Health check endpoint."""
-        return {"status": "ok", "message": "Server is running"}
+        """Health check endpoint with model information."""
+        from app.engine.embedder import Embedder
+
+        try:
+            # Get current embedder status
+            embedder = Embedder()
+            model_type = "INT8 ONNX" if embedder.is_int8_quantized() else "Standard"
+
+            return {
+                "status": "ok",
+                "message": "Server is running",
+                "embedding_model": model_type,
+                "model_name": embedder.get_model_name(),
+                "dimension": embedder.get_embedding_dimension(),
+            }
+        except Exception as e:
+            return {
+                "status": "ok",
+                "message": "Server is running",
+                "warning": f"Could not load embedder: {str(e)}",
+            }
 
     # Error handlers
     @app.exception_handler(ValueError)

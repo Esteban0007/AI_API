@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     EMBEDDING_DIMENSION: int = 384  # MiniLM uses 384 dimensions
     EMBEDDING_USE_ONNX: bool = False
     EMBEDDING_ONNX_DIR: str = ""
+    EMBEDDING_USE_INT8_QUANTIZATION: bool = True  # Enable INT8 quantization by default
 
     # Search Configuration
     TOP_K: int = 10  # Number of candidates to retrieve before re-ranking
