@@ -57,16 +57,23 @@ class SearchEngine:
         self.top_k = settings.TOP_K
         self.rerank_top_k = settings.RERANK_TOP_K
 
-        # Load cross-encoder for re-ranking (single instance shared across searches)
-        logger.info(f"Loading cross-encoder model: {settings.RERANK_MODEL}")
-        try:
-            self.cross_encoder = cross_encoder or get_cross_encoder(
-                settings.RERANK_MODEL
+        # Load cross-encoder for re-ranking (optional, disabled by default)
+        self.enable_reranking = settings.ENABLE_RERANKING
+        if self.enable_reranking:
+            logger.info(f"Loading cross-encoder model: {settings.RERANK_MODEL}")
+            try:
+                self.cross_encoder = cross_encoder or get_cross_encoder(
+                    settings.RERANK_MODEL
+                )
+                logger.info("Cross-encoder loaded successfully")
+            except Exception as e:
+                logger.error(f"Failed to load cross-encoder: {e}")
+                raise
+        else:
+            self.cross_encoder = None
+            logger.info(
+                "Re-ranking disabled (ENABLE_RERANKING=False) — using pure vector similarity"
             )
-            logger.info("Cross-encoder loaded successfully")
-        except Exception as e:
-            logger.error(f"Failed to load cross-encoder: {e}")
-            raise
 
         # Performance metrics
         self.early_exit_count = 0
@@ -195,7 +202,8 @@ class SearchEngine:
             # Step 6: Re-rank low-confidence candidates if needed
             t_rerank_start = time()
             if (
-                len(results) < final_top_k
+                self.enable_reranking
+                and len(results) < final_top_k
                 and low_confidence_candidates
                 and len(low_confidence_candidates) >= MIN_CANDIDATES_FOR_RERANK
             ):

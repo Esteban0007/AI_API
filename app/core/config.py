@@ -39,6 +39,9 @@ class Settings(BaseSettings):
     RERANK_MODEL: str = (
         "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1"  # Baseline reranker
     )
+    ENABLE_RERANKING: bool = (
+        False  # Disabled by default (adds 2-5s latency; Arctic-768D is sufficient)
+    )
 
     # Database Configuration
     CHROMA_COLLECTION_NAME: str = "documents"
