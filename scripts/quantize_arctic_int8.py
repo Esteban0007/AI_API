@@ -109,12 +109,11 @@ class ArcticQuantizer:
             print("\n⚙️  Applying INT8 dynamic quantization...")
             start_time = time.time()
 
-            # Use only compatible parameters for onnxruntime 1.20.1+
+            # Use only compatible parameters for onnxruntime 1.24.2
             quantize_dynamic(
                 self.model_path,
                 self.quantized_model_path,
                 weight_type=QuantType.QInt8,
-                use_sym_int8_weights=True,
             )
 
             quantization_time = (time.time() - start_time) * 1000
