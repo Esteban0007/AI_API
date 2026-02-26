@@ -24,11 +24,13 @@ class Settings(BaseSettings):
 
     # Embedding Configuration
     EMBEDDING_MODEL: str = (
-        "sentence-transformers/all-MiniLM-L6-v2"  # Baseline model for testing
+        "snowflake/snowflake-arctic-embed-m-v1.5"  # Better semantic understanding than MiniLM
     )
-    EMBEDDING_DIMENSION: int = 384  # MiniLM uses 384 dimensions
-    EMBEDDING_USE_ONNX: bool = False
-    EMBEDDING_ONNX_DIR: str = ""
+    EMBEDDING_DIMENSION: int = 768  # Arctic uses 768 dimensions (vs MiniLM 384)
+    EMBEDDING_USE_ONNX: bool = True  # Use ONNX for better performance
+    EMBEDDING_ONNX_DIR: str = (
+        "/var/www/readyapi/models/arctic_onnx"  # Production ONNX path
+    )
     EMBEDDING_USE_INT8_QUANTIZATION: bool = True  # Enable INT8 quantization by default
 
     # Search Configuration

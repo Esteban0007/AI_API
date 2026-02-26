@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 EARLY_EXIT_THRESHOLD = 0.92  # Skip re-ranking if vector similarity > this
 MIN_CANDIDATES_FOR_RERANK = 3  # Don't re-rank if fewer candidates
 MAX_RERANK_CANDIDATES = 10  # Re-rank only top N candidates
-TITLE_MATCH_BONUS = 0.25  # Bonus for title containment match
+TITLE_MATCH_BONUS = 0.05  # Reduced bonus for title containment match (was 0.25)
 
 
 class SearchEngine:
@@ -36,7 +36,6 @@ class SearchEngine:
     - Cross-encoder re-ranking only for ambiguous results
     - Title match bonus scoring
     """
-
 
     def __init__(
         self,
@@ -132,50 +131,29 @@ class SearchEngine:
 
             exact_ids = set()
 
-            # Step 2: Fast title token matching (no embedding needed)
+            # Step 2: Fast title token matching (collect IDs only, don't assign fixed score)
+            # Token matches will get their score from semantic search instead
             token_title_matches = self.vector_store.get_title_token_matches(query)
-            exact_ids.update(doc["id"] for doc in token_title_matches)
+            token_match_ids = {doc["id"] for doc in token_title_matches}
+            exact_ids.update(token_match_ids)
 
             # Prepare results list
             results = []
 
-            # Add token matches with score 0.95
-            if token_title_matches:
-                for match in token_title_matches:
-                    results.append(
-                        {
-                            "id": match["id"],
-                            "title": match["metadata"].get("title", ""),
-                            "score": 0.95,  # High score for partial title match
-                            "metadata": match["metadata"],
-                            "content": match["content"] if include_content else None,
-                        }
-                    )
-
-            # If we have token matches and we have enough results, return (fast-path)
-            if len(results) >= final_top_k:
-                execution_time = (time() - start_time) * 1000
-                logger.info(
-                    f"Fast path (token match): '{query}' completed in {execution_time:.2f}ms "
-                    f"(found {len(results)} token matches)"
-                )
-                return results[:final_top_k], execution_time
-
-            # Step 3: Generate query embedding (only if needed)
+            # Step 3: Generate query embedding (always - semantic score is ground truth)
             if hasattr(self.embedder, "embed_query"):
                 query_embedding = self.embedder.embed_query(query)
             else:
                 query_embedding = self.embedder.embed_text(query)
 
-            # Step 4: Vector search to get candidates
+            # Step 4: Vector search to get candidates (includes token match IDs too)
             candidate_k = max(MAX_RERANK_CANDIDATES, final_top_k * 2)
             candidates = self.vector_store.search(
                 query_embedding, top_k=candidate_k, filters=filters
             )
 
-            # Remove duplicates already matched by exact title
-            if exact_ids:
-                candidates = [c for c in candidates if c["id"] not in exact_ids]
+            # Remove only exact title matches (score=1.0 already added above)
+            candidates = [c for c in candidates if c["id"] not in exact_ids]
 
             # Step 5: Apply early exit optimization
             # If top candidate has similarity > threshold, skip re-ranking
@@ -184,6 +162,10 @@ class SearchEngine:
 
             for candidate in candidates:
                 similarity = candidate["similarity_score"]
+
+                # Small bonus for token title matches - only if semantically relevant
+                if candidate["id"] in token_match_ids:
+                    similarity = min(similarity + TITLE_MATCH_BONUS, 0.99)
 
                 # Early exit: high confidence candidates skip re-ranking
                 if similarity > EARLY_EXIT_THRESHOLD:
