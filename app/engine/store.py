@@ -123,6 +123,58 @@ class VectorStore:
         text = re.sub(r"\s+", " ", text).strip()
         return text
 
+    @staticmethod
+    def _build_embed_text(title: str, content: str, user_metadata: dict) -> str:
+        """
+        Build structured text for embedding that includes all relevant fields.
+        This allows semantic search to find documents by actor, director, genre, year, etc.
+
+        Format:
+            Title: {title}
+            Summary: {content}
+            Category: {genres}
+            Director: {director}
+            Cast: {cast}
+            Year Released: {year}
+        """
+        # Parse genres (may be list or JSON string)
+        genres = user_metadata.get("genres", [])
+        if isinstance(genres, str):
+            try:
+                genres = json.loads(genres)
+            except Exception:
+                genres = [genres]
+        genres_str = ", ".join(genres) if genres else ""
+
+        # Parse cast (may be list or JSON string)
+        cast = user_metadata.get("cast", [])
+        if isinstance(cast, str):
+            try:
+                cast = json.loads(cast)
+            except Exception:
+                cast = [cast]
+        cast_str = ", ".join(cast) if cast else ""
+
+        director = user_metadata.get("director", "")
+        release_date = user_metadata.get("release_date", "")
+        year = str(release_date)[:4] if release_date else ""
+
+        parts = []
+        if title:
+            parts.append(f"Title: {title}")
+        if content:
+            parts.append(f"Summary: {content}")
+        if genres_str:
+            parts.append(f"Category: {genres_str}")
+        if director:
+            parts.append(f"Director: {director}")
+        if cast_str:
+            parts.append(f"Cast: {cast_str}")
+        if year:
+            parts.append(f"Year Released: {year}")
+
+        return "\n".join(parts)
+
     def add_document(self, doc_id: str, content: str, metadata: Dict) -> bool:
         """
         Add a single document to the vector store.
@@ -136,16 +188,12 @@ class VectorStore:
             True if successful
         """
         try:
-            # Generate embedding from title + content (no keywords)
+            # Generate embedding from structured text including cast, director, genres
             title = metadata.get("title", "")
+            user_metadata = metadata.get("metadata", {})
 
-            # Build text to embed
-            parts = []
-            if title:
-                parts.append(title)
-            parts.append(content)
-
-            text_to_embed = "\n\n".join(parts)
+            # Build structured text to embed
+            text_to_embed = self._build_embed_text(title, content, user_metadata)
             embedding = self.embedder.embed_text(text_to_embed)
 
             # Prepare metadata - copy all user metadata fields
@@ -208,19 +256,15 @@ class VectorStore:
         full_documents = []
 
         try:
-            # Generate all embeddings at once from title + content (no keywords)
+            # Generate all embeddings from structured text including cast, director, genres
             for doc in documents:
                 doc_ids.append(doc["id"])
                 title = doc.get("title", "")
                 content = doc["content"]
+                user_metadata = doc.get("metadata", {})
 
-                # Build text to embed
-                parts = []
-                if title:
-                    parts.append(title)
-                parts.append(content)
-
-                text_to_embed = "\n\n".join(parts)
+                # Build structured text to embed
+                text_to_embed = self._build_embed_text(title, content, user_metadata)
                 contents.append(text_to_embed)
 
             embeddings_list = self.embedder.embed_texts(contents)
