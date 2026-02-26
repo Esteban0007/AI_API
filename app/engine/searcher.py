@@ -141,16 +141,20 @@ class SearchEngine:
             results = []
 
             # Step 3: Generate query embedding (always - semantic score is ground truth)
+            t_embed_start = time()
             if hasattr(self.embedder, "embed_query"):
                 query_embedding = self.embedder.embed_query(query)
             else:
                 query_embedding = self.embedder.embed_text(query)
+            t_embed = (time() - t_embed_start) * 1000
 
             # Step 4: Vector search to get candidates (includes token match IDs too)
+            t_search_start = time()
             candidate_k = max(MAX_RERANK_CANDIDATES, final_top_k * 2)
             candidates = self.vector_store.search(
                 query_embedding, top_k=candidate_k, filters=filters
             )
+            t_search = (time() - t_search_start) * 1000
 
             # Remove only exact title matches (score=1.0 already added above)
             candidates = [c for c in candidates if c["id"] not in exact_ids]
@@ -189,6 +193,7 @@ class SearchEngine:
             results.extend(high_confidence_results)
 
             # Step 6: Re-rank low-confidence candidates if needed
+            t_rerank_start = time()
             if (
                 len(results) < final_top_k
                 and low_confidence_candidates
@@ -217,6 +222,7 @@ class SearchEngine:
                             ),
                         }
                     )
+            t_rerank = (time() - t_rerank_start) * 1000
 
             # Apply final top_k limit
             results = results[:final_top_k]
@@ -225,7 +231,8 @@ class SearchEngine:
             logger.info(
                 f"Search '{query}' completed in {execution_time:.2f}ms. "
                 f"Found {len(results)} results (early_exits: {self.early_exit_count}, "
-                f"rerankings: {self.rerank_count})"
+                f"rerankings: {self.rerank_count}) | "
+                f"embed={t_embed:.0f}ms search={t_search:.0f}ms rerank={t_rerank:.0f}ms"
             )
 
             return results, execution_time
