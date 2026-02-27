@@ -1,0 +1,214 @@
+"""Email service for sending confirmation emails."""
+
+import smtplib
+import logging
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from typing import Optional
+import os
+
+logger = logging.getLogger(__name__)
+
+# Email configuration from environment
+SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+SMTP_USER = os.getenv("SMTP_USER", "info@readyapi.net")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
+EMAIL_FROM = os.getenv("EMAIL_FROM", "info@readyapi.net")
+BASE_URL = os.getenv("BASE_URL", "https://readyapi.net")
+
+
+def send_confirmation_email(to_email: str, confirmation_token: str) -> bool:
+    """Send confirmation email to user."""
+    try:
+        # Create message
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = "Confirma tu cuenta - SemanticSearch API"
+        msg["From"] = EMAIL_FROM
+        msg["To"] = to_email
+
+        # Confirmation URL
+        confirmation_url = f"{BASE_URL}/confirm/{confirmation_token}"
+
+        # Plain text version
+        text = f"""
+¡Bienvenido a SemanticSearch API!
+
+Confirma tu cuenta haciendo clic en el siguiente enlace:
+{confirmation_url}
+
+Este enlace es válido por 24 horas.
+
+Si no creaste esta cuenta, ignora este email.
+
+---
+SemanticSearch API
+Powered by Arctic-768D ONNX INT8
+"""
+
+        # HTML version
+        html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; }}
+        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+        .header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }}
+        .content {{ background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }}
+        .button {{ display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }}
+        .footer {{ text-align: center; margin-top: 30px; color: #666; font-size: 0.9em; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 ¡Bienvenido a SemanticSearch API!</h1>
+        </div>
+        <div class="content">
+            <p>Hola,</p>
+            <p>Gracias por registrarte en <strong>SemanticSearch API</strong>. Estás a un paso de comenzar a usar nuestra búsqueda semántica ultrarrápida.</p>
+            <p style="text-align: center;">
+                <a href="{confirmation_url}" class="button">Confirmar mi cuenta</a>
+            </p>
+            <p style="color: #666; font-size: 0.9em;">O copia este enlace en tu navegador:<br>
+            <code style="background: #eee; padding: 5px 10px; border-radius: 3px; display: inline-block; margin-top: 5px;">{confirmation_url}</code></p>
+            <p style="margin-top: 30px; color: #666;">Este enlace es válido por <strong>24 horas</strong>.</p>
+            <p style="color: #999; font-size: 0.85em; margin-top: 20px;">Si no creaste esta cuenta, puedes ignorar este email.</p>
+        </div>
+        <div class="footer">
+            <p>SemanticSearch API<br>
+            Powered by Arctic-768D ONNX INT8</p>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+        # Attach both versions
+        part1 = MIMEText(text, "plain")
+        part2 = MIMEText(html, "html")
+        msg.attach(part1)
+        msg.attach(part2)
+
+        # Send email
+        if not SMTP_PASSWORD:
+            logger.warning(
+                f"SMTP not configured. Would send email to {to_email}: {confirmation_url}"
+            )
+            # In development, just log the URL
+            print(f"\n{'='*60}")
+            print(f"📧 CONFIRMATION EMAIL (dev mode)")
+            print(f"To: {to_email}")
+            print(f"URL: {confirmation_url}")
+            print(f"{'='*60}\n")
+            return True
+
+        # Production: actually send email
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+
+        logger.info(f"Confirmation email sent to {to_email}")
+        return True
+
+    except Exception as e:
+        logger.error(f"Failed to send email to {to_email}: {e}")
+        return False
+
+
+def send_api_key_email(to_email: str, api_key: str) -> bool:
+    """Send API key to confirmed user."""
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = "Tu API Key - SemanticSearch API"
+        msg["From"] = EMAIL_FROM
+        msg["To"] = to_email
+
+        text = f"""
+¡Tu cuenta ha sido confirmada!
+
+Tu API Key es:
+{api_key}
+
+Guárdala en un lugar seguro. La necesitarás para todas las peticiones a la API.
+
+Ejemplo de uso:
+curl -X POST "https://api.readyapi.net/api/v1/search/query" \\
+  -H "x-api-key: {api_key}" \\
+  -H "Content-Type: application/json" \\
+  -d '{{"query": "superhero saves the world", "top_k": 5}}'
+
+Documentación: https://api.readyapi.net/api/docs
+
+---
+SemanticSearch API
+"""
+
+        html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; }}
+        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+        .header {{ background: #4CAF50; color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }}
+        .content {{ background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }}
+        .api-key {{ background: #fff; border: 2px solid #4CAF50; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 14px; word-break: break-all; margin: 20px 0; }}
+        .code {{ background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 12px; }}
+        .footer {{ text-align: center; margin-top: 30px; color: #666; font-size: 0.9em; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ ¡Cuenta Confirmada!</h1>
+        </div>
+        <div class="content">
+            <p>Tu cuenta ha sido activada con éxito.</p>
+            <p><strong>Tu API Key:</strong></p>
+            <div class="api-key">{api_key}</div>
+            <p style="color: #d32f2f; font-weight: bold;">⚠️ Guárdala en un lugar seguro. No la compartas.</p>
+            
+            <p style="margin-top: 30px;"><strong>Ejemplo de uso:</strong></p>
+            <pre class="code">curl -X POST "https://api.readyapi.net/api/v1/search/query" \\
+  -H "x-api-key: {api_key}" \\
+  -H "Content-Type: application/json" \\
+  -d '{{"query": "superhero saves the world", "top_k": 5}}'</pre>
+            
+            <p style="margin-top: 20px;">📚 <a href="https://api.readyapi.net/api/docs">Ver documentación completa</a></p>
+        </div>
+        <div class="footer">
+            <p>SemanticSearch API</p>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+        part1 = MIMEText(text, "plain")
+        part2 = MIMEText(html, "html")
+        msg.attach(part1)
+        msg.attach(part2)
+
+        if not SMTP_PASSWORD:
+            logger.info(f"Would send API key email to {to_email}")
+            print(f"\n{'='*60}")
+            print(f"📧 API KEY EMAIL (dev mode)")
+            print(f"To: {to_email}")
+            print(f"API Key: {api_key}")
+            print(f"{'='*60}\n")
+            return True
+
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.send_message(msg)
+
+        logger.info(f"API key email sent to {to_email}")
+        return True
+
+    except Exception as e:
+        logger.error(f"Failed to send API key email to {to_email}: {e}")
+        return False

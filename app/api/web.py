@@ -8,7 +8,8 @@ import logging
 
 from app.engine.searcher import SearchEngine
 from app.engine.store import VectorStore
-from app.db.users import register_user, confirm_user, get_user_by_api_key
+from app.db.users import register_user, confirm_user, get_user_by_api_key, get_user
+from app.core.email import send_confirmation_email, send_api_key_email
 
 logger = logging.getLogger(__name__)
 
@@ -110,17 +111,27 @@ async def register(
     result = register_user(email, password)
 
     if result["success"]:
-        # In production, send confirmation email here
-        logger.info(
-            f"User registered: {email}, confirmation_token: {result['confirmation_token']}"
-        )
-        return templates.TemplateResponse(
-            "register.html",
-            {
-                "request": request,
-                "success": f"¡Bienvenido! Hemos creado tu API Key. Confirma tu email para activarla.",
-            },
-        )
+        # Send confirmation email
+        email_sent = send_confirmation_email(email, result["confirmation_token"])
+
+        if email_sent:
+            logger.info(f"User registered and confirmation email sent: {email}")
+            return templates.TemplateResponse(
+                "register.html",
+                {
+                    "request": request,
+                    "success": f"¡Registro exitoso! Revisa tu email ({email}) para confirmar tu cuenta.",
+                },
+            )
+        else:
+            logger.error(f"User registered but email failed: {email}")
+            return templates.TemplateResponse(
+                "register.html",
+                {
+                    "request": request,
+                    "success": f"Cuenta creada. Error al enviar email. Contacta soporte: info@readyapi.net",
+                },
+            )
     else:
         return templates.TemplateResponse(
             "register.html", {"request": request, "error": result["message"]}
@@ -133,6 +144,11 @@ async def confirm_email(request: Request, token: str):
     result = confirm_user(token)
 
     if result["success"]:
+        # Get user and send API key email
+        user = get_user(result["email"])
+        if user and user.get("api_key"):
+            send_api_key_email(result["email"], user["api_key"])
+
         return templates.TemplateResponse(
             "index.html",
             {
