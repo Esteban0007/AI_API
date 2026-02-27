@@ -57,27 +57,32 @@
       .movie-card {
         border: 1px solid var(--form-element-border-color);
         border-radius: var(--border-radius);
-        padding: 1.5rem;
+        padding: 1rem;
         margin-bottom: 1rem;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: box-shadow 0.3s;
+        gap: 1rem;
+        align-items: flex-start;
+        transition:
+          box-shadow 0.3s,
+          transform 0.2s;
       }
       .movie-card:hover {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
       }
       .movie-info {
         flex: 1;
+        min-width: 0;
       }
       .movie-title {
         font-weight: bold;
         font-size: 1.1rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.3rem;
+        word-break: break-word;
       }
       .movie-year {
         color: var(--muted-color);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
       .score-badge {
         background: var(--form-element-valid-border-color);

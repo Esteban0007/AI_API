@@ -1,5 +1,21 @@
 {% if results %} {% for result in results %}
 <div class="movie-card">
+  {% if result.metadata.get('poster_url') %}
+  <div style="flex-shrink: 0; margin-right: 1rem">
+    <img
+      src="{{ result.metadata.poster_url }}"
+      alt="{{ result.title }}"
+      style="
+        width: 60px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      "
+      onerror="this.style.display = 'none'"
+    />
+  </div>
+  {% endif %}
   <div class="movie-info">
     <div class="movie-title">{{ result.title }}</div>
     <div class="movie-year">{{ result.metadata.get('year', 'N/A') }}</div>
@@ -11,7 +27,14 @@
     </div>
     {% endif %}
   </div>
-  <div style="display: flex; align-items: center; white-space: nowrap">
+  <div
+    style="
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      margin-left: auto;
+    "
+  >
     <span class="score-badge">{{ "%.3f" % result.score }}</span>
     {% if timing < 300 %}
     <span class="fast-path-badge">⚡ Fast</span>
