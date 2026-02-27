@@ -33,6 +33,33 @@ def get_search_engine():
     return _search_engine
 
 
+def _extract_summary(content: str) -> str:
+    """Extract clean summary from stored content text."""
+    if not content:
+        return ""
+
+    if "Summary:" not in content:
+        return content.strip()
+
+    lines = [line.strip() for line in content.splitlines() if line.strip()]
+    summary_started = False
+    summary_parts = []
+    stop_prefixes = ("Category:", "Director:", "Cast:", "Year Released:")
+
+    for line in lines:
+        if line.startswith("Summary:"):
+            summary_started = True
+            summary_parts.append(line.replace("Summary:", "", 1).strip())
+            continue
+
+        if summary_started:
+            if any(line.startswith(prefix) for prefix in stop_prefixes):
+                break
+            summary_parts.append(line)
+
+    return " ".join(part for part in summary_parts if part).strip() or content.strip()
+
+
 @router.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     """Home page."""
@@ -62,6 +89,9 @@ async def search_partial(request: Request, query: str = Form(...)):
 
         search_engine = get_search_engine()
         results, timing = search_engine.search(query, top_k=5, include_content=True)
+
+        for result in results:
+            result["summary"] = _extract_summary(result.get("content", ""))
 
         return templates.TemplateResponse(
             "results_list.html",

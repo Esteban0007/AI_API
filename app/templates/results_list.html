@@ -19,7 +19,7 @@
   <div class="movie-info">
     <div style="margin-bottom: 0.5rem">
       <div class="movie-title">{{ result.title }}</div>
-      {% if result.content %}
+      {% if result.summary %}
       <div
         style="
           color: var(--muted-color);
@@ -28,7 +28,7 @@
           margin-top: 0.3rem;
         "
       >
-        {{ result.content | truncate(150) }}
+        {{ result.summary | truncate(150) }}
       </div>
       {% endif %}
     </div>
