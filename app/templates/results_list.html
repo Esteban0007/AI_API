@@ -1,9 +1,9 @@
 {% if results %} {% for result in results %}
 <div class="movie-card">
-  {% if result.metadata.get('poster_url') %}
+  {% if result.metadata.get('poster_path') %}
   <div style="flex-shrink: 0; margin-right: 1rem">
     <img
-      src="{{ result.metadata.poster_url }}"
+      src="{{ result.metadata.poster_path }}"
       alt="{{ result.title }}"
       style="
         width: 60px;
