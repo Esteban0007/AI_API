@@ -18,12 +18,26 @@
   {% endif %}
   <div class="movie-info">
     <div class="movie-title">{{ result.title }}</div>
-    <div class="movie-year">{{ result.metadata.get('year', 'N/A') }}</div>
+    <div class="movie-year">
+      {% if result.metadata.get('release_date') %} {{
+      result.metadata.release_date | slice(':4') }} {% else %} N/A {% endif %}
+    </div>
     {% if result.metadata.get('cast') %}
     <div
       style="color: var(--muted-color); font-size: 0.9rem; margin-top: 0.3rem"
     >
       Cast: {{ result.metadata.cast | join(', ') | truncate(100) }}
+    </div>
+    {% endif %} {% if result.content %}
+    <div
+      style="
+        color: var(--muted-color);
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        line-height: 1.4;
+      "
+    >
+      {{ result.content | truncate(150) }}
     </div>
     {% endif %}
   </div>

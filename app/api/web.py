@@ -61,7 +61,7 @@ async def search_partial(request: Request, query: str = Form(...)):
             )
 
         search_engine = get_search_engine()
-        results, timing = search_engine.search(query, top_k=5, include_content=False)
+        results, timing = search_engine.search(query, top_k=5, include_content=True)
 
         return templates.TemplateResponse(
             "results_list.html",
