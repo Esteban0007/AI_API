@@ -68,6 +68,14 @@ class Settings(BaseSettings):
     RATE_LIMIT_ENABLED: bool = False
     RATE_LIMIT_REQUESTS: int = 60
 
+    # Email Configuration
+    SMTP_HOST: str = "smtp.strato.com"
+    SMTP_PORT: int = 587
+    SMTP_USER: str = "info@readyapi.net"
+    SMTP_PASSWORD: str = ""
+    EMAIL_FROM: str = "info@readyapi.net"
+    BASE_URL: str = "https://readyapi.net"
+
     class Config:
         env_file = ".env"
         case_sensitive = True
