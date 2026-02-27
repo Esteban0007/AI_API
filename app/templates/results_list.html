@@ -41,7 +41,7 @@
     >
       <div class="movie-year" style="margin-bottom: 0.3rem">
         {% if result.metadata.get('release_date') %} {{
-        result.metadata.release_date | slice(':4') }} {% else %} N/A {% endif %}
+        result.metadata.release_date[:4] }} {% else %} N/A {% endif %}
       </div>
       {% if result.metadata.get('cast') %}
       <div style="color: var(--muted-color); font-size: 0.9rem">
