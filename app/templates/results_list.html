@@ -1,0 +1,36 @@
+{% if results %} {% for result in results %}
+<div class="movie-card">
+  <div class="movie-info">
+    <div class="movie-title">{{ result.title }}</div>
+    <div class="movie-year">{{ result.metadata.get('year', 'N/A') }}</div>
+    {% if result.metadata.get('cast') %}
+    <div
+      style="color: var(--muted-color); font-size: 0.9rem; margin-top: 0.3rem"
+    >
+      Cast: {{ result.metadata.cast | join(', ') | truncate(100) }}
+    </div>
+    {% endif %}
+  </div>
+  <div style="display: flex; align-items: center; white-space: nowrap">
+    <span class="score-badge">{{ "%.3f" % result.score }}</span>
+    {% if timing < 300 %}
+    <span class="fast-path-badge">⚡ Fast</span>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+<p
+  style="
+    color: var(--muted-color);
+    font-size: 0.9rem;
+    text-align: right;
+    margin-top: 1rem;
+  "
+>
+  ⏱️ {{ "%.0f" % timing }}ms
+</p>
+{% else %}
+<p style="color: var(--muted-color); text-align: center">
+  No hay resultados para esa búsqueda.
+</p>
+{% endif %}

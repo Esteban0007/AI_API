@@ -1,0 +1,80 @@
+{% extends "base.html" %} {% block title %}Registro - SemanticSearch{% endblock
+%} {% block content %}
+<div class="container">
+  <div style="max-width: 600px; margin: 4rem auto">
+    <h1>Crear Cuenta</h1>
+    <p style="color: var(--muted-color)">
+      Regístrate para obtener tu API Key gratis. Solo necesitas email y
+      contraseña.
+    </p>
+
+    {% if error %}
+    <article
+      style="
+        background-color: #ffebee;
+        border-color: #f44336;
+        color: #c62828;
+        margin-bottom: 2rem;
+      "
+    >
+      <strong>Error:</strong> {{ error }}
+    </article>
+    {% endif %} {% if success %}
+    <article
+      style="
+        background-color: #e8f5e9;
+        border-color: #4caf50;
+        color: #2e7d32;
+        margin-bottom: 2rem;
+      "
+    >
+      <strong>¡Éxito!</strong> {{ success }}
+      <p style="margin-top: 1rem">Revisa tu email para confirmar tu cuenta.</p>
+    </article>
+    {% endif %}
+
+    <form method="post" action="/register">
+      <label for="email">
+        Email
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="tu@email.com"
+          required
+        />
+      </label>
+
+      <label for="password">
+        Contraseña
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Mínimo 8 caracteres"
+          required
+          minlength="8"
+        />
+      </label>
+
+      <label for="password2">
+        Confirmar Contraseña
+        <input
+          type="password"
+          id="password2"
+          name="password2"
+          placeholder="Repite la contraseña"
+          required
+          minlength="8"
+        />
+      </label>
+
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 2rem; color: var(--muted-color)">
+      ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
