@@ -4,12 +4,13 @@ Initialize API router with all endpoints.
 
 from fastapi import APIRouter
 
-from . import search  # documents, users, billing require SQLAlchemy - not used
+from . import search, documents
 
 # Create main router
 router = APIRouter()
 
-# Include only search router (documents, users, billing disabled - using simple auth)
+# Include search and documents routers
 router.include_router(search.router)
+router.include_router(documents.router)
 
 __all__ = ["router"]

@@ -2,9 +2,9 @@
 API endpoints for document management.
 """
 
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, HTTPException, status, Header
 import logging
-from typing import List
+from typing import List, Optional
 
 from ...models.document import DocumentCreate, DocumentBatch, DocumentResponse
 from ...models.search import DocumentUploadResponse
@@ -34,7 +34,8 @@ def _get_vector_store_for_tenant(tenant_id: str) -> VectorStore:
 
 @router.post("/upload", response_model=DocumentUploadResponse)
 async def upload_documents(
-    batch: DocumentBatch, user_context: dict = Depends(validate_api_key)
+    batch: DocumentBatch,
+    x_api_key: Optional[str] = Header(None),
 ) -> DocumentUploadResponse:
     """
     Upload and index documents.
@@ -68,6 +69,8 @@ async def upload_documents(
     - `uploaded_count`: Number of documents successfully uploaded
     - `failed_count`: Number of documents that failed
     """
+    # Validate API key
+    user_context = await validate_api_key(x_api_key)
     try:
         if not batch.documents:
             raise HTTPException(
@@ -129,7 +132,7 @@ async def upload_documents(
 
 
 @router.get("/stats")
-async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
+async def get_stats(x_api_key: Optional[str] = Header(None)) -> dict:
     """
     Get statistics about the document collection.
 
@@ -139,6 +142,9 @@ async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
     - `embedding_dimension`: Dimension of embeddings
     - `model`: Model used for embeddings
     """
+    # Validate API key
+    user_context = await validate_api_key(x_api_key)
+
     try:
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
@@ -153,11 +159,14 @@ async def get_stats(user_context: dict = Depends(validate_api_key)) -> dict:
 
 
 @router.delete("/clear-all")
-async def clear_all_documents(user_context: dict = Depends(validate_api_key)) -> dict:
+async def clear_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
     """
     Delete ALL documents from the collection.
     Use before re-loading a new dataset.
     """
+    # Validate API key
+    user_context = await validate_api_key(x_api_key)
+
     try:
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
@@ -177,7 +186,8 @@ async def clear_all_documents(user_context: dict = Depends(validate_api_key)) ->
 
 @router.delete("/{doc_id}")
 async def delete_document(
-    doc_id: str, user_context: dict = Depends(validate_api_key)
+    doc_id: str,
+    x_api_key: Optional[str] = Header(None),
 ) -> dict:
     """
     Delete a document by ID.
@@ -189,6 +199,9 @@ async def delete_document(
     - `success`: Whether the deletion was successful
     - `message`: Result message
     """
+    # Validate API key
+    user_context = await validate_api_key(x_api_key)
+
     try:
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
