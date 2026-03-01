@@ -16,8 +16,14 @@ from app.db.users import (
     verify_password,
     update_last_login,
     regenerate_confirmation_token,
+    request_password_reset,
+    reset_password_with_token,
 )
-from app.core.email import send_confirmation_email, send_api_key_email
+from app.core.email import (
+    send_confirmation_email,
+    send_api_key_email,
+    send_password_reset_email,
+)
 from app.core.config import get_settings
 
 logger = logging.getLogger(__name__)
@@ -291,3 +297,103 @@ async def resend_confirmation(request: Request, email: str = Form(...)):
                 "success": f"Use this link to confirm: {confirmation_url}",
             },
         )
+
+
+@router.get("/forgot-password", response_class=HTMLResponse)
+async def forgot_password_page(request: Request):
+    """Forgot password form page."""
+    return templates.TemplateResponse("forgot_password.html", {"request": request})
+
+
+@router.post("/forgot-password", response_class=HTMLResponse)
+async def forgot_password(request: Request, email: str = Form(...)):
+    """Process forgot password request."""
+    result = request_password_reset(email)
+
+    if not result["success"]:
+        return templates.TemplateResponse(
+            "forgot_password.html", {"request": request, "error": result["message"]}
+        )
+
+    # Send password reset email
+    email_sent = send_password_reset_email(email, result["reset_token"])
+    smtp_password = settings.SMTP_PASSWORD.strip()
+    smtp_configured = bool(
+        smtp_password and smtp_password.lower() != "your_password_here"
+    )
+
+    if email_sent and smtp_configured:
+        logger.info(f"Password reset email sent to {email}")
+        return templates.TemplateResponse(
+            "forgot_password.html",
+            {
+                "request": request,
+                "success": f"Password reset email sent to {email}. Check your inbox for instructions.",
+            },
+        )
+    else:
+        reset_url = f"{settings.BASE_URL}/reset-password/{result['reset_token']}"
+        logger.warning(f"Password reset without SMTP. URL: {reset_url}")
+        return templates.TemplateResponse(
+            "forgot_password.html",
+            {
+                "request": request,
+                "success": f"Use this link to reset password: {reset_url}",
+            },
+        )
+
+
+@router.get("/reset-password/{token}", response_class=HTMLResponse)
+async def reset_password_page(request: Request, token: str):
+    """Reset password form page with token."""
+    return templates.TemplateResponse(
+        "reset_password.html", {"request": request, "token": token}
+    )
+
+
+@router.post("/reset-password/{token}", response_class=HTMLResponse)
+async def reset_password(
+    request: Request,
+    token: str,
+    password: str = Form(...),
+    password2: str = Form(...),
+):
+    """Process password reset with token."""
+    # Validate inputs
+    if len(password) < 8:
+        return templates.TemplateResponse(
+            "reset_password.html",
+            {
+                "request": request,
+                "token": token,
+                "error": "Password must be at least 8 characters.",
+            },
+        )
+
+    if password != password2:
+        return templates.TemplateResponse(
+            "reset_password.html",
+            {
+                "request": request,
+                "token": token,
+                "error": "Passwords do not match.",
+            },
+        )
+
+    # Reset password
+    result = reset_password_with_token(token, password)
+
+    if not result["success"]:
+        return templates.TemplateResponse(
+            "reset_password.html",
+            {"request": request, "token": token, "error": result["message"]},
+        )
+
+    # Success
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "message": "Password reset successfully! You can now log in with your new password.",
+        },
+    )

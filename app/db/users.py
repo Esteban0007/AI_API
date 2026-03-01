@@ -27,6 +27,8 @@ def init_db():
             is_confirmed BOOLEAN DEFAULT 0,
             confirmation_token TEXT,
             confirmation_token_expires TIMESTAMP,
+            password_reset_token TEXT,
+            password_reset_expires TIMESTAMP,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             last_login TIMESTAMP
         )
@@ -225,6 +227,92 @@ def regenerate_confirmation_token(email: str) -> dict:
         "success": True,
         "message": "New confirmation email sent.",
         "confirmation_token": confirmation_token,
+    }
+
+
+def request_password_reset(email: str) -> dict:
+    """Request password reset. Generate token and return it."""
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    # Check if user exists
+    c.execute("SELECT id FROM users WHERE email = ?", (email,))
+    user = c.fetchone()
+
+    if not user:
+        conn.close()
+        return {"success": False, "message": "Email not found."}
+
+    user_id = user[0]
+
+    # Generate reset token (24h validity)
+    reset_token, token_expires = generate_confirmation_token()
+
+    # Update user with reset token
+    c.execute(
+        """
+        UPDATE users 
+        SET password_reset_token = ?, password_reset_expires = ?
+        WHERE id = ?
+    """,
+        (reset_token, token_expires, user_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "success": True,
+        "message": "Password reset email sent.",
+        "reset_token": reset_token,
+    }
+
+
+def reset_password_with_token(reset_token: str, new_password: str) -> dict:
+    """Reset password using token."""
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    c.execute(
+        """
+        SELECT id, email, password_reset_expires 
+        FROM users 
+        WHERE password_reset_token = ?
+    """,
+        (reset_token,),
+    )
+
+    user = c.fetchone()
+
+    if not user:
+        conn.close()
+        return {"success": False, "message": "Invalid reset token."}
+
+    user_id, email, expires = user
+
+    # Check if token expired
+    if datetime.fromisoformat(expires) < datetime.utcnow():
+        conn.close()
+        return {"success": False, "message": "Reset token expired."}
+
+    # Update password and clear reset token
+    new_password_hash = hash_password(new_password)
+    c.execute(
+        """
+        UPDATE users 
+        SET password_hash = ?, password_reset_token = NULL, password_reset_expires = NULL
+        WHERE id = ?
+    """,
+        (new_password_hash, user_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "success": True,
+        "message": f"Password reset successfully for {email}.",
+        "email": email,
     }
 
 

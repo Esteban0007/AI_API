@@ -208,3 +208,92 @@ SemanticSearch API
     except Exception as e:
         logger.error(f"Failed to send API key email to {to_email}: {e}")
         return False
+
+
+def send_password_reset_email(to_email: str, reset_token: str) -> bool:
+    """Send password reset email to user."""
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = "Reset your password - SemanticSearch API"
+        msg["From"] = settings.EMAIL_FROM
+        msg["To"] = to_email
+
+        reset_url = f"{settings.BASE_URL}/reset-password/{reset_token}"
+
+        text = f"""
+Password Reset - SemanticSearch API
+
+Click this link to reset your password:
+{reset_url}
+
+This link is valid for 24 hours.
+
+If you didn't request this, ignore this email.
+
+---
+SemanticSearch API
+"""
+
+        html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; }}
+        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+        .header {{ background: #ff9800; color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }}
+        .content {{ background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }}
+        .button {{ display: inline-block; background: #ff9800; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }}
+        .footer {{ text-align: center; margin-top: 30px; color: #666; font-size: 0.9em; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Reset Your Password</h1>
+        </div>
+        <div class="content">
+            <p>Hi,</p>
+            <p>You requested to reset your password for <strong>SemanticSearch API</strong>.</p>
+            <p style="text-align: center;">
+                <a href="{reset_url}" class="button">Reset Password</a>
+            </p>
+            <p style="color: #666; font-size: 0.9em;">Or copy this link in your browser:<br>
+            <code style="background: #eee; padding: 5px 10px; border-radius: 3px; display: inline-block; margin-top: 5px;">{reset_url}</code></p>
+            <p style="margin-top: 30px; color: #666;">This link is valid for <strong>24 hours</strong>.</p>
+            <p style="color: #999; font-size: 0.85em; margin-top: 20px;">If you didn't request this, you can ignore this email.</p>
+        </div>
+        <div class="footer">
+            <p>SemanticSearch API</p>
+        </div>
+    </div>
+</body>
+</html>
+"""
+
+        part1 = MIMEText(text, "plain")
+        part2 = MIMEText(html, "html")
+        msg.attach(part1)
+        msg.attach(part2)
+
+        smtp_password = settings.SMTP_PASSWORD.strip()
+        if not smtp_password or smtp_password.lower() == "your_password_here":
+            logger.info(f"Would send password reset email to {to_email}")
+            print(f"\n{'='*60}")
+            print(f"📧 PASSWORD RESET EMAIL (dev mode)")
+            print(f"To: {to_email}")
+            print(f"URL: {reset_url}")
+            print(f"{'='*60}\n")
+            return True
+
+        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
+            server.starttls()
+            server.login(settings.SMTP_USER, smtp_password)
+            server.send_message(msg)
+
+        logger.info(f"Password reset email sent to {to_email}")
+        return True
+
+    except Exception as e:
+        logger.error(f"Failed to send password reset email to {to_email}: {e}")
+        return False
