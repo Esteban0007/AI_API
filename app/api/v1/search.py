@@ -2,11 +2,12 @@
 API endpoints for semantic search.
 """
 
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, HTTPException, status, Header
 import logging
+from typing import Optional
 
 from ...models.search import SearchQuery, SearchResponse, SearchResult
-from ...core.security import check_rate_limit
+from ...core.security import validate_api_key
 from ...engine.searcher import SearchEngine
 from ...engine.store import VectorStore
 from ...engine.embedder import Embedder
@@ -41,7 +42,7 @@ def _get_search_engine_for_tenant(tenant_id: str) -> SearchEngine:
 @router.post("/query", response_model=SearchResponse)
 async def search(
     search_query: SearchQuery,
-    user_context: dict = Depends(check_rate_limit),  # ← Validates API key + rate limits
+    x_api_key: Optional[str] = Header(None),
 ) -> SearchResponse:
     """
     Perform semantic search with cross-encoder re-ranking.
@@ -96,6 +97,8 @@ async def search(
       - `metadata`: Document metadata
     - `execution_time_ms`: Query execution time
     """
+    # Validate API key
+    user_context = await validate_api_key(x_api_key)
     try:
         logger.info(f"Received search query: '{search_query.query}'")
 
