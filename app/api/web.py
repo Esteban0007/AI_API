@@ -84,8 +84,21 @@ async def home(request: Request):
 
 @router.get("/api-docs", response_class=HTMLResponse)
 async def api_docs(request: Request):
-    """Redirect to Swagger docs."""
-    return RedirectResponse(url="/api/docs")
+    """Redirect to Swagger docs in a new tab."""
+    return HTMLResponse(
+        """
+    <html>
+    <head><title>Redirecting...</title></head>
+    <body>
+        <script>
+            window.open('/api/docs', '_blank');
+            window.location.href = '/';
+        </script>
+        <p>Opening API documentation in a new tab...</p>
+    </body>
+    </html>
+    """
+    )
 
 
 @router.get("/simulator", response_class=HTMLResponse)

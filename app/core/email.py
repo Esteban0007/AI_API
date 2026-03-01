@@ -172,7 +172,7 @@ SemanticSearch API
   -H "Content-Type: application/json" \\
   -d '{{"query": "superhero saves the world", "top_k": 5}}'</pre>
             
-            <p style="margin-top: 20px;">📚 <a href="https://api.readyapi.net/api/docs">View Full Documentation</a></p>
+            <p style="margin-top: 20px;">📚 <a href="https://api.readyapi.net/api/docs" target="_blank">View Full Documentation</a></p>
         </div>
         <div class="footer">
             <p>SemanticSearch API</p>
