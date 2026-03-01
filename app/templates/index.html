@@ -1,6 +1,20 @@
 {% extends "base.html" %} {% block title %}SemanticSearch - Home{% endblock %}
 {% block content %}
 <div class="container">
+  {% if message %}
+  <article
+    style="background-color: #e8f5e9; border-color: #4caf50; color: #2e7d32"
+  >
+    {{ message }}
+  </article>
+  {% endif %} {% if error %}
+  <article
+    style="background-color: #ffebee; border-color: #f44336; color: #c62828"
+  >
+    {{ error }}
+  </article>
+  {% endif %}
+
   <div class="hero">
     <h1>SemanticSearch API</h1>
     <p>Fast semantic search with AI. Understands meaning, not just keywords.</p>

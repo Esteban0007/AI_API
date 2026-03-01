@@ -8,7 +8,14 @@ import logging
 
 from app.engine.searcher import SearchEngine
 from app.engine.store import VectorStore
-from app.db.users import register_user, confirm_user, get_user_by_api_key, get_user
+from app.db.users import (
+    register_user,
+    confirm_user,
+    get_user_by_api_key,
+    get_user,
+    verify_password,
+    update_last_login,
+)
 from app.core.email import send_confirmation_email, send_api_key_email
 
 logger = logging.getLogger(__name__)
@@ -111,6 +118,44 @@ async def register_page(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
 
 
+@router.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    """Login form page."""
+    return templates.TemplateResponse("login.html", {"request": request})
+
+
+@router.post("/login", response_class=HTMLResponse)
+async def login(request: Request, email: str = Form(...), password: str = Form(...)):
+    """Process user login and show API key."""
+    user = get_user(email)
+
+    if not user or not verify_password(email, password):
+        return templates.TemplateResponse(
+            "login.html",
+            {"request": request, "error": "Invalid email or password."},
+        )
+
+    if not user.get("is_confirmed"):
+        return templates.TemplateResponse(
+            "login.html",
+            {
+                "request": request,
+                "error": "Please confirm your email before logging in.",
+            },
+        )
+
+    update_last_login(email)
+    return templates.TemplateResponse(
+        "login.html",
+        {
+            "request": request,
+            "success": "Login successful.",
+            "user_email": email,
+            "api_key": user.get("api_key", ""),
+        },
+    )
+
+
 @router.post("/register", response_class=HTMLResponse)
 async def register(
     request: Request,
@@ -122,19 +167,19 @@ async def register(
     # Validate inputs
     if not email or "@" not in email:
         return templates.TemplateResponse(
-            "register.html", {"request": request, "error": "Email inválido"}
+            "register.html", {"request": request, "error": "Invalid email."}
         )
 
     if len(password) < 8:
         return templates.TemplateResponse(
             "register.html",
-            {"request": request, "error": "Contraseña mínimo 8 caracteres"},
+            {"request": request, "error": "Password must be at least 8 characters."},
         )
 
     if password != password2:
         return templates.TemplateResponse(
             "register.html",
-            {"request": request, "error": "Las contraseñas no coinciden"},
+            {"request": request, "error": "Passwords do not match."},
         )
 
     # Register user
@@ -150,7 +195,7 @@ async def register(
                 "register.html",
                 {
                     "request": request,
-                    "success": f"¡Registro exitoso! Revisa tu email ({email}) para confirmar tu cuenta.",
+                    "success": f"Registration successful! Check your email ({email}) to confirm your account.",
                 },
             )
         else:
@@ -159,7 +204,7 @@ async def register(
                 "register.html",
                 {
                     "request": request,
-                    "success": f"Cuenta creada. Error al enviar email. Contacta soporte: info@readyapi.net",
+                    "success": "Account created. Email could not be sent. Contact support: info@readyapi.net",
                 },
             )
     else:
@@ -183,7 +228,7 @@ async def confirm_email(request: Request, token: str):
             "index.html",
             {
                 "request": request,
-                "message": f"¡Email confirmado! Tu API Key está activa. Accede a tu dashboard para copiarla.",
+                "message": "Email confirmed! Your API Key is active. Log in to view and copy it.",
             },
         )
     else:
