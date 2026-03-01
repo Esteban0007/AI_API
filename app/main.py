@@ -5,9 +5,11 @@ FastAPI application factory and middleware setup.
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 import logging
 import time
 from typing import Callable
+from pathlib import Path
 
 from app.core.config import get_settings
 from app.api import router
@@ -46,6 +48,12 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    # Mount static files
+    static_path = Path(__file__).parent / "static"
+    if static_path.exists():
+        app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
+        logger.info(f"Static files mounted at /static from {static_path}")
 
     # Add request logging middleware
     @app.middleware("http")
