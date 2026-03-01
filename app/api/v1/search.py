@@ -149,7 +149,7 @@ async def search(
         )
 
 
-@router.get("/health")
+@router.get("/health", tags=["Search"], include_in_schema=False)
 async def health_check() -> dict:
     """
     Health check endpoint for the search service.

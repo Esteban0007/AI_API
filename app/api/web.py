@@ -178,7 +178,7 @@ async def login(request: Request, email: str = Form(...), password: str = Form(.
     )
 
 
-@router.post("/register", response_class=HTMLResponse)
+@router.post("/register", response_class=HTMLResponse, include_in_schema=False)
 async def register(
     request: Request,
     email: str = Form(...),
