@@ -76,13 +76,13 @@ def _extract_summary(content: str) -> str:
     return " ".join(part for part in summary_parts if part).strip() or content.strip()
 
 
-@router.get("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def home(request: Request):
     """Home page."""
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@router.get("/api-docs", response_class=HTMLResponse)
+@router.get("/api-docs", response_class=HTMLResponse, include_in_schema=False)
 async def api_docs(request: Request):
     """Redirect to Swagger docs in a new tab."""
     return HTMLResponse(
@@ -101,13 +101,13 @@ async def api_docs(request: Request):
     )
 
 
-@router.get("/simulator", response_class=HTMLResponse)
+@router.get("/simulator", response_class=HTMLResponse, include_in_schema=False)
 async def simulator(request: Request):
     """Movie search simulator page."""
     return templates.TemplateResponse("simulator.html", {"request": request})
 
 
-@router.post("/search-partial", response_class=HTMLResponse)
+@router.post("/search-partial", response_class=HTMLResponse, include_in_schema=False)
 async def search_partial(request: Request, query: str = Form(...)):
     """HTMX endpoint that returns HTML partial with search results."""
     try:
@@ -134,19 +134,19 @@ async def search_partial(request: Request, query: str = Form(...)):
         )
 
 
-@router.get("/register", response_class=HTMLResponse)
+@router.get("/register", response_class=HTMLResponse, include_in_schema=False)
 async def register_page(request: Request):
     """Registration form page."""
     return templates.TemplateResponse("register.html", {"request": request})
 
 
-@router.get("/login", response_class=HTMLResponse)
+@router.get("/login", response_class=HTMLResponse, include_in_schema=False)
 async def login_page(request: Request):
     """Login form page."""
     return templates.TemplateResponse("login.html", {"request": request})
 
 
-@router.post("/login", response_class=HTMLResponse)
+@router.post("/login", response_class=HTMLResponse, include_in_schema=False)
 async def login(request: Request, email: str = Form(...), password: str = Form(...)):
     """Process user login and show API key."""
     user = get_user(email)
@@ -243,7 +243,7 @@ async def register(
         )
 
 
-@router.get("/confirm/{token}", response_class=HTMLResponse)
+@router.get("/confirm/{token}", response_class=HTMLResponse, include_in_schema=False)
 async def confirm_email(request: Request, token: str):
     """Confirm user email with token."""
     result = confirm_user(token)
@@ -267,13 +267,17 @@ async def confirm_email(request: Request, token: str):
         )
 
 
-@router.get("/resend-confirmation", response_class=HTMLResponse)
+@router.get(
+    "/resend-confirmation", response_class=HTMLResponse, include_in_schema=False
+)
 async def resend_confirmation_page(request: Request):
     """Resend confirmation email page."""
     return templates.TemplateResponse("resend_confirmation.html", {"request": request})
 
 
-@router.post("/resend-confirmation", response_class=HTMLResponse)
+@router.post(
+    "/resend-confirmation", response_class=HTMLResponse, include_in_schema=False
+)
 async def resend_confirmation(request: Request, email: str = Form(...)):
     """Resend confirmation email to user."""
     # Regenerate token
@@ -312,13 +316,13 @@ async def resend_confirmation(request: Request, email: str = Form(...)):
         )
 
 
-@router.get("/forgot-password", response_class=HTMLResponse)
+@router.get("/forgot-password", response_class=HTMLResponse, include_in_schema=False)
 async def forgot_password_page(request: Request):
     """Forgot password form page."""
     return templates.TemplateResponse("forgot_password.html", {"request": request})
 
 
-@router.post("/forgot-password", response_class=HTMLResponse)
+@router.post("/forgot-password", response_class=HTMLResponse, include_in_schema=False)
 async def forgot_password(request: Request, email: str = Form(...)):
     """Process forgot password request."""
     result = request_password_reset(email)
@@ -356,7 +360,9 @@ async def forgot_password(request: Request, email: str = Form(...)):
         )
 
 
-@router.get("/reset-password/{token}", response_class=HTMLResponse)
+@router.get(
+    "/reset-password/{token}", response_class=HTMLResponse, include_in_schema=False
+)
 async def reset_password_page(request: Request, token: str):
     """Reset password form page with token."""
     return templates.TemplateResponse(
@@ -364,7 +370,9 @@ async def reset_password_page(request: Request, token: str):
     )
 
 
-@router.post("/reset-password/{token}", response_class=HTMLResponse)
+@router.post(
+    "/reset-password/{token}", response_class=HTMLResponse, include_in_schema=False
+)
 async def reset_password(
     request: Request,
     token: str,
