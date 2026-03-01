@@ -17,7 +17,7 @@ def send_confirmation_email(to_email: str, confirmation_token: str) -> bool:
     try:
         # Create message
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = "Confirm your account - SemanticSearch API"
+        msg["Subject"] = "Confirm Your Account - SemanticSearch API"
         msg["From"] = settings.EMAIL_FROM
         msg["To"] = to_email
 
@@ -26,14 +26,14 @@ def send_confirmation_email(to_email: str, confirmation_token: str) -> bool:
 
         # Plain text version
         text = f"""
-¡Bienvenido a SemanticSearch API!
+Welcome to SemanticSearch API!
 
-Confirma tu cuenta haciendo clic en el siguiente enlace:
+Confirm your account by clicking the link below:
 {confirmation_url}
 
-Este enlace es válido por 24 horas.
+This link is valid for 24 hours.
 
-Si no creaste esta cuenta, ignora este email.
+If you didn't create this account, please ignore this email.
 
 ---
 SemanticSearch API
@@ -57,18 +57,18 @@ Powered by Arctic-768D ONNX INT8
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎉 ¡Bienvenido a SemanticSearch API!</h1>
+            <h1>🎉 Welcome to SemanticSearch API!</h1>
         </div>
         <div class="content">
-            <p>Hola,</p>
-            <p>Gracias por registrarte en <strong>SemanticSearch API</strong>. Estás a un paso de comenzar a usar nuestra búsqueda semántica ultrarrápida.</p>
+            <p>Hello,</p>
+            <p>Thank you for signing up at <strong>SemanticSearch API</strong>. You're one step away from using our ultra-fast semantic search.</p>
             <p style="text-align: center;">
-                <a href="{confirmation_url}" class="button">Confirmar mi cuenta</a>
+                <a href="{confirmation_url}" class="button">Confirm My Account</a>
             </p>
-            <p style="color: #666; font-size: 0.9em;">O copia este enlace en tu navegador:<br>
+            <p style="color: #666; font-size: 0.9em;">Or copy this link in your browser:<br>
             <code style="background: #eee; padding: 5px 10px; border-radius: 3px; display: inline-block; margin-top: 5px;">{confirmation_url}</code></p>
-            <p style="margin-top: 30px; color: #666;">Este enlace es válido por <strong>24 horas</strong>.</p>
-            <p style="color: #999; font-size: 0.85em; margin-top: 20px;">Si no creaste esta cuenta, puedes ignorar este email.</p>
+            <p style="margin-top: 30px; color: #666;">This link is valid for <strong>24 hours</strong>.</p>
+            <p style="color: #999; font-size: 0.85em; margin-top: 20px;">If you didn't create this account, you can ignore this email.</p>
         </div>
         <div class="footer">
             <p>SemanticSearch API<br>
@@ -122,20 +122,20 @@ def send_api_key_email(to_email: str, api_key: str) -> bool:
         msg["To"] = to_email
 
         text = f"""
-¡Tu cuenta ha sido confirmada!
+Your Account Has Been Confirmed!
 
-Tu API Key es:
+Your API Key:
 {api_key}
 
-Guárdala en un lugar seguro. La necesitarás para todas las peticiones a la API.
+Keep it safe and secure. You'll need it for all API requests.
 
-Ejemplo de uso:
+Usage Example:
 curl -X POST "https://api.readyapi.net/api/v1/search/query" \\
   -H "x-api-key: {api_key}" \\
   -H "Content-Type: application/json" \\
   -d '{{"query": "superhero saves the world", "top_k": 5}}'
 
-Documentación: https://api.readyapi.net/api/docs
+Documentation: https://api.readyapi.net/api/docs
 
 ---
 SemanticSearch API
@@ -172,7 +172,7 @@ SemanticSearch API
   -H "Content-Type: application/json" \\
   -d '{{"query": "superhero saves the world", "top_k": 5}}'</pre>
             
-            <p style="margin-top: 20px;">📚 <a href="https://api.readyapi.net/api/docs">Ver documentación completa</a></p>
+            <p style="margin-top: 20px;">📚 <a href="https://api.readyapi.net/api/docs">View Full Documentation</a></p>
         </div>
         <div class="footer">
             <p>SemanticSearch API</p>
