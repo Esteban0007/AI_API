@@ -1,11 +1,10 @@
-{% extends "base.html" %} {% block title %}Registro - SemanticSearch{% endblock
+{% extends "base.html" %} {% block title %}Sign Up - SemanticSearch{% endblock
 %} {% block content %}
 <div class="container">
   <div style="max-width: 600px; margin: 4rem auto">
-    <h1>Crear Cuenta</h1>
+    <h1>Create Account</h1>
     <p style="color: var(--muted-color)">
-      Regístrate para obtener tu API Key gratis. Solo necesitas email y
-      contraseña.
+      Sign up to get your free API Key. You only need email and password.
     </p>
 
     {% if error %}
@@ -28,8 +27,8 @@
         margin-bottom: 2rem;
       "
     >
-      <strong>¡Éxito!</strong> {{ success }}
-      <p style="margin-top: 1rem">Revisa tu email para confirmar tu cuenta.</p>
+      <strong>Success!</strong> {{ success }}
+      <p style="margin-top: 1rem">Check your email to confirm your account.</p>
     </article>
     {% endif %}
 
@@ -40,40 +39,40 @@
           type="email"
           id="email"
           name="email"
-          placeholder="tu@email.com"
+          placeholder="your@email.com"
           required
         />
       </label>
 
       <label for="password">
-        Contraseña
+        Password
         <input
           type="password"
           id="password"
           name="password"
-          placeholder="Mínimo 8 caracteres"
+          placeholder="Minimum 8 characters"
           required
           minlength="8"
         />
       </label>
 
       <label for="password2">
-        Confirmar Contraseña
+        Confirm Password
         <input
           type="password"
           id="password2"
           name="password2"
-          placeholder="Repite la contraseña"
+          placeholder="Repeat the password"
           required
           minlength="8"
         />
       </label>
 
-      <button type="submit">Registrarse</button>
+      <button type="submit">Sign Up</button>
     </form>
 
     <p style="text-align: center; margin-top: 2rem; color: var(--muted-color)">
-      ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+      Already have an account? <a href="/login">Log in</a>
     </p>
   </div>
 </div>

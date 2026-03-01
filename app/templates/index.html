@@ -3,78 +3,75 @@
 <div class="container">
   <div class="hero">
     <h1>SemanticSearch API</h1>
-    <p>
-      Búsqueda semántica rápida con IA. Entiende el significado, no solo
-      palabras clave.
-    </p>
+    <p>Fast semantic search with AI. Understands meaning, not just keywords.</p>
     <div class="btn-group">
-      <a href="/simulator" role="button">Probar Demo</a>
-      <a href="/register" role="button" class="secondary">Registrarse</a>
+      <a href="/simulator" role="button">Try Demo</a>
+      <a href="/register" role="button" class="secondary">Sign Up</a>
     </div>
   </div>
 
   <div class="features">
     <div class="feature-card">
-      <h3>🚀 Ultra Rápido</h3>
+      <h3>🚀 Ultra Fast</h3>
       <p>
-        Búsquedas en ~200ms con embedding de última generación (Arctic-768D ONNX
+        Searches in ~200ms with state-of-the-art embeddings (Arctic-768D ONNX
         INT8).
       </p>
     </div>
     <div class="feature-card">
-      <h3>🧠 Comprensión Semántica</h3>
+      <h3>🧠 Semantic Understanding</h3>
       <p>
-        No busca palabras exactas. Entiende conceptos: "película de superhéroes"
-        encuentra Avengers.
+        Doesn't search for exact words. Understands concepts: "superhero saves
+        world" finds Avengers.
       </p>
     </div>
     <div class="feature-card">
-      <h3>🌍 Multilingüe</h3>
+      <h3>🌍 Multilingual</h3>
       <p>
-        Funciona con queries en español, inglés y otros idiomas sin cambiar
-        nada.
+        Works with queries in Spanish, English and other languages without
+        changing anything.
       </p>
     </div>
     <div class="feature-card">
       <h3>📊 RESTful API</h3>
       <p>
-        Integración sencilla. JSON in, JSON out. Con documentación interactiva
-        Swagger.
+        Easy integration. JSON in, JSON out. With interactive Swagger
+        documentation.
       </p>
     </div>
     <div class="feature-card">
-      <h3>🔐 API Key Personal</h3>
+      <h3>🔐 Personal API Key</h3>
       <p>
-        Obtén tu API key con registro gratuito. Sin pago, solo confirmación por
-        email.
+        Get your API key with free registration. No payment, just email
+        confirmation.
       </p>
     </div>
     <div class="feature-card">
-      <h3>📈 1958 Películas</h3>
+      <h3>📈 1958 Movies</h3>
       <p>
-        Base de datos de películas TMDB. Busca por género, actor, concepto o lo
-        que imagines.
+        TMDB movies database. Search by genre, actor, concept or whatever you
+        imagine.
       </p>
     </div>
   </div>
 
   <section style="margin: 4rem 0">
-    <h2>¿Cómo usar?</h2>
+    <h2>How to Use?</h2>
     <ol>
-      <li><a href="/register">Regístrate</a> (email + contraseña)</li>
-      <li>Confirma tu email</li>
-      <li>Copia tu API Key desde el dashboard</li>
-      <li>Usa la API (ver <a href="/api-docs">documentación</a>)</li>
+      <li><a href="/register">Sign Up</a> (email + password)</li>
+      <li>Confirm your email</li>
+      <li>Copy your API Key from the dashboard</li>
+      <li>Use the API (see <a href="/api-docs">documentation</a>)</li>
     </ol>
   </section>
 
   <section style="margin: 4rem 0">
-    <h2>Ejemplo de uso</h2>
+    <h2>Example Usage</h2>
     <pre><code>curl -X POST "https://api.readyapi.net/api/v1/search/query" \
   -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "query": "superhéroe salva el mundo",
+    "query": "superhero saves the world",
     "top_k": 5
   }'</code></pre>
   </section>

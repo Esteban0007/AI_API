@@ -1,29 +1,29 @@
-{% extends "base.html" %} {% block title %}Simulador - SemanticSearch{% endblock
+{% extends "base.html" %} {% block title %}Simulator - SemanticSearch{% endblock
 %} {% block content %}
 <div class="container">
-  <h1>🎬 Simulador de Búsqueda</h1>
-  <p>Prueba la búsqueda semántica en tiempo real con 1958 películas TMDB.</p>
+  <h1>🎬 Search Simulator</h1>
+  <p>Try semantic search in real-time with 1958 TMDB movies.</p>
 
   <div style="margin: 2rem 0">
-    <label for="search-query">Busca películas (en español o inglés):</label>
+    <label for="search-query">Search movies (in Spanish or English):</label>
     <div class="search-box">
       <input
         type="text"
         id="search-query"
         name="query"
-        placeholder="Ej: 'superhéroe salva el mundo', 'robot inteligente', 'heist'"
+        placeholder="E.g: 'superhero saves the world', 'intelligent robot', 'heist'"
         hx-post="/search-partial"
         hx-trigger="keyup changed delay:500ms, search"
         hx-target="#results"
         autocomplete="off"
       />
-      <span class="htmx-indicator loading">Buscando...</span>
+      <span class="htmx-indicator loading">Searching...</span>
     </div>
   </div>
 
   <div id="results" style="margin-top: 2rem">
     <p style="color: var(--muted-color); text-align: center">
-      Escribe para ver resultados...
+      Type to see results...
     </p>
   </div>
 </div>
