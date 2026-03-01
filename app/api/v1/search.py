@@ -14,7 +14,7 @@ from ...engine.embedder import Embedder
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1/search", tags=["search"])
+router = APIRouter(prefix="/api/v1/search", tags=["Search"])
 
 # Global instances
 embedder = Embedder()
@@ -39,7 +39,7 @@ def _get_search_engine_for_tenant(tenant_id: str) -> SearchEngine:
     return _search_engine_cache[tenant_id]
 
 
-@router.post("/query", response_model=SearchResponse, tags=["Search"])
+@router.post("/query", response_model=SearchResponse)
 async def search(
     search_query: SearchQuery,
     x_api_key: Optional[str] = Header(None),
