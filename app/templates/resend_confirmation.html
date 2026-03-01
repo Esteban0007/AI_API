@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block title %}Resend Confirmation -
+SemanticSearch{% endblock %} {% block content %}
+<div class="container">
+  <div style="max-width: 600px; margin: 4rem auto">
+    <h1>Resend Confirmation Email</h1>
+    <p style="color: var(--muted-color)">
+      Didn't receive the confirmation email? Enter your email address and we'll
+      send it again.
+    </p>
+
+    {% if error %}
+    <article
+      style="
+        background-color: #ffebee;
+        border-color: #f44336;
+        color: #c62828;
+        margin-bottom: 2rem;
+      "
+    >
+      <strong>Error:</strong> {{ error }}
+    </article>
+    {% endif %} {% if success %}
+    <article
+      style="
+        background-color: #e8f5e9;
+        border-color: #4caf50;
+        color: #2e7d32;
+        margin-bottom: 2rem;
+      "
+    >
+      <strong>Success!</strong> {{ success }}
+    </article>
+    {% endif %}
+
+    <form method="post" action="/resend-confirmation">
+      <label for="email">
+        Email
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+        />
+      </label>
+
+      <button type="submit">Resend Confirmation Email</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 2rem; color: var(--muted-color)">
+      Already confirmed? <a href="/login">Log in</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

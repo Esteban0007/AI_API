@@ -15,6 +15,7 @@ from app.db.users import (
     get_user,
     verify_password,
     update_last_login,
+    regenerate_confirmation_token,
 )
 from app.core.email import send_confirmation_email, send_api_key_email
 from app.core.config import get_settings
@@ -244,4 +245,49 @@ async def confirm_email(request: Request, token: str):
     else:
         return templates.TemplateResponse(
             "index.html", {"request": request, "error": result["message"]}
+        )
+
+
+@router.get("/resend-confirmation", response_class=HTMLResponse)
+async def resend_confirmation_page(request: Request):
+    """Resend confirmation email page."""
+    return templates.TemplateResponse("resend_confirmation.html", {"request": request})
+
+
+@router.post("/resend-confirmation", response_class=HTMLResponse)
+async def resend_confirmation(request: Request, email: str = Form(...)):
+    """Resend confirmation email to user."""
+    # Regenerate token
+    result = regenerate_confirmation_token(email)
+
+    if not result["success"]:
+        return templates.TemplateResponse(
+            "resend_confirmation.html", {"request": request, "error": result["message"]}
+        )
+
+    # Send new confirmation email
+    email_sent = send_confirmation_email(email, result["confirmation_token"])
+    smtp_password = settings.SMTP_PASSWORD.strip()
+    smtp_configured = bool(
+        smtp_password and smtp_password.lower() != "your_password_here"
+    )
+
+    if email_sent and smtp_configured:
+        logger.info(f"Confirmation email resent to {email}")
+        return templates.TemplateResponse(
+            "resend_confirmation.html",
+            {
+                "request": request,
+                "success": f"Confirmation email sent to {email}. Please check your inbox.",
+            },
+        )
+    else:
+        confirmation_url = f"{settings.BASE_URL}/confirm/{result['confirmation_token']}"
+        logger.warning(f"Resend without SMTP delivery. URL: {confirmation_url}")
+        return templates.TemplateResponse(
+            "resend_confirmation.html",
+            {
+                "request": request,
+                "success": f"Use this link to confirm: {confirmation_url}",
+            },
         )

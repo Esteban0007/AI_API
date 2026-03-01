@@ -183,5 +183,50 @@ def update_last_login(email: str):
     conn.close()
 
 
+def regenerate_confirmation_token(email: str) -> dict:
+    """Generate new confirmation token for unconfirmed user."""
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+
+    # Check if user exists and is not confirmed
+    c.execute(
+        "SELECT id, is_confirmed FROM users WHERE email = ?",
+        (email,),
+    )
+    user = c.fetchone()
+
+    if not user:
+        conn.close()
+        return {"success": False, "message": "Email not found."}
+
+    user_id, is_confirmed = user
+
+    if is_confirmed:
+        conn.close()
+        return {"success": False, "message": "Account already confirmed."}
+
+    # Generate new token
+    confirmation_token, token_expires = generate_confirmation_token()
+
+    # Update user with new token
+    c.execute(
+        """
+        UPDATE users 
+        SET confirmation_token = ?, confirmation_token_expires = ?
+        WHERE id = ?
+    """,
+        (confirmation_token, token_expires, user_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "success": True,
+        "message": "New confirmation email sent.",
+        "confirmation_token": confirmation_token,
+    }
+
+
 # Initialize DB on import
 init_db()
