@@ -93,7 +93,7 @@ def create_app() -> FastAPI:
         logger.info("Database initialized successfully")
 
     # Root endpoint
-    @app.get("/")
+    @app.get("/", tags=["System"])
     async def root():
         """Root endpoint with API information."""
         return {
@@ -105,7 +105,7 @@ def create_app() -> FastAPI:
         }
 
     # Health check endpoint
-    @app.get("/health")
+    @app.get("/health", tags=["System"])
     async def health():
         """Health check endpoint with model information."""
         from app.engine.embedder import Embedder

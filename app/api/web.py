@@ -33,7 +33,7 @@ settings = get_settings()
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "../templates")
 templates = Jinja2Templates(directory=TEMPLATE_DIR)
 
-router = APIRouter(tags=["web"])
+router = APIRouter(tags=["Authentication"])
 
 # Initialize search engine (lazy load)
 _search_engine = None

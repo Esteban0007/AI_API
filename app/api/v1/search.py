@@ -39,7 +39,7 @@ def _get_search_engine_for_tenant(tenant_id: str) -> SearchEngine:
     return _search_engine_cache[tenant_id]
 
 
-@router.post("/query", response_model=SearchResponse)
+@router.post("/query", response_model=SearchResponse, tags=["Search"])
 async def search(
     search_query: SearchQuery,
     x_api_key: Optional[str] = Header(None),
