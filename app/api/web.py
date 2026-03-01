@@ -17,8 +17,10 @@ from app.db.users import (
     update_last_login,
 )
 from app.core.email import send_confirmation_email, send_api_key_email
+from app.core.config import get_settings
 
 logger = logging.getLogger(__name__)
+settings = get_settings()
 
 # Setup templates
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "../templates")
@@ -186,10 +188,16 @@ async def register(
     result = register_user(email, password)
 
     if result["success"]:
+        confirmation_url = f"{settings.BASE_URL}/confirm/{result['confirmation_token']}"
+
         # Send confirmation email
         email_sent = send_confirmation_email(email, result["confirmation_token"])
+        smtp_password = os.getenv("SMTP_PASSWORD", "").strip()
+        smtp_configured = bool(
+            smtp_password and smtp_password.lower() != "your_password_here"
+        )
 
-        if email_sent:
+        if email_sent and smtp_configured:
             logger.info(f"User registered and confirmation email sent: {email}")
             return templates.TemplateResponse(
                 "register.html",
@@ -199,12 +207,14 @@ async def register(
                 },
             )
         else:
-            logger.error(f"User registered but email failed: {email}")
+            logger.warning(
+                f"User registered without SMTP delivery. Confirmation URL: {confirmation_url}"
+            )
             return templates.TemplateResponse(
                 "register.html",
                 {
                     "request": request,
-                    "success": "Account created. Email could not be sent. Contact support: info@readyapi.net",
+                    "success": f"Account created, but email is not configured yet. Confirm manually with this link: {confirmation_url}",
                 },
             )
     else:
