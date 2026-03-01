@@ -192,7 +192,7 @@ async def register(
 
         # Send confirmation email
         email_sent = send_confirmation_email(email, result["confirmation_token"])
-        smtp_password = os.getenv("SMTP_PASSWORD", "").strip()
+        smtp_password = settings.SMTP_PASSWORD.strip()
         smtp_configured = bool(
             smtp_password and smtp_password.lower() != "your_password_here"
         )

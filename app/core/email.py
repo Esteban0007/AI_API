@@ -4,18 +4,12 @@ import smtplib
 import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from typing import Optional
-import os
+
+from app.core.config import get_settings
 
 logger = logging.getLogger(__name__)
 
-# Email configuration from environment
-SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
-SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
-SMTP_USER = os.getenv("SMTP_USER", "info@readyapi.net")
-SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-EMAIL_FROM = os.getenv("EMAIL_FROM", "info@readyapi.net")
-BASE_URL = os.getenv("BASE_URL", "https://readyapi.net")
+settings = get_settings()
 
 
 def send_confirmation_email(to_email: str, confirmation_token: str) -> bool:
@@ -23,12 +17,12 @@ def send_confirmation_email(to_email: str, confirmation_token: str) -> bool:
     try:
         # Create message
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = "Confirma tu cuenta - SemanticSearch API"
-        msg["From"] = EMAIL_FROM
+        msg["Subject"] = "Confirm your account - SemanticSearch API"
+        msg["From"] = settings.EMAIL_FROM
         msg["To"] = to_email
 
         # Confirmation URL
-        confirmation_url = f"{BASE_URL}/confirm/{confirmation_token}"
+        confirmation_url = f"{settings.BASE_URL}/confirm/{confirmation_token}"
 
         # Plain text version
         text = f"""
@@ -92,7 +86,8 @@ Powered by Arctic-768D ONNX INT8
         msg.attach(part2)
 
         # Send email
-        if not SMTP_PASSWORD:
+        smtp_password = settings.SMTP_PASSWORD.strip()
+        if not smtp_password or smtp_password.lower() == "your_password_here":
             logger.warning(
                 f"SMTP not configured. Would send email to {to_email}: {confirmation_url}"
             )
@@ -105,9 +100,9 @@ Powered by Arctic-768D ONNX INT8
             return True
 
         # Production: actually send email
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
             server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.login(settings.SMTP_USER, smtp_password)
             server.send_message(msg)
 
         logger.info(f"Confirmation email sent to {to_email}")
@@ -122,8 +117,8 @@ def send_api_key_email(to_email: str, api_key: str) -> bool:
     """Send API key to confirmed user."""
     try:
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = "Tu API Key - SemanticSearch API"
-        msg["From"] = EMAIL_FROM
+        msg["Subject"] = "Your API Key - SemanticSearch API"
+        msg["From"] = settings.EMAIL_FROM
         msg["To"] = to_email
 
         text = f"""
@@ -192,7 +187,8 @@ SemanticSearch API
         msg.attach(part1)
         msg.attach(part2)
 
-        if not SMTP_PASSWORD:
+        smtp_password = settings.SMTP_PASSWORD.strip()
+        if not smtp_password or smtp_password.lower() == "your_password_here":
             logger.info(f"Would send API key email to {to_email}")
             print(f"\n{'='*60}")
             print(f"📧 API KEY EMAIL (dev mode)")
@@ -201,9 +197,9 @@ SemanticSearch API
             print(f"{'='*60}\n")
             return True
 
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
             server.starttls()
-            server.login(SMTP_USER, SMTP_PASSWORD)
+            server.login(settings.SMTP_USER, smtp_password)
             server.send_message(msg)
 
         logger.info(f"API key email sent to {to_email}")
