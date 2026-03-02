@@ -1,171 +1,143 @@
 {
     "documents": [
         {
-            "id": "cl-100",
-            "title": "Classic Executive Oxford Shirt",
-            "content": "A crisp, button-down formal shirt in high-thread-count white cotton. Tailored for a sharp professional silhouette in corporate boardrooms, law firms, and high-stakes job interviews. The gold standard for conservative business formal attire.",
-            "keywords": ["business", "professional", "interview", "white", "shirt"],
+            "id": "cl-112",
+            "title": "Slim-Fit Italian Chinos",
+            "content": "Tailored trousers in a breathable navy cotton-twill blend. Designed for business-casual office wear, smart-casual dinners, and semi-formal social events. Offers a polished professional look with a comfortable stretch finish.",
+            "keywords": ["chinos", "navy", "business-casual", "trousers"],
             "metadata": {
                 "gender": "male",
-                "category": "tops",
+                "category": "bottoms",
                 "style": "formal",
-                "price": 65.00,
-                "size": "S, M, L, XL, XXL",
-                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+                "price": 59.99,
+                "size": "30, 32, 34, 36, 38",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
             }
         },
         {
-            "id": "cl-101",
-            "title": "Midnight Navy Wool Blazer",
-            "content": "Single-breasted structured jacket in premium navy wool. Essential for business-casual offices, networking events, and semi-formal dinners. Pairs perfectly with chinos for a polished, authoritative look.",
-            "keywords": ["blazer", "navy", "business-casual", "jacket"],
+            "id": "cl-113",
+            "title": "High-Performance Trekking Pants",
+            "content": "Rugged charcoal utility trousers with reinforced knee panels and water-repellent coating. Engineered for mountain hiking, rock climbing, and extreme outdoor adventure in unpredictable weather conditions.",
+            "keywords": ["hiking", "trekking", "outdoor", "waterproof", "cargo"],
             "metadata": {
-                "gender": "male",
-                "category": "outerwear",
-                "style": "formal",
-                "price": 145.00,
-                "size": "48, 50, 52, 54, 56",
-                "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500"
+                "gender": "unisex",
+                "category": "bottoms",
+                "style": "sporty",
+                "price": 85.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
             }
         },
         {
-            "id": "cl-102",
-            "title": "Silk Pussy-Bow Blouse",
-            "content": "Sophisticated cream silk top with an adjustable neck tie. Designed for executive presence in professional environments and upscale evening social events. Elegant, fluid drape for a high-end corporate aesthetic.",
-            "keywords": ["blouse", "silk", "professional", "cream"],
+            "id": "cl-114",
+            "title": "Distressed Skinny Rocker Jeans",
+            "content": "Faded black denim with strategic knee destruction and frayed hems. Inspired by underground punk and grunge aesthetics. Perfect for music concerts, late-night events, and edgy urban streetwear looks.",
+            "keywords": ["jeans", "black", "grunge", "punk", "denim"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "bottoms",
+                "style": "edgy",
+                "price": 68.00,
+                "size": "28, 30, 32, 34, 36",
+                "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+            }
+        },
+        {
+            "id": "cl-115",
+            "title": "Pleated Satin Midi Skirt",
+            "content": "Elegant emerald green skirt with a high-gloss silky finish. Designed for cocktail parties, wedding guest attire, and sophisticated evening dining. Fluid movement for a luxurious feminine silhouette.",
+            "keywords": ["skirt", "satin", "green", "formal", "wedding"],
             "metadata": {
                 "gender": "female",
-                "category": "tops",
+                "category": "bottoms",
                 "style": "formal",
-                "price": 89.00,
-                "size": "XS, S, M, L, XL",
-                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
-            }
-        },
-        {
-            "id": "cl-103",
-            "title": "Double-Breasted Heritage Trench",
-            "content": "Timeless tan raincoat with waist belt and shoulder epaulettes. Traditional British military-inspired design for rainy autumn commutes and professional outdoor transitions. Water-resistant and sophisticated.",
-            "keywords": ["trench", "coat", "rain", "tan", "classic"],
-            "metadata": {
-                "gender": "female",
-                "category": "outerwear",
-                "style": "formal",
-                "price": 195.00,
-                "size": "S, M, L, XL",
-                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
-            }
-        },
-        {
-            "id": "cl-104",
-            "title": "Acid-Wash Grunge Hoodie",
-            "content": "Oversized, heavy-fleece sweatshirt in distressed charcoal grey. Features a faded wash for a 90s rock aesthetic. Ideal for urban streetwear, skate culture, and relaxed, edgy social settings.",
-            "keywords": ["hoodie", "grunge", "streetwear", "grey", "oversized"],
-            "metadata": {
-                "gender": "unisex",
-                "category": "outerwear",
-                "style": "edgy",
-                "price": 75.00,
-                "size": "M, L, XL, XXL",
-                "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
-            }
-        },
-        {
-            "id": "cl-105",
-            "title": "Cyberpunk Reflective Windbreaker",
-            "content": "High-visibility technical jacket with neon accents and 3M reflective panels. Waterproof and windproof shell designed for night cycling, raves, and futuristic techwear fashion styles.",
-            "keywords": ["windbreaker", "techwear", "neon", "reflective", "waterproof"],
-            "metadata": {
-                "gender": "unisex",
-                "category": "outerwear",
-                "style": "edgy",
-                "price": 110.00,
-                "size": "S, M, L, XL",
-                "image": "https://images.unsplash.com/photo-1544441893-675973e31985?w=500"
-            }
-        },
-        {
-            "id": "cl-106",
-            "title": "Distressed Band Graphic Tee",
-            "content": "Vintage-soft white cotton t-shirt with a faded Nirvana smiley print. Relaxed fit with frayed hems for an authentic grunge-rock look. Perfect for casual weekend wear and music festivals.",
-            "keywords": ["nirvana", "t-shirt", "white", "vintage", "rock"],
-            "metadata": {
-                "gender": "unisex",
-                "category": "tops",
-                "style": "casual",
-                "price": 32.00,
-                "size": "S, M, L, XL, XXL",
-                "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500"
-            }
-        },
-        {
-            "id": "cl-107",
-            "title": "High-Altitude Expedition Parka",
-            "content": "Heavy-duty insulated orange coat with faux-fur hood. Engineered for sub-zero arctic temperatures, snowy mountains, and extreme winter exploration. Features multiple thermal-lock pockets.",
-            "keywords": ["parka", "winter", "orange", "snow", "extreme"],
-            "metadata": {
-                "gender": "unisex",
-                "category": "outerwear",
-                "style": "sporty",
-                "price": 280.00,
-                "size": "S, M, L, XL, XXL",
-                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
-            }
-        },
-        {
-            "id": "cl-108",
-            "title": "Ripstop Utility Cargo Vest",
-            "content": "Tactical sleeveless jacket with 8 functional pockets. Breathable mesh lining and durable ripstop fabric for hiking, fishing, and outdoor photography adventures in hot climates.",
-            "keywords": ["vest", "cargo", "tactical", "hiking", "outdoor"],
-            "metadata": {
-                "gender": "unisex",
-                "category": "outerwear",
-                "style": "sporty",
-                "price": 55.00,
-                "size": "M, L, XL",
-                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
-            }
-        },
-        {
-            "id": "cl-109",
-            "title": "Performance Compression Top",
-            "content": "Under-layer thermal shirt in matte black. Moisture-wicking technology designed for professional athletes, gym workouts, and base-layer insulation during winter football or skiing.",
-            "keywords": ["compression", "sport", "black", "thermal", "gym"],
-            "metadata": {
-                "gender": "unisex",
-                "category": "tops",
-                "style": "sporty",
                 "price": 45.00,
-                "size": "XS, S, M, L, XL",
-                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
-            }
-        },
-        {
-            "id": "cl-110",
-            "title": "Bohemian Floral Maxi Dress",
-            "content": "Lightweight flowing dress with a vibrant wildflower pattern. Breezy fabric engineered for summer holidays, beach resorts, and outdoor music festivals. Captures a relaxed boho-chic spirit.",
-            "keywords": ["dress", "floral", "boho", "summer", "beach"],
-            "metadata": {
-                "gender": "female",
-                "category": "dresses",
-                "style": "boho",
-                "price": 72.00,
-                "size": "S, M, L",
+                "size": "XS, S, M, L",
                 "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
             }
         },
         {
-            "id": "cl-111",
-            "title": "Minimalist Cashmere Turtleneck",
-            "content": "Ultra-soft luxury sweater in charcoal grey. High neck design for refined winter elegance and cozy warmth in snowy climates. Pairs well with formal trousers or casual denim.",
-            "keywords": ["cashmere", "winter", "grey", "sweater", "luxury"],
+            "id": "cl-116",
+            "title": "Gore-Tex Alpine Adventure Boots",
+            "content": "Heavy-duty waterproof footwear with deep-lug traction soles. Engineered for snowy mountain peaks, muddy forest trails, and extreme winter trekking. Provides maximum ankle stability and thermal insulation.",
+            "keywords": ["boots", "hiking", "waterproof", "winter", "mountain"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "sporty",
+                "price": 165.00,
+                "size": "38, 39, 40, 41, 42, 43, 44, 45",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-117",
+            "title": "Minimalist Leather Court Sneakers",
+            "content": "Clean white low-top trainers in premium calfskin leather. A versatile staple for smart-casual wardrobes, weekend urban travel, and relaxed office environments. Timeless and understated design.",
+            "keywords": ["sneakers", "white", "leather", "casual", "minimalist"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "casual",
+                "price": 110.00,
+                "size": "36-46",
+                "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500"
+            }
+        },
+        {
+            "id": "cl-118",
+            "title": "Midnight Stiletto Evening Pumps",
+            "content": "Classic pointed-toe high heels in matte black leather. The essential footwear for black-tie galas, formal corporate events, and prestigious evening celebrations. Elegant and commanding presence.",
+            "keywords": ["heels", "black", "formal", "wedding", "gala"],
             "metadata": {
                 "gender": "female",
-                "category": "tops",
+                "category": "shoes",
                 "style": "formal",
-                "price": 120.00,
-                "size": "XS, S, M, L",
-                "image": "https://images.unsplash.com/photo-1574201630328-950dd725d21c?w=500"
+                "price": 135.00,
+                "size": "35, 36, 37, 38, 39, 40, 41",
+                "image": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
+            }
+        },
+        {
+            "id": "cl-119",
+            "title": "Desert Sand Suede Loafers",
+            "content": "Lightweight slip-on shoes in soft beige suede. Ideal for summer garden parties, resort holidays, and yacht-club casual attire. Breathable design for hot climates and relaxed luxury vibes.",
+            "keywords": ["loafers", "suede", "beige", "summer", "luxury"],
+            "metadata": {
+                "gender": "male",
+                "category": "shoes",
+                "style": "resort",
+                "price": 95.00,
+                "size": "40, 41, 42, 43, 44, 45",
+                "image": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500"
+            }
+        },
+        {
+            "id": "cl-120",
+            "title": "Performance Marathon Runners",
+            "content": "Ultra-lightweight technical sneakers with reactive foam cushioning and mesh breathability. Optimized for long-distance road running, high-intensity interval training, and gym performance.",
+            "keywords": ["running", "sport", "gym", "sneakers", "active"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "sporty",
+                "price": 125.00,
+                "size": "37-47",
+                "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+            }
+        },
+        {
+            "id": "cl-121",
+            "title": "Classic Tan Chelsea Boots",
+            "content": "Heritage pull-on ankle boots with elastic side panels. Premium suede finish suitable for autumn street style, casual weekend outings, and rugged urban looks. Durable rubber sole for city life.",
+            "keywords": ["boots", "chelsea", "tan", "autumn", "casual"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "casual",
+                "price": 140.00,
+                "size": "38, 39, 40, 41, 42, 43, 44, 45",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
             }
         }
     ]

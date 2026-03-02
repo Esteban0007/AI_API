@@ -125,70 +125,39 @@ class VectorStore:
 
     @staticmethod
     def _build_embed_text(
-        title: str, content: str, user_metadata: dict, keywords: list = None
+        title: str, content: str, user_metadata: dict = None, keywords: list = None
     ) -> str:
         """
-        Build structured text for embedding that includes all relevant fields.
-        This allows semantic search to find documents by actor, director, genre, year, keywords, etc.
+        Build structured text for embedding - generic for any document type.
+        Works with movies, clothes, products, etc.
 
         Format:
             Title: {title}
-            Summary: {content}
+            Content: {content}
             Keywords: {keywords}
-            Category: {genres}
-            Director: {director}
-            Cast: {cast}
-            Year Released: {year}
         """
-        # Parse genres (may be list or JSON string)
-        genres = user_metadata.get("genres", [])
-        if isinstance(genres, str):
-            try:
-                genres = json.loads(genres)
-            except Exception:
-                genres = [genres]
-        genres_str = ", ".join(genres) if genres else ""
+        parts = []
 
-        # Parse cast (may be list or JSON string)
-        cast = user_metadata.get("cast", [])
-        if isinstance(cast, str):
-            try:
-                cast = json.loads(cast)
-            except Exception:
-                cast = [cast]
-        cast_str = ", ".join(cast) if cast else ""
+        if title:
+            parts.append(f"Title: {title}")
 
-        director = user_metadata.get("director", "")
-        release_date = user_metadata.get("release_date", "")
-        year = str(release_date)[:4] if release_date else ""
+        if content:
+            parts.append(f"Content: {content}")
 
-        # Parse keywords
+        # Handle keywords - generic approach
         keywords_str = ""
         if keywords:
             if isinstance(keywords, list):
-                keywords_str = ", ".join(keywords)
+                keywords_str = ", ".join(str(k) for k in keywords)
             elif isinstance(keywords, str):
                 try:
                     kw_list = json.loads(keywords)
-                    keywords_str = ", ".join(kw_list)
+                    keywords_str = ", ".join(str(k) for k in kw_list)
                 except Exception:
                     keywords_str = keywords
 
-        parts = []
-        if title:
-            parts.append(f"Title: {title}")
-        if content:
-            parts.append(f"Summary: {content}")
         if keywords_str:
             parts.append(f"Keywords: {keywords_str}")
-        if genres_str:
-            parts.append(f"Category: {genres_str}")
-        if director:
-            parts.append(f"Director: {director}")
-        if cast_str:
-            parts.append(f"Cast: {cast_str}")
-        if year:
-            parts.append(f"Year Released: {year}")
 
         return "\n".join(parts)
 
@@ -205,15 +174,12 @@ class VectorStore:
             True if successful
         """
         try:
-            # Generate embedding from structured text including cast, director, genres, keywords
+            # Generate embedding from structured text: title, content, keywords
             title = metadata.get("title", "")
-            user_metadata = metadata.get("metadata", {})
             keywords = metadata.get("keywords", [])
 
             # Build structured text to embed
-            text_to_embed = self._build_embed_text(
-                title, content, user_metadata, keywords
-            )
+            text_to_embed = self._build_embed_text(title, content, keywords=keywords)
             embedding = self.embedder.embed_text(text_to_embed)
 
             # Prepare metadata - copy all user metadata fields
@@ -276,17 +242,16 @@ class VectorStore:
         full_documents = []
 
         try:
-            # Generate all embeddings from structured text including cast, director, genres, keywords
+            # Generate all embeddings from structured text: title, content, keywords
             for doc in documents:
                 doc_ids.append(doc["id"])
                 title = doc.get("title", "")
                 content = doc["content"]
-                user_metadata = doc.get("metadata", {})
                 keywords = doc.get("keywords", [])
 
                 # Build structured text to embed
                 text_to_embed = self._build_embed_text(
-                    title, content, user_metadata, keywords
+                    title, content, keywords=keywords
                 )
                 contents.append(text_to_embed)
 
