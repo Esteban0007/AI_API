@@ -107,14 +107,29 @@ async def simulator(request: Request):
     return templates.TemplateResponse("simulator.html", {"request": request})
 
 
+@router.get("/demos", response_class=HTMLResponse, include_in_schema=False)
+async def demos(request: Request):
+    """Live demos page with multiple datasets."""
+    return templates.TemplateResponse("demos.html", {"request": request})
+
+
 @router.post("/search-partial", response_class=HTMLResponse, include_in_schema=False)
-async def search_partial(request: Request, query: str = Form(...)):
+async def search_partial(
+    request: Request, query: str = Form(...), dataset: str = Form(default="movies")
+):
     """HTMX endpoint that returns HTML partial with search results."""
     try:
         if not query or len(query.strip()) < 2:
-            return templates.TemplateResponse(
-                "results_list.html", {"request": request, "results": [], "timing": 0}
-            )
+            if dataset == "clothing":
+                return templates.TemplateResponse(
+                    "clothing_results.html",
+                    {"request": request, "results": [], "timing": 0},
+                )
+            else:
+                return templates.TemplateResponse(
+                    "results_list.html",
+                    {"request": request, "results": [], "timing": 0},
+                )
 
         search_engine = get_search_engine()
         results, timing = search_engine.search(query, top_k=5, include_content=True)
@@ -122,14 +137,23 @@ async def search_partial(request: Request, query: str = Form(...)):
         for result in results:
             result["summary"] = _extract_summary(result.get("content", ""))
 
-        return templates.TemplateResponse(
-            "results_list.html",
-            {"request": request, "results": results, "timing": timing},
-        )
+        if dataset == "clothing":
+            return templates.TemplateResponse(
+                "clothing_results.html",
+                {"request": request, "results": results, "timing": timing},
+            )
+        else:
+            return templates.TemplateResponse(
+                "results_list.html",
+                {"request": request, "results": results, "timing": timing},
+            )
     except Exception as e:
         logger.error(f"Search error: {e}")
+        template = (
+            "clothing_results.html" if dataset == "clothing" else "results_list.html"
+        )
         return templates.TemplateResponse(
-            "results_list.html",
+            template,
             {"request": request, "results": [], "timing": 0, "error": str(e)},
         )
 

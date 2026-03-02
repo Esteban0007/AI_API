@@ -1,17 +1,17 @@
 {% extends "base.html" %} {% block title %}Simulator - SemanticSearch{% endblock
 %} {% block content %}
 <div class="container">
-  <h1>🎬 Search Simulator</h1>
+  <h1>🎬 Movies Search Simulator</h1>
   <p>Try semantic search in real-time with 1958 TMDB movies.</p>
 
   <div style="margin: 2rem 0">
-    <label for="search-query">Search movies (in Spanish or English):</label>
+    <label for="search-query">Search movies:</label>
     <div class="search-box">
       <input
         type="text"
         id="search-query"
         name="query"
-        placeholder="E.g: 'superhero saves the world', 'intelligent robot', 'heist'"
+        placeholder="E.g: 'cute robot cleans the earth'"
         hx-post="/search-partial"
         hx-trigger="keyup changed delay:500ms, search"
         hx-target="#results"

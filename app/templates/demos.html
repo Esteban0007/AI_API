@@ -1,0 +1,244 @@
+{% extends "base.html" %} {% block title %}Demos - SemanticSearch{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>🎯 Live Demos</h1>
+  <p>Explore semantic search across different product categories.</p>
+
+  <!-- Tabs Navigation -->
+  <div
+    style="
+      margin: 2rem 0;
+      display: flex;
+      gap: 1rem;
+      border-bottom: 2px solid var(--form-element-border-color);
+      padding-bottom: 1rem;
+    "
+  >
+    <button
+      class="demo-tab-btn active"
+      onclick="switchDemo('movies')"
+      style="
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        border-bottom: 3px solid var(--primary-color);
+        color: var(--primary-color);
+      "
+    >
+      🎬 Movies
+    </button>
+    <button
+      class="demo-tab-btn"
+      onclick="switchDemo('clothing')"
+      style="
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        color: var(--muted-color);
+      "
+    >
+      👕 Fashion Store
+    </button>
+  </div>
+
+  <!-- Movies Demo -->
+  <div id="movies-demo" class="demo-section">
+    <h2>Movie Search</h2>
+    <p>Search from 1958 TMDB movies using semantic understanding.</p>
+
+    <div style="margin: 2rem 0">
+      <label for="movies-search">Search movies:</label>
+      <div class="search-box">
+        <input
+          type="text"
+          id="movies-search"
+          name="query"
+          placeholder="E.g: 'cute robot cleans the earth' or 'action adventure'"
+          hx-post="/search-partial?dataset=movies"
+          hx-trigger="keyup changed delay:500ms, search"
+          hx-target="#movies-results"
+          autocomplete="off"
+        />
+        <span class="htmx-indicator loading">Searching...</span>
+      </div>
+    </div>
+
+    <div id="movies-results" style="margin-top: 2rem">
+      <p style="color: var(--muted-color); text-align: center">
+        Type to see results...
+      </p>
+    </div>
+  </div>
+
+  <!-- Clothing Demo -->
+  <div id="clothing-demo" class="demo-section" style="display: none">
+    <h2>Fashion Store</h2>
+    <p>Discover clothing items using natural language search.</p>
+
+    <div style="margin: 2rem 0">
+      <label for="clothing-search">Search clothing:</label>
+      <div class="search-box">
+        <input
+          type="text"
+          id="clothing-search"
+          name="query"
+          placeholder="E.g: 'leather jacket for winter' or 'formal dress'"
+          hx-post="/search-partial?dataset=clothing"
+          hx-trigger="keyup changed delay:500ms, search"
+          hx-target="#clothing-results"
+          autocomplete="off"
+        />
+        <span class="htmx-indicator loading">Searching...</span>
+      </div>
+    </div>
+
+    <div id="clothing-results" style="margin-top: 2rem">
+      <p style="color: var(--muted-color); text-align: center">
+        Type to see results...
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .demo-tab-btn:hover {
+    opacity: 0.8;
+  }
+
+  .demo-section {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .product-card {
+    border: 1px solid var(--form-element-border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-image {
+    width: 100%;
+    height: 250px;
+    background: var(--form-element-valid-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--color);
+  }
+
+  .product-description {
+    font-size: 0.9rem;
+    color: var(--muted-color);
+    margin: 0.5rem 0 1rem 0;
+    line-height: 1.4;
+  }
+
+  .product-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .meta-label {
+    color: var(--muted-color);
+    font-weight: 500;
+  }
+
+  .meta-value {
+    color: var(--color);
+    font-weight: 600;
+  }
+
+  .price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 1rem 0;
+  }
+
+  .similarity-score {
+    background: var(--form-element-valid-border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--muted-color);
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+</style>
+
+<script>
+  function switchDemo(demo) {
+    // Hide all demos
+    document.getElementById("movies-demo").style.display = "none";
+    document.getElementById("clothing-demo").style.display = "none";
+
+    // Remove active state from all buttons
+    document.querySelectorAll(".demo-tab-btn").forEach((btn) => {
+      btn.style.color = "var(--muted-color)";
+      btn.style.borderBottom = "none";
+    });
+
+    // Show selected demo
+    document.getElementById(demo + "-demo").style.display = "block";
+
+    // Activate button
+    event.target.style.color = "var(--primary-color)";
+    event.target.style.borderBottom = "3px solid var(--primary-color)";
+  }
+</script>
+{% endblock %}
