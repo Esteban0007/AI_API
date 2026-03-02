@@ -124,14 +124,17 @@ class VectorStore:
         return text
 
     @staticmethod
-    def _build_embed_text(title: str, content: str, user_metadata: dict) -> str:
+    def _build_embed_text(
+        title: str, content: str, user_metadata: dict, keywords: list = None
+    ) -> str:
         """
         Build structured text for embedding that includes all relevant fields.
-        This allows semantic search to find documents by actor, director, genre, year, etc.
+        This allows semantic search to find documents by actor, director, genre, year, keywords, etc.
 
         Format:
             Title: {title}
             Summary: {content}
+            Keywords: {keywords}
             Category: {genres}
             Director: {director}
             Cast: {cast}
@@ -159,11 +162,25 @@ class VectorStore:
         release_date = user_metadata.get("release_date", "")
         year = str(release_date)[:4] if release_date else ""
 
+        # Parse keywords
+        keywords_str = ""
+        if keywords:
+            if isinstance(keywords, list):
+                keywords_str = ", ".join(keywords)
+            elif isinstance(keywords, str):
+                try:
+                    kw_list = json.loads(keywords)
+                    keywords_str = ", ".join(kw_list)
+                except Exception:
+                    keywords_str = keywords
+
         parts = []
         if title:
             parts.append(f"Title: {title}")
         if content:
             parts.append(f"Summary: {content}")
+        if keywords_str:
+            parts.append(f"Keywords: {keywords_str}")
         if genres_str:
             parts.append(f"Category: {genres_str}")
         if director:
@@ -188,12 +205,15 @@ class VectorStore:
             True if successful
         """
         try:
-            # Generate embedding from structured text including cast, director, genres
+            # Generate embedding from structured text including cast, director, genres, keywords
             title = metadata.get("title", "")
             user_metadata = metadata.get("metadata", {})
+            keywords = metadata.get("keywords", [])
 
             # Build structured text to embed
-            text_to_embed = self._build_embed_text(title, content, user_metadata)
+            text_to_embed = self._build_embed_text(
+                title, content, user_metadata, keywords
+            )
             embedding = self.embedder.embed_text(text_to_embed)
 
             # Prepare metadata - copy all user metadata fields
@@ -256,15 +276,18 @@ class VectorStore:
         full_documents = []
 
         try:
-            # Generate all embeddings from structured text including cast, director, genres
+            # Generate all embeddings from structured text including cast, director, genres, keywords
             for doc in documents:
                 doc_ids.append(doc["id"])
                 title = doc.get("title", "")
                 content = doc["content"]
                 user_metadata = doc.get("metadata", {})
+                keywords = doc.get("keywords", [])
 
                 # Build structured text to embed
-                text_to_embed = self._build_embed_text(title, content, user_metadata)
+                text_to_embed = self._build_embed_text(
+                    title, content, user_metadata, keywords
+                )
                 contents.append(text_to_embed)
 
             embeddings_list = self.embedder.embed_texts(contents)
