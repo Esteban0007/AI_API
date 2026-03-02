@@ -35,18 +35,27 @@ templates = Jinja2Templates(directory=TEMPLATE_DIR)
 
 router = APIRouter(tags=["Authentication"])
 
-# Initialize search engine (lazy load)
-_search_engine = None
-_vector_store = None
+# Initialize search engines for different datasets
+_search_engines = {}
 
 
-def get_search_engine():
-    """Get or create search engine instance."""
-    global _search_engine, _vector_store
-    if _search_engine is None:
-        _vector_store = VectorStore()
-        _search_engine = SearchEngine(vector_store=_vector_store)
-    return _search_engine
+def get_search_engine(dataset: str = "movies"):
+    """Get or create search engine instance for specific dataset."""
+    global _search_engines
+
+    if dataset not in _search_engines:
+        # Map datasets to their tenant IDs
+        tenant_map = {
+            "movies": "admin",  # Admin tenant has movies
+            "clothing": "user_1",  # User 1 tenant has clothing
+        }
+        tenant_id = tenant_map.get(dataset, "admin")
+
+        # Create vector store for specific tenant
+        vector_store = VectorStore(tenant_id=tenant_id)
+        _search_engines[dataset] = SearchEngine(vector_store=vector_store)
+
+    return _search_engines[dataset]
 
 
 def _extract_summary(content: str) -> str:
@@ -131,7 +140,8 @@ async def search_partial(
                     {"request": request, "results": [], "timing": 0},
                 )
 
-        search_engine = get_search_engine()
+        # Get search engine for the specific dataset
+        search_engine = get_search_engine(dataset)
         results, timing = search_engine.search(query, top_k=5, include_content=True)
 
         for result in results:

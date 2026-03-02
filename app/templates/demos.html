@@ -52,19 +52,23 @@
 
     <div style="margin: 2rem 0">
       <label for="movies-search">Search movies:</label>
-      <div class="search-box">
-        <input
-          type="text"
-          id="movies-search"
-          name="query"
-          placeholder="E.g: 'cute robot cleans the earth' or 'action adventure'"
-          hx-post="/search-partial?dataset=movies"
-          hx-trigger="keyup changed delay:500ms, search"
-          hx-target="#movies-results"
-          autocomplete="off"
-        />
-        <span class="htmx-indicator loading">Searching...</span>
-      </div>
+      <form
+        hx-post="/search-partial"
+        hx-trigger="keyup changed delay:500ms from:#movies-search, submit from:#movies-search"
+        hx-target="#movies-results"
+      >
+        <div class="search-box">
+          <input
+            type="text"
+            id="movies-search"
+            name="query"
+            placeholder="E.g: 'cute robot cleans the earth' or 'action adventure'"
+            autocomplete="off"
+          />
+          <input type="hidden" name="dataset" value="movies" />
+          <span class="htmx-indicator loading">Searching...</span>
+        </div>
+      </form>
     </div>
 
     <div id="movies-results" style="margin-top: 2rem">
@@ -81,19 +85,23 @@
 
     <div style="margin: 2rem 0">
       <label for="clothing-search">Search clothing:</label>
-      <div class="search-box">
-        <input
-          type="text"
-          id="clothing-search"
-          name="query"
-          placeholder="E.g: 'leather jacket for winter' or 'formal dress'"
-          hx-post="/search-partial?dataset=clothing"
-          hx-trigger="keyup changed delay:500ms, search"
-          hx-target="#clothing-results"
-          autocomplete="off"
-        />
-        <span class="htmx-indicator loading">Searching...</span>
-      </div>
+      <form
+        hx-post="/search-partial"
+        hx-trigger="keyup changed delay:500ms from:#clothing-search, submit from:#clothing-search"
+        hx-target="#clothing-results"
+      >
+        <div class="search-box">
+          <input
+            type="text"
+            id="clothing-search"
+            name="query"
+            placeholder="E.g: 'leather jacket for winter' or 'formal dress'"
+            autocomplete="off"
+          />
+          <input type="hidden" name="dataset" value="clothing" />
+          <span class="htmx-indicator loading">Searching...</span>
+        </div>
+      </form>
     </div>
 
     <div id="clothing-results" style="margin-top: 2rem">
