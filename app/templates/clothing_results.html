@@ -15,10 +15,10 @@
     {% for result in results %}
     <div class="product-card">
       <div class="product-image">
-        {% if result.metadata and result.metadata.image %}
+        {% if result.get('metadata') and result['metadata'].get('image') %}
         <img
-          src="{{ result.metadata.image }}"
-          alt="{{ result.title }}"
+          src="{{ result['metadata']['image'] }}"
+          alt="{{ result.get('title', 'Product') }}"
           loading="lazy"
         />
         {% else %}
@@ -37,31 +37,31 @@
         {% endif %}
       </div>
       <div class="product-info">
-        <h3 class="product-title">{{ result.title }}</h3>
+        <h3 class="product-title">{{ result.get('title', 'Product') }}</h3>
         <p class="product-description">
-          {{ result.summary or result.content[:80] }}...
+          {{ result.get('summary') or (result.get('content', '')[:80]) }}...
         </p>
 
         <div class="product-meta">
-          {% if result.metadata.gender %}
+          {% if result.get('metadata', {}).get('gender') %}
           <div class="meta-item">
             <span class="meta-label">Gender</span>
             <span class="meta-value"
-              >{{ result.metadata.gender|capitalize }}</span
+              >{{ result['metadata']['gender']|capitalize }}</span
             >
           </div>
-          {% endif %} {% if result.metadata.category %}
+          {% endif %} {% if result.get('metadata', {}).get('category') %}
           <div class="meta-item">
             <span class="meta-label">Category</span>
             <span class="meta-value"
-              >{{ result.metadata.category|capitalize }}</span
+              >{{ result['metadata']['category']|capitalize }}</span
             >
           </div>
-          {% endif %} {% if result.metadata.style %}
+          {% endif %} {% if result.get('metadata', {}).get('style') %}
           <div class="meta-item">
             <span class="meta-label">Style</span>
             <span class="meta-value"
-              >{{ result.metadata.style|capitalize }}</span
+              >{{ result['metadata']['style']|capitalize }}</span
             >
           </div>
           {% endif %}
@@ -79,9 +79,9 @@
           Size: <strong>XS - XXL</strong>
         </div>
 
-        {% if result.similarity_score is not none %}
+        {% if result.get('similarity_score') %}
         <div class="similarity-score">
-          Match: {{ (result.similarity_score * 100)|int }}%
+          Match: {{ (result['similarity_score'] * 100)|int }}%
         </div>
         {% endif %}
       </div>

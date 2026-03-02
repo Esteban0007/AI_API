@@ -1,10 +1,10 @@
 {% if results %} {% for result in results %}
 <div class="movie-card">
-  {% if result.metadata.get('poster_path') %}
+  {% if result.get('metadata', {}).get('poster_path') %}
   <div style="flex-shrink: 0; margin-right: 1rem">
     <img
-      src="{{ result.metadata.poster_path }}"
-      alt="{{ result.title }}"
+      src="{{ result['metadata']['poster_path'] }}"
+      alt="{{ result.get('title', 'Movie') }}"
       style="
         width: 60px;
         height: 90px;
@@ -18,8 +18,8 @@
   {% endif %}
   <div class="movie-info">
     <div style="margin-bottom: 0.5rem">
-      <div class="movie-title">{{ result.title }}</div>
-      {% if result.summary %}
+      <div class="movie-title">{{ result.get('title', 'Movie') }}</div>
+      {% if result.get('summary') %}
       <div
         style="
           color: var(--muted-color);
@@ -28,7 +28,7 @@
           margin-top: 0.3rem;
         "
       >
-        {{ result.summary | truncate(150) }}
+        {{ result['summary'] | truncate(150) }}
       </div>
       {% endif %}
     </div>
@@ -40,12 +40,12 @@
       "
     >
       <div class="movie-year" style="margin-bottom: 0.3rem">
-        {% if result.metadata.get('release_date') %} {{
-        result.metadata.release_date[:4] }} {% else %} N/A {% endif %}
+        {% if result.get('metadata', {}).get('release_date') %} {{
+        result['metadata']['release_date'][:4] }} {% else %} N/A {% endif %}
       </div>
-      {% if result.metadata.get('cast') %}
+      {% if result.get('metadata', {}).get('cast') %}
       <div style="color: var(--muted-color); font-size: 0.9rem">
-        Cast: {{ result.metadata.cast | join(', ') | truncate(100) }}
+        Cast: {{ result['metadata']['cast'] | join(', ') | truncate(100) }}
       </div>
       {% endif %}
     </div>
@@ -58,7 +58,7 @@
       margin-left: auto;
     "
   >
-    <span class="score-badge">{{ "%.3f" % result.score }}</span>
+    <span class="score-badge">{{ "%.3f" % result.get('score', 0) }}</span>
     {% if timing < 300 %}
     <span class="fast-path-badge">⚡ Fast</span>
     {% endif %}
