@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
   <h1>🎯 Live Demos</h1>
-  <p>Explore semantic search across different product categories.</p>
+  <p>Explore semantic search across movies and spaceship systems.</p>
 
   <!-- Tabs Navigation -->
   <div
@@ -31,7 +31,7 @@
     </button>
     <button
       class="demo-tab-btn"
-      onclick="switchDemo('clothing')"
+      onclick="switchDemo('spaceship')"
       style="
         background: none;
         border: none;
@@ -41,7 +41,7 @@
         color: var(--muted-color);
       "
     >
-      👕 Fashion Store
+      🚀 Spaceship
     </button>
   </div>
 
@@ -78,33 +78,51 @@
     </div>
   </div>
 
-  <!-- Clothing Demo -->
-  <div id="clothing-demo" class="demo-section" style="display: none">
-    <h2>Fashion Store</h2>
-    <p>Discover clothing items using natural language search.</p>
+  <!-- Spaceship Demo -->
+  <div id="spaceship-demo" class="demo-section" style="display: none">
+    <h2>Spaceship Control</h2>
+    <p>Search spaceship parts and activate operational modes.</p>
+
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0">
+      <button type="button" class="contrast" onclick="setShipQuery('charge')">
+        ⚡ Charge
+      </button>
+      <button type="button" class="contrast" onclick="setShipQuery('fly')">
+        🚀 Fly
+      </button>
+      <button type="button" class="contrast" onclick="setShipQuery('stealth')">
+        🕶️ Stealth
+      </button>
+      <button type="button" class="contrast" onclick="setShipQuery('attack')">
+        🎯 Attack
+      </button>
+      <button type="button" class="contrast" onclick="setShipQuery('shield')">
+        🛡️ Shield
+      </button>
+    </div>
 
     <div style="margin: 2rem 0">
-      <label for="clothing-search">Search clothing:</label>
+      <label for="spaceship-search">Search ship systems:</label>
       <form
         hx-post="/search-partial"
-        hx-trigger="keyup changed delay:500ms from:#clothing-search, submit from:#clothing-search"
-        hx-target="#clothing-results"
+        hx-trigger="keyup changed delay:400ms from:#spaceship-search, submit from:#spaceship-search"
+        hx-target="#spaceship-results"
       >
         <div class="search-box">
           <input
             type="text"
-            id="clothing-search"
+            id="spaceship-search"
             name="query"
-            placeholder="E.g: 'leather jacket for winter' or 'formal dress'"
+            placeholder="E.g: 'recharge energy', 'go stealth', 'defense shield'"
             autocomplete="off"
           />
-          <input type="hidden" name="dataset" value="clothing" />
+          <input type="hidden" name="dataset" value="spaceship" />
           <span class="htmx-indicator loading">Searching...</span>
         </div>
       </form>
     </div>
 
-    <div id="clothing-results" style="margin-top: 2rem">
+    <div id="spaceship-results" style="margin-top: 2rem">
       <p style="color: var(--muted-color); text-align: center">
         Type to see results...
       </p>
@@ -227,13 +245,33 @@
     display: inline-block;
     margin-top: 0.5rem;
   }
+
+  .mode-charging .product-image {
+    background: linear-gradient(135deg, #0f2d4d 0%, #2d7dd2 100%);
+  }
+
+  .mode-flying .product-image {
+    background: linear-gradient(135deg, #0b1026 0%, #145da0 100%);
+  }
+
+  .mode-stealth .product-image {
+    background: linear-gradient(135deg, #111 0%, #333 100%);
+  }
+
+  .mode-attack .product-image {
+    background: linear-gradient(135deg, #3a0f0f 0%, #9f1d1d 100%);
+  }
+
+  .mode-shield .product-image {
+    background: linear-gradient(135deg, #0c2e1c 0%, #2f9e44 100%);
+  }
 </style>
 
 <script>
   function switchDemo(demo) {
     // Hide all demos
     document.getElementById("movies-demo").style.display = "none";
-    document.getElementById("clothing-demo").style.display = "none";
+    document.getElementById("spaceship-demo").style.display = "none";
 
     // Remove active state from all buttons
     document.querySelectorAll(".demo-tab-btn").forEach((btn) => {
@@ -247,6 +285,13 @@
     // Activate button
     event.target.style.color = "var(--primary-color)";
     event.target.style.borderBottom = "3px solid var(--primary-color)";
+  }
+
+  function setShipQuery(value) {
+    const input = document.getElementById("spaceship-search");
+    if (!input) return;
+    input.value = value;
+    input.dispatchEvent(new Event("keyup", { bubbles: true }));
   }
 </script>
 {% endblock %}

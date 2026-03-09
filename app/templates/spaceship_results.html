@@ -1,0 +1,71 @@
+{% if error %}
+<article
+  style="
+    background-color: #ffebee;
+    border-color: #f44336;
+    color: #c62828;
+    margin-top: 1rem;
+  "
+>
+  <strong>Error:</strong> {{ error }}
+</article>
+{% elif results %}
+<div style="margin-top: 1rem">
+  <div class="product-grid">
+    {% for result in results %} {% set css_class = result.get('metadata',
+    {}).get('css_class', 'mode-idle') %} {% set state = result.get('metadata',
+    {}).get('state', 'unknown') %}
+    <div class="product-card {{ css_class }}">
+      <div class="product-image">
+        {% if css_class == 'mode-charging' %}⚡{% elif css_class ==
+        'mode-flying' %}🚀{% elif css_class == 'mode-stealth' %}🕶️{% elif
+        css_class == 'mode-attack' %}🎯{% elif css_class == 'mode-shield' %}🛡️{%
+        else %}🛸{% endif %}
+      </div>
+      <div class="product-info">
+        <h3 class="product-title">
+          {{ result.get('title', 'ship-part')|replace('-', ' ')|title }}
+        </h3>
+        <p class="product-description">
+          {{ result.get('summary', 'No description available') }}
+        </p>
+
+        <div class="product-meta">
+          <div class="meta-item">
+            <span class="meta-label">State</span>
+            <span class="meta-value">{{ state|capitalize }}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Mode</span>
+            <span class="meta-value"
+              >{{ css_class|replace('mode-', '')|capitalize }}</span
+            >
+          </div>
+        </div>
+
+        {% if result.get('similarity_score') %}
+        <div class="similarity-score">
+          Match: {{ (result['similarity_score'] * 100)|int }}%
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div
+    style="
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+    "
+  >
+    <p>Showing {{ results|length }} results in {{ timing|round(2) }}ms</p>
+  </div>
+</div>
+{% else %}
+<p style="color: var(--muted-color); text-align: center; margin-top: 1rem">
+  No systems matched. Try: charge, fly, stealth, attack, shield.
+</p>
+{% endif %}

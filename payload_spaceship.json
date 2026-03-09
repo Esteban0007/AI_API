@@ -1,0 +1,54 @@
+{
+  "documents": [
+    {
+      "id": "part-001",
+      "title": "solar-core",
+      "content": "energy charging panels that deploy to capture sun power",
+      "keywords": ["charge", "recharge", "energy", "static", "day"],
+      "metadata": {
+        "css_class": "mode-charging",
+        "state": "idle"
+      }
+    },
+    {
+      "id": "part-002",
+      "title": "plasma-thruster",
+      "content": "rear engine exhaust with bright blue fire for propulsion",
+      "keywords": ["fly", "speed", "boost", "fire", "travel"],
+      "metadata": {
+        "css_class": "mode-flying",
+        "state": "active"
+      }
+    },
+    {
+      "id": "part-003",
+      "title": "stealth-hull",
+      "content": "dark outer shell for camouflage and radar invisibility",
+      "keywords": ["hide", "stealth", "invisible", "ghost", "dark"],
+      "metadata": {
+        "css_class": "mode-stealth",
+        "state": "hidden"
+      }
+    },
+    {
+      "id": "part-004",
+      "title": "pulse-laser",
+      "content": "front mounted cannons for shooting energy beams",
+      "keywords": ["shoot", "attack", "fire", "combat", "weapon"],
+      "metadata": {
+        "css_class": "mode-attack",
+        "state": "offensive"
+      }
+    },
+    {
+      "id": "part-005",
+      "title": "energy-shield",
+      "content": "hexagonal light barrier for defense against impact",
+      "keywords": ["protect", "shield", "defense", "armor", "safe"],
+      "metadata": {
+        "css_class": "mode-shield",
+        "state": "defensive"
+      }
+    }
+  ]
+}

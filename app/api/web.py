@@ -47,7 +47,7 @@ def get_search_engine(dataset: str = "movies"):
         # Map datasets to their tenant IDs
         tenant_map = {
             "movies": "admin",  # Admin tenant has movies
-            "clothing": "user_1",  # User 1 tenant has clothing
+            "spaceship": "user_1",  # User 1 tenant has spaceship parts
         }
         tenant_id = tenant_map.get(dataset, "admin")
 
@@ -70,7 +70,7 @@ def _extract_summary(content: str) -> str:
         content_end = content.find("Keywords:")
         if content_start > 0 and content_end > content_start:
             return content[content_start:content_end].strip()
-    
+
     # For movies (Summary: format)
     if "Summary:" not in content:
         return content.strip()
@@ -138,9 +138,9 @@ async def search_partial(
     """HTMX endpoint that returns HTML partial with search results."""
     try:
         if not query or len(query.strip()) < 2:
-            if dataset == "clothing":
+            if dataset == "spaceship":
                 return templates.TemplateResponse(
-                    "clothing_results.html",
+                    "spaceship_results.html",
                     {"request": request, "results": [], "timing": 0},
                 )
             else:
@@ -156,9 +156,9 @@ async def search_partial(
         for result in results:
             result["summary"] = _extract_summary(result.get("content", ""))
 
-        if dataset == "clothing":
+        if dataset == "spaceship":
             return templates.TemplateResponse(
-                "clothing_results.html",
+                "spaceship_results.html",
                 {"request": request, "results": results, "timing": timing},
             )
         else:
@@ -169,7 +169,7 @@ async def search_partial(
     except Exception as e:
         logger.error(f"Search error: {e}")
         template = (
-            "clothing_results.html" if dataset == "clothing" else "results_list.html"
+            "spaceship_results.html" if dataset == "spaceship" else "results_list.html"
         )
         return templates.TemplateResponse(
             template,
