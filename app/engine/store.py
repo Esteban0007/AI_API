@@ -66,6 +66,19 @@ class VectorStore:
             raise
 
     @staticmethod
+    def _is_missing_collection_error(error: Exception) -> bool:
+        """Return True when Chroma reports a stale/missing collection handle."""
+        msg = str(error).lower()
+        return "collection" in msg and "does not exist" in msg
+
+    def _refresh_collection_reference(self) -> None:
+        """Refresh collection handle (self-healing after stale UUIDs)."""
+        self.collection = self.client.get_or_create_collection(
+            name=self.collection_name, metadata={"hnsw:space": "cosine"}
+        )
+        logger.info(f"Collection reference refreshed: {self.collection_name}")
+
+    @staticmethod
     def _extract_filterable_metadata(metadata: Dict) -> Dict:
         """
         Extract filterable fields from metadata for ChromaDB storage.
@@ -218,6 +231,19 @@ class VectorStore:
             logger.info(f"Document added: {doc_id}")
             return True
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                try:
+                    logger.warning(
+                        "Collection handle stale while adding document. Refreshing and retrying once."
+                    )
+                    self._refresh_collection_reference()
+                    return self.add_document(
+                        doc_id=doc_id, content=content, metadata=metadata
+                    )
+                except Exception as retry_error:
+                    logger.error(
+                        f"Error adding document {doc_id} after refresh: {retry_error}"
+                    )
             logger.error(f"Error adding document {doc_id}: {e}")
             return False
 
@@ -304,6 +330,15 @@ class VectorStore:
             logger.info(f"Batch upload completed: {success_count} documents")
 
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                try:
+                    logger.warning(
+                        "Collection handle stale during batch upload. Refreshing and retrying once."
+                    )
+                    self._refresh_collection_reference()
+                    return self.add_documents_batch(documents)
+                except Exception as retry_error:
+                    logger.error(f"Error in batch upload after refresh: {retry_error}")
             logger.error(f"Error in batch upload: {e}")
             failure_count = len(documents)
 
@@ -384,6 +419,19 @@ class VectorStore:
 
             return search_results
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                try:
+                    logger.warning(
+                        "Collection handle stale during search. Refreshing and retrying once."
+                    )
+                    self._refresh_collection_reference()
+                    return self.search(
+                        query_embedding=query_embedding, top_k=top_k, filters=filters
+                    )
+                except Exception as retry_error:
+                    logger.error(
+                        f"Error searching vector store after refresh: {retry_error}"
+                    )
             logger.error(f"Error searching vector store: {e}")
             return []
 
@@ -454,6 +502,17 @@ class VectorStore:
                 )
             return results
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                try:
+                    logger.warning(
+                        "Collection handle stale during exact title match. Refreshing and retrying once."
+                    )
+                    self._refresh_collection_reference()
+                    return self.get_exact_title_matches(title)
+                except Exception as retry_error:
+                    logger.error(
+                        f"Error fetching exact title matches after refresh: {retry_error}"
+                    )
             logger.error(f"Error fetching exact title matches: {e}")
             return []
 
@@ -559,6 +618,17 @@ class VectorStore:
             return matches[:10]
 
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                try:
+                    logger.warning(
+                        "Collection handle stale during prefix title match. Refreshing and retrying once."
+                    )
+                    self._refresh_collection_reference()
+                    return self.get_title_token_matches(query)
+                except Exception as retry_error:
+                    logger.error(
+                        f"Error in prefix title matching after refresh: {retry_error}"
+                    )
             logger.error(f"Error in prefix title matching: {e}")
             return []
 
@@ -618,14 +688,22 @@ class VectorStore:
             if count == 0:
                 logger.info("Collection is already empty")
                 return 0
-            # Delete and recreate the collection to wipe it cleanly
-            self.client.delete_collection(self.collection_name)
-            self.collection = self.client.get_or_create_collection(
-                name=self.collection_name, metadata={"hnsw:space": "cosine"}
-            )
-            logger.info(f"Cleared {count} documents from collection")
-            return count
+            # Delete documents without recreating collection to avoid stale UUIDs
+            all_docs = self.collection.get(include=["metadatas"], limit=count)
+            all_ids = all_docs.get("ids", [])
+            if all_ids:
+                self.collection.delete(ids=all_ids)
+
+            deleted_count = count - self.collection.count()
+            logger.info(f"Cleared {deleted_count} documents from collection")
+            return deleted_count
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                logger.warning(
+                    "Collection handle stale while clearing docs. Refreshing and retrying once."
+                )
+                self._refresh_collection_reference()
+                return self.clear_all()
             logger.error(f"Error clearing collection: {e}")
             raise
             return False
@@ -642,18 +720,38 @@ class VectorStore:
                 "tenant_id": self.tenant_id,
             }
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                try:
+                    logger.warning(
+                        "Collection handle stale while reading stats. Refreshing and retrying once."
+                    )
+                    self._refresh_collection_reference()
+                    return self.get_collection_stats()
+                except Exception as retry_error:
+                    logger.error(
+                        f"Error getting collection stats after refresh: {retry_error}"
+                    )
             logger.error(f"Error getting collection stats: {e}")
             return {}
 
     def clear_collection(self) -> None:
         """Delete all documents in the collection."""
         try:
-            self.client.delete_collection(name=self.collection_name)
-            self.collection = self.client.get_or_create_collection(
-                name=self.collection_name, metadata={"hnsw:space": "cosine"}
-            )
+            count = self.collection.count()
+            if count > 0:
+                all_docs = self.collection.get(include=["metadatas"], limit=count)
+                all_ids = all_docs.get("ids", [])
+                if all_ids:
+                    self.collection.delete(ids=all_ids)
             logger.info(f"Collection cleared: {self.collection_name}")
         except Exception as e:
+            if self._is_missing_collection_error(e):
+                logger.warning(
+                    "Collection handle stale while clearing collection. Refreshing and retrying once."
+                )
+                self._refresh_collection_reference()
+                self.clear_collection()
+                return
             logger.error(f"Error clearing collection {self.collection_name}: {e}")
             raise
 
