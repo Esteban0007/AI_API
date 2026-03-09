@@ -80,8 +80,10 @@
 
   <!-- Spaceship Demo -->
   <div id="spaceship-demo" class="demo-section" style="display: none">
-    <h2>Spaceship Control</h2>
-    <p>Search spaceship parts and activate operational modes.</p>
+    <h2>🛸 Interactive Spaceship</h2>
+    <p style="font-size: 0.9rem; color: var(--muted-color)">
+      Type any command: charge, fly, stealth, attack, shield, scan, warp, repair
+    </p>
 
     <!-- Interactive Spaceship Visualization -->
     <div id="spaceship-viz" class="spaceship-container">
@@ -92,26 +94,85 @@
       <div class="ship-status">IDLE</div>
     </div>
 
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0">
-      <button type="button" class="contrast" onclick="setShipQuery('charge')">
+    <div
+      style="
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+        justify-content: center;
+      "
+    >
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('charge')"
+      >
         ⚡ Charge
       </button>
-      <button type="button" class="contrast" onclick="setShipQuery('fly')">
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('fly')"
+      >
         🚀 Fly
       </button>
-      <button type="button" class="contrast" onclick="setShipQuery('stealth')">
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('stealth')"
+      >
         🕶️ Stealth
       </button>
-      <button type="button" class="contrast" onclick="setShipQuery('attack')">
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('attack')"
+      >
         🎯 Attack
       </button>
-      <button type="button" class="contrast" onclick="setShipQuery('shield')">
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('shield')"
+      >
         🛡️ Shield
+      </button>
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('scan')"
+      >
+        📡 Scan
+      </button>
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('warp')"
+      >
+        🌀 Warp
+      </button>
+      <button
+        type="button"
+        class="contrast outline"
+        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
+        onclick="setShipQuery('repair')"
+      >
+        🔧 Repair
       </button>
     </div>
 
-    <div style="margin: 2rem 0">
-      <label for="spaceship-search">Search ship systems:</label>
+    <div style="margin: 1rem 0">
+      <label for="spaceship-search" style="font-size: 0.9rem"
+        >Command Console:</label
+      >
       <form
         hx-post="/search-partial"
         hx-trigger="keyup changed delay:400ms from:#spaceship-search, submit from:#spaceship-search"
@@ -122,9 +183,10 @@
             type="text"
             id="spaceship-search"
             name="query"
-            placeholder="E.g: 'recharge energy', 'go stealth', 'defense shield'"
+            placeholder="Type: power, navigate, hide, combat, defend, search, jump, fix..."
             autocomplete="off"
             oninput="reactToInput(this.value)"
+            style="text-align: center; font-family: monospace"
           />
           <input type="hidden" name="dataset" value="spaceship" />
           <span class="htmx-indicator loading">Searching...</span>
@@ -132,11 +194,7 @@
       </form>
     </div>
 
-    <div id="spaceship-results" style="margin-top: 2rem">
-      <p style="color: var(--muted-color); text-align: center">
-        Type to see results...
-      </p>
-    </div>
+    <div id="spaceship-results" style="display: none"></div>
   </div>
 </div>
 
@@ -513,6 +571,130 @@
       transform: translate(-50%, -50%) rotate(360deg);
     }
   }
+
+  /* Scan mode */
+  .ship-scanning .ship-core {
+    filter: drop-shadow(0 0 40px #17a2b8);
+    animation: scanPulse 2s ease-in-out infinite;
+  }
+
+  .ship-scanning .ship-effect {
+    opacity: 0.8;
+    background: conic-gradient(from 0deg, transparent, #17a2b8, transparent);
+    width: 300px;
+    height: 300px;
+    animation: radar 2s linear infinite;
+  }
+
+  .ship-scanning .ship-status {
+    color: #17a2b8;
+    text-shadow: 0 0 10px #17a2b8;
+  }
+
+  @keyframes scanPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes radar {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  /* Warp mode */
+  .ship-warp .ship-core {
+    filter: drop-shadow(0 0 50px #9b59b6);
+    animation: warpStretch 0.8s ease-in-out infinite;
+  }
+
+  .ship-warp .ship-effect {
+    opacity: 0.9;
+    background: linear-gradient(90deg, transparent, #9b59b6, transparent);
+    width: 400px;
+    height: 100px;
+    animation: warpLines 0.5s linear infinite;
+  }
+
+  .ship-warp .ship-status {
+    color: #9b59b6;
+    text-shadow: 0 0 15px #9b59b6;
+  }
+
+  @keyframes warpStretch {
+    0%,
+    100% {
+      transform: scaleX(1);
+    }
+    50% {
+      transform: scaleX(1.3) scaleY(0.8);
+    }
+  }
+
+  @keyframes warpLines {
+    0% {
+      transform: translate(-50%, -50%) translateX(0);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translate(-50%, -50%) translateX(100px);
+      opacity: 0;
+    }
+  }
+
+  /* Repair mode */
+  .ship-repair .ship-core {
+    filter: drop-shadow(0 0 30px #f39c12);
+    animation: repairBlink 1.5s ease-in-out infinite;
+  }
+
+  .ship-repair .ship-effect {
+    opacity: 0.7;
+    background: repeating-radial-gradient(
+      circle,
+      transparent 0px,
+      #f39c12 5px,
+      transparent 10px
+    );
+    width: 200px;
+    height: 200px;
+    animation: repairExpand 1.5s ease-in-out infinite;
+  }
+
+  .ship-repair .ship-status {
+    color: #f39c12;
+    text-shadow: 0 0 10px #f39c12;
+  }
+
+  @keyframes repairBlink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes repairExpand {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 0.3;
+    }
+  }
 </style>
 
 <script>
@@ -547,71 +729,100 @@
     const status = viz.querySelector(".ship-status");
     const lowerQuery = query.toLowerCase();
 
-    // Remove all state classes
     viz.classList.remove(
       "ship-charging",
       "ship-flying",
       "ship-stealth",
       "ship-attack",
       "ship-shield",
+      "ship-scanning",
+      "ship-warp",
+      "ship-repair",
     );
 
-    // Detect intent from input
     if (
-      lowerQuery.includes("charge") ||
-      lowerQuery.includes("energy") ||
-      lowerQuery.includes("power") ||
-      lowerQuery.includes("solar") ||
-      lowerQuery.includes("recharge")
+      lowerQuery.match(
+        /charg|energy|power|solar|battery|electric|fuel|reactor/i,
+      )
     ) {
       viz.classList.add("ship-charging");
       status.textContent = "⚡ CHARGING";
     } else if (
-      lowerQuery.includes("fly") ||
-      lowerQuery.includes("thrust") ||
-      lowerQuery.includes("speed") ||
-      lowerQuery.includes("boost") ||
-      lowerQuery.includes("propul")
+      lowerQuery.match(
+        /fly|flight|thrust|speed|travel|navigate|move|jet|rocket|propul/i,
+      )
     ) {
       viz.classList.add("ship-flying");
       status.textContent = "🚀 FLYING";
     } else if (
-      lowerQuery.includes("stealth") ||
-      lowerQuery.includes("hide") ||
-      lowerQuery.includes("invisible") ||
-      lowerQuery.includes("camouflage") ||
-      lowerQuery.includes("cloak")
+      lowerQuery.match(
+        /stealth|hide|invisible|cloak|camouflag|ghost|disappear|vanish|sneak|silent/i,
+      )
     ) {
       viz.classList.add("ship-stealth");
       status.textContent = "🕶️ STEALTH";
     } else if (
-      lowerQuery.includes("attack") ||
-      lowerQuery.includes("fire") ||
-      lowerQuery.includes("shoot") ||
-      lowerQuery.includes("laser") ||
-      lowerQuery.includes("weapon")
+      lowerQuery.match(
+        /attack|shoot|fire|weapon|laser|combat|strike|destroy|blast/i,
+      )
     ) {
       viz.classList.add("ship-attack");
       status.textContent = "🎯 ATTACK";
     } else if (
-      lowerQuery.includes("shield") ||
-      lowerQuery.includes("protect") ||
-      lowerQuery.includes("defense") ||
-      lowerQuery.includes("barrier") ||
-      lowerQuery.includes("guard")
+      lowerQuery.match(
+        /shield|protect|defense|guard|armor|block|safe|barrier|secure|deflect/i,
+      )
     ) {
       viz.classList.add("ship-shield");
       status.textContent = "🛡️ SHIELD";
+    } else if (
+      lowerQuery.match(
+        /scan|search|detect|radar|sensor|analyz|find|probe|inspect|explore/i,
+      )
+    ) {
+      viz.classList.add("ship-scanning");
+      status.textContent = "📡 SCANNING";
+    } else if (
+      lowerQuery.match(
+        /warp|jump|teleport|hyperdrive|lightspeed|portal|instant|transport|leap/i,
+      )
+    ) {
+      viz.classList.add("ship-warp");
+      status.textContent = "🌀 WARP";
+    } else if (
+      lowerQuery.match(
+        /repair|fix|heal|restore|maintenance|recover|regenerat|rebuild|patch|mend/i,
+      )
+    ) {
+      viz.classList.add("ship-repair");
+      status.textContent = "🔧 REPAIR";
     } else if (lowerQuery.length === 0) {
       status.textContent = "IDLE";
     } else {
-      // Random mode for any other input
-      const modes = ["charging", "flying", "stealth", "attack", "shield"];
-      const emojis = ["⚡", "🚀", "🕶️", "🎯", "🛡️"];
-      const randomIndex = Math.floor(Math.random() * modes.length);
-      viz.classList.add("ship-" + modes[randomIndex]);
-      status.textContent =
-        emojis[randomIndex] + " " + modes[randomIndex].toUpperCase();
+      const modes = [
+        "charging",
+        "flying",
+        "stealth",
+        "attack",
+        "shield",
+        "scanning",
+        "warp",
+        "repair",
+      ];
+      const emojis = ["⚡", "🚀", "🕶️", "🎯", "🛡️", "📡", "🌀", "🔧"];
+      const labels = [
+        "CHARGING",
+        "FLYING",
+        "STEALTH",
+        "ATTACK",
+        "SHIELD",
+        "SCANNING",
+        "WARP",
+        "REPAIR",
+      ];
+      const i = Math.floor(Math.random() * modes.length);
+      viz.classList.add("ship-" + modes[i]);
+      status.textContent = emojis[i] + " " + labels[i];
     }
   }
 </script>

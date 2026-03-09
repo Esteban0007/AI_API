@@ -2,53 +2,59 @@
   "documents": [
     {
       "id": "part-001",
-      "title": "solar-core",
-      "content": "energy charging panels that deploy to capture sun power",
-      "keywords": ["charge", "recharge", "energy", "static", "day"],
-      "metadata": {
-        "css_class": "mode-charging",
-        "state": "idle"
-      }
+      "title": "Charge System",
+      "content": "solar panels energy reactor battery charging power recharge fuel cells electricity boost capacitor voltage amp watt",
+      "keywords": ["charge", "recharge", "energy", "power", "battery", "solar", "electricity", "fuel", "boost", "reactor"],
+      "metadata": {"css_class": "mode-charging", "state": "idle"}
     },
     {
       "id": "part-002",
-      "title": "plasma-thruster",
-      "content": "rear engine exhaust with bright blue fire for propulsion",
-      "keywords": ["fly", "speed", "boost", "fire", "travel"],
-      "metadata": {
-        "css_class": "mode-flying",
-        "state": "active"
-      }
+      "title": "Flight System",
+      "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine accelerate velocity motion movement",
+      "keywords": ["fly", "flight", "speed", "boost", "travel", "navigate", "move", "jet", "rocket", "propulsion"],
+      "metadata": {"css_class": "mode-flying", "state": "active"}
     },
     {
       "id": "part-003",
-      "title": "stealth-hull",
-      "content": "dark outer shell for camouflage and radar invisibility",
-      "keywords": ["hide", "stealth", "invisible", "ghost", "dark"],
-      "metadata": {
-        "css_class": "mode-stealth",
-        "state": "hidden"
-      }
+      "title": "Stealth System",
+      "content": "cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise shadow sneak silent undetectable",
+      "keywords": ["stealth", "hide", "invisible", "cloak", "camouflage", "ghost", "disappear", "vanish", "sneak", "silent"],
+      "metadata": {"css_class": "mode-stealth", "state": "hidden"}
     },
     {
       "id": "part-004",
-      "title": "pulse-laser",
-      "content": "front mounted cannons for shooting energy beams",
-      "keywords": ["shoot", "attack", "fire", "combat", "weapon"],
-      "metadata": {
-        "css_class": "mode-attack",
-        "state": "offensive"
-      }
+      "title": "Attack System",
+      "content": "laser cannon weapon shoot fire attack combat strike offensive destroy blast hit target aim damage hurt",
+      "keywords": ["attack", "shoot", "fire", "weapon", "laser", "combat", "strike", "destroy", "blast", "offensive"],
+      "metadata": {"css_class": "mode-attack", "state": "offensive"}
     },
     {
       "id": "part-005",
-      "title": "energy-shield",
-      "content": "hexagonal light barrier for defense against impact",
-      "keywords": ["protect", "shield", "defense", "armor", "safe"],
-      "metadata": {
-        "css_class": "mode-shield",
-        "state": "defensive"
-      }
+      "title": "Defense System",
+      "content": "shield barrier protect defense guard armor block deflect safe secure immunity resistance fortify wall protection",
+      "keywords": ["shield", "protect", "defense", "guard", "armor", "block", "safe", "barrier", "secure", "deflect"],
+      "metadata": {"css_class": "mode-shield", "state": "defensive"}
+    },
+    {
+      "id": "part-006",
+      "title": "Scan System",
+      "content": "radar scanner detect analyze search scan probe sensor identify inspect examine investigate explore discover find",
+      "keywords": ["scan", "search", "detect", "radar", "sensor", "analyze", "find", "probe", "inspect", "explore"],
+      "metadata": {"css_class": "mode-scanning", "state": "active"}
+    },
+    {
+      "id": "part-007",
+      "title": "Warp System",
+      "content": "warp jump teleport hyperdrive lightspeed portal dimension quantum leap transport instant fast travel distant",
+      "keywords": ["warp", "jump", "teleport", "hyperdrive", "lightspeed", "fast", "portal", "instant", "transport", "leap"],
+      "metadata": {"css_class": "mode-warp", "state": "ready"}
+    },
+    {
+      "id": "part-008",
+      "title": "Repair System",
+      "content": "repair fix heal restore maintenance regenerate recover rebuild patch mend cure treatment restore refurbish",
+      "keywords": ["repair", "fix", "heal", "restore", "maintenance", "recover", "regenerate", "rebuild", "patch", "mend"],
+      "metadata": {"css_class": "mode-repair", "state": "standby"}
     }
   ]
 }
