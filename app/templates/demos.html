@@ -82,7 +82,8 @@
   <div id="spaceship-demo" class="demo-section" style="display: none">
     <h2>🛸 Interactive Spaceship</h2>
     <p style="font-size: 0.9rem; color: var(--muted-color)">
-      Type any command: charge, fly, stealth, attack, shield, scan, warp, repair
+      ⚡ Charge · 🚀 Fly · 🕶️ Stealth · 🎯 Attack · 🛡️ Shield · 📡 Scan · 🌀
+      Warp · 🔧 Repair
     </p>
 
     <!-- Interactive Spaceship Visualization -->
@@ -92,81 +93,6 @@
         <div class="ship-effect"></div>
       </div>
       <div class="ship-status">IDLE</div>
-    </div>
-
-    <div
-      style="
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin: 1rem 0;
-        justify-content: center;
-      "
-    >
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('charge')"
-      >
-        ⚡ Charge
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('fly')"
-      >
-        🚀 Fly
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('stealth')"
-      >
-        🕶️ Stealth
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('attack')"
-      >
-        🎯 Attack
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('shield')"
-      >
-        🛡️ Shield
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('scan')"
-      >
-        📡 Scan
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('warp')"
-      >
-        🌀 Warp
-      </button>
-      <button
-        type="button"
-        class="contrast outline"
-        style="padding: 0.4rem 0.8rem; font-size: 0.85rem"
-        onclick="setShipQuery('repair')"
-      >
-        🔧 Repair
-      </button>
     </div>
 
     <div style="margin: 1rem 0">
@@ -717,13 +643,6 @@
     event.target.style.borderBottom = "3px solid var(--primary-color)";
   }
 
-  function setShipQuery(value) {
-    const input = document.getElementById("spaceship-search");
-    if (!input) return;
-    input.value = value;
-    input.dispatchEvent(new Event("keyup", { bubbles: true }));
-  }
-
   function reactToInput(query) {
     const viz = document.getElementById("spaceship-viz");
     const status = viz.querySelector(".ship-status");
@@ -777,7 +696,7 @@
       status.textContent = "🛡️ SHIELD";
     } else if (
       lowerQuery.match(
-        /scan|search|detect|radar|sensor|analyz|find|probe|inspect|explore/i,
+        /scan|search|detect|radar|sensor|analyz|find|probe|inspect|explore|see|look|watch|observe/i,
       )
     ) {
       viz.classList.add("ship-scanning");

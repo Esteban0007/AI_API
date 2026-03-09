@@ -38,8 +38,8 @@
     {
       "id": "part-006",
       "title": "Scan System",
-      "content": "radar scanner detect analyze search scan probe sensor identify inspect examine investigate explore discover find",
-      "keywords": ["scan", "search", "detect", "radar", "sensor", "analyze", "find", "probe", "inspect", "explore"],
+      "content": "radar scanner detect analyze search scan probe sensor identify inspect examine investigate explore discover find see look watch observe",
+      "keywords": ["scan", "search", "detect", "radar", "sensor", "analyze", "find", "probe", "inspect", "explore", "see", "look", "watch", "observe"],
       "metadata": {"css_class": "mode-scanning", "state": "active"}
     },
     {
