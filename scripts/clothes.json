@@ -139,6 +139,1906 @@
                 "size": "38, 39, 40, 41, 42, 43, 44, 45",
                 "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
             }
+        },
+        {
+            "id": "cl-210",
+            "title": "Italian Slim-Fit Chinos",
+            "content": "Tailored trousers in a breathable navy cotton-twill blend. Designed for business-casual office environments, professional networking events, and semi-formal evening social gatherings. Offers a polished and sharp silhouette.",
+            "keywords": ["chinos", "navy", "business-casual", "trousers", "office"],
+            "metadata": {
+                "gender": "male",
+                "category": "bottoms",
+                "style": "formal",
+                "price": 62.00,
+                "size": "30, 32, 34, 36, 38, 40",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-211",
+            "title": "Mediterranean Linen Trousers",
+            "content": "Ultra-lightweight beige pants crafted from 100% natural linen. Engineered for maximum breathability in tropical climates, beach weddings, and high-summer resort holidays. Relaxed fit for a luxurious coastal aesthetic.",
+            "keywords": ["linen", "beige", "summer", "beach", "tropical"],
+            "metadata": {
+                "gender": "male",
+                "category": "bottoms",
+                "style": "resort",
+                "price": 55.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-212",
+            "title": "Tactical Ripstop Cargo Pants",
+            "content": "Rugged charcoal utility trousers with multiple reinforced pockets and water-repellent finish. Designed for mountain hiking, forest trekking, and extreme outdoor adventure. Built for durability in harsh terrains.",
+            "keywords": ["cargo", "tactical", "hiking", "outdoor", "charcoal"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "bottoms",
+                "style": "sporty",
+                "price": 89.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-213",
+            "title": "Satin Pleated Midi Skirt",
+            "content": "Elegant emerald green skirt with a high-gloss silky finish. Suitable for formal cocktail parties, wedding guest attire, and sophisticated professional dinners. Features fluid movement and a refined feminine drape.",
+            "keywords": ["skirt", "satin", "green", "formal", "wedding"],
+            "metadata": {
+                "gender": "female",
+                "category": "bottoms",
+                "style": "formal",
+                "price": 48.00,
+                "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-214",
+            "title": "Distressed Black Punk Jeans",
+            "content": "Slim-fit denim with heavy knee destruction and frayed hems. Inspired by underground rock and grunge street culture. Perfect for night concerts, edgy social events, and urban streetwear looks.",
+            "keywords": ["jeans", "black", "grunge", "punk", "streetwear"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "bottoms",
+                "style": "edgy",
+                "price": 65.00,
+                "size": "28, 30, 32, 34, 36",
+                "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+            }
+        },
+        {
+            "id": "cl-215",
+            "title": "Alpine Waterproof Hiking Boots",
+            "content": "Technical outdoor footwear with Gore-Tex lining and deep-lug Vibram soles. Engineered for snowy mountains, muddy trails, and extreme winter trekking. Provides maximum ankle support and thermal protection.",
+            "keywords": ["boots", "hiking", "waterproof", "mountain", "snow"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "sporty",
+                "price": 175.00,
+                "size": "38, 39, 40, 41, 42, 43, 44, 45, 46",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-216",
+            "title": "Minimalist White Leather Trainers",
+            "content": "Clean, low-top sneakers in premium full-grain white leather. A versatile essential for smart-casual wardrobes, weekend travel, and relaxed office styles. Timeless design with a comfortable padded interior.",
+            "keywords": ["sneakers", "white", "leather", "minimalist", "casual"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "casual",
+                "price": 115.00,
+                "size": "36-47",
+                "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500"
+            }
+        },
+        {
+            "id": "cl-217",
+            "title": "Formal Midnight Stiletto Pumps",
+            "content": "Classic pointed-toe high heels in polished black leather. The essential choice for black-tie galas, formal weddings, and prestigious evening events. Offers a sophisticated and commanding professional presence.",
+            "keywords": ["heels", "black", "formal", "wedding", "gala"],
+            "metadata": {
+                "gender": "female",
+                "category": "shoes",
+                "style": "formal",
+                "price": 140.00,
+                "size": "35, 36, 37, 38, 39, 40, 41",
+                "image": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
+            }
+        },
+        {
+            "id": "cl-218",
+            "title": "Performance Road Running Shoes",
+            "content": "Ultra-lightweight technical sneakers with reactive foam cushioning and breathable mesh. Optimized for marathon racing, high-intensity gym training, and professional athletic performance.",
+            "keywords": ["running", "sneakers", "sport", "gym", "active"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "sporty",
+                "price": 130.00,
+                "size": "37, 38, 39, 40, 41, 42, 43, 44, 45",
+                "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+            }
+        },
+        {
+            "id": "cl-219",
+            "title": "Heritage Suede Chelsea Boots",
+            "content": "Classic pull-on ankle boots in tan suede with elastic side panels. Designed for autumn street style, casual weekend outings, and rugged urban looks. Durable rubber sole for city commutes.",
+            "keywords": ["boots", "chelsea", "tan", "autumn", "casual"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "casual",
+                "price": 145.00,
+                "size": "38, 39, 40, 41, 42, 43, 44, 45",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },{
+            "id": "cl-220",
+            "title": "Arctic Trapper Winter Hat",
+            "content": "Heavy-duty thermal headwear with faux-fur lining and protective ear flaps. Engineered for sub-zero blizzard conditions and extreme arctic expeditions. Features a windproof outer shell and adjustable chin strap for maximum heat retention in snow.",
+            "keywords": ["hat", "winter", "fur", "snow", "extreme"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "sporty",
+                "price": 38.00,
+                "size": "S-M, L-XL",
+                "image": "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=500"
+            }
+        },
+        {
+            "id": "cl-221",
+            "title": "Italian Silk Jacquard Tie",
+            "content": "Hand-finished premium necktie in a deep burgundy silk. Essential for high-stakes business presentations, formal wedding ceremonies, and executive evening events. Features a subtle textured weave for a sophisticated professional finish.",
+            "keywords": ["tie", "silk", "formal", "wedding", "business"],
+            "metadata": {
+                "gender": "male",
+                "category": "accessories",
+                "style": "formal",
+                "price": 49.00,
+                "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1589756823851-411584687574?w=500"
+            }
+        },
+        {
+            "id": "cl-222",
+            "title": "Polarized Aviator Pilot Sunglasses",
+            "content": "Classic gold-framed eyewear with teardrop-shaped dark lenses. 100% UV protection designed for high-glare environments like aviation, driving, or luxury beach resorts. Timeless military-inspired aesthetic for a confident look.",
+            "keywords": ["sunglasses", "aviator", "gold", "summer", "sun"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "cool",
+                "price": 95.00,
+                "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-223",
+            "title": "Full-Grain Leather Executive Briefcase",
+            "content": "Professional document carrier with a padded 15-inch laptop sleeve and antique brass hardware. Crafted from durable tan vegetable-tanned leather for daily corporate use and business travel. Built to last a lifetime.",
+            "keywords": ["briefcase", "leather", "office", "business", "bag"],
+            "metadata": {
+                "gender": "male",
+                "category": "accessories",
+                "style": "formal",
+                "price": 210.00,
+                "size": "Large",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-224",
+            "title": "Cashmere Infinity Winter Scarf",
+            "content": "Ultra-soft charcoal neck warmer made from 100% Mongolian cashmere. Provides superior thermal insulation for winter commutes and snowy holiday travel. A versatile unisex accessory for layering against extreme cold.",
+            "keywords": ["scarf", "cashmere", "winter", "warm", "grey"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "cozy",
+                "price": 85.00,
+                "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500"
+            }
+        },
+        {
+            "id": "cl-225",
+            "title": "Smart Touchscreen Leather Gloves",
+            "content": "Sleek black gloves crafted from soft lambskin with conductive fingertips for smartphone compatibility. Features a warm brushed-fleece lining for winter city commutes and elegant outdoor protection.",
+            "keywords": ["gloves", "leather", "tech", "winter", "black"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "practical",
+                "price": 45.00,
+                "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=500"
+            }
+        },
+        {
+            "id": "cl-226",
+            "title": "Minimalist 18k Gold Link Necklace",
+            "content": "Delicate thin chain plated in 18-karat gold. A subtle jewelry piece designed for daily layering and understated luxury. Perfect for enhancing professional office attire or adding shine to evening wear.",
+            "keywords": ["jewelry", "gold", "necklace", "minimalist", "luxury"],
+            "metadata": {
+                "gender": "female",
+                "category": "accessories",
+                "style": "elegant",
+                "price": 65.00,
+                "size": "18 inch",
+                "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500"
+            }
+        },
+        {
+            "id": "cl-227",
+            "title": "Technical Expedition 45L Backpack",
+            "content": "Rugged olive green rucksack with ergonomic support straps and multiple MOLLE attachments. Constructed from high-density ripstop nylon for mountain hiking, long-distance trekking, and wild camping adventures.",
+            "keywords": ["backpack", "hiking", "outdoor", "tactical", "green"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "sporty",
+                "price": 120.00,
+                "size": "45L",
+                "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+            }
+        },
+        {
+            "id": "cl-228",
+            "title": "Woven Straw Sun Fedora",
+            "content": "Breathable summer hat made from natural palm fibers. Features a classic wide brim and black decorative band. Essential protection for tropical beach holidays, Mediterranean cruises, and garden parties.",
+            "keywords": ["hat", "straw", "summer", "beach", "holiday"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "beach",
+                "price": 35.00,
+                "size": "M, L",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-229",
+            "title": "Brushed Silver Buckle Leather Belt",
+            "content": "Classic dark brown belt crafted from premium vegetable-tanned leather. A durable wardrobe staple that pairs perfectly with denim jeans, chino trousers, and professional business-casual outfits.",
+            "keywords": ["belt", "leather", "brown", "business", "classic"],
+            "metadata": {
+                "gender": "male",
+                "category": "accessories",
+                "style": "casual",
+                "price": 42.00,
+                "size": "32, 34, 36, 38, 40, 42",
+                "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500"
+            }
+        },
+        {
+            "id": "cl-230",
+            "title": "Seamless High-Waist Gym Leggings",
+            "content": "Professional compression tights in matte forest green. Squat-proof, moisture-wicking fabric designed for high-intensity interval training, yoga sessions, and professional gym workouts. Offers maximum flexibility and muscle support.",
+            "keywords": ["leggings", "gym", "yoga", "compression", "green"],
+            "metadata": {
+                "gender": "female",
+                "category": "sport",
+                "style": "sporty",
+                "price": 52.00,
+                "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-231",
+            "title": "Pro-Performance Tech Running Tee",
+            "content": "Ultra-lightweight athletic shirt in electric blue. Features laser-cut ventilation and silver ion anti-odor technology. Engineered for marathon racing and long-distance road running in hot weather conditions.",
+            "keywords": ["running", "shirt", "blue", "athletic", "breathable"],
+            "metadata": {
+                "gender": "male",
+                "category": "sport",
+                "style": "sporty",
+                "price": 35.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-232",
+            "title": "Tropical Print Board Shorts",
+            "content": "Quick-dry swimming trunks with a vibrant palm leaf pattern. Features a secure velcro fly and reinforced seams for surfing, beach volleyball, and casual pool lounging. High-performance fabric for aquatic sports.",
+            "keywords": ["swim", "shorts", "surf", "tropical", "beach"],
+            "metadata": {
+                "gender": "male",
+                "category": "sport",
+                "style": "beach",
+                "price": 45.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500"
+            }
+        },
+        {
+            "id": "cl-233",
+            "title": "Athletic Racerback Sports Bra",
+            "content": "High-impact support bra in charcoal grey. Designed for professional athletes engaging in running, cross-fit, and combat sports. Features breathable mesh panels and a stay-put elastic underband.",
+            "keywords": ["bra", "sport", "gym", "running", "grey"],
+            "metadata": {
+                "gender": "female",
+                "category": "sport",
+                "style": "sporty",
+                "price": 38.00,
+                "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-234",
+            "title": "Minimalist One-Piece Swimsuit",
+            "content": "Sleek black swimwear with a plunging back and high-cut leg. Crafted from premium Italian chlorine-resistant fabric. Suitable for professional lap swimming or elegant resort poolside lounging.",
+            "keywords": ["swimsuit", "black", "beach", "pool", "minimalist"],
+            "metadata": {
+                "gender": "female",
+                "category": "sport",
+                "style": "elegant",
+                "price": 65.00,
+                "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500"
+            }
+        },
+        {
+            "id": "cl-235",
+            "title": "Thermal Compression Baselayer",
+            "content": "Long-sleeve heat-retention top in matte black. Designed as a first layer for skiing, snowboarding, and winter outdoor football. Moisture-wicking technology keeps the skin dry during intense activity.",
+            "keywords": ["thermal", "compression", "winter", "ski", "black"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "sport",
+                "style": "sporty",
+                "price": 55.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-236",
+            "title": "Quick-Dry Microfiber Beach Towel",
+            "content": "Ultra-absorbent oversized towel in a navy blue stripe design. Engineered to repel sand and dry 3 times faster than cotton. The essential accessory for surfing, beach travel, and boat trips.",
+            "keywords": ["towel", "beach", "blue", "travel", "surf"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "beach",
+                "price": 28.00,
+                "size": "Oversized",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-237",
+            "title": "Waterproof Swimming Cap",
+            "content": "Professional-grade silicone cap in metallic silver. Ergonomic design to reduce drag and protect hair from chlorine. Essential gear for competitive pool training and open water swimming.",
+            "keywords": ["swimming", "cap", "silver", "pool", "professional"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "sporty",
+                "price": 15.00,
+                "size": "Universal",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-238",
+            "title": "Tapered Tech-Fleece Joggers",
+            "content": "Sleek charcoal sweatpants with zippered pockets and a streamlined fit. Designed for athletic recovery, warm-ups, and modern urban leisure wear. Offers thermal warmth with a lightweight feel.",
+            "keywords": ["joggers", "grey", "gym", "casual", "athletic"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "bottoms",
+                "style": "sporty",
+                "price": 70.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-239",
+            "title": "Neoprene Surfing Wetsuit",
+            "content": "Full-body 3/2mm thermal suit in black and neon blue. Engineered for cold water surfing, diving, and paddleboarding. Features reinforced knee pads and a back-zip entry for durability.",
+            "keywords": ["wetsuit", "surf", "black", "water", "sport"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "outerwear",
+                "style": "sporty",
+                "price": 185.00,
+                "size": "XS, S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-240",
+            "title": "Ultra-Soft Plush Bathrobe",
+            "content": "Luxurious floor-length robe in heavy-weight white fleece. Designed for ultimate comfort after showers, spa days, or relaxing weekend mornings at home. Features a deep hood and waist tie for a cozy, hotel-style experience.",
+            "keywords": ["bathrobe", "white", "home", "spa", "cozy"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "tops",
+                "style": "cozy",
+                "price": 85.00,
+                "size": "S-M, L-XL, XXL",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-241",
+            "title": "Silk Pajama Set",
+            "content": "Two-piece sleepwear set in navy blue mulberry silk. Includes a button-down long-sleeve top and matching elasticated trousers. Engineered for temperature regulation and premium skin comfort during overnight rest.",
+            "keywords": ["pajamas", "silk", "navy", "sleep", "luxury"],
+            "metadata": {
+                "gender": "female",
+                "category": "tops",
+                "style": "elegant",
+                "price": 120.00,
+                "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-242",
+            "title": "Flannel Checkered Lounge Pants",
+            "content": "Relaxed-fit trousers in soft brushed cotton flannel with a red and black plaid pattern. Ideal for lounging at home during winter months or casual sleepwear. Features a functional drawstring waist and side pockets.",
+            "keywords": ["flannel", "pants", "plaid", "home", "winter"],
+            "metadata": {
+                "gender": "male",
+                "category": "bottoms",
+                "style": "casual",
+                "price": 38.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-243",
+            "title": "Memory Foam Indoor Slippers",
+            "content": "Cushioned slip-on house shoes in light grey wool felt. Features a non-slip rubber sole and high-density memory foam interior for orthopedic support and warmth on cold indoor floors.",
+            "keywords": ["slippers", "grey", "home", "warm", "shoes"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "cozy",
+                "price": 32.00,
+                "size": "36-46",
+                "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500"
+            }
+        },
+        {
+            "id": "cl-244",
+            "title": "Organic Cotton Sleep Tee",
+            "content": "Oversized, breathable t-shirt in pale blue organic cotton. Designed with a tagless neck and loose fit for maximum freedom of movement and comfort during deep sleep cycles.",
+            "keywords": ["t-shirt", "blue", "sleep", "cotton", "breathable"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "tops",
+                "style": "casual",
+                "price": 25.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500"
+            }
+        },
+        {
+            "id": "cl-245",
+            "title": "Waffle Knit Robe",
+            "content": "Lightweight grey cotton robe with a textured waffle weave. Perfect for summer mornings and tropical climates. Highly absorbent and quick-drying, ideal for post-pool or bathroom use.",
+            "keywords": ["robe", "grey", "waffle", "summer", "bath"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "tops",
+                "style": "casual",
+                "price": 55.00,
+                "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-246",
+            "title": "Cashmere Bed Socks",
+            "content": "Thick, ultra-soft knit socks in cream luxury wool. Specifically designed for keeping feet warm during sleep or while relaxing on the sofa. Gentle non-elasticated cuff for improved circulation.",
+            "keywords": ["socks", "cashmere", "warm", "sleep", "cream"],
+            "metadata": {
+                "gender": "female",
+                "category": "accessories",
+                "style": "cozy",
+                "price": 28.00,
+                "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=500"
+            }
+        },
+        {
+            "id": "cl-247",
+            "title": "Modal Lounge Shorts",
+            "content": "Soft-touch shorts in charcoal grey modal fabric. Features a silky texture and high elasticity for everyday comfort at home. Includes side pockets and a soft waistband that doesn't dig in.",
+            "keywords": ["shorts", "grey", "lounge", "home", "soft"],
+            "metadata": {
+                "gender": "male",
+                "category": "bottoms",
+                "style": "casual",
+                "price": 30.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500"
+            }
+        },
+        {
+            "id": "cl-248",
+            "title": "Oversized Sherpa Blanket Hoodie",
+            "content": "Extreme oversized hooded sweatshirt lined with thick sherpa fleece. Designed as a wearable blanket for freezing winter days at home. Features massive pockets and rib-knit cuffs to trap heat.",
+            "keywords": ["hoodie", "blanket", "fleece", "winter", "warm"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "outerwear",
+                "style": "cozy",
+                "price": 65.00,
+                "size": "Universal",
+                "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+            }
+        },
+        {
+            "id": "cl-249",
+            "title": "Satin Sleep Eye Mask",
+            "content": "Padded black satin mask with an adjustable elastic strap. Designed to block 100% of light for improved sleep quality during travel or at home. Gentle on the skin and prevents eye irritation.",
+            "keywords": ["mask", "sleep", "black", "travel", "satin"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "accessories",
+                "style": "elegant",
+                "price": 18.00,
+                "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-250",
+            "title": "Retro 80s Colorblock Windbreaker",
+            "content": "Vibrant oversized jacket featuring geometric patterns in neon pink, teal, and yellow. Inspired by 1980s fitness culture and retro street style. Lightweight nylon shell for nostalgic urban outfits and themed parties.",
+            "keywords": ["windbreaker", "retro", "80s", "neon", "vintage"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "outerwear",
+                "style": "vintage",
+                "price": 78.00,
+                "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1544441893-675973e31985?w=500"
+            }
+        },
+        {
+            "id": "cl-251",
+            "title": "Heavy-Duty Carpenter Canvas Pants",
+            "content": "Rugged work trousers crafted from triple-stitched tan duck canvas. Features reinforced utility pockets and a hammer loop for professional construction work, carpentry, and industrial labor environments. Extremely durable.",
+            "keywords": ["pants", "workwear", "canvas", "industrial", "tan"],
+            "metadata": {
+                "gender": "male",
+                "category": "bottoms",
+                "style": "practical",
+                "price": 85.00,
+                "size": "30, 32, 34, 36, 38, 40",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-252",
+            "title": "Distressed Oversized Denim Vest",
+            "content": "Sleeveless blue jean jacket with hand-frayed armholes and vintage-washed finish. Ideal for layering over hoodies in grunge and punk-inspired wardrobes. Represents a raw, rebellious urban aesthetic.",
+            "keywords": ["vest", "denim", "grunge", "punk", "blue"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "outerwear",
+                "style": "edgy",
+                "price": 55.00,
+                "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1576871337622-98d48d890e49?w=500"
+            }
+        },
+        {
+            "id": "cl-253",
+            "title": "Steel-Toe Industrial Safety Boots",
+            "content": "Professional black leather work boots with oil-resistant soles and internal steel toe caps. Engineered for maximum foot protection in construction sites, warehouses, and hazardous manual labor settings.",
+            "keywords": ["boots", "safety", "work", "black", "leather"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "practical",
+                "price": 125.00,
+                "size": "38, 39, 40, 41, 42, 43, 44, 45, 46",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-254",
+            "title": "Victorian-Inspired Lace Corset Top",
+            "content": "Intricate black corset with floral lace overlays and structured boning. Designed for gothic fashion, alternative evening wear, and historical-themed social events. Elegant and highly stylized silhouette.",
+            "keywords": ["corset", "lace", "black", "gothic", "alternative"],
+            "metadata": {
+                "gender": "female",
+                "category": "tops",
+                "style": "edgy",
+                "price": 89.00,
+                "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-255",
+            "title": "Classic Acid-Wash High-Waist Jeans",
+            "content": "Vintage-inspired light blue denim with a 90s tapered fit. High-rise waist and durable cotton build for a classic mom-jean aesthetic. Perfect for retro-casual daily outfits.",
+            "keywords": ["jeans", "vintage", "denim", "90s", "blue"],
+            "metadata": {
+                "gender": "female",
+                "category": "bottoms",
+                "style": "vintage",
+                "price": 65.00,
+                "size": "24, 26, 28, 30, 32",
+                "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+            }
+        },
+        {
+            "id": "cl-256",
+            "title": "Flame-Retardant Utility Coveralls",
+            "content": "Full-body protective suit in high-visibility orange. Engineered for hazardous work environments like oil rigs, welding, and electrical maintenance. Features reflective safety tape and heat-resistant fabric.",
+            "keywords": ["coveralls", "safety", "orange", "workwear", "protection"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "outerwear",
+                "style": "practical",
+                "price": 150.00,
+                "size": "M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-257",
+            "title": "Plaid Punk Tartan Mini Skirt",
+            "content": "Red and black checked skirt with silver chain accents and safety pin details. Inspired by 70s British punk subculture and modern alternative street style. Bold and rebellious aesthetic.",
+            "keywords": ["skirt", "plaid", "punk", "red", "tartan"],
+            "metadata": {
+                "gender": "female",
+                "category": "bottoms",
+                "style": "edgy",
+                "price": 42.00,
+                "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-258",
+            "title": "Gothic Platform Combat Boots",
+            "content": "Thick-soled black leather boots with multiple buckle straps and metallic hardware. Designed for alternative fashion, goth subculture, and industrial clubwear. Offers a dramatic, heavy-duty look.",
+            "keywords": ["boots", "platform", "black", "goth", "alternative"],
+            "metadata": {
+                "gender": "unisex",
+                "category": "shoes",
+                "style": "edgy",
+                "price": 110.00,
+                "size": "36, 37, 38, 39, 40, 41, 42",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-259",
+            "title": "Embroidered 70s Flare Jeans",
+            "content": "Bohemian-style denim with a dramatic bell-bottom leg and floral embroidery on the pockets. Captures the free-spirited 1970s hippy aesthetic. Premium stretch denim for a flattering retro fit.",
+            "keywords": ["jeans", "flare", "vintage", "70s", "boho"],
+            "metadata": {
+                "gender": "female",
+                "category": "bottoms",
+                "style": "vintage",
+                "price": 75.00,
+                "size": "26, 28, 30, 32, 34",
+                "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+            }
+        },
+        {
+            "id": "cl-260",
+            "title": "Double-Breasted Cashmere Overcoat",
+            "content": "Elite charcoal grey long coat crafted from 100% pure Mongolian cashmere. Designed for high-ranking executives and luxury winter events. Features hand-finished stitching and a silk-lined interior for ultimate insulation and prestige.",
+            "keywords": ["overcoat", "cashmere", "luxury", "grey", "winter"],
+            "metadata": {
+                "gender": "male", "category": "outerwear", "style": "formal", "price": 450.00, "size": "48, 50, 52, 54, 56",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-261",
+            "title": "Stiletto Heel Snakeskin Boots",
+            "content": "Exotic animal-print ankle boots with a razor-sharp 100mm heel. High-fashion statement footwear for red carpet events, luxury nightlife, and avant-garde editorial looks. Crafted from premium embossed leather.",
+            "keywords": ["boots", "snakeskin", "luxury", "heels", "fashion"],
+            "metadata": {
+                "gender": "female", "category": "shoes", "style": "elegant", "price": 210.00, "size": "36, 37, 38, 39, 40",
+                "image": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
+            }
+        },
+        {
+            "id": "cl-262",
+            "title": "Seamless Maternity Support Leggings",
+            "content": "Ultra-stretch black leggings with an integrated over-the-belly support band. Engineered for expectant mothers to provide comfort, lower back support, and compression during pregnancy and prenatal exercise.",
+            "keywords": ["maternity", "leggings", "black", "pregnancy", "support"],
+            "metadata": {
+                "gender": "female", "category": "bottoms", "style": "casual", "price": 45.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-263",
+            "title": "Hand-Knitted Icelandic Wool Sweater",
+            "content": "Authentic heavyweight pullover with traditional geometric yoke patterns. Spun from water-repellent Arctic wool for extreme thermal insulation in snowy Nordic climates. A rustic, high-quality outdoor staple.",
+            "keywords": ["sweater", "wool", "nordic", "winter", "warm"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "cozy", "price": 135.00, "size": "M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1574201630328-950dd725d21c?w=500"
+            }
+        },
+        {
+            "id": "cl-264",
+            "title": "Professional Chef's Kitchen Whites",
+            "content": "Double-breasted white jacket made from heavy-duty breathable cotton. Features heat-resistant buttons and moisture-wicking technology for professional culinary environments and high-temperature industrial kitchens.",
+            "keywords": ["chef", "jacket", "white", "kitchen", "professional"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "practical", "price": 55.00, "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-265",
+            "title": "Silk Kimono-Style Wrap Dress",
+            "content": "Deep floral print flowing dress with wide sleeves and a self-tie waist. Inspired by traditional Japanese silhouettes, updated for modern luxury resort wear and elegant summer garden parties.",
+            "keywords": ["dress", "kimono", "silk", "floral", "summer"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "elegant", "price": 145.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-266",
+            "title": "High-Visibility Construction Vest",
+            "content": "Fluorescent yellow safety waistcoat with 360-degree reflective silver tape. Compliant with industrial safety standards for roadside work, airport ground crews, and construction site visibility.",
+            "keywords": ["vest", "safety", "yellow", "reflective", "workwear"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 22.00, "size": "Universal",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-267",
+            "title": "Velvet Evening Smoking Jacket",
+            "content": "Deep emerald velvet blazer with quilted satin lapels. A pinnacle of luxury lounge attire for private members' clubs, high-end cigar lounges, and aristocratic evening gatherings.",
+            "keywords": ["jacket", "velvet", "green", "luxury", "evening"],
+            "metadata": {
+                "gender": "male", "category": "outerwear", "style": "formal", "price": 280.00, "size": "48, 50, 52, 54",
+                "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500"
+            }
+        },
+        {
+            "id": "cl-268",
+            "title": "Rugged Oilskin Drover's Coat",
+            "content": "Heavy-weight waxed cotton long coat designed for horse riding and outback adventure. Completely windproof and waterproof with a protective storm flap and shoulder cape. Built for life in the wild.",
+            "keywords": ["coat", "waterproof", "brown", "outdoor", "waxed"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 195.00, "size": "M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-269",
+            "title": "Minimalist Titanium Wristwatch",
+            "content": "Sleek matte grey timepiece with a sapphire crystal face and automatic movement. Engineered from aerospace-grade titanium for professional diving and executive daily wear. Water resistant up to 200m.",
+            "keywords": ["watch", "titanium", "luxury", "grey", "accessory"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 850.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500"
+            }
+        },
+        {
+            "id": "cl-270",
+            "title": "Pleated High-Waist Tuxedo Trousers",
+            "content": "Traditional black formal pants with a satin side stripe. Designed to be worn with a dinner jacket for black-tie galas, state dinners, and ultra-formal evening ceremonies.",
+            "keywords": ["pants", "tuxedo", "black", "formal", "wedding"],
+            "metadata": {
+                "gender": "male", "category": "bottoms", "style": "formal", "price": 115.00, "size": "30, 32, 34, 36, 38",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-271",
+            "title": "Canvas Espadrille Summer Flats",
+            "content": "Breathable slip-on shoes with a woven jute sole and cotton canvas upper. The quintessential footwear for Mediterranean holidays, beach walks, and casual tropical resort living.",
+            "keywords": ["shoes", "espadrilles", "summer", "beach", "beige"],
+            "metadata": {
+                "gender": "unisex", "category": "shoes", "style": "resort", "price": 45.00, "size": "36-45",
+                "image": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500"
+            }
+        },
+        {
+            "id": "cl-272",
+            "title": "Ultra-Light Carbon Fiber Sunglasses",
+            "content": "Modern rimless shades with polarized blue lenses and carbon fiber arms. Engineered for professional sailing, high-speed driving, and high-glare sports environments. Indestructible and featherweight.",
+            "keywords": ["sunglasses", "sport", "blue", "luxury", "carbon"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "cool", "price": 165.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-273",
+            "title": "Embellished Evening Clutch Bag",
+            "content": "Small structured handbag covered in hand-sewn crystals and pearls. Featuring a detachable chain strap for black-tie events, luxury weddings, and prestigious award ceremonies.",
+            "keywords": ["bag", "clutch", "luxury", "wedding", "pearl"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "elegant", "price": 180.00, "size": "Small",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-274",
+            "title": "Compression Recovery Calf Sleeves",
+            "content": "Medical-grade gradient compression sleeves in neon yellow. Designed for marathon runners and triathletes to increase blood flow, reduce muscle vibration, and accelerate post-race recovery.",
+            "keywords": ["compression", "running", "sport", "yellow", "recovery"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 32.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-275",
+            "title": "Vintage Suede Fringe Jacket",
+            "content": "Tan leather jacket featuring long fringe detailing on the back and sleeves. Inspired by 1960s Western Americana and bohemian rock subcultures. Perfect for music festivals and retro-edgy styles.",
+            "keywords": ["jacket", "suede", "fringe", "vintage", "tan"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "vintage", "price": 155.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1576871337622-98d48d890e49?w=500"
+            }
+        },
+        {
+            "id": "cl-276",
+            "title": "Anti-Fog Professional Ski Goggles",
+            "content": "Dual-layer wide-angle lenses with triple-face foam padding. Engineered for high-altitude mountain sports, providing maximum contrast in whiteout snow conditions and 100% UV protection.",
+            "keywords": ["goggles", "ski", "snow", "winter", "sport"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 85.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-277",
+            "title": "Classic Nautical Breton Stripe Tee",
+            "content": "Traditional navy and white horizontal striped shirt in heavy jersey cotton. Originally designed for sailors, now a staple of Parisian chic and casual coastal summer fashion.",
+            "keywords": ["t-shirt", "stripes", "navy", "summer", "classic"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "casual", "price": 42.00, "size": "XS, S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500"
+            }
+        },
+        {
+            "id": "cl-278",
+            "title": "Waterproof Dry-Bag Duffel 60L",
+            "content": "Heavy-duty PVC tarpaulin bag with heat-welded seams and a roll-top closure. Designed for professional kayaking, offshore sailing, and expedition travel in monsoon or heavy rain conditions.",
+            "keywords": ["bag", "waterproof", "sailing", "black", "expedition"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 95.00, "size": "60L",
+                "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+            }
+        },
+        {
+            "id": "cl-279",
+            "title": "Hand-Carved Wooden Platform Sandals",
+            "content": "Avant-garde footwear with an architectural wooden sole and premium black leather straps. Inspired by Japanese Geta and 70s brutalist fashion. A bold artistic choice for high-fashion enthusiasts.",
+            "keywords": ["sandals", "wood", "black", "alternative", "luxury"],
+            "metadata": {
+                "gender": "female", "category": "shoes", "style": "edgy", "price": 185.00, "size": "36, 37, 38, 39, 40",
+                "image": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
+            }
+        },
+        {
+            "id": "cl-280",
+            "title": "Armored Kevlar Riding Jeans",
+            "content": "Professional motorcycle trousers with reinforced Kevlar lining and removable CE-rated knee armor. Engineered for maximum abrasion resistance during high-speed riding while maintaining a casual denim appearance.",
+            "keywords": ["motorcycle", "jeans", "safety", "protection", "blue"],
+            "metadata": {
+                "gender": "unisex", "category": "bottoms", "style": "practical", "price": 165.00, "size": "30, 32, 34, 36, 38, 40",
+                "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=500"
+            }
+        },
+        {
+            "id": "cl-281",
+            "title": "Infant Heirloom Christening Gown",
+            "content": "Traditional full-length baby gown in antique ivory lace and silk. Features hand-embroidered detailing for baptism ceremonies and formal religious family events. A timeless family keepsake piece.",
+            "keywords": ["baby", "dress", "lace", "baptism", "formal"],
+            "metadata": {
+                "gender": "unisex", "category": "dresses", "style": "formal", "price": 110.00, "size": "0-3M, 3-6M, 6-12M",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-282",
+            "title": "Aero-Tech Cycling Jersey",
+            "content": "Form-fitting professional bike shirt with three rear cargo pockets and a full-length zipper. Moisture-wicking aerodynamic fabric designed for competitive road cycling and long-distance endurance racing.",
+            "keywords": ["cycling", "jersey", "sport", "breathable", "blue"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "sporty", "price": 75.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-283",
+            "title": "Gothic Bat-Wing Velvet Cape",
+            "content": "Dramatic floor-length hooded cloak in heavy black crushed velvet. Ideal for alternative fashion, gothic events, and avant-garde theatrical performances. Features a satin-lined interior and ornate silver clasp.",
+            "keywords": ["cape", "velvet", "black", "goth", "alternative"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "edgy", "price": 140.00, "size": "Universal",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-284",
+            "title": "Skateboarder Baggy Cargo Shorts",
+            "content": "Durable cotton twill shorts with a relaxed oversized fit and extra-wide pockets. Inspired by early 2000s skate culture and urban streetwear. Built to withstand friction and movement during active skating.",
+            "keywords": ["shorts", "cargo", "skate", "streetwear", "beige"],
+            "metadata": {
+                "gender": "male", "category": "bottoms", "style": "casual", "price": 48.00, "size": "28, 30, 32, 34, 36",
+                "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500"
+            }
+        },
+        {
+            "id": "cl-285",
+            "title": "Executive Smartwatch Titanium Band",
+            "content": "Luxury link bracelet designed for high-end smartwatches. Precision-engineered from space-grade titanium for a professional aesthetic in corporate environments. Features a secure butterfly deployment clasp.",
+            "keywords": ["watch", "band", "titanium", "luxury", "tech"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 89.00, "size": "42mm, 44mm, 45mm",
+                "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500"
+            }
+        },
+        {
+            "id": "cl-286",
+            "title": "Thermal Fleece-Lined Rain Boots",
+            "content": "High-gloss waterproof rubber boots with a removable warm fleece sock. Designed for rainy autumn days, gardening, and walking in wet winter conditions. Ensures feet stay dry and insulated.",
+            "keywords": ["boots", "rain", "waterproof", "winter", "black"],
+            "metadata": {
+                "gender": "female", "category": "shoes", "style": "practical", "price": 55.00, "size": "36, 37, 38, 39, 40, 41",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-287",
+            "title": "Urban Graffiti Print Bomber",
+            "content": "Lightweight satin flight jacket featuring a colorful all-over street art print. Represents the vibrant energy of hip-hop culture and modern streetwear fashion. Ribbed cuffs and collar for a classic silhouette.",
+            "keywords": ["bomber", "jacket", "streetwear", "art", "multicolor"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "edgy", "price": 95.00, "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1576871337622-98d48d890e49?w=500"
+            }
+        },
+        {
+            "id": "cl-288",
+            "title": "Floral Embroidery Toddler Sun Hat",
+            "content": "Soft pink cotton hat with a wide protective brim and adjustable chin strap. Features delicate floral stitching for summer outings, beach days, and protecting sensitive skin from UV rays.",
+            "keywords": ["hat", "baby", "pink", "summer", "sun"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "casual", "price": 18.00, "size": "12-24M, 2T, 3T",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-289",
+            "title": "Professional Lab Coat",
+            "content": "Knee-length white medical coat in a durable polyester-cotton blend. Features multiple utility pockets for pens and instruments. Designed for scientists, doctors, and professional laboratory environments.",
+            "keywords": ["white", "coat", "medical", "workwear", "professional"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 40.00, "size": "XS, S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-290",
+            "title": "Crushed Velvet Slip Dress",
+            "content": "Elegant midi-length dress in midnight blue velvet with delicate spaghetti straps. A versatile piece for 90s-inspired evening wear, cocktail parties, and festive holiday celebrations.",
+            "keywords": ["dress", "velvet", "blue", "evening", "party"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "elegant", "price": 72.00, "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-291",
+            "title": "Tactical Multi-Tool Utility Belt",
+            "content": "Reinforced nylon web belt with multiple modular pouches and quick-release buckle. Designed for security professionals, hikers, and DIY enthusiasts needing quick access to tools and equipment.",
+            "keywords": ["belt", "tactical", "black", "utility", "outdoor"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 35.00, "size": "Adjustable",
+                "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500"
+            }
+        },
+        {
+            "id": "cl-292",
+            "title": "Boho Tasseled Leather Crossbody",
+            "content": "Small brown suede bag with long fringe and turquoise stone embellishments. Perfect for music festivals and bohemian-style summer outfits. Compact design for essentials like phone and keys.",
+            "keywords": ["bag", "suede", "boho", "brown", "festival"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "vintage", "price": 58.00, "size": "Small",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-293",
+            "title": "Anti-Blister Running Socks",
+            "content": "Double-layer technical socks with seamless toe construction and arch support. Engineered for high-mileage road running and intense marathon training. Breathable and moisture-wicking synthetic blend.",
+            "keywords": ["socks", "running", "sport", "white", "active"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 15.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-294",
+            "title": "Reflective Dog Walking Vest",
+            "content": "Lightweight neon pink vest for humans with high-visibility reflective strips. Designed for safe early morning or late night outdoor activities like dog walking or urban jogging.",
+            "keywords": ["vest", "safety", "pink", "reflective", "walking"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 20.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-295",
+            "title": "Linen Drawstring Beach Shirt",
+            "content": "Relaxed-fit white linen top with a unique lace-up neckline. Highly breathable and lightweight, designed for tropical heat, resort vacations, and casual sunset dining on the coast.",
+            "keywords": ["shirt", "linen", "white", "beach", "summer"],
+            "metadata": {
+                "gender": "male", "category": "tops", "style": "resort", "price": 49.00, "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-296",
+            "title": "Structured Wool Fedora Hat",
+            "content": "Classic charcoal headwear with a wide brim and grosgrain ribbon band. A timeless accessory for adding a touch of vintage sophistication to formal overcoats and tailored suits.",
+            "keywords": ["hat", "fedora", "grey", "vintage", "formal"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 65.00, "size": "M, L",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-297",
+            "title": "High-Impact Boxing Hand Wraps",
+            "content": "Professional 4.5m elastic cotton wraps in black. Designed to protect knuckles and stabilize wrists during heavy bag training, sparring sessions, and competitive combat sports.",
+            "keywords": ["boxing", "sport", "black", "gym", "protection"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 12.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-298",
+            "title": "Kids' Waterproof Muddy Puddles Suit",
+            "content": "Full-body all-in-one rain suit in bright primary colors. Features elasticated cuffs and a peaked hood. Perfect for outdoor forest schools, rainy garden play, and keeping clothes dry in wet weather.",
+            "keywords": ["kids", "rain", "suit", "waterproof", "yellow"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 45.00, "size": "2T, 3T, 4T, 5T",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-299",
+            "title": "Polished Silver Tie Clip",
+            "content": "Minimalist metallic accessory designed to keep neckties in place. Adds a subtle professional accent to formal business attire and wedding suits. Crafted from tarnish-resistant sterling silver.",
+            "keywords": ["tie", "accessory", "silver", "formal", "business"],
+            "metadata": {
+                "gender": "male", "category": "accessories", "style": "formal", "price": 30.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1589756823851-411584687574?w=500"
+            }
+        },
+        {
+            "id": "cl-300",
+            "title": "Asymmetric Silk Gala Gown",
+            "content": "Breathtaking floor-length evening dress in shimmering champagne silk. Features a hand-draped asymmetric shoulder and a thigh-high slit. Designed for red carpet events, prestigious award ceremonies, and high-society weddings.",
+            "keywords": ["dress", "silk", "formal", "gala", "wedding"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "elegant", "price": 350.00, "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500"
+            }
+        },
+        {
+            "id": "cl-301",
+            "title": "Recycled Ocean-Plastic Swim Trunks",
+            "content": "Sustainable men's swimwear made from 100% recycled marine plastic. Features a quick-dry finish and a minimalist geometric print. Eco-friendly choice for conscious travelers and beach enthusiasts.",
+            "keywords": ["swim", "shorts", "recycled", "eco-friendly", "blue"],
+            "metadata": {
+                "gender": "male", "category": "sport", "style": "beach", "price": 55.00, "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500"
+            }
+        },
+        {
+            "id": "cl-302",
+            "title": "Extreme-Altitude Down Parka",
+            "content": "Professional-grade mountaineering jacket with 800-fill power goose down. Engineered for Himalayan expeditions and sub-zero survival. Features a reinforced ripstop shell and integrated oxygen mask loops.",
+            "keywords": ["parka", "winter", "mountain", "extreme", "red"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "sporty", "price": 580.00, "size": "M, L, XL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-303",
+            "title": "Hemp-Blend Minimalist T-Shirt",
+            "content": "Eco-conscious basic tee crafted from a durable hemp and organic cotton blend. Naturally antibacterial and moisture-wicking. Designed for long-lasting daily wear and sustainable wardrobe building.",
+            "keywords": ["t-shirt", "hemp", "sustainable", "minimalist", "beige"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "casual", "price": 40.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500"
+            }
+        },
+        {
+            "id": "cl-304",
+            "title": "RFID-Blocking Leather Passport Holder",
+            "content": "Sleek travel wallet in premium black pebbled leather. Features advanced RFID-shielding technology to protect personal data from digital theft. Essential for international business travelers and frequent flyers.",
+            "keywords": ["travel", "leather", "wallet", "black", "accessory"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 45.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-305",
+            "title": "Carbon-Plate Professional Racing Flats",
+            "content": "Elite marathon shoes featuring an internal carbon fiber plate for maximum energy return. Ultra-thin breathable mesh upper and responsive foam cushioning. Designed for breaking personal records on the road.",
+            "keywords": ["running", "shoes", "sport", "professional", "neon"],
+            "metadata": {
+                "gender": "unisex", "category": "shoes", "style": "sporty", "price": 220.00, "size": "38-46",
+                "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+            }
+        },
+        {
+            "id": "cl-306",
+            "title": "Hand-Painted Leather Biker Jacket",
+            "content": "One-of-a-kind heavy leather jacket with custom graffiti-style back piece. Features asymmetrical zippers and classic silver studs. A high-fashion statement piece for alternative and edgy urban wardrobes.",
+            "keywords": ["jacket", "leather", "edgy", "art", "black"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "edgy", "price": 420.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1576871337622-98d48d890e49?w=500"
+            }
+        },
+        {
+            "id": "cl-307",
+            "title": "Organic Bamboo Yoga Bolster",
+            "content": "Firm supportive cushion with a removable bamboo-fiber cover. Designed for restorative yoga practices, meditation, and prenatal stretching. Naturally hypoallergenic and eco-friendly material.",
+            "keywords": ["yoga", "accessory", "meditation", "bamboo", "grey"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "cozy", "price": 48.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-308",
+            "title": "Traditional Embroidered Sombrero",
+            "content": "Authentic wide-brimmed felt hat with intricate silver-thread embroidery. Crafted by artisans for cultural festivals, traditional performances, and folk celebrations. Features a heavy structured crown.",
+            "keywords": ["hat", "traditional", "festival", "black", "embroidery"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 120.00, "size": "Large",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-309",
+            "title": "Anti-Theft Commuter Backpack",
+            "content": "Minimalist city rucksack with hidden zippers and cut-proof fabric. Includes an integrated USB charging port and secret pockets for credit cards. Designed for daily urban commuting and safe travel.",
+            "keywords": ["backpack", "travel", "safety", "grey", "office"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 85.00, "size": "20L",
+                "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+            }
+        },
+        {
+            "id": "cl-310",
+            "title": "High-Gloss Pointed Chelsea Boots",
+            "content": "Polished patent leather ankle boots with an elongated silhouette. Designed for rock-star aesthetic and high-fashion formal outfits. Features a concealed side zip and stacked wooden heel.",
+            "keywords": ["boots", "leather", "formal", "black", "edgy"],
+            "metadata": {
+                "gender": "unisex", "category": "shoes", "style": "elegant", "price": 185.00, "size": "38-45",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-311",
+            "title": "Tapered Performance Golf Trousers",
+            "content": "Technical four-way stretch pants in a professional sand color. Features water-resistant coating and specialized pockets for tees and scorecards. Designed for executive presence on the golf course.",
+            "keywords": ["golf", "pants", "sport", "business", "beige"],
+            "metadata": {
+                "gender": "male", "category": "bottoms", "style": "formal", "price": 89.00, "size": "30, 32, 34, 36, 38",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-312",
+            "title": "Vintage-Wash Denim Overall Dress",
+            "content": "Casual pinafore dress in durable light-wash denim. Features adjustable straps and multiple utility pockets. Inspired by 90s nostalgia and modern weekend-casual style.",
+            "keywords": ["dress", "denim", "casual", "90s", "blue"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "casual", "price": 55.00, "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-313",
+            "title": "Heavy-Knit Oversized Cardigan",
+            "content": "Chunky-knit sweater in a warm oatmeal wool blend. Features large wooden buttons and deep front pockets. Designed for cozy home layering and relaxed autumn outdoor walks.",
+            "keywords": ["cardigan", "wool", "cozy", "autumn", "beige"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "cozy", "price": 78.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1574201630328-950dd725d21c?w=500"
+            }
+        },
+        {
+            "id": "cl-314",
+            "title": "Neoprene Laptop Sleeve 13-inch",
+            "content": "Shock-absorbent protective cover in vibrant electric purple. Features a soft scratch-resistant interior lining and heavy-duty zipper. Perfect for students and digital nomads on the move.",
+            "keywords": ["laptop", "case", "tech", "purple", "accessory"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 25.00, "size": "13-inch",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-315",
+            "title": "Feather-Trimmed Silk Robe",
+            "content": "Exquisite bridal morning robe in pure white silk with ostrich feather cuffs. A pinnacle of luxury lounge wear for wedding preparations and high-end relaxation. Fluid and opulent silhouette.",
+            "keywords": ["robe", "silk", "white", "luxury", "wedding"],
+            "metadata": {
+                "gender": "female", "category": "tops", "style": "elegant", "price": 240.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-316",
+            "title": "Ultra-Wide Leg Palazzo Trousers",
+            "content": "Flowing high-waist pants in a lightweight black crepe fabric. Designed for a dramatic silhouette in professional settings or sophisticated evening events. Combines comfort with high-fashion impact.",
+            "keywords": ["pants", "black", "formal", "elegant", "fashion"],
+            "metadata": {
+                "gender": "female", "category": "bottoms", "style": "formal", "price": 95.00, "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-317",
+            "title": "Professional Grooming Apron",
+            "content": "Water-resistant black nylon apron with specialized compartments for scissors, combs, and hair clippers. Designed for barbers, hairstylists, and professional dog groomers in high-traffic salons.",
+            "keywords": ["apron", "black", "professional", "workwear", "beauty"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 38.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-318",
+            "title": "Adjustable Mesh Trucker Cap",
+            "content": "Classic casual headwear with a foam front panel and breathable mesh back. Features a vintage-style sunset patch. Perfect for outdoor road trips, camping, and casual weekend sun protection.",
+            "keywords": ["hat", "cap", "casual", "summer", "blue"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "casual", "price": 22.00, "size": "Adjustable",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-319",
+            "title": "Matte Finish Sterling Silver Ring",
+            "content": "Minimalist 6mm wide band in solid .925 sterling silver with a brushed matte texture. A modern and understated jewelry piece for daily wear or as a contemporary wedding band.",
+            "keywords": ["jewelry", "ring", "silver", "minimalist", "luxury"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "elegant", "price": 110.00, "size": "7-12",
+                "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500"
+            }
+        },
+        {
+            "id": "cl-320",
+            "title": "Quiet Luxury Cashmere Polo",
+            "content": "A sophisticated long-sleeve polo shirt in ultra-fine beige cashmere. Minimalist design without visible branding, tailored for the elite 'stealth wealth' aesthetic. Perfect for private jet travel and executive leisure.",
+            "keywords": ["polo", "cashmere", "beige", "luxury", "minimalist"],
+            "metadata": {
+                "gender": "male", "category": "tops", "style": "formal", "price": 320.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-321",
+            "title": "Tactical Ripstop Combat Shirt",
+            "content": "High-durability field top with reinforced elbow pads and moisture-wicking torso fabric. Designed for military operations, tactical training, and airsoft. Features velcro patches for ID and rank insignias.",
+            "keywords": ["tactical", "shirt", "camo", "military", "workwear"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "practical", "price": 75.00, "size": "M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-322",
+            "title": "Neon-Cyberpunk Transparent Raincoat",
+            "content": "Futuristic waterproof coat made from translucent TPU with neon purple piping. Inspired by Tokyo street fashion and sci-fi aesthetics. Features a modular hood and oversized utility buckles.",
+            "keywords": ["raincoat", "cyberpunk", "neon", "techwear", "fashion"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "edgy", "price": 130.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1544441893-675973e31985?w=500"
+            }
+        },
+        {
+            "id": "cl-323",
+            "title": "Hand-Stitched Full-Grain Loafers",
+            "content": "Luxury slip-on shoes in deep mahogany leather. Crafted using traditional Goodyear welt construction for lifetime durability. Ideal for corporate boardrooms and high-end formal celebrations.",
+            "keywords": ["loafers", "leather", "brown", "formal", "luxury"],
+            "metadata": {
+                "gender": "male", "category": "shoes", "style": "formal", "price": 285.00, "size": "40, 41, 42, 43, 44, 45",
+                "image": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500"
+            }
+        },
+        {
+            "id": "cl-324",
+            "title": "Impact-Resistant Hard Shell Knee Pads",
+            "content": "Professional protective gear for downhill mountain biking and extreme skating. Features a high-density outer shell and ventilated foam padding for maximum safety during high-speed crashes.",
+            "keywords": ["protection", "sport", "bike", "safety", "black"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 55.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-325",
+            "title": "Sequined Mermaid Cocktail Dress",
+            "content": "Form-fitting mini dress covered in iridescent blue sequins. Designed to catch light on the dance floor. Features a plunging neckline and open back for parties, clubbing, and New Year's Eve.",
+            "keywords": ["dress", "sequins", "blue", "party", "clubwear"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "edgy", "price": 110.00, "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500"
+            }
+        },
+        {
+            "id": "cl-326",
+            "title": "Alpaca Wool Infinity Scarf",
+            "content": "Extra-wide circular scarf hand-knit from sustainable Peruvian alpaca wool. Provides incredible warmth without the weight. A soft, hypoallergenic accessory for harsh winter climates.",
+            "keywords": ["scarf", "wool", "winter", "warm", "sustainable"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "cozy", "price": 65.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500"
+            }
+        },
+        {
+            "id": "cl-327",
+            "title": "High-Vis Reflective Safety Parka",
+            "content": "Thermal insulated work jacket in fluorescent lime with reflective 3M stripes. Fully waterproof and windproof, designed for highway maintenance and airport tarmac workers in extreme weather.",
+            "keywords": ["parka", "safety", "yellow", "workwear", "waterproof"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 145.00, "size": "M, L, XL, XXL, 3XL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-328",
+            "title": "Minimalist Silk-Satin Camisole",
+            "content": "Delicate champagne-colored top with ultra-thin straps. Crafted from sand-washed silk for a matte, luxurious feel. A versatile layering piece for under blazers or as elegant sleepwear.",
+            "keywords": ["top", "silk", "minimalist", "beige", "luxury"],
+            "metadata": {
+                "gender": "female", "category": "tops", "style": "elegant", "price": 85.00, "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-329",
+            "title": "Vintage Aviator Sheepskin Jacket",
+            "content": "Classic pilot-style coat with a thick shearling lining and distressed leather exterior. Inspired by WWII flight gear. Features a heavy-duty collar buckle and rugged brass zippers.",
+            "keywords": ["jacket", "leather", "vintage", "brown", "winter"],
+            "metadata": {
+                "gender": "male", "category": "outerwear", "style": "vintage", "price": 380.00, "size": "M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1576871337622-98d48d890e49?w=500"
+            }
+        },
+        {
+            "id": "cl-330",
+            "title": "Carbon Fiber Hard-Shell Suitcase",
+            "content": "Ultra-lightweight carry-on luggage engineered from aerospace-grade carbon fiber. Features 360-degree silent spinner wheels and a TSA-approved biometric lock for the modern frequent traveler.",
+            "keywords": ["luggage", "travel", "carbon", "tech", "black"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 550.00, "size": "Carry-on",
+                "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+            }
+        },
+        {
+            "id": "cl-331",
+            "title": "Compression Recovery Eye Mask",
+            "content": "Weighted sleep mask filled with cooling glass beads. Designed to reduce puffiness and alleviate migraine tension while blocking 100% of ambient light for deep restorative sleep.",
+            "keywords": ["sleep", "mask", "health", "grey", "recovery"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 35.00, "size": "Adjustable",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-332",
+            "title": "Bohemian Crochet Maxi Dress",
+            "content": "Hand-crafted floor-length dress in ivory cotton crochet. Features an open-back design and fringed hem. Perfect for beach weddings, summer festivals, and upscale boho-chic events.",
+            "keywords": ["dress", "crochet", "white", "boho", "summer"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "casual", "price": 125.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-333",
+            "title": "Professional Archery Arm Guard",
+            "content": "Sleek protective sleeve made from ventilated polymer and leather. Designed to protect the inner arm from bowstring friction during competitive target archery and hunting.",
+            "keywords": ["sport", "archery", "protection", "black", "leather"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 28.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-334",
+            "title": "Bespoke Three-Piece Tuxedo",
+            "content": "The pinnacle of formalwear in midnight blue wool-mohair blend. Includes a structured jacket with silk lapels, a matching waistcoat, and trousers. Hand-tailored for red-carpet gala standards.",
+            "keywords": ["suit", "tuxedo", "formal", "navy", "luxury"],
+            "metadata": {
+                "gender": "male", "category": "outerwear", "style": "formal", "price": 950.00, "size": "48, 50, 52, 54, 56",
+                "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500"
+            }
+        },
+        {
+            "id": "cl-335",
+            "title": "Ultra-Thin Merino Wool Liners",
+            "content": "Lightweight base-layer socks designed to be worn under heavy hiking boots. Naturally wicks moisture and prevents blisters during long-distance backpacking and mountain treks.",
+            "keywords": ["socks", "merino", "hiking", "grey", "outdoor"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 18.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-336",
+            "title": "Cyber-Tech Messenger Bag",
+            "content": "Asymmetric shoulder bag in water-resistant ballistic nylon. Features magnetic Fidlock buckles, a modular internal organization system, and a stealthy urban techwear aesthetic.",
+            "keywords": ["bag", "techwear", "messenger", "black", "urban"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "edgy", "price": 160.00, "size": "15L",
+                "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500"
+            }
+        },
+        {
+            "id": "cl-337",
+            "title": "Regency-Era Velvet Waistcoat",
+            "content": "Antique-style vest in deep burgundy velvet with gold filigree buttons. Designed for historical reenactments, theatrical productions, and eccentric dandy fashion enthusiasts.",
+            "keywords": ["vest", "velvet", "vintage", "red", "formal"],
+            "metadata": {
+                "gender": "male", "category": "tops", "style": "vintage", "price": 110.00, "size": "M, L, XL",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-338",
+            "title": "Polarized Floating Fishing Shades",
+            "content": "Specialized eyewear with unsinkable frames and salt-water resistant lenses. Optimized for offshore fishing to reduce water surface glare and track fish movement in high-sun conditions.",
+            "keywords": ["sunglasses", "fishing", "sport", "blue", "polarized"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 75.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-339",
+            "title": "Embroidered Silk Square Scarf",
+            "content": "Luxurious 90x90cm scarf in 100% twill silk. Features a hand-painted botanical illustration with rolled edges. Can be worn as a headwrap, neck accessory, or tied to a handbag.",
+            "keywords": ["scarf", "silk", "floral", "luxury", "accessory"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "elegant", "price": 140.00, "size": "Large",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-340",
+            "title": "Nomex Fire-Resistant Racing Suit",
+            "content": "Professional FIA-approved triple-layer racing coveralls. Engineered with Nomex fiber to provide critical seconds of thermal protection during cockpit fires. Features breathable stretch panels for high-performance driving.",
+            "keywords": ["racing", "safety", "fireproof", "sport", "blue"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 850.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-341",
+            "title": "Avant-Garde Architectural Drape Top",
+            "content": "A conceptual upper garment featuring experimental folding techniques and a structured asymmetric hem. Crafted from heavy bonded jersey for a sculptural look. Designed for gallery openings and editorial fashion.",
+            "keywords": ["top", "black", "fashion", "conceptual", "artistic"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "edgy", "price": 195.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1515347619252-60a4bdad358d?w=500"
+            }
+        },
+        {
+            "id": "cl-342",
+            "title": "Sapphire-Crystal Skeleton Watch",
+            "content": "High-complication timepiece with a fully transparent case. Reveals the intricate hand-wound mechanical movement inside. Features a premium alligator leather strap and 72-hour power reserve. A pinnacle of horology.",
+            "keywords": ["watch", "luxury", "skeleton", "leather", "mechanical"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 4200.00, "size": "42mm",
+                "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500"
+            }
+        },
+        {
+            "id": "cl-343",
+            "title": "Chemical-Resistant Level A Hazmat Suit",
+            "content": "Maximum-protection encapsulated suit designed for hazardous material handling. Features vapor-tight zippers and integrated internal cooling vest loops. For industrial emergency response and laboratory safety.",
+            "keywords": ["safety", "industrial", "yellow", "protection", "professional"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 650.00, "size": "L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-344",
+            "title": "Recycled Parachute Windbreaker",
+            "content": "Sustainable lightweight jacket upcycled from decommissioned military parachutes. Each piece features unique stitching and original hardware. Windproof and water-resistant for eco-conscious urban explorers.",
+            "keywords": ["windbreaker", "recycled", "sustainable", "khaki", "outdoor"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "casual", "price": 145.00, "size": "M, L, XL",
+                "image": "https://images.unsplash.com/photo-1544441893-675973e31985?w=500"
+            }
+        },
+        {
+            "id": "cl-345",
+            "title": "Biometric Compression Training Top",
+            "content": "Athletic smart-shirt with integrated textile sensors to track heart rate and respiratory data. Syncs with mobile apps via a low-profile Bluetooth pod. Engineered for elite athletic performance monitoring.",
+            "keywords": ["sport", "tech", "compression", "black", "fitness"],
+            "metadata": {
+                "gender": "unisex", "category": "tops", "style": "sporty", "price": 180.00, "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-346",
+            "title": "Hand-Tooled Italian Leather Saddle Bag",
+            "content": "Artisan-crafted handbag with intricate floral embossing and burnished edges. Features a traditional brass turn-lock and adjustable cross-body strap. Represents the heritage of Tuscan leather craftsmanship.",
+            "keywords": ["bag", "leather", "brown", "artisan", "luxury"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "vintage", "price": 320.00, "size": "Medium",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-347",
+            "title": "Aramid-Reinforced Work Gloves",
+            "content": "Heavy-duty safety gloves with puncture-resistant palms and cut-proof aramid backing. Designed for metal fabrication, glass handling, and heavy industrial maintenance. Provides superior grip and dexterity.",
+            "keywords": ["gloves", "safety", "industrial", "black", "workwear"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 42.00, "size": "M, L, XL",
+                "image": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=500"
+            }
+        },
+        {
+            "id": "cl-348",
+            "title": "Pleated Metallic Festival Cape",
+            "content": "Shimmering holographic outerwear piece with accordion pleats. Captures and reflects light in a spectrum of colors. Designed for music festivals, stage performances, and bold artistic expression.",
+            "keywords": ["cape", "holographic", "festival", "silver", "party"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "edgy", "price": 85.00, "size": "Universal",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-349",
+            "title": "Titanium-Frame Minimalist Glasses",
+            "content": "Ultra-lightweight optical frames with a matte gunmetal finish. Features screwless hinges and hypoallergenic titanium nose pads. A discreet and high-quality choice for daily professional wear.",
+            "keywords": ["glasses", "titanium", "minimalist", "grey", "accessory"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 240.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-350",
+            "title": "Kevlar-Lined Urban Riding Hoodie",
+            "content": "Casual-look sweatshirt with hidden full-body Kevlar reinforcement and removable CE armor. Designed for urban motorcyclists who want protection without the look of traditional leather gear.",
+            "keywords": ["motorcycle", "hoodie", "safety", "black", "streetwear"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 175.00, "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"
+            }
+        },
+        {
+            "id": "cl-351",
+            "title": "Anti-Gravity Orthopedic Trainers",
+            "content": "Specialized footwear with a pressurized air-bridge sole system for maximum impact absorption. Designed for medical professionals and service workers who spend 12+ hours on their feet.",
+            "keywords": ["shoes", "orthopedic", "white", "health", "workwear"],
+            "metadata": {
+                "gender": "unisex", "category": "shoes", "style": "practical", "price": 130.00, "size": "36-47",
+                "image": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500"
+            }
+        },
+        {
+            "id": "cl-352",
+            "title": "Bespoke Silk Bow Tie",
+            "content": "Hand-tied formal accessory in a deep navy velvet-silk blend. Features a self-tie mechanism for the authentic sharp appearance required at black-tie weddings and gala dinners.",
+            "keywords": ["tie", "silk", "formal", "navy", "wedding"],
+            "metadata": {
+                "gender": "male", "category": "accessories", "style": "formal", "price": 55.00, "size": "Adjustable",
+                "image": "https://images.unsplash.com/photo-1589756823851-411584687574?w=500"
+            }
+        },
+        {
+            "id": "cl-353",
+            "title": "Technical Sailing Salopettes",
+            "content": "Professional offshore racing bib with 3-layer GORE-TEX Pro protection. Features Cordura-reinforced seat and knees for extreme durability against deck abrasion and heavy ocean spray.",
+            "keywords": ["sailing", "pants", "waterproof", "red", "sport"],
+            "metadata": {
+                "gender": "unisex", "category": "bottoms", "style": "practical", "price": 450.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-354",
+            "title": "Minimalist Merino Knit Trousers",
+            "content": "Luxury lounge pants crafted from extra-fine 18.5-micron merino wool. Offers natural temperature regulation and a soft fluid drape. Part of a premium coordinated travel set for long-haul flights.",
+            "keywords": ["pants", "wool", "grey", "luxury", "travel"],
+            "metadata": {
+                "gender": "female", "category": "bottoms", "style": "cozy", "price": 180.00, "size": "XS, S, M, L",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-355",
+            "title": "Industrial Strength Hair Tie Set",
+            "content": "High-tension snag-free hair elastics designed for professional athletes and dancers. Holds hair securely during high-impact movement without causing breakage or tension headaches.",
+            "keywords": ["hair", "accessory", "black", "sport", "active"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 12.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1511499767390-90342f5b49a7?w=500"
+            }
+        },
+        {
+            "id": "cl-356",
+            "title": "Victorian Velvet Morning Suit",
+            "content": "Three-piece formal ensemble featuring a swallow-tail coat and pinstriped trousers. Recreated with historical accuracy for high-end weddings, horse racing events, and period drama costumes.",
+            "keywords": ["suit", "formal", "grey", "vintage", "wedding"],
+            "metadata": {
+                "gender": "male", "category": "outerwear", "style": "formal", "price": 580.00, "size": "48, 50, 52, 54",
+                "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=500"
+            }
+        },
+        {
+            "id": "cl-357",
+            "title": "UV-Blocker Sun Parasol Hat",
+            "content": "Innovative wearable shade with a UPF 50+ coating and wide structured brim. Designed for extreme sun protection during tropical botanical field work and garden expeditions.",
+            "keywords": ["hat", "sun", "white", "protection", "outdoor"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 45.00, "size": "Large",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-358",
+            "title": "Carbon Fiber Archery Chest Guard",
+            "content": "Ultra-lightweight protective plate with adjustable mesh straps. Prevents clothing interference and protects the chest from the bowstring's path during professional target shooting.",
+            "keywords": ["sport", "archery", "black", "protection", "carbon"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 38.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-359",
+            "title": "Regenerated Nylon Puffer Scarf",
+            "content": "Insulated winter accessory filled with recycled synthetic down. Water-repellent and incredibly warm, designed to complement urban technical parkas in freezing city environments.",
+            "keywords": ["scarf", "winter", "black", "recycled", "warm"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "edgy", "price": 50.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500"
+            }
+        },
+        {
+            "id": "cl-360",
+            "title": "NIJ Level IIIA Bulletproof Vest",
+            "content": "Professional-grade soft armor vest designed for law enforcement and high-risk security personnel. Features ultra-thin polyethylene layers for discreet under-shirt protection against handgun calibers. Includes moisture-wicking carrier fabric.",
+            "keywords": ["safety", "ballistic", "protection", "black", "tactical"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "practical", "price": 450.00, "size": "S, M, L, XL, XXL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-361",
+            "title": "Chantilly Lace Bridal Veil",
+            "content": "Exquisite cathedral-length wedding accessory featuring hand-applied French lace edges. Crafted from premium silk tulle for a soft, ethereal drape. The ultimate finishing touch for traditional luxury bridal gowns.",
+            "keywords": ["wedding", "lace", "white", "bridal", "accessory"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "elegant", "price": 180.00, "size": "3 Meters",
+                "image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500"
+            }
+        },
+        {
+            "id": "cl-362",
+            "title": "Technical Ice Climbing Boots",
+            "content": "Stiff-soled mountaineering footwear with full crampon compatibility. Features an integrated GORE-TEX Duratherm lining and a carbon fiber insole for thermal insulation on frozen vertical terrain. Engineered for extreme alpine conditions.",
+            "keywords": ["boots", "climbing", "mountain", "winter", "professional"],
+            "metadata": {
+                "gender": "unisex", "category": "shoes", "style": "sporty", "price": 420.00, "size": "38-46",
+                "image": "https://images.unsplash.com/photo-1520639889410-d04196f73176?w=500"
+            }
+        },
+        {
+            "id": "cl-363",
+            "title": "Full-Grain Leather Duffle Travel Bag",
+            "content": "Heritage-style weekend bag crafted from thick vegetable-tanned cowhide. Features solid brass hardware and a reinforced base. Develops a unique patina over time. Ideal for luxury travel and high-end gym use.",
+            "keywords": ["bag", "leather", "travel", "brown", "luxury"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "formal", "price": 310.00, "size": "45L",
+                "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500"
+            }
+        },
+        {
+            "id": "cl-364",
+            "title": "1000m Professional Diver's Watch",
+            "content": "Extreme-depth mechanical timepiece with a helium escape valve and unidirectional ceramic bezel. Features a surgical-grade stainless steel case and luminescent indices for deep-sea visibility. Tested for saturation diving.",
+            "keywords": ["watch", "diving", "sport", "silver", "luxury"],
+            "metadata": {
+                "gender": "male", "category": "accessories", "style": "sporty", "price": 1200.00, "size": "44mm",
+                "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500"
+            }
+        },
+        {
+            "id": "cl-365",
+            "title": "Silk-Lined Wool Morning Trousers",
+            "content": "Formal pinstriped pants designed for Royal Ascot and high-protocol morning weddings. Features a traditional high-waist cut with brace buttons and a flawless drape. Part of the classic daytime formal ensemble.",
+            "keywords": ["pants", "formal", "grey", "wedding", "classic"],
+            "metadata": {
+                "gender": "male", "category": "bottoms", "style": "formal", "price": 140.00, "size": "30, 32, 34, 36, 38",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-366",
+            "title": "Aerodynamic Time-Trial Cycling Helmet",
+            "content": "Teardrop-shaped professional racing helmet with an integrated magnetic visor. Engineered in wind tunnels to minimize drag during triathlons and time trials. Features internal cooling channels and a carbon-kevlar shell.",
+            "keywords": ["cycling", "helmet", "sport", "black", "professional"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 280.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-367",
+            "title": "Artisan Silk Hand-Fan",
+            "content": "Luxury cooling accessory with hand-painted silk fabric and carved sandalwood ribs. Inspired by traditional Spanish and East Asian craftsmanship. A sophisticated piece for summer operas and garden weddings.",
+            "keywords": ["accessory", "silk", "floral", "summer", "luxury"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "elegant", "price": 75.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-368",
+            "title": "Heavy-Duty Leather Blacksmith Apron",
+            "content": "Industrial protective garment made from heat-resistant split cowhide leather. Features reinforced pockets for metalworking tools and adjustable neck straps. Protects against sparks, heat, and sharp edges.",
+            "keywords": ["apron", "leather", "workwear", "brown", "protection"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 95.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1598033129183-c4f50c7176c8?w=500"
+            }
+        },
+        {
+            "id": "cl-369",
+            "title": "Ultra-Compression Performance Tri-Suit",
+            "content": "One-piece racing suit for triathletes. Features water-repellent coating for the swim, a low-profile chamois for the bike, and high-stretch fabric for the run. Engineered to reduce muscle fatigue over long distances.",
+            "keywords": ["sport", "triathlon", "black", "active", "professional"],
+            "metadata": {
+                "gender": "unisex", "category": "outerwear", "style": "sporty", "price": 160.00, "size": "XS, S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500"
+            }
+        },
+        {
+            "id": "cl-370",
+            "title": "Beaded Art-Deco Flapper Dress",
+            "content": "Vintage-inspired shift dress with intricate hand-sewn beads and tiered fringe. Captures the glamour of the 1920s. Perfect for themed parties, jazz clubs, and vintage social events. Includes a matching headband.",
+            "keywords": ["dress", "vintage", "party", "black", "20s"],
+            "metadata": {
+                "gender": "female", "category": "dresses", "style": "vintage", "price": 145.00, "size": "S, M, L",
+                "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500"
+            }
+        },
+        {
+            "id": "cl-371",
+            "title": "Titanium-Coated Professional Hair Shears",
+            "content": "Elite barbering tool with razor-sharp edges and ergonomic offset handles. The titanium coating ensures durability and a smooth cutting action for high-end hair salons and precision styling.",
+            "keywords": ["tool", "professional", "beauty", "silver", "barber"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "practical", "price": 120.00, "size": "6-inch",
+                "image": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=500"
+            }
+        },
+        {
+            "id": "cl-372",
+            "title": "Minimalist Cashmere Beanie",
+            "content": "Ultra-soft, lightweight winter hat made from 100% sustainably sourced cashmere. Offers breathable warmth and a clean, luxury aesthetic for urban winter outfits and business-casual travel.",
+            "keywords": ["hat", "cashmere", "winter", "grey", "luxury"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "cozy", "price": 55.00, "size": "One Size",
+                "image": "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=500"
+            }
+        },
+        {
+            "id": "cl-373",
+            "title": "High-Visibility LED Armband",
+            "content": "Active safety accessory for night runners and cyclists. Features bright internal LEDs with flash and steady modes. Fully weather-resistant with a long-lasting rechargeable battery and elastic velcro strap.",
+            "keywords": ["safety", "running", "sport", "neon", "active"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 25.00, "size": "Adjustable",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-374",
+            "title": "Silk Velvet Opera Gloves",
+            "content": "Elegant over-the-elbow evening gloves in deep emerald velvet. Features a slight stretch for a perfect fit. Designed for high-formal events, debutante balls, and sophisticated winter galas.",
+            "keywords": ["gloves", "velvet", "green", "formal", "elegant"],
+            "metadata": {
+                "gender": "female", "category": "accessories", "style": "elegant", "price": 65.00, "size": "Standard",
+                "image": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=500"
+            }
+        },
+        {
+            "id": "cl-375",
+            "title": "Rugged Ripstop Field Trousers",
+            "content": "Durable outdoor pants with a water-repellent finish and reinforced seat. Features articulated knees for maximum mobility during trekking and tactical field work. Multiple secure cargo pockets included.",
+            "keywords": ["pants", "tactical", "outdoor", "khaki", "workwear"],
+            "metadata": {
+                "gender": "male", "category": "bottoms", "style": "practical", "price": 85.00, "size": "30-42",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
+        },
+        {
+            "id": "cl-376",
+            "title": "Hand-Polished Mother of Pearl Cufflinks",
+            "content": "Luxury shirt accessories featuring iridescent shell inlays set in sterling silver. A subtle and elegant gift for grooms or executive-level business professionals. Classic circular design.",
+            "keywords": ["accessory", "luxury", "silver", "wedding", "formal"],
+            "metadata": {
+                "gender": "male", "category": "accessories", "style": "formal", "price": 110.00, "size": "Small",
+                "image": "https://images.unsplash.com/photo-1589756823851-411584687574?w=500"
+            }
+        },
+        {
+            "id": "cl-377",
+            "title": "Anti-Chafe Sport Balm",
+            "content": "High-performance skin protection for endurance athletes. Prevents blisters and skin irritation caused by wetsuits, running gear, or cycling bibs. Sweat and water-resistant formula.",
+            "keywords": ["sport", "health", "active", "professional", "protection"],
+            "metadata": {
+                "gender": "unisex", "category": "accessories", "style": "sporty", "price": 15.00, "size": "100ml",
+                "image": "https://images.unsplash.com/photo-1506629082925-534e36d5a8c1?w=500"
+            }
+        },
+        {
+            "id": "cl-378",
+            "title": "Linen Newsboy Flat Cap",
+            "content": "Breathable summer headwear in a classic 8-panel construction. Made from cool oatmeal-colored linen. Inspired by early 20th-century heritage styles, perfect for casual outdoor events.",
+            "keywords": ["hat", "vintage", "linen", "beige", "summer"],
+            "metadata": {
+                "gender": "male", "category": "accessories", "style": "vintage", "price": 45.00, "size": "M, L, XL",
+                "image": "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=500"
+            }
+        },
+        {
+            "id": "cl-379",
+            "title": "Cyber-Reflective Techwear Joggers",
+            "content": "Avant-garde urban trousers with a multi-strap design and high-visibility reflective panels. Features a water-resistant shell and tapered fit. The core piece for modern techwear and street fashion aesthetics.",
+            "keywords": ["pants", "techwear", "black", "reflective", "urban"],
+            "metadata": {
+                "gender": "unisex", "category": "bottoms", "style": "edgy", "price": 135.00, "size": "S, M, L, XL",
+                "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500"
+            }
         }
+
     ]
 }

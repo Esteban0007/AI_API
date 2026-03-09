@@ -63,6 +63,15 @@ def _extract_summary(content: str) -> str:
     if not content:
         return ""
 
+    # For clothing items (Title: X Content: Y Keywords: Z format)
+    if "Content:" in content and "Keywords:" in content:
+        # Extract only the Content part
+        content_start = content.find("Content:") + len("Content:")
+        content_end = content.find("Keywords:")
+        if content_start > 0 and content_end > content_start:
+            return content[content_start:content_end].strip()
+    
+    # For movies (Summary: format)
     if "Summary:" not in content:
         return content.strip()
 

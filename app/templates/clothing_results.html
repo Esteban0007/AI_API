@@ -15,9 +15,9 @@
     {% for result in results %}
     <div class="product-card">
       <div class="product-image">
-        {% if result.get('metadata') and result['metadata'].get('image') %}
+        {% if result.get('metadata') and result['metadata'].get('source') %}
         <img
-          src="{{ result['metadata']['image'] }}"
+          src="{{ result['metadata']['source'] }}"
           alt="{{ result.get('title', 'Product') }}"
           loading="lazy"
         />
@@ -37,37 +37,23 @@
         {% endif %}
       </div>
       <div class="product-info">
-        <h3 class="product-title">{{ result.get('title', 'Product') }}</h3>
+        <h3 class="product-title">{{ result.get('title', 'Product')|capitalize }}</h3>
         <p class="product-description">
-          {{ result.get('summary') or (result.get('content', '')[:80]) }}...
+          {{ result.get('summary', 'No description available') }}
         </p>
 
         <div class="product-meta">
-          {% if result.get('metadata', {}).get('gender') %}
+          {% if result.get('metadata', {}).get('sex') %}
           <div class="meta-item">
             <span class="meta-label">Gender</span>
             <span class="meta-value"
-              >{{ result['metadata']['gender']|capitalize }}</span
-            >
-          </div>
-          {% endif %} {% if result.get('metadata', {}).get('category') %}
-          <div class="meta-item">
-            <span class="meta-label">Category</span>
-            <span class="meta-value"
-              >{{ result['metadata']['category']|capitalize }}</span
-            >
-          </div>
-          {% endif %} {% if result.get('metadata', {}).get('style') %}
-          <div class="meta-item">
-            <span class="meta-label">Style</span>
-            <span class="meta-value"
-              >{{ result['metadata']['style']|capitalize }}</span
+              >{{ result['metadata']['sex']|capitalize }}</span
             >
           </div>
           {% endif %}
         </div>
 
-        <div class="price">$49.99</div>
+        <div class="price">${{ result.get('metadata', {}).get('price', '0.00') }}</div>
 
         <div
           style="
