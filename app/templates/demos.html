@@ -83,6 +83,15 @@
     <h2>Spaceship Control</h2>
     <p>Search spaceship parts and activate operational modes.</p>
 
+    <!-- Interactive Spaceship Visualization -->
+    <div id="spaceship-viz" class="spaceship-container">
+      <div class="ship-body">
+        <div class="ship-core">🛸</div>
+        <div class="ship-effect"></div>
+      </div>
+      <div class="ship-status">IDLE</div>
+    </div>
+
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0">
       <button type="button" class="contrast" onclick="setShipQuery('charge')">
         ⚡ Charge
@@ -115,6 +124,7 @@
             name="query"
             placeholder="E.g: 'recharge energy', 'go stealth', 'defense shield'"
             autocomplete="off"
+            oninput="reactToInput(this.value)"
           />
           <input type="hidden" name="dataset" value="spaceship" />
           <span class="htmx-indicator loading">Searching...</span>
@@ -265,6 +275,244 @@
   .mode-shield .product-image {
     background: linear-gradient(135deg, #0c2e1c 0%, #2f9e44 100%);
   }
+
+  /* Spaceship Visualization */
+  .spaceship-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto;
+    padding: 3rem;
+    background: radial-gradient(circle, #0a0e27 0%, #000000 100%);
+    border-radius: 16px;
+    position: relative;
+    min-height: 250px;
+    overflow: hidden;
+  }
+
+  .ship-body {
+    position: relative;
+    transition: all 0.5s ease;
+  }
+
+  .ship-core {
+    font-size: 8rem;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    transition: all 0.5s ease;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .ship-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .ship-status {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  /* Ship States */
+  .ship-charging .ship-core {
+    filter: drop-shadow(0 0 40px #2d7dd2);
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  .ship-charging .ship-effect {
+    opacity: 0.6;
+    background: radial-gradient(circle, #2d7dd2 0%, transparent 70%);
+    animation: energyPulse 1.5s ease-in-out infinite;
+  }
+
+  .ship-charging .ship-status {
+    color: #2d7dd2;
+    text-shadow: 0 0 10px #2d7dd2;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes energyPulse {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.3;
+    }
+  }
+
+  .ship-flying .ship-core {
+    animation: flyUp 0.8s ease-in-out infinite;
+    filter: drop-shadow(0 10px 30px #145da0);
+  }
+
+  .ship-flying .ship-effect {
+    opacity: 0.8;
+    background: linear-gradient(180deg, transparent 0%, #145da0 100%);
+    width: 150px;
+    height: 300px;
+    top: 100%;
+    animation: thrust 0.3s ease-in-out infinite;
+  }
+
+  .ship-flying .ship-status {
+    color: #145da0;
+    text-shadow: 0 0 10px #145da0;
+  }
+
+  @keyframes flyUp {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(-2deg);
+    }
+  }
+
+  @keyframes thrust {
+    0%,
+    100% {
+      opacity: 0.8;
+      height: 300px;
+    }
+    50% {
+      opacity: 0.5;
+      height: 250px;
+    }
+  }
+
+  .ship-stealth .ship-core {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 5px #333);
+    animation: flicker 2s ease-in-out infinite;
+  }
+
+  .ship-stealth .ship-effect {
+    opacity: 0.2;
+    background: radial-gradient(circle, #333 0%, transparent 70%);
+  }
+
+  .ship-stealth .ship-status {
+    color: #555;
+    opacity: 0.5;
+  }
+
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.1;
+    }
+  }
+
+  .ship-attack .ship-core {
+    filter: drop-shadow(0 0 40px #9f1d1d);
+    animation: shake 0.3s ease-in-out infinite;
+  }
+
+  .ship-attack .ship-effect {
+    opacity: 0.9;
+    background: radial-gradient(circle, #9f1d1d 0%, transparent 70%);
+    animation: attackPulse 0.5s ease-in-out infinite;
+  }
+
+  .ship-attack .ship-status {
+    color: #9f1d1d;
+    text-shadow: 0 0 15px #9f1d1d;
+  }
+
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-3px) rotate(-1deg);
+    }
+    75% {
+      transform: translateX(3px) rotate(1deg);
+    }
+  }
+
+  @keyframes attackPulse {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.4;
+    }
+  }
+
+  .ship-shield .ship-core {
+    filter: drop-shadow(0 0 40px #2f9e44);
+  }
+
+  .ship-shield .ship-effect {
+    opacity: 0.7;
+    background: radial-gradient(
+      circle,
+      transparent 40%,
+      #2f9e44 45%,
+      transparent 50%
+    );
+    width: 250px;
+    height: 250px;
+    border: 3px solid #2f9e44;
+    animation: shieldRotate 2s linear infinite;
+  }
+
+  .ship-shield .ship-status {
+    color: #2f9e44;
+    text-shadow: 0 0 10px #2f9e44;
+  }
+
+  @keyframes shieldRotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 </style>
 
 <script>
@@ -292,6 +540,79 @@
     if (!input) return;
     input.value = value;
     input.dispatchEvent(new Event("keyup", { bubbles: true }));
+  }
+
+  function reactToInput(query) {
+    const viz = document.getElementById("spaceship-viz");
+    const status = viz.querySelector(".ship-status");
+    const lowerQuery = query.toLowerCase();
+
+    // Remove all state classes
+    viz.classList.remove(
+      "ship-charging",
+      "ship-flying",
+      "ship-stealth",
+      "ship-attack",
+      "ship-shield",
+    );
+
+    // Detect intent from input
+    if (
+      lowerQuery.includes("charge") ||
+      lowerQuery.includes("energy") ||
+      lowerQuery.includes("power") ||
+      lowerQuery.includes("solar") ||
+      lowerQuery.includes("recharge")
+    ) {
+      viz.classList.add("ship-charging");
+      status.textContent = "⚡ CHARGING";
+    } else if (
+      lowerQuery.includes("fly") ||
+      lowerQuery.includes("thrust") ||
+      lowerQuery.includes("speed") ||
+      lowerQuery.includes("boost") ||
+      lowerQuery.includes("propul")
+    ) {
+      viz.classList.add("ship-flying");
+      status.textContent = "🚀 FLYING";
+    } else if (
+      lowerQuery.includes("stealth") ||
+      lowerQuery.includes("hide") ||
+      lowerQuery.includes("invisible") ||
+      lowerQuery.includes("camouflage") ||
+      lowerQuery.includes("cloak")
+    ) {
+      viz.classList.add("ship-stealth");
+      status.textContent = "🕶️ STEALTH";
+    } else if (
+      lowerQuery.includes("attack") ||
+      lowerQuery.includes("fire") ||
+      lowerQuery.includes("shoot") ||
+      lowerQuery.includes("laser") ||
+      lowerQuery.includes("weapon")
+    ) {
+      viz.classList.add("ship-attack");
+      status.textContent = "🎯 ATTACK";
+    } else if (
+      lowerQuery.includes("shield") ||
+      lowerQuery.includes("protect") ||
+      lowerQuery.includes("defense") ||
+      lowerQuery.includes("barrier") ||
+      lowerQuery.includes("guard")
+    ) {
+      viz.classList.add("ship-shield");
+      status.textContent = "🛡️ SHIELD";
+    } else if (lowerQuery.length === 0) {
+      status.textContent = "IDLE";
+    } else {
+      // Random mode for any other input
+      const modes = ["charging", "flying", "stealth", "attack", "shield"];
+      const emojis = ["⚡", "🚀", "🕶️", "🎯", "🛡️"];
+      const randomIndex = Math.floor(Math.random() * modes.length);
+      viz.classList.add("ship-" + modes[randomIndex]);
+      status.textContent =
+        emojis[randomIndex] + " " + modes[randomIndex].toUpperCase();
+    }
   }
 </script>
 {% endblock %}
