@@ -1,0 +1,57 @@
+{% if error %}
+<article
+  style="
+    background-color: #ffebee;
+    border-color: #f44336;
+    color: #c62828;
+    margin-top: 1rem;
+  "
+>
+  <strong>Error:</strong> {{ error }}
+</article>
+{% elif results %}
+<div style="margin-top: 0.5rem">
+  {% for result in results %}
+  <div class="definition-card">
+    <img
+      class="definition-image"
+      src="{{ result.get('reference_image') }}"
+      alt="{{ result.get('title', 'Plant Part') }} reference"
+      loading="lazy"
+    />
+
+    <div>
+      <h3 class="product-title" style="margin-bottom: 0.35rem">
+        {{ result.get('title', 'Plant Part')|title }}
+      </h3>
+      <p class="product-description" style="margin: 0">
+        {{ result.get('summary', 'No definition available') }}
+      </p>
+
+      {% set words = result.get('keywords_list', []) %} {% if words %}
+      <div class="keyword-chips">
+        {% for word in words %}
+        <span class="keyword-chip">{{ word }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <div
+    style="
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--muted-color);
+      font-size: 0.85rem;
+    "
+  >
+    Showing {{ results|length }} definitions in {{ timing|round(2) }}ms
+  </div>
+</div>
+{% else %}
+<p style="color: var(--muted-color); text-align: center; margin-top: 1rem">
+  No definitions found yet. Try: root, stem, leaf, flower, fruit.
+</p>
+{% endif %}

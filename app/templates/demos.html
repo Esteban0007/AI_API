@@ -2,7 +2,9 @@
 {% block content %}
 <div class="container">
   <h1>🎯 Live Demos</h1>
-  <p>Explore semantic search across movies and spaceship systems.</p>
+  <p>
+    Explore semantic search across movies, spaceship systems, and definitions.
+  </p>
 
   <!-- Tabs Navigation -->
   <div
@@ -43,11 +45,25 @@
     >
       🚀 Spaceship
     </button>
+    <button
+      class="demo-tab-btn"
+      onclick="switchDemo('definitions')"
+      style="
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        color: var(--muted-color);
+      "
+    >
+      🌱 Definitions
+    </button>
   </div>
 
   <!-- Movies Demo -->
   <div id="movies-demo" class="demo-section">
-    <h2>Movie Search</h2>
+    <h2>🎬 Movie Search</h2>
     <p>Search from 1958 TMDB movies using semantic understanding.</p>
 
     <div style="margin: 2rem 0">
@@ -122,6 +138,57 @@
     </div>
 
     <div id="spaceship-results" style="display: none"></div>
+  </div>
+
+  <!-- Definitions Demo -->
+  <div id="definitions-demo" class="demo-section" style="display: none">
+    <h2>🌱 Plant Definitions</h2>
+    <p style="font-size: 0.9rem; color: var(--muted-color)">
+      Root · Stem · Leaf · Flower · Fruit
+    </p>
+
+    <div class="plant-viz">
+      <div class="plant-stem"></div>
+      <div class="plant-leaf left"></div>
+      <div class="plant-leaf right"></div>
+      <div class="plant-flower">🌸</div>
+      <span class="floating-word w1">photosynthesis</span>
+      <span class="floating-word w2">roots</span>
+      <span class="floating-word w3">pollination</span>
+      <span class="floating-word w4">nutrients</span>
+      <span class="floating-word w5">seeds</span>
+    </div>
+
+    <div style="margin: 1rem 0">
+      <label for="definitions-search" style="font-size: 0.9rem"
+        >Definition Console:</label
+      >
+      <form
+        hx-post="/search-partial"
+        hx-trigger="keyup changed delay:400ms from:#definitions-search"
+        hx-target="#definitions-results"
+        onsubmit="return false;"
+      >
+        <div class="search-box">
+          <input
+            type="text"
+            id="definitions-search"
+            name="query"
+            placeholder="Type: what is root, photosynthesis, flower function..."
+            autocomplete="off"
+            style="text-align: center"
+          />
+          <input type="hidden" name="dataset" value="definitions" />
+          <span class="htmx-indicator loading">Searching...</span>
+        </div>
+      </form>
+    </div>
+
+    <div id="definitions-results" style="margin-top: 1rem">
+      <p style="color: var(--muted-color); text-align: center">
+        Type to see plant definitions...
+      </p>
+    </div>
   </div>
 </div>
 
@@ -622,6 +689,159 @@
       opacity: 0.3;
     }
   }
+
+  .plant-viz {
+    position: relative;
+    height: 220px;
+    margin: 1rem 0 1.5rem 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #0e1f2a 0%, #132f1f 100%);
+    overflow: hidden;
+  }
+
+  .plant-stem {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    width: 10px;
+    height: 120px;
+    transform: translateX(-50%);
+    background: #3da35d;
+    border-radius: 10px;
+    animation: stemGrow 2.6s ease-in-out infinite alternate;
+  }
+
+  .plant-leaf {
+    position: absolute;
+    width: 60px;
+    height: 30px;
+    background: #63c174;
+    border-radius: 100% 0;
+    bottom: 80px;
+  }
+
+  .plant-leaf.left {
+    left: calc(50% - 58px);
+    transform: rotate(-35deg);
+  }
+
+  .plant-leaf.right {
+    left: calc(50% + 2px);
+    transform: rotate(145deg);
+  }
+
+  .plant-flower {
+    position: absolute;
+    left: 50%;
+    top: 32px;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    animation: flowerFloat 2.4s ease-in-out infinite;
+  }
+
+  .floating-word {
+    position: absolute;
+    color: #c6f6d5;
+    font-size: 0.82rem;
+    opacity: 0.85;
+    animation: drift 5s ease-in-out infinite;
+  }
+
+  .floating-word.w1 {
+    top: 18px;
+    left: 12%;
+    animation-delay: 0s;
+  }
+  .floating-word.w2 {
+    top: 44px;
+    right: 14%;
+    animation-delay: 0.8s;
+  }
+  .floating-word.w3 {
+    top: 108px;
+    left: 10%;
+    animation-delay: 1.4s;
+  }
+  .floating-word.w4 {
+    top: 132px;
+    right: 12%;
+    animation-delay: 2s;
+  }
+  .floating-word.w5 {
+    top: 74px;
+    left: 46%;
+    animation-delay: 2.5s;
+  }
+
+  .definition-card {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 1rem;
+    border: 1px solid var(--form-element-border-color);
+    border-radius: 12px;
+    padding: 0.9rem;
+    margin-bottom: 0.9rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .definition-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .keyword-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .keyword-chip {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(140, 255, 173, 0.12);
+    border: 1px solid rgba(140, 255, 173, 0.25);
+  }
+
+  @keyframes stemGrow {
+    from {
+      height: 108px;
+    }
+    to {
+      height: 126px;
+    }
+  }
+
+  @keyframes flowerFloat {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-6px);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.75;
+    }
+    50% {
+      transform: translateY(-7px);
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .definition-card {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <script>
@@ -629,6 +849,7 @@
     // Hide all demos
     document.getElementById("movies-demo").style.display = "none";
     document.getElementById("spaceship-demo").style.display = "none";
+    document.getElementById("definitions-demo").style.display = "none";
 
     // Remove active state from all buttons
     document.querySelectorAll(".demo-tab-btn").forEach((btn) => {

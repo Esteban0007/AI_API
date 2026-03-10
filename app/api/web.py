@@ -48,6 +48,7 @@ def get_search_engine(dataset: str = "movies"):
         tenant_map = {
             "movies": "admin",  # Admin tenant has movies
             "spaceship": "user_1",  # User 1 tenant has spaceship parts
+            "definitions": "user_7",  # User 7 tenant has plant definitions
         }
         tenant_id = tenant_map.get(dataset, "admin")
 
@@ -92,6 +93,27 @@ def _extract_summary(content: str) -> str:
             summary_parts.append(line)
 
     return " ".join(part for part in summary_parts if part).strip() or content.strip()
+
+
+def _extract_keywords(content: str) -> list[str]:
+    """Extract keyword list from stored content text."""
+    if not content or "Keywords:" not in content:
+        return []
+
+    keyword_text = content.split("Keywords:", 1)[1].strip()
+    return [k.strip() for k in keyword_text.split(",") if k.strip()]
+
+
+def _get_definition_image(title: str) -> str:
+    """Get reference image for plant definition cards."""
+    image_map = {
+        "root": "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735",
+        "stem": "https://images.unsplash.com/photo-1464226184884-fa280b87c399",
+        "leaf": "https://images.unsplash.com/photo-1472141521881-95d0e87e2e39",
+        "flower": "https://images.unsplash.com/photo-1490750967868-88aa4486c946",
+        "fruit": "https://images.unsplash.com/photo-1619566636858-adf3ef46400b",
+    }
+    return image_map.get((title or "").strip().lower(), image_map["leaf"])
 
 
 @router.get("/", response_class=HTMLResponse, include_in_schema=False)
@@ -143,6 +165,11 @@ async def search_partial(
                     "spaceship_results.html",
                     {"request": request, "results": [], "timing": 0},
                 )
+            elif dataset == "definitions":
+                return templates.TemplateResponse(
+                    "definitions_results.html",
+                    {"request": request, "results": [], "timing": 0},
+                )
             else:
                 return templates.TemplateResponse(
                     "results_list.html",
@@ -155,10 +182,17 @@ async def search_partial(
 
         for result in results:
             result["summary"] = _extract_summary(result.get("content", ""))
+            result["keywords_list"] = _extract_keywords(result.get("content", ""))
+            result["reference_image"] = _get_definition_image(result.get("title", ""))
 
         if dataset == "spaceship":
             return templates.TemplateResponse(
                 "spaceship_results.html",
+                {"request": request, "results": results, "timing": timing},
+            )
+        elif dataset == "definitions":
+            return templates.TemplateResponse(
+                "definitions_results.html",
                 {"request": request, "results": results, "timing": timing},
             )
         else:
@@ -168,9 +202,11 @@ async def search_partial(
             )
     except Exception as e:
         logger.error(f"Search error: {e}")
-        template = (
-            "spaceship_results.html" if dataset == "spaceship" else "results_list.html"
-        )
+        template = "results_list.html"
+        if dataset == "spaceship":
+            template = "spaceship_results.html"
+        elif dataset == "definitions":
+            template = "definitions_results.html"
         return templates.TemplateResponse(
             template,
             {"request": request, "results": [], "timing": 0, "error": str(e)},
