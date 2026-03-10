@@ -157,6 +157,11 @@
       <span class="floating-word w3">pollination</span>
       <span class="floating-word w4">nutrients</span>
       <span class="floating-word w5">seeds</span>
+
+      <div class="plant-def-overlay">
+        <div id="def-viz-1" class="plant-def-chip">🌱 Definition #1</div>
+        <div id="def-viz-2" class="plant-def-chip">🌿 Definition #2</div>
+      </div>
     </div>
 
     <div style="margin: 1rem 0">
@@ -771,6 +776,28 @@
     top: 74px;
     left: 46%;
     animation-delay: 2.5s;
+  }
+
+  .plant-def-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    display: grid;
+    gap: 0.35rem;
+    padding: 0 0.75rem;
+  }
+
+  .plant-def-chip {
+    font-size: 0.78rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(198, 246, 213, 0.35);
+    color: #e8fff0;
+    border-radius: 8px;
+    padding: 0.25rem 0.45rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .definition-card {
