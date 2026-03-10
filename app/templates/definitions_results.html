@@ -11,17 +11,7 @@
 </article>
 {% elif results %}
 <div style="margin-top: 0.5rem">
-  {% set top_results = results[:2] %} {% if top_results|length > 0 %}
-  <div id="def-viz-1" class="plant-def-chip" hx-swap-oob="true">
-    🌱 {{ top_results[0].get('title', 'Definition')|title }}: {{
-    top_results[0].get('summary', 'No definition available') }}
-  </div>
-  {% endif %} {% if top_results|length > 1 %}
-  <div id="def-viz-2" class="plant-def-chip" hx-swap-oob="true">
-    🌿 {{ top_results[1].get('title', 'Definition')|title }}: {{
-    top_results[1].get('summary', 'No definition available') }}
-  </div>
-  {% endif %} {% for result in top_results %}
+  {% set top_results = results[:2] %} {% for result in top_results %}
   <div class="definition-card">
     <img
       class="definition-image"
@@ -37,19 +27,6 @@
       <p class="product-description" style="margin: 0">
         {{ result.get('summary', 'No definition available') }}
       </p>
-
-      <div class="similarity-score" style="margin-top: 0.45rem">
-        Score: {{ (((result.get('score', result.get('similarity_score', 0)) or
-        0) * 100))|round(1) }}%
-      </div>
-
-      {% set words = result.get('keywords_list', []) %} {% if words %}
-      <div class="keyword-chips">
-        {% for word in words %}
-        <span class="keyword-chip">{{ word }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
     </div>
   </div>
   {% endfor %}
