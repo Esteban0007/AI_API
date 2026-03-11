@@ -180,10 +180,14 @@ async def search_partial(
         search_engine = get_search_engine(dataset)
         results, timing = search_engine.search(query, top_k=5, include_content=True)
 
-        for result in results:
-            result["summary"] = _extract_summary(result.get("content", ""))
-            result["keywords_list"] = _extract_keywords(result.get("content", ""))
-            result["reference_image"] = _get_definition_image(result.get("title", ""))
+        # Only process special fields for spaceship/legacy datasets
+        if dataset != "definitions":
+            for result in results:
+                result["summary"] = _extract_summary(result.get("content", ""))
+                result["keywords_list"] = _extract_keywords(result.get("content", ""))
+                result["reference_image"] = _get_definition_image(
+                    result.get("title", "")
+                )
 
         if dataset == "spaceship":
             return templates.TemplateResponse(
