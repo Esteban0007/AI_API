@@ -1,0 +1,104 @@
+{
+    "documents": [
+        {
+            "id": "doc-035",
+            "title": "Quantum Superposition",
+            "content": "A fundamental principle of quantum mechanics that states a physical system—such as an electron—exists partly in all its particular theoretically possible states simultaneously before being measured.",
+            "keywords": ["physics", "quantum", "science"],
+            "metadata": {
+                "category": "science",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-036",
+            "title": "Maslow's Hierarchy of Needs",
+            "content": "A motivational theory in psychology comprising a five-tier model of human needs, often depicted as hierarchical levels within a pyramid, ranging from physiological needs to self-actualization.",
+            "keywords": ["psychology", "motivation", "sociology"],
+            "metadata": {
+                "category": "psychology",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-037",
+            "title": "Gerrymandering",
+            "content": "The practice of setting boundaries of electoral districts to favor specific political interests within legislative bodies, often resulting in districts with convoluted shapes.",
+            "keywords": ["politics", "law", "government"],
+            "metadata": {
+                "category": "social science",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-038",
+            "title": "The Golden Ratio",
+            "content": "A mathematical ratio commonly found in nature, art, and architecture (approximately 1.618). It is believed to create aesthetically pleasing compositions.",
+            "keywords": ["mathematics", "art", "geometry"],
+            "metadata": {
+                "category": "mathematics",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-039",
+            "title": "Edge Computing",
+            "content": "A distributed computing paradigm that brings computation and data storage closer to the sources of data, such as IoT devices, to improve response times and save bandwidth.",
+            "keywords": ["tech", "network", "iot"],
+            "metadata": {
+                "category": "technology",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-040",
+            "title": "Plato's Allegory of the Cave",
+            "content": "A philosophical metaphor exploring the effects of education on the human soul and the nature of reality, depicting prisoners who mistake shadows on a wall for real objects.",
+            "keywords": ["philosophy", "literature", "history"],
+            "metadata": {
+                "category": "humanities",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-041",
+            "title": "Carbon Sequestration",
+            "content": "The process of capturing and storing atmospheric carbon dioxide. It is one method of reducing the amount of carbon dioxide in the atmosphere with the goal of reducing global climate change.",
+            "keywords": ["environment", "ecology", "carbon"],
+            "metadata": {
+                "category": "environment",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-042",
+            "title": "Turing Test",
+            "content": "A method of inquiry in artificial intelligence for determining whether or not a computer is capable of thinking like a human being.",
+            "keywords": ["ai", "computing", "philosophy"],
+            "metadata": {
+                "category": "technology",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-043",
+            "title": "Pareto Principle",
+            "content": "Also known as the 80/20 rule, it states that for many outcomes, roughly 80% of consequences come from 20% of causes.",
+            "keywords": ["economics", "management", "statistics"],
+            "metadata": {
+                "category": "business",
+                "language": "en"
+            }
+        },
+        {
+            "id": "doc-044",
+            "title": "The Doppler Effect",
+            "content": "The change in frequency of a wave in relation to an observer who is moving relative to the wave source, commonly heard when a vehicle sounding a siren approaches and recedes.",
+            "keywords": ["physics", "sound", "science"],
+            "metadata": {
+                "category": "science",
+                "language": "en"
+            }
+        }
+    ]
+}

@@ -11,24 +11,28 @@
 </article>
 {% elif results %}
 <div style="margin-top: 0.5rem">
-  {% set top_results = results[:2] %} {% for result in top_results %}
-  <div class="definition-card">
-    <img
-      class="definition-image"
-      src="{{ result.get('reference_image') }}"
-      alt="{{ result.get('title', 'Plant Part') }} reference"
-      loading="lazy"
-    />
-
-    <div>
-      <h3 class="product-title" style="margin-bottom: 0.35rem">
-        {{ result.get('title', 'Plant Part')|title }}
-      </h3>
-      <p class="product-description" style="margin: 0">
-        {{ result.get('summary', 'No definition available') }}
-      </p>
-    </div>
-  </div>
+  {% for result in results %}
+  <article
+    style="
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--form-element-border-color);
+      border-radius: 0.5rem;
+    "
+  >
+    <h3 style="margin: 0 0 0.5rem 0">
+      📄 {{ result.get('title', 'Definition') }}
+    </h3>
+    <p
+      style="
+        margin: 0;
+        color: var(--form-element-valid-border-color);
+        line-height: 1.5;
+      "
+    >
+      {{ result.get('content', 'No definition available') }}
+    </p>
+  </article>
   {% endfor %}
 
   <div
@@ -39,12 +43,11 @@
       font-size: 0.85rem;
     "
   >
-    Showing {{ top_results|length }} of {{ results|length }} definitions in {{
-    timing|round(2) }}ms
+    Showing {{ results|length }} definitions in {{ timing|round(2) }}ms
   </div>
 </div>
 {% else %}
 <p style="color: var(--muted-color); text-align: center; margin-top: 1rem">
-  No definitions found yet. Try: root, stem, leaf, flower, fruit.
+  Type to search definitions...
 </p>
 {% endif %}

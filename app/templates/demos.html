@@ -57,7 +57,7 @@
         color: var(--muted-color);
       "
     >
-      🌱 Definitions
+      📄 Definitions
     </button>
   </div>
 
@@ -142,24 +142,14 @@
 
   <!-- Definitions Demo -->
   <div id="definitions-demo" class="demo-section" style="display: none">
-    <h2>🌱 Plant Definitions</h2>
+    <h2>📄 Definitions</h2>
     <p style="font-size: 0.9rem; color: var(--muted-color)">
-      Root · Stem · Leaf · Flower · Fruit
+      Explore definitions on concepts, science, philosophy, and more.
     </p>
-
-    <div class="plant-viz">
-      <div class="plant-root root-1"></div>
-      <div class="plant-root root-2"></div>
-      <div class="plant-root root-3"></div>
-      <div class="plant-stem"></div>
-      <div class="plant-leaf left"></div>
-      <div class="plant-leaf right"></div>
-      <div class="plant-flower">🌸</div>
-    </div>
 
     <div style="margin: 1rem 0">
       <label for="definitions-search" style="font-size: 0.9rem"
-        >Definition Console:</label
+        >Search definitions:</label
       >
       <form
         hx-post="/search-partial"
@@ -172,7 +162,7 @@
             type="text"
             id="definitions-search"
             name="query"
-            placeholder="Type: what is root, photosynthesis, flower function..."
+            placeholder="E.g: quantum physics, psychology, mathematics..."
             autocomplete="off"
             style="text-align: center"
           />
@@ -184,7 +174,7 @@
 
     <div id="definitions-results" style="margin-top: 1rem">
       <p style="color: var(--muted-color); text-align: center">
-        Type to see plant definitions...
+        Type to see definitions...
       </p>
     </div>
   </div>
