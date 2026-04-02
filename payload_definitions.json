@@ -2,102 +2,102 @@
     "documents": [
         {
             "id": "doc-035",
-            "title": "Quantum Superposition",
-            "content": "A fundamental principle of quantum mechanics that states a physical system—such as an electron—exists partly in all its particular theoretically possible states simultaneously before being measured.",
-            "keywords": ["physics", "quantum", "science"],
+            "title": "Machine Learning",
+            "content": "Rama de la inteligencia artificial donde un sistema aprende patrones a partir de datos para hacer predicciones o decisiones.",
+            "keywords": ["ia", "ai", "machine learning", "modelos", "datos"],
             "metadata": {
-                "category": "science",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-036",
-            "title": "Maslow's Hierarchy of Needs",
-            "content": "A motivational theory in psychology comprising a five-tier model of human needs, often depicted as hierarchical levels within a pyramid, ranging from physiological needs to self-actualization.",
-            "keywords": ["psychology", "motivation", "sociology"],
+            "title": "Deep Learning",
+            "content": "Tipo de machine learning que usa redes neuronales con muchas capas para resolver tareas complejas como imagen, audio y texto.",
+            "keywords": ["deep learning", "redes neuronales", "ia", "vision", "nlp"],
             "metadata": {
-                "category": "psychology",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-037",
-            "title": "Gerrymandering",
-            "content": "The practice of setting boundaries of electoral districts to favor specific political interests within legislative bodies, often resulting in districts with convoluted shapes.",
-            "keywords": ["politics", "law", "government"],
+            "title": "Neural Network",
+            "content": "Modelo inspirado en el cerebro, formado por nodos conectados, que transforma entradas en salidas aprendiendo pesos internos.",
+            "keywords": ["neural network", "red neuronal", "nodos", "pesos", "modelo"],
             "metadata": {
-                "category": "social science",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-038",
-            "title": "The Golden Ratio",
-            "content": "A mathematical ratio commonly found in nature, art, and architecture (approximately 1.618). It is believed to create aesthetically pleasing compositions.",
-            "keywords": ["mathematics", "art", "geometry"],
+            "title": "Training Data",
+            "content": "Conjunto de ejemplos que se usa para entrenar un modelo y enseñarle la relación entre entradas y resultados.",
+            "keywords": ["training data", "datos", "entrenamiento", "dataset", "ejemplos"],
             "metadata": {
-                "category": "mathematics",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-039",
-            "title": "Edge Computing",
-            "content": "A distributed computing paradigm that brings computation and data storage closer to the sources of data, such as IoT devices, to improve response times and save bandwidth.",
-            "keywords": ["tech", "network", "iot"],
+            "title": "Overfitting",
+            "content": "Cuando un modelo memoriza demasiado los datos de entrenamiento y luego falla al generalizar en datos nuevos.",
+            "keywords": ["overfitting", "generalizacion", "error", "modelo", "entrenamiento"],
             "metadata": {
-                "category": "technology",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-040",
-            "title": "Plato's Allegory of the Cave",
-            "content": "A philosophical metaphor exploring the effects of education on the human soul and the nature of reality, depicting prisoners who mistake shadows on a wall for real objects.",
-            "keywords": ["philosophy", "literature", "history"],
+            "title": "Underfitting",
+            "content": "Cuando un modelo es demasiado simple y no aprende bien el patrón, rindiendo mal incluso en entrenamiento.",
+            "keywords": ["underfitting", "modelo simple", "patron", "error", "aprendizaje"],
             "metadata": {
-                "category": "humanities",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-041",
-            "title": "Carbon Sequestration",
-            "content": "The process of capturing and storing atmospheric carbon dioxide. It is one method of reducing the amount of carbon dioxide in the atmosphere with the goal of reducing global climate change.",
-            "keywords": ["environment", "ecology", "carbon"],
+            "title": "Model Inference",
+            "content": "Fase en la que un modelo ya entrenado recibe datos nuevos y produce una predicción o respuesta.",
+            "keywords": ["inference", "inferencia", "prediccion", "produccion", "modelo"],
             "metadata": {
-                "category": "environment",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-042",
-            "title": "Turing Test",
-            "content": "A method of inquiry in artificial intelligence for determining whether or not a computer is capable of thinking like a human being.",
-            "keywords": ["ai", "computing", "philosophy"],
+            "title": "Tokenization",
+            "content": "Proceso de dividir texto en partes pequeñas llamadas tokens para que un modelo de lenguaje pueda procesarlo.",
+            "keywords": ["tokenization", "tokens", "nlp", "texto", "llm"],
             "metadata": {
-                "category": "technology",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-043",
-            "title": "Pareto Principle",
-            "content": "Also known as the 80/20 rule, it states that for many outcomes, roughly 80% of consequences come from 20% of causes.",
-            "keywords": ["economics", "management", "statistics"],
+            "title": "Embedding",
+            "content": "Representación numérica de un texto o elemento que permite comparar significado y buscar similitud semántica.",
+            "keywords": ["embedding", "vectores", "similitud", "semantica", "busqueda"],
             "metadata": {
-                "category": "business",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         },
         {
             "id": "doc-044",
-            "title": "The Doppler Effect",
-            "content": "The change in frequency of a wave in relation to an observer who is moving relative to the wave source, commonly heard when a vehicle sounding a siren approaches and recedes.",
-            "keywords": ["physics", "sound", "science"],
+            "title": "Fine-tuning",
+            "content": "Ajuste adicional de un modelo ya preentrenado con datos específicos para una tarea concreta.",
+            "keywords": ["fine-tuning", "ajuste", "modelo", "especializacion", "transfer learning"],
             "metadata": {
-                "category": "science",
-                "language": "en"
+                "category": "artificial-intelligence",
+                "language": "es"
             }
         }
     ]
