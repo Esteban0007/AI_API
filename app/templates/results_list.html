@@ -23,17 +23,25 @@
       <div
         style="
           color: var(--muted-color);
-          font-size: 0.85rem;
-          line-height: 1.4;
-          margin-top: 0.3rem;
+          font-size: 0.9rem;
+          line-height: 1.8;
+          margin-top: 0.5rem;
           white-space: pre-wrap;
           word-wrap: break-word;
+          letter-spacing: 0.2px;
         "
       >
-        {% if include_content and result.get('content') %} {{ result['content']
-        }} {% elif result.get('summary') %} {{ result['summary'] | truncate(150)
-        }} {% elif result.get('content') %} {{ result['content'] | truncate(150)
-        }} {% endif %}
+        {% if include_content and result.get('content') %} {% set content =
+        result['content'].replace('Question ', '<strong
+          style="
+            color: var(--primary-color);
+            margin-top: 0.8rem;
+            display: block;
+          "
+          >Question ') %} {% set content = content.replace('Answer:', '</strong
+        ><br />Answer:') %} {{ content | safe }} {% elif result.get('summary')
+        %} {{ result['summary'] | truncate(150) }} {% elif result.get('content')
+        %} {{ result['content'] | truncate(150) }} {% endif %}
       </div>
       {% endif %}
     </div>
