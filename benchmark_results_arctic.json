@@ -1,0 +1,959 @@
+{
+  "results": {
+    "timestamp": 1775158555.6123579,
+    "server": "https://api.readyapi.net",
+    "queries_tested": 50,
+    "latencies": [
+      322.573184967041,
+      215.81482887268066,
+      220.35908699035645,
+      231.25982284545898,
+      225.7399559020996,
+      227.87094116210938,
+      225.95906257629395,
+      218.12105178833008,
+      214.66374397277832,
+      220.1521396636963,
+      224.03407096862793,
+      231.2932014465332,
+      238.4328842163086,
+      221.74906730651855,
+      224.62797164916992,
+      231.42004013061523,
+      223.88315200805664,
+      232.72299766540527,
+      226.6528606414795,
+      237.64801025390625,
+      223.38509559631348,
+      236.77921295166016,
+      226.58324241638184,
+      224.8220443725586,
+      221.05979919433594,
+      233.29782485961914,
+      241.8692111968994,
+      248.00992012023926,
+      234.18188095092773,
+      239.14003372192383,
+      232.2831153869629,
+      223.60897064208984,
+      232.98192024230957,
+      239.884614944458,
+      235.825777053833,
+      239.33696746826172,
+      229.3112277984619,
+      230.68523406982422,
+      234.6341609954834,
+      232.59806632995605,
+      231.38689994812012,
+      229.02488708496094,
+      222.43428230285645,
+      238.37900161743164,
+      238.07072639465332,
+      295.2098846435547,
+      237.29181289672852,
+      241.52493476867676,
+      248.0628490447998,
+      232.15889930725098
+    ],
+    "ndcg_scores": [
+      0.4736842105263158,
+      0.8612611068778384,
+      0.2734817064582438,
+      0.33494531740415406,
+      0.4736842105263158,
+      0.4736842105263158,
+      0.0,
+      0.0,
+      0.4736842105263158,
+      0.8612611068778384,
+      0.8612611068778384,
+      0.8612611068778384,
+      0.4736842105263158,
+      0.8458456743087092,
+      0.5263157894736842,
+      0.8612611068778384,
+      0.8458456743087092,
+      0.7631578947368421,
+      0.583999482703426,
+      0.2734817064582438,
+      0.33494531740415406,
+      1.0,
+      0.4736842105263158,
+      0.8612611068778384,
+      0.8458456743087092,
+      0.7071067811865475,
+      0.5407106679945399,
+      0.8612611068778384,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.7071067811865475,
+      1.0,
+      1.0,
+      1.0,
+      0.7071067811865475,
+      1.0,
+      1.0,
+      0.7071067811865475,
+      0.5773502691896258,
+      0.5773502691896258,
+      1.0,
+      0.7071067811865475,
+      0.4472135954999579,
+      0.0,
+      1.0,
+      0.5773502691896258
+    ],
+    "query_results": [
+      {
+        "query": "How to sign up and get API key",
+        "lang": "en",
+        "latency_ms": 322.57,
+        "ndcg@5": 0.474,
+        "expected": [
+          "How to Sign Up and Get Your API Key",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Understanding Your API Key and Keeping It Safe",
+          "Using Python or JavaScript Instead of Curl",
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "uploading documents to search",
+        "lang": "en",
+        "latency_ms": 215.81,
+        "ndcg@5": 0.861,
+        "expected": [
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads"
+        ],
+        "actual_top5": [
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions"
+        ]
+      },
+      {
+        "query": "JSON format structure fields",
+        "lang": "en",
+        "latency_ms": 220.36,
+        "ndcg@5": 0.273,
+        "expected": [
+          "Understanding the JSON Format for Uploads",
+          "How to Upload Your Documents to Search"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Using Python or JavaScript Instead of Curl",
+          "How to Upload Your Documents to Search",
+          "Making Search Work - Common Questions",
+          "Understanding Your API Key and Keeping It Safe"
+        ]
+      },
+      {
+        "query": "check statistics verify documents",
+        "lang": "en",
+        "latency_ms": 231.26,
+        "ndcg@5": 0.335,
+        "expected": [
+          "Finding Your Documents After Upload - Check Statistics",
+          "How to Upload Your Documents to Search"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Understanding the JSON Format for Uploads",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "common questions FAQ search",
+        "lang": "en",
+        "latency_ms": 225.74,
+        "ndcg@5": 0.474,
+        "expected": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Testing Search with the Live Demo",
+          "How to Upload Your Documents to Search",
+          "Pricing Plans and Understanding Your Quota",
+          "Understanding What ReadyAPI Does"
+        ]
+      },
+      {
+        "query": "Python JavaScript code example",
+        "lang": "en",
+        "latency_ms": 227.87,
+        "ndcg@5": 0.474,
+        "expected": [
+          "Using Python or JavaScript Instead of Curl",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Testing Search with the Live Demo",
+          "Understanding the JSON Format for Uploads",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search"
+        ]
+      },
+      {
+        "query": "API key security protection",
+        "lang": "en",
+        "latency_ms": 225.96,
+        "ndcg@5": 0.0,
+        "expected": [
+          "Understanding Your API Key and Keeping It Safe",
+          "How to Sign Up and Get Your API Key"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Using Python or JavaScript Instead of Curl",
+          "Getting Help - What To Do When Something Goes Wrong",
+          "How to Upload Your Documents to Search"
+        ]
+      },
+      {
+        "query": "pricing plans early adopter free",
+        "lang": "en",
+        "latency_ms": 218.12,
+        "ndcg@5": 0.0,
+        "expected": [
+          "Pricing Plans and Understanding Your Quota"
+        ],
+        "actual_top5": [
+          "Testing Search with the Live Demo",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Understanding What ReadyAPI Does"
+        ]
+      },
+      {
+        "query": "testing demo interactive search",
+        "lang": "en",
+        "latency_ms": 214.66,
+        "ndcg@5": 0.474,
+        "expected": [
+          "Testing Search with the Live Demo",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Understanding What ReadyAPI Does",
+          "Understanding the JSON Format for Uploads"
+        ]
+      },
+      {
+        "query": "troubleshooting help problems errors",
+        "lang": "en",
+        "latency_ms": 220.15,
+        "ndcg@5": 0.861,
+        "expected": [
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Understanding the JSON Format for Uploads",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "semantic search meaning concept",
+        "lang": "en",
+        "latency_ms": 224.03,
+        "ndcg@5": 0.861,
+        "expected": [
+          "Understanding What ReadyAPI Does",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Understanding What ReadyAPI Does",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo",
+          "How to Upload Your Documents to Search"
+        ]
+      },
+      {
+        "query": "curl command request syntax",
+        "lang": "en",
+        "latency_ms": 231.29,
+        "ndcg@5": 0.861,
+        "expected": [
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Making Search Work - Common Questions",
+          "Understanding the JSON Format for Uploads",
+          "Understanding Your API Key and Keeping It Safe"
+        ]
+      },
+      {
+        "query": "document upload batch API",
+        "lang": "en",
+        "latency_ms": 238.43,
+        "ndcg@5": 0.474,
+        "expected": [
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads"
+        ],
+        "actual_top5": [
+          "Understanding the JSON Format for Uploads",
+          "Using Python or JavaScript Instead of Curl",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "response time latency performance",
+        "lang": "en",
+        "latency_ms": 221.75,
+        "ndcg@5": 0.846,
+        "expected": [
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo"
+        ],
+        "actual_top5": [
+          "Testing Search with the Live Demo",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Pricing Plans and Understanding Your Quota",
+          "Using Python or JavaScript Instead of Curl"
+        ]
+      },
+      {
+        "query": "delete remove document API",
+        "lang": "en",
+        "latency_ms": 224.63,
+        "ndcg@5": 0.526,
+        "expected": [
+          "Making Search Work - Common Questions",
+          "Getting Help - What To Do When Something Goes Wrong"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Using Python or JavaScript Instead of Curl"
+        ]
+      },
+      {
+        "query": "top_k parameter results limit",
+        "lang": "en",
+        "latency_ms": 231.42,
+        "ndcg@5": 0.861,
+        "expected": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Understanding Your API Key and Keeping It Safe"
+        ]
+      },
+      {
+        "query": "relevance score ranking results",
+        "lang": "en",
+        "latency_ms": 223.88,
+        "ndcg@5": 0.846,
+        "expected": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo",
+          "Understanding What ReadyAPI Does",
+          "How to Upload Your Documents to Search"
+        ]
+      },
+      {
+        "query": "environment variables secrets management",
+        "lang": "en",
+        "latency_ms": 232.72,
+        "ndcg@5": 0.763,
+        "expected": [
+          "Understanding Your API Key and Keeping It Safe",
+          "Using Python or JavaScript Instead of Curl"
+        ],
+        "actual_top5": [
+          "Understanding Your API Key and Keeping It Safe",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Using Python or JavaScript Instead of Curl",
+          "Pricing Plans and Understanding Your Quota"
+        ]
+      },
+      {
+        "query": "private documents account security",
+        "lang": "en",
+        "latency_ms": 226.65,
+        "ndcg@5": 0.584,
+        "expected": [
+          "Making Search Work - Common Questions",
+          "Understanding Your API Key and Keeping It Safe"
+        ],
+        "actual_top5": [
+          "How to Upload Your Documents to Search",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Understanding Your API Key and Keeping It Safe"
+        ]
+      },
+      {
+        "query": "first search request example walkthrough",
+        "lang": "en",
+        "latency_ms": 237.65,
+        "ndcg@5": 0.273,
+        "expected": [
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search"
+        ],
+        "actual_top5": [
+          "Testing Search with the Live Demo",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads",
+          "Understanding What ReadyAPI Does"
+        ]
+      },
+      {
+        "query": "what is ReadyAPI does",
+        "lang": "en",
+        "latency_ms": 223.39,
+        "ndcg@5": 0.335,
+        "expected": [
+          "Understanding What ReadyAPI Does",
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Testing Search with the Live Demo",
+          "How to Sign Up and Get Your API Key",
+          "Understanding Your API Key and Keeping It Safe"
+        ]
+      },
+      {
+        "query": "registration email verification account",
+        "lang": "en",
+        "latency_ms": 236.78,
+        "ndcg@5": 1.0,
+        "expected": [
+          "How to Sign Up and Get Your API Key"
+        ],
+        "actual_top5": [
+          "How to Sign Up and Get Your API Key",
+          "Finding Your Documents After Upload - Check Statistics",
+          "How to Upload Your Documents to Search",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request"
+        ]
+      },
+      {
+        "query": "quota limits searches per month",
+        "lang": "en",
+        "latency_ms": 226.58,
+        "ndcg@5": 0.474,
+        "expected": [
+          "Pricing Plans and Understanding Your Quota",
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Testing Search with the Live Demo",
+          "Finding Your Documents After Upload - Check Statistics"
+        ]
+      },
+      {
+        "query": "invalid API key error solution",
+        "lang": "en",
+        "latency_ms": 224.82,
+        "ndcg@5": 0.861,
+        "expected": [
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Understanding Your API Key and Keeping It Safe"
+        ],
+        "actual_top5": [
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Understanding Your API Key and Keeping It Safe",
+          "How to Sign Up and Get Your API Key",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions"
+        ]
+      },
+      {
+        "query": "no results search troubleshooting fix",
+        "lang": "en",
+        "latency_ms": 221.06,
+        "ndcg@5": 0.846,
+        "expected": [
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "c\u00f3mo registrarse y obtener clave API",
+        "lang": "es",
+        "latency_ms": 233.3,
+        "ndcg@5": 0.707,
+        "expected": [
+          "How to Sign Up and Get Your API Key"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "How to Sign Up and Get Your API Key",
+          "How to Upload Your Documents to Search",
+          "Understanding Your API Key and Keeping It Safe",
+          "Getting Help - What To Do When Something Goes Wrong"
+        ]
+      },
+      {
+        "query": "subir documentos para buscar",
+        "lang": "es",
+        "latency_ms": 241.87,
+        "ndcg@5": 0.541,
+        "expected": [
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "formato JSON estructura campos",
+        "lang": "es",
+        "latency_ms": 248.01,
+        "ndcg@5": 0.861,
+        "expected": [
+          "Understanding the JSON Format for Uploads",
+          "How to Upload Your Documents to Search"
+        ],
+        "actual_top5": [
+          "Understanding the JSON Format for Uploads",
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Using Python or JavaScript Instead of Curl",
+          "Finding Your Documents After Upload - Check Statistics"
+        ]
+      },
+      {
+        "query": "verificar documentos estad\u00edsticas",
+        "lang": "es",
+        "latency_ms": 234.18,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Finding Your Documents After Upload - Check Statistics"
+        ],
+        "actual_top5": [
+          "Finding Your Documents After Upload - Check Statistics",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Understanding What ReadyAPI Does"
+        ]
+      },
+      {
+        "query": "preguntas frecuentes b\u00fasqueda",
+        "lang": "es",
+        "latency_ms": 239.14,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo",
+          "Finding Your Documents After Upload - Check Statistics"
+        ]
+      },
+      {
+        "query": "ejemplo c\u00f3digo Python JavaScript",
+        "lang": "es",
+        "latency_ms": 232.28,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Using Python or JavaScript Instead of Curl"
+        ],
+        "actual_top5": [
+          "Using Python or JavaScript Instead of Curl",
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads",
+          "Making Search Work - Common Questions"
+        ]
+      },
+      {
+        "query": "seguridad clave API proteger",
+        "lang": "es",
+        "latency_ms": 223.61,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Understanding Your API Key and Keeping It Safe"
+        ],
+        "actual_top5": [
+          "Understanding Your API Key and Keeping It Safe",
+          "Making Your First Search Request",
+          "How to Sign Up and Get Your API Key",
+          "How to Upload Your Documents to Search",
+          "Making Search Work - Common Questions"
+        ]
+      },
+      {
+        "query": "planes precio gratis early adopter",
+        "lang": "es",
+        "latency_ms": 232.98,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Pricing Plans and Understanding Your Quota"
+        ],
+        "actual_top5": [
+          "Pricing Plans and Understanding Your Quota",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Understanding What ReadyAPI Does",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "prueba demostraci\u00f3n b\u00fasqueda interactiva",
+        "lang": "es",
+        "latency_ms": 239.88,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Testing Search with the Live Demo"
+        ],
+        "actual_top5": [
+          "Testing Search with the Live Demo",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Understanding What ReadyAPI Does"
+        ]
+      },
+      {
+        "query": "ayuda problemas errores soluci\u00f3n",
+        "lang": "es",
+        "latency_ms": 235.83,
+        "ndcg@5": 0.707,
+        "expected": [
+          "Getting Help - What To Do When Something Goes Wrong"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Using Python or JavaScript Instead of Curl"
+        ]
+      },
+      {
+        "query": "b\u00fasqueda sem\u00e1ntica significado concepto",
+        "lang": "es",
+        "latency_ms": 239.34,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Understanding What ReadyAPI Does"
+        ],
+        "actual_top5": [
+          "Understanding What ReadyAPI Does",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "comando curl sintaxis solicitud",
+        "lang": "es",
+        "latency_ms": 229.31,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "How to Upload Your Documents to Search",
+          "Using Python or JavaScript Instead of Curl",
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "subida lote documento API",
+        "lang": "es",
+        "latency_ms": 230.69,
+        "ndcg@5": 1.0,
+        "expected": [
+          "How to Upload Your Documents to Search"
+        ],
+        "actual_top5": [
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "tiempo respuesta latencia desempe\u00f1o",
+        "lang": "es",
+        "latency_ms": 234.63,
+        "ndcg@5": 0.707,
+        "expected": [
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo",
+          "Using Python or JavaScript Instead of Curl"
+        ]
+      },
+      {
+        "query": "eliminar borrar documento",
+        "lang": "es",
+        "latency_ms": 232.6,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Understanding the JSON Format for Uploads"
+        ]
+      },
+      {
+        "query": "par\u00e1metro top_k resultados l\u00edmite",
+        "lang": "es",
+        "latency_ms": 231.39,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Testing Search with the Live Demo",
+          "Finding Your Documents After Upload - Check Statistics",
+          "How to Upload Your Documents to Search"
+        ]
+      },
+      {
+        "query": "puntuaci\u00f3n relevancia ranking",
+        "lang": "es",
+        "latency_ms": 229.02,
+        "ndcg@5": 0.707,
+        "expected": [
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Finding Your Documents After Upload - Check Statistics",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo"
+        ]
+      },
+      {
+        "query": "variables entorno secretos gesti\u00f3n",
+        "lang": "es",
+        "latency_ms": 222.43,
+        "ndcg@5": 0.577,
+        "expected": [
+          "Understanding Your API Key and Keeping It Safe"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Understanding Your API Key and Keeping It Safe",
+          "Using Python or JavaScript Instead of Curl",
+          "How to Upload Your Documents to Search"
+        ]
+      },
+      {
+        "query": "documentos privados cuenta seguridad",
+        "lang": "es",
+        "latency_ms": 238.38,
+        "ndcg@5": 0.577,
+        "expected": [
+          "Making Search Work - Common Questions"
+        ],
+        "actual_top5": [
+          "How to Upload Your Documents to Search",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Understanding Your API Key and Keeping It Safe",
+          "Finding Your Documents After Upload - Check Statistics"
+        ]
+      },
+      {
+        "query": "primera b\u00fasqueda ejemplo tutorial",
+        "lang": "es",
+        "latency_ms": 238.07,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Making Your First Search Request"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo",
+          "Understanding the JSON Format for Uploads"
+        ]
+      },
+      {
+        "query": "qu\u00e9 es ReadyAPI funciona",
+        "lang": "es",
+        "latency_ms": 295.21,
+        "ndcg@5": 0.707,
+        "expected": [
+          "Understanding What ReadyAPI Does"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Understanding What ReadyAPI Does",
+          "How to Upload Your Documents to Search",
+          "Testing Search with the Live Demo",
+          "How to Sign Up and Get Your API Key"
+        ]
+      },
+      {
+        "query": "registro email verificaci\u00f3n cuenta",
+        "lang": "es",
+        "latency_ms": 237.29,
+        "ndcg@5": 0.447,
+        "expected": [
+          "How to Sign Up and Get Your API Key"
+        ],
+        "actual_top5": [
+          "How to Upload Your Documents to Search",
+          "Finding Your Documents After Upload - Check Statistics",
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "How to Sign Up and Get Your API Key"
+        ]
+      },
+      {
+        "query": "l\u00edmite cuota b\u00fasquedas mes",
+        "lang": "es",
+        "latency_ms": 241.52,
+        "ndcg@5": 0.0,
+        "expected": [
+          "Pricing Plans and Understanding Your Quota"
+        ],
+        "actual_top5": [
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "How to Upload Your Documents to Search",
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Understanding the JSON Format for Uploads"
+        ]
+      },
+      {
+        "query": "clave API inv\u00e1lida error soluci\u00f3n",
+        "lang": "es",
+        "latency_ms": 248.06,
+        "ndcg@5": 1.0,
+        "expected": [
+          "Getting Help - What To Do When Something Goes Wrong"
+        ],
+        "actual_top5": [
+          "Getting Help - What To Do When Something Goes Wrong",
+          "Making Your First Search Request",
+          "Making Search Work - Common Questions",
+          "Testing Search with the Live Demo",
+          "How to Sign Up and Get Your API Key"
+        ]
+      },
+      {
+        "query": "sin resultados b\u00fasqueda soluci\u00f3n",
+        "lang": "es",
+        "latency_ms": 232.16,
+        "ndcg@5": 0.577,
+        "expected": [
+          "Getting Help - What To Do When Something Goes Wrong"
+        ],
+        "actual_top5": [
+          "Making Search Work - Common Questions",
+          "Making Your First Search Request",
+          "Getting Help - What To Do When Something Goes Wrong",
+          "How to Upload Your Documents to Search",
+          "Understanding the JSON Format for Uploads"
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "total_queries": 50,
+    "latency": {
+      "min_ms": 214.66374397277832,
+      "max_ms": 322.573184967041,
+      "mean_ms": 233.77601146697998,
+      "median_ms": 231.40347003936768,
+      "p95_ms": 248.0628490447998,
+      "p99_ms": 322.573184967041
+    },
+    "accuracy": {
+      "ndcg_min": 0.0,
+      "ndcg_max": 1.0,
+      "ndcg_mean": 0.695086124517275,
+      "ndcg_median": 0.7351323379616947
+    },
+    "requirements_met": {
+      "p95_latency_lt_500ms": true,
+      "ndcg_mean_gt_0_80": false
+    }
+  }
+}
