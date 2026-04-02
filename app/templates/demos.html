@@ -61,12 +61,26 @@
     >
       � Manual Instructions
     </button>
+    <button
+      class="demo-tab-btn"
+      onclick="switchDemo('readyapi')"
+      style="
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        color: var(--muted-color);
+      "
+    >
+      ⚙️ ReadyAPI Docs
+    </button>
   </div>
 
   <!-- Movies Demo -->
   <div id="movies-demo" class="demo-section">
     <h2>🎬 Movie Search</h2>
-    <p>Search from 1958 TMDB movies using semantic understanding.</p>
+    <p>Search from 2000 TMDB movies using semantic understanding.</p>
 
     <div style="margin: 2rem 0">
       <label for="movies-search">Search movies:</label>
@@ -188,6 +202,56 @@
     <div id="definitions-results" style="margin-top: 1rem">
       <p style="color: var(--muted-color); text-align: center">
         Type to see instructions...
+      </p>
+    </div>
+  </div>
+
+  <!-- ReadyAPI Documentation Demo -->
+  <div id="readyapi-demo" class="demo-section" style="display: none">
+    <h2>⚙️ ReadyAPI Documentation</h2>
+    <p style="font-size: 0.9rem; color: var(--muted-color)">
+      Explore comprehensive documentation for deploying and using ReadyAPI.
+    </p>
+    <p
+      style="
+        font-size: 0.86rem;
+        color: var(--muted-color);
+        margin-top: -0.35rem;
+      "
+    >
+      <strong>Available sections:</strong> Installation, Configuration,
+      Deployment, Semantic Search, Multi-tenant Data, Document Loading, INT8
+      Quantization, Integration, Troubleshooting, Updates, Monitoring, API Docs.
+    </p>
+
+    <div style="margin: 1rem 0">
+      <label for="readyapi-search" style="font-size: 0.9rem"
+        >Search documentation:</label
+      >
+      <form
+        hx-post="/search-partial"
+        hx-trigger="keyup changed delay:400ms from:#readyapi-search"
+        hx-target="#readyapi-results"
+        onsubmit="return false;"
+      >
+        <div class="search-box">
+          <input
+            type="text"
+            id="readyapi-search"
+            name="query"
+            placeholder="Search: how to install, deployment, semantic search, monitoring..."
+            autocomplete="off"
+            style="text-align: center"
+          />
+          <input type="hidden" name="dataset" value="readyapi" />
+          <span class="htmx-indicator loading">Searching...</span>
+        </div>
+      </form>
+    </div>
+
+    <div id="readyapi-results" style="margin-top: 1rem">
+      <p style="color: var(--muted-color); text-align: center">
+        Type to see documentation...
       </p>
     </div>
   </div>
@@ -701,6 +765,7 @@
     document.getElementById("movies-demo").style.display = "none";
     document.getElementById("spaceship-demo").style.display = "none";
     document.getElementById("definitions-demo").style.display = "none";
+    document.getElementById("readyapi-demo").style.display = "none";
 
     // Remove active state from all buttons
     document.querySelectorAll(".demo-tab-btn").forEach((btn) => {
