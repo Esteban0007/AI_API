@@ -19,16 +19,21 @@
   <div class="movie-info">
     <div style="margin-bottom: 0.5rem">
       <div class="movie-title">{{ result.get('title', 'Movie') }}</div>
-      {% if result.get('summary') %}
+      {% if result.get('summary') or result.get('content') %}
       <div
         style="
           color: var(--muted-color);
           font-size: 0.85rem;
           line-height: 1.4;
           margin-top: 0.3rem;
+          white-space: pre-wrap;
+          word-wrap: break-word;
         "
       >
-        {{ result['summary'] | truncate(150) }}
+        {% if include_content and result.get('content') %} {{ result['content']
+        }} {% elif result.get('summary') %} {{ result['summary'] | truncate(150)
+        }} {% elif result.get('content') %} {{ result['content'] | truncate(150)
+        }} {% endif %}
       </div>
       {% endif %}
     </div>
@@ -39,11 +44,11 @@
         margin-top: 0.5rem;
       "
     >
+      {% if result.get('metadata', {}).get('release_date') %}
       <div class="movie-year" style="margin-bottom: 0.3rem">
-        {% if result.get('metadata', {}).get('release_date') %} {{
-        result['metadata']['release_date'][:4] }} {% else %} N/A {% endif %}
+        {{ result['metadata']['release_date'][:4] }}
       </div>
-      {% if result.get('metadata', {}).get('cast') %}
+      {% endif %} {% if result.get('metadata', {}).get('cast') %}
       <div style="color: var(--muted-color); font-size: 0.9rem">
         Cast: {{ result['metadata']['cast'] | join(', ') | truncate(100) }}
       </div>

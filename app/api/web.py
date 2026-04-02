@@ -155,25 +155,45 @@ async def demos(request: Request):
 
 @router.post("/search-partial", response_class=HTMLResponse, include_in_schema=False)
 async def search_partial(
-    request: Request, query: str = Form(...), dataset: str = Form(default="movies")
+    request: Request,
+    query: str = Form(...),
+    dataset: str = Form(default="movies"),
+    include_content: str = Form(default="false"),
 ):
     """HTMX endpoint that returns HTML partial with search results."""
     try:
+        include_content_bool = include_content.lower() == "true"
+
         if not query or len(query.strip()) < 2:
             if dataset == "spaceship":
                 return templates.TemplateResponse(
                     "spaceship_results.html",
-                    {"request": request, "results": [], "timing": 0},
+                    {
+                        "request": request,
+                        "results": [],
+                        "timing": 0,
+                        "include_content": include_content_bool,
+                    },
                 )
             elif dataset == "definitions":
                 return templates.TemplateResponse(
                     "definitions_results.html",
-                    {"request": request, "results": [], "timing": 0},
+                    {
+                        "request": request,
+                        "results": [],
+                        "timing": 0,
+                        "include_content": include_content_bool,
+                    },
                 )
             else:
                 return templates.TemplateResponse(
                     "results_list.html",
-                    {"request": request, "results": [], "timing": 0},
+                    {
+                        "request": request,
+                        "results": [],
+                        "timing": 0,
+                        "include_content": include_content_bool,
+                    },
                 )
 
         # Get search engine for the specific dataset
@@ -192,17 +212,32 @@ async def search_partial(
         if dataset == "spaceship":
             return templates.TemplateResponse(
                 "spaceship_results.html",
-                {"request": request, "results": results, "timing": timing},
+                {
+                    "request": request,
+                    "results": results,
+                    "timing": timing,
+                    "include_content": include_content_bool,
+                },
             )
         elif dataset == "definitions":
             return templates.TemplateResponse(
                 "definitions_results.html",
-                {"request": request, "results": results, "timing": timing},
+                {
+                    "request": request,
+                    "results": results,
+                    "timing": timing,
+                    "include_content": include_content_bool,
+                },
             )
         else:
             return templates.TemplateResponse(
                 "results_list.html",
-                {"request": request, "results": results, "timing": timing},
+                {
+                    "request": request,
+                    "results": results,
+                    "timing": timing,
+                    "include_content": include_content_bool,
+                },
             )
     except Exception as e:
         logger.error(f"Search error: {e}")
