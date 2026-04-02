@@ -3,10 +3,12 @@
 <div class="container">
   <h1>🎯 Live Demos</h1>
   <p>
-    Explore semantic search across movies, spaceship systems, and definitions.
+    Explore semantic search across movies, spaceship systems, and manual
+    instructions.
+
+    <!-- Tabs Navigation -->
   </p>
 
-  <!-- Tabs Navigation -->
   <div
     style="
       margin: 2rem 0;
@@ -57,7 +59,7 @@
         color: var(--muted-color);
       "
     >
-      📄 Definitions
+      � Manual Instructions
     </button>
   </div>
 
@@ -140,11 +142,11 @@
     <div id="spaceship-results" style="display: none"></div>
   </div>
 
-  <!-- Definitions Demo -->
+  <!-- Manual Instructions Demo -->
   <div id="definitions-demo" class="demo-section" style="display: none">
-    <h2>📄 Definitions</h2>
+    <h2>📖 Manual Instructions</h2>
     <p style="font-size: 0.9rem; color: var(--muted-color)">
-      Definiciones sencillas del nicho de Inteligencia Artificial.
+      Search through technical manual instructions and procedures.
     </p>
     <p
       style="
@@ -153,14 +155,14 @@
         margin-top: -0.35rem;
       "
     >
-      <strong>Títulos disponibles:</strong> Machine Learning, Deep Learning,
-      Neural Network, Training Data, Overfitting, Underfitting, Model Inference,
-      Tokenization, Embedding, Fine-tuning.
+      <strong>Available sections:</strong> Installation, Configuration,
+      Troubleshooting, Maintenance, Safety, Operation, Calibration, Firmware
+      Update, Network Setup, Performance Tuning.
     </p>
 
     <div style="margin: 1rem 0">
       <label for="definitions-search" style="font-size: 0.9rem"
-        >Search definitions:</label
+        >Search instructions:</label
       >
       <form
         hx-post="/search-partial"
@@ -173,7 +175,7 @@
             type="text"
             id="definitions-search"
             name="query"
-            placeholder="Escribe un título o algo relacionado: embeddings, overfitting, tokens..."
+            placeholder="Search: how to install, troubleshooting errors, setup network..."
             autocomplete="off"
             style="text-align: center"
           />
@@ -185,7 +187,7 @@
 
     <div id="definitions-results" style="margin-top: 1rem">
       <p style="color: var(--muted-color); text-align: center">
-        Type to see definitions...
+        Type to see instructions...
       </p>
     </div>
   </div>
