@@ -48,7 +48,6 @@ def get_search_engine(dataset: str = "movies"):
         tenant_map = {
             "movies": "admin",  # Admin tenant has movies
             "spaceship": "user_1",  # User 1 tenant has spaceship parts
-            "definitions": "user_7",  # User 7 tenant has manual instructions
             "readyapi": "user_8",  # User 8 tenant has ReadyAPI documentation
         }
         tenant_id = tenant_map.get(dataset, "admin")

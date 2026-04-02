@@ -73,7 +73,7 @@
         color: var(--muted-color);
       "
     >
-      ⚙️ ReadyAPI Docs
+      📚 ReadyAPI Docs
     </button>
   </div>
 
@@ -154,56 +154,6 @@
     </div>
 
     <div id="spaceship-results" style="display: none"></div>
-  </div>
-
-  <!-- Manual Instructions Demo -->
-  <div id="definitions-demo" class="demo-section" style="display: none">
-    <h2>📖 Manual Instructions</h2>
-    <p style="font-size: 0.9rem; color: var(--muted-color)">
-      Search through technical manual instructions and procedures.
-    </p>
-    <p
-      style="
-        font-size: 0.86rem;
-        color: var(--muted-color);
-        margin-top: -0.35rem;
-      "
-    >
-      <strong>Available sections:</strong> Installation, Configuration,
-      Troubleshooting, Maintenance, Safety, Operation, Calibration, Firmware
-      Update, Network Setup, Performance Tuning.
-    </p>
-
-    <div style="margin: 1rem 0">
-      <label for="definitions-search" style="font-size: 0.9rem"
-        >Search instructions:</label
-      >
-      <form
-        hx-post="/search-partial"
-        hx-trigger="keyup changed delay:400ms from:#definitions-search"
-        hx-target="#definitions-results"
-        onsubmit="return false;"
-      >
-        <div class="search-box">
-          <input
-            type="text"
-            id="definitions-search"
-            name="query"
-            placeholder="Search: how to install, troubleshooting errors, setup network..."
-            autocomplete="off"
-            style="text-align: center"
-          />
-          <input type="hidden" name="dataset" value="definitions" />
-          <span class="htmx-indicator loading">Searching...</span>
-        </div>
-      </form>
-    </div>
-
-    <div id="definitions-results" style="margin-top: 1rem">
-      <p style="color: var(--muted-color); text-align: center">
-        Type to see instructions...
-      </p>
-    </div>
   </div>
 
   <!-- ReadyAPI Documentation Demo -->
@@ -764,7 +714,6 @@
     // Hide all demos
     document.getElementById("movies-demo").style.display = "none";
     document.getElementById("spaceship-demo").style.display = "none";
-    document.getElementById("definitions-demo").style.display = "none";
     document.getElementById("readyapi-demo").style.display = "none";
 
     // Remove active state from all buttons
