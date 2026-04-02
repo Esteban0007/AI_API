@@ -12,42 +12,225 @@
 {% elif results %}
 <div style="margin-top: 0.5rem">
   {% for result in results %}
-  <article
-    style="
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border: 1px solid var(--form-element-border-color);
-      border-radius: 0.5rem;
-    "
-  >
-    <h3 style="margin: 0 0 0.5rem 0">
-      📄 {{ result.get('title', 'Definition') }}
-    </h3>
-    <p
-      style="
-        margin: 0;
-        color: var(--form-element-valid-border-color);
-        line-height: 1.5;
-      "
-    >
+  <article class="definition-card">
+    <h3 class="definition-title">📄 {{ result.get('title', 'Definition') }}</h3>
+    <p class="definition-content">
       {{ result.get('content', 'No definition available') }}
     </p>
   </article>
   {% endfor %}
 
-  <div
-    style="
-      text-align: center;
-      margin-top: 1rem;
-      color: var(--muted-color);
-      font-size: 0.85rem;
-    "
-  >
+  <div class="definitions-meta">
     Showing {{ results|length }} definitions in {{ timing|round(2) }}ms
   </div>
 </div>
 {% else %}
-<p style="color: var(--muted-color); text-align: center; margin-top: 1rem">
-  Type to search definitions...
-</p>
+<div style="color: var(--muted-color); margin-top: 1rem; line-height: 1.6">
+  <section
+    style="
+      background: #f8f9fb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    "
+  >
+    <h3 style="margin-top: 0; margin-bottom: 0.7rem; font-size: 1.1rem">
+      AI READY API Context
+    </h3>
+
+    <p style="margin: 0 0 0.8rem 0">
+      API is an all-in-one neural search infrastructure that automates the
+      entire semantic pipeline—from data ingestion to high-precision
+      retrieval—enabling developers to build private, multilingual, and
+      intelligent search into any application or robotic system.
+    </p>
+
+    <p style="margin: 0 0 0.8rem 0">
+      The proliferation of unstructured textual data across enterprises has
+      created a critical challenge: enabling efficient, semantically-aware
+      retrieval without relying on expensive third-party APIs or sacrificing
+      data privacy. AI READY API addresses this gap by providing a
+      comprehensive, multi-tenant SaaS infrastructure that manages the entire
+      lifecycle of neural search.
+    </p>
+
+    <p style="margin: 0 0 0.8rem 0">
+      Semantic Search is an advanced data retrieval technology that understands
+      the intent and contextual meaning of a query rather than just matching
+      literal keywords. By converting text into mathematical “concept maps”
+      (vectors), the system can identify relationships between words, recognize
+      synonyms, and even bridge different languages to find the most relevant
+      information—regardless of how it is phrased.
+    </p>
+
+    <div style="overflow-x: auto; margin: 0.9rem 0 1rem 0">
+      <table
+        style="
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 680px;
+          font-size: 0.92rem;
+        "
+      >
+        <thead>
+          <tr style="background: #eef2ff">
+            <th
+              style="
+                border: 1px solid #dbe2ea;
+                text-align: left;
+                padding: 0.55rem;
+              "
+            >
+              Feature
+            </th>
+            <th
+              style="
+                border: 1px solid #dbe2ea;
+                text-align: left;
+                padding: 0.55rem;
+              "
+            >
+              Traditional Search (Lexical)
+            </th>
+            <th
+              style="
+                border: 1px solid #dbe2ea;
+                text-align: left;
+                padding: 0.55rem;
+              "
+            >
+              Semantic Search (AI READY API)
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Search Logic
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Matches exact characters/keywords.
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Understands intent and concepts.
+            </td>
+          </tr>
+          <tr style="background: #fafafa">
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Language
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Limited to the language of the document.
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Multilingual: Search in English, find in Spanish.
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Synonyms
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Fails unless words match exactly.
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Succeeds by matching meaning (e.g., “Home” = “House”).
+            </td>
+          </tr>
+          <tr style="background: #fafafa">
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Data Quality
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Requires clean, tagged metadata.
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Works perfectly with messy, unstructured text.
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              User Experience
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Frustrating; needs specific “search terms.”
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Intuitive; uses natural human language.
+            </td>
+          </tr>
+          <tr style="background: #fafafa">
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Primary Goal
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Finds Words.
+            </td>
+            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+              Finds Answers.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin: 0 0 0.8rem 0">
+      Unlike traditional implementations that require developers to manually
+      orchestrate embedding generation, vector database management, and
+      re-ranking logic, AI READY API provides a unified abstraction layer.
+    </p>
+
+    <ul style="margin: 0 0 0.8rem 1.2rem; padding: 0">
+      <li>
+        <strong>Managed Pipeline:</strong> The client uploads data, then the API
+        executes the embedding process, manages vector persistence, and performs
+        real-time retrieval.
+      </li>
+      <li>
+        <strong>Direct Result Delivery:</strong> The system receives raw text
+        inputs and returns ranked, contextually relevant results directly,
+        bypassing the need for client-side data processing.
+      </li>
+    </ul>
+
+    <h4 style="margin: 0.3rem 0 0.5rem 0; font-size: 1rem">Key Benefits</h4>
+    <ul style="margin: 0 0 0 1.2rem; padding: 0">
+      <li>
+        <strong>No AI Expertise Required:</strong> You don’t need to hire a
+        Machine Learning engineer. The API handles vectors and embeddings
+        automatically, so any web developer can use it.
+      </li>
+      <li>
+        <strong>Plug-and-Play Infrastructure:</strong> Forget about setting up
+        and maintaining a vector database. The API is all-in-one: you send data
+        in, you get answers out.
+      </li>
+      <li>
+        <strong>Hardware Cost Savings:</strong> You don’t need expensive GPUs or
+        massive RAM. The system is optimized to run on standard, affordable
+        servers without losing speed.
+      </li>
+      <li>
+        <strong>Ready for Any Device:</strong> Because the “brain” is in the
+        API, you can add intelligent search to a website, a mobile app, or even
+        a small robot without overloading local processors.
+      </li>
+      <li>
+        <strong>Privacy:</strong> Your data is private and it is not used for
+        training models.
+      </li>
+    </ul>
+  </section>
+
+  <div style="text-align: center">
+    <p style="margin-bottom: 0.4rem">Type to search definitions...</p>
+    <p style="font-size: 0.9rem; margin: 0">
+      Try: Machine Learning · Deep Learning · Neural Network · Training Data ·
+      Overfitting · Underfitting · Model Inference · Tokenization · Embedding ·
+      Fine-tuning
+    </p>
+  </div>
+</div>
 {% endif %}
