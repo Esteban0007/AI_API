@@ -155,9 +155,7 @@
         margin-top: -0.35rem;
       "
     >
-      <strong>Available sections:</strong> Installation, Configuration,
-      Deployment, Semantic Search, Multi-tenant Data, Document Loading, INT8
-      Quantization, Integration, Troubleshooting, Updates, Monitoring, API Docs.
+      <strong>Available sections:</strong> How to Sign Up, Understanding Semantic Search, Making Requests, Uploading Documents, JSON Format, Checking Statistics, Common Questions, Code Examples, API Key Security, Pricing, Live Demo, Troubleshooting.
     </p>
 
     <div style="margin: 1rem 0">
@@ -175,11 +173,12 @@
             type="text"
             id="readyapi-search"
             name="query"
-            placeholder="Search: how to install, deployment, semantic search, monitoring..."
+            placeholder="Search: how to sign up, upload documents, JSON format, pricing..."
             autocomplete="off"
             style="text-align: center"
           />
           <input type="hidden" name="dataset" value="readyapi" />
+          <input type="hidden" name="include_content" value="true" />
           <span class="htmx-indicator loading">Searching...</span>
         </div>
       </form>
