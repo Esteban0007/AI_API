@@ -131,7 +131,7 @@ async def api_docs(request: Request):
     <head><title>Redirecting...</title></head>
     <body>
         <script>
-            window.open('/api/docs', '_blank');
+            window.open('/api/docs');
             window.location.href = '/';
         </script>
         <p>Opening API documentation in a new tab...</p>
