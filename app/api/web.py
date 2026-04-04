@@ -104,6 +104,7 @@ def _extract_keywords(content: str) -> list[str]:
     return [k.strip() for k in keyword_text.split(",") if k.strip()]
 
 
+
 def _get_definition_image(title: str) -> str:
     """Get reference image for plant definition cards."""
     image_map = {
