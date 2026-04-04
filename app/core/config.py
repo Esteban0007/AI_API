@@ -24,12 +24,14 @@ class Settings(BaseSettings):
 
     # Embedding Configuration
     EMBEDDING_MODEL: str = (
-        "snowflake/snowflake-arctic-embed-m-v1.5"  # Better semantic understanding than MiniLM
+        "BAAI/bge-m3"  # Multilingual BGE-M3 - Better accuracy, faster, less RAM
     )
-    EMBEDDING_DIMENSION: int = 768  # Arctic uses 768 dimensions (vs MiniLM 384)
+    EMBEDDING_DIMENSION: int = (
+        384  # BGE-M3 uses 384 dimensions (more efficient than Arctic 768)
+    )
     EMBEDDING_USE_ONNX: bool = True  # Use ONNX for better performance
     EMBEDDING_ONNX_DIR: str = (
-        "/var/www/readyapi/models/arctic_onnx"  # Production ONNX path
+        "/var/www/readyapi/models/bge_m3_onnx"  # Production ONNX path for BGE-M3
     )
     EMBEDDING_USE_INT8_QUANTIZATION: bool = True  # Enable INT8 quantization by default
 
