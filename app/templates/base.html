@@ -299,22 +299,34 @@
         const apiKey = localStorage.getItem("api_key");
         const userEmail = localStorage.getItem("user_email");
 
+        console.log("initializeNavbar - apiKey:", apiKey ? "exists" : "null");
+        console.log("initializeNavbar - userEmail:", userEmail);
+
         const userMenu = document.getElementById("user-menu");
         const authLinks = document.getElementById("auth-links");
         const userEmailSpan = document.getElementById("user-email");
         const navDashboard = document.getElementById("nav-dashboard");
 
+        // Verify elements exist
+        if (!userMenu || !authLinks) {
+          console.warn("Navbar elements not found. Retrying...");
+          setTimeout(initializeNavbar, 100);
+          return;
+        }
+
         if (apiKey && userEmail) {
           // User is logged in
+          console.log("Setting navbar to logged-in state");
           userMenu.style.display = "block";
           authLinks.style.display = "none";
-          userEmailSpan.textContent = userEmail;
-          navDashboard.style.display = "block";
+          if (userEmailSpan) userEmailSpan.textContent = userEmail;
+          if (navDashboard) navDashboard.style.display = "block";
         } else {
           // User is not logged in
+          console.log("Setting navbar to logged-out state");
           userMenu.style.display = "none";
           authLinks.style.display = "flex";
-          navDashboard.style.display = "none";
+          if (navDashboard) navDashboard.style.display = "none";
         }
       }
 
@@ -341,9 +353,13 @@
         }
       });
 
-      // Initialize on page load
+      // Initialize on DOMContentLoaded and load event
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializeNavbar);
+      } else {
+        initializeNavbar();
+      }
       window.addEventListener("load", initializeNavbar);
-      initializeNavbar();
     </script>
   </body>
 </html>
