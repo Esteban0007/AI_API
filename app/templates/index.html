@@ -493,43 +493,20 @@
         style="
           color: var(--muted-color);
           font-size: 0.9rem;
-          background: rgba(108, 92, 231, 0.1);
+          background: rgba(76, 175, 80, 0.1);
           padding: 0.8rem;
           border-radius: 4px;
-          margin-top: 1rem;
-          border-left: 4px solid var(--primary-color);
         "
       >
-        <strong>🎯 Optional Filters:</strong> You can also add filters to narrow
-        down results. For example, search in documents with
-        <code
-          style="
-            background: rgba(0, 0, 0, 0.1);
-            padding: 0.2rem 0.4rem;
-            border-radius: 2px;
-          "
-          >state: "active"</code
-        >
-        to only get running systems. Filters work on the metadata field, giving
-        you precise control over results.
+        <strong>🧠 How it works:</strong> ReadyAPI uses advanced AI (Arctic
+        embeddings) to understand what you mean, not just what keywords you use.
+        So "get somewhere far away quickly" understands you need speed and
+        distance, and finds the Warp System!
       </p>
-    </div>
 
-    <!-- Step 4: Get Results -->
-    <div
-      style="
-        margin: 3rem 0;
-        padding: 2rem;
-        border: 2px solid var(--form-element-border-color);
-        border-radius: 8px;
-        background: rgba(102, 126, 234, 0.05);
-      "
-    >
-      <h3 style="margin-top: 0; color: var(--primary-color)">
-        ✅ Step 4: Get Ranked Results
-      </h3>
-      <p style="color: var(--muted-color)">
-        ReadyAPI returns the most relevant documents, ranked by similarity.
+      <!-- API Call Examples -->
+      <p style="color: var(--muted-color); font-weight: 600; margin-top: 2rem">
+        Now make the API call to search:
       </p>
 
       <div
@@ -541,7 +518,7 @@
         "
       >
         <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
-          <strong>API Call (Search):</strong>
+          <strong>Basic Search (No Filters):</strong>
         </p>
         <pre
           style="overflow-x: auto; font-size: 0.75rem; margin: 0"
@@ -563,7 +540,7 @@
         "
       >
         <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
-          <strong>API Call with Filters (Only Active Systems):</strong>
+          <strong>Search with Filters (Only Active Systems):</strong>
         </p>
         <pre
           style="overflow-x: auto; font-size: 0.75rem; margin: 0"
@@ -596,6 +573,40 @@
           in their metadata.
         </p>
       </div>
+
+      <p
+        style="
+          color: var(--muted-color);
+          font-size: 0.9rem;
+          background: rgba(108, 92, 231, 0.1);
+          padding: 0.8rem;
+          border-radius: 4px;
+          margin-top: 1rem;
+          border-left: 4px solid var(--primary-color);
+        "
+      >
+        <strong>🎯 Optional Filters:</strong> You can add filters to narrow down
+        results by metadata. Filters give you precise control over which
+        documents are returned.
+      </p>
+    </div>
+
+    <!-- Step 4: Get Results -->
+    <div
+      style="
+        margin: 3rem 0;
+        padding: 2rem;
+        border: 2px solid var(--form-element-border-color);
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.05);
+      "
+    >
+      <h3 style="margin-top: 0; color: var(--primary-color)">
+        ✅ Step 4: Get Ranked Results
+      </h3>
+      <p style="color: var(--muted-color)">
+        ReadyAPI returns the most relevant documents, ranked by similarity.
+      </p>
 
       <div
         style="
