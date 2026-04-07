@@ -1,42 +1,106 @@
 {% extends "base.html" %} {% block title %}Dashboard - ReadyAPI{% endblock %} {%
 block content %}
-<div class="container">
-  <div style="margin-bottom: 2rem">
-    <h1>📊 Dashboard</h1>
-    <p style="color: var(--muted-color)">
-      View your API usage, documents, and activity.
+<div class="container" style="max-width: 1200px">
+  <!-- Dashboard Header -->
+  <div style="margin-bottom: 3rem; margin-top: 2rem">
+    <h1 style="margin-bottom: 0.5rem">Dashboard</h1>
+    <p style="color: var(--muted-color); font-size: 1rem">
+      Monitor your API usage and activity
     </p>
+    <hr style="margin-top: 1.5rem; margin-bottom: 1.5rem" />
   </div>
 
-  <div id="dashboard" style="margin-top: 2rem">
-    <article>
-      <p style="text-align: center; color: var(--muted-color)">
-        Loading dashboard...
-      </p>
+  <div id="dashboard" style="min-height: 400px">
+    <article style="text-align: center; padding: 3rem">
+      <p style="color: var(--muted-color)">Loading your dashboard...</p>
     </article>
   </div>
 </div>
 
+<style>
+  .stat-card {
+    background: white;
+    border: 1px solid var(--form-element-border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #667eea;
+    margin: 1rem 0;
+  }
+
+  .stat-label {
+    color: var(--muted-color);
+    font-size: 0.95rem;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+  }
+
+  .api-key-container {
+    background: #f8f9fa;
+    border: 1px solid var(--form-element-border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .stat-card {
+      padding: 1.5rem;
+    }
+    .stat-value {
+      font-size: 2rem;
+    }
+    .btn-group {
+      flex-direction: column;
+    }
+  }
+</style>
+
 <script>
   const API_BASE = "/api/v1";
 
-  // Get API key from URL parameter or localStorage
-  const urlParams = new URLSearchParams(window.location.search);
-  let API_KEY = urlParams.get("key") || localStorage.getItem("api_key");
+  // Get API key from localStorage
+  let API_KEY = localStorage.getItem("api_key");
+  const USER_EMAIL = localStorage.getItem("user_email");
 
   if (!API_KEY) {
     document.getElementById("dashboard").innerHTML = `
-      <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 1.5rem;">
-        <strong>⚠️ Error:</strong> No API key provided. 
-        <br><br>
-        Please log in first to access your dashboard.
-        <br><br>
-        <a href="/login" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; background-color: #2196F3; color: white; border-radius: 4px; text-decoration: none;">Go to Login</a>
+      <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 2rem; border-radius: var(--border-radius);">
+        <h3>⚠️ Not Authenticated</h3>
+        <p>Your session has expired. Please log in again to access your dashboard.</p>
+        <a href="/login" style="display: inline-block; margin-top: 1rem; background-color: #2196F3; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none;">Go to Login</a>
       </article>
     `;
   } else {
-    // Save to localStorage for future visits
-    localStorage.setItem("api_key", API_KEY);
     loadDashboard();
   }
 
@@ -44,12 +108,12 @@ block content %}
     try {
       // Fetch all stats in parallel
       const [monthlyResponse, docsResponse] = await Promise.all([
-        fetch(`${API_BASE}/search/stats/monthly`, {
+        fetch(\`\${API_BASE}/search/stats/monthly\`, {
           headers: { "X-API-Key": API_KEY },
         }),
-        fetch(`${API_BASE}/search/stats/documents`, {
+        fetch(\`\${API_BASE}/search/stats/documents\`, {
           headers: { "X-API-Key": API_KEY },
-        }),
+        })
       ]);
 
       if (!monthlyResponse.ok || !docsResponse.ok) {
@@ -63,10 +127,10 @@ block content %}
     } catch (error) {
       console.error(error);
       document.getElementById("dashboard").innerHTML = `
-        <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 1.5rem;">
-          <strong>⚠️ Error:</strong> ${error.message}
-          <br><br>
-          <a href="/login" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; background-color: #2196F3; color: white; border-radius: 4px; text-decoration: none;">Try logging in again</a>
+        <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 2rem; border-radius: var(--border-radius);">
+          <h3>⚠️ Error Loading Dashboard</h3>
+          <p>\${error.message}</p>
+          <a href="/login" style="display: inline-block; margin-top: 1rem; background-color: #2196F3; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none;">Try logging in again</a>
         </article>
       `;
     }
@@ -74,41 +138,96 @@ block content %}
 
   function displayDashboard(monthlyStats, docsStats) {
     const html = `
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
-        <!-- Monthly Searches -->
-        <article>
-          <h3>📈 Searches (Monthly)</h3>
-          <h2 style="color: #667eea; margin: 1rem 0; font-size: 2.5rem;">${monthlyStats.total_searches}</h2>
-          <p style="color: var(--muted-color); font-size: 0.9rem;">Total searches in <strong>${monthlyStats.month}</strong></p>
-        </article>
+      <!-- Statistics Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+        <!-- Monthly Searches Card -->
+        <div class="stat-card">
+          <div class="stat-icon">📈</div>
+          <h3 style="margin: 1rem 0 0.5rem 0;">Monthly Searches</h3>
+          <div class="stat-value">\${monthlyStats.total_searches}</div>
+          <p class="stat-label">Total searches in <strong>\${monthlyStats.month}</strong></p>
+        </div>
 
-        <!-- Documents -->
-        <article>
-          <h3>📄 Documents</h3>
-          <h2 style="color: #667eea; margin: 1rem 0; font-size: 2.5rem;">${docsStats.total_documents}</h2>
-          <p style="color: var(--muted-color); font-size: 0.9rem;">Total indexed documents</p>
-          <small style="color: #999;">Collection: <code>${docsStats.collection_name}</code></small>
-        </article>
+        <!-- Documents Card -->
+        <div class="stat-card">
+          <div class="stat-icon">📄</div>
+          <h3 style="margin: 1rem 0 0.5rem 0;">Indexed Documents</h3>
+          <div class="stat-value">\${docsStats.total_documents}</div>
+          <p class="stat-label">Documents in your collection</p>
+        </div>
+
+        <!-- Status Card -->
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <h3 style="margin: 1rem 0 0.5rem 0;">API Status</h3>
+          <div class="stat-value" style="color: #27ae60;">Active</div>
+          <p class="stat-label">Your API key is active</p>
+        </div>
       </div>
 
       <!-- API Keys Section -->
-      <article>
-        <h3>🔑 Your API Key</h3>
-        <p style="color: var(--muted-color); margin-bottom: 1rem;">Use this key in the <code>X-API-Key</code> header for API requests.</p>
-        
-        <div style="background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
-          <input 
-            type="text" 
-            value="${API_KEY}" 
-            readonly 
-            style="width: 100%; padding: 0.5rem; font-family: monospace; font-size: 0.85rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px;"
+      <article style="margin-top: 3rem;">
+        <h2 class="section-title">🔐 API Key Management</h2>
+
+        <p style="color: var(--muted-color); margin-bottom: 1rem;">
+          Use your API key to authenticate requests to the SemanticSearch API.
+          Keep it secure and never share it publicly.
+        </p>
+
+        <div class="api-key-container">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Primary Key</label>
+          <input
+            type="text"
+            value="\${API_KEY}"
+            readonly
+            style="
+              width: 100%;
+              padding: 0.75rem;
+              font-family: monospace;
+              font-size: 0.85rem;
+              margin-bottom: 1rem;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              background: white;
+            "
             id="api-key-input"
           >
-          <button type="button" onclick="copyAPI()" style="margin-right: 1rem;">📋 Copy Key</button>
-          <button type="button" onclick="logout()" class="secondary" style="margin-left: 1rem;">Logout</button>
-        </div>
 
-        <p style="color: #999; font-size: 0.9rem;">✓ <strong>Active</strong> - Keep this key private and secure.</p>
+          <div class="btn-group">
+            <button type="button" onclick="copyAPI()" style="flex: 1;">📋 Copy Key</button>
+            <button type="button" onclick="revealKey()" class="secondary" style="flex: 1;">👁️ Show/Hide</button>
+          </div>
+
+          <p style="color: #27ae60; margin-top: 1rem; font-size: 0.9rem;">
+            ✅ <strong>Active</strong> – This key has full read access to your collections.
+          </p>
+        </div>
+      </article>
+
+      <!-- Usage Instructions -->
+      <article style="margin-top: 2rem; background: #e8f5e9; border-color: #4caf50;">
+        <h3>📚 How to Use Your API Key</h3>
+        <p>Include your API key in the <code>X-API-Key</code> header of your requests:</p>
+        <pre style="
+          background: white;
+          border: 1px solid #ddd;
+          padding: 1rem;
+          border-radius: 4px;
+          overflow-x: auto;
+          font-size: 0.85rem;
+        "><code>curl -H "X-API-Key: \${API_KEY.substring(0, 20)}..." https://api.semanticsearch.io/api/v1/search/query</code></pre>
+        <p style="color: var(--muted-color); font-size: 0.9rem;">
+          For full documentation, visit <a href="/api-docs" style="color: #667eea;">API Docs</a>
+        </p>
+      </article>
+
+      <!-- Collection Info -->
+      <article style="margin-top: 2rem; background: #f0f7ff; border-color: #2196F3;">
+        <h3>📁 Your Collection</h3>
+        <p><strong>Collection Name:</strong> <code style="background: white; padding: 2px 6px; border-radius: 3px;">\${docsStats.collection_name}</code></p>
+        <p style="color: var(--muted-color); font-size: 0.9rem;">
+          This is the collection where your documents are indexed. You can search across all documents in this collection using the API.
+        </p>
       </article>
     `;
 
@@ -116,16 +235,21 @@ block content %}
   }
 
   function copyAPI() {
-    const input = document.getElementById("api-key-input");
+    const input = document.getElementById('api-key-input');
     input.select();
     navigator.clipboard.writeText(API_KEY).then(() => {
-      alert("✓ API Key copied to clipboard!");
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
     });
   }
 
-  function logout() {
-    localStorage.removeItem("api_key");
-    window.location.href = "/login";
+  function revealKey() {
+    const input = document.getElementById('api-key-input');
+    input.type = input.type === 'password' ? 'text' : 'password';
   }
 </script>
 {% endblock %}

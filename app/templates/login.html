@@ -92,8 +92,12 @@
     <script>
       // Auto-redirect to dashboard after login
       function goToDashboard(apiKey) {
+        const emailInput = document.getElementById("email");
+        const userEmail = emailInput ? emailInput.value : "User";
+
         localStorage.setItem("api_key", apiKey);
-        window.location.href = "/dashboard?key=" + apiKey;
+        localStorage.setItem("user_email", userEmail);
+        window.location.href = "/dashboard";
       }
 
       // Auto-redirect if API key is present

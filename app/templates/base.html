@@ -160,19 +160,117 @@
     {% block extra_css %}{% endblock %}
   </head>
   <body>
-    <nav>
-      <ul style="margin: 0; display: flex; gap: 2rem">
-        <li><a href="/">SemanticSearch</a></li>
-        <li><a href="/api-docs">API Docs</a></li>
-        <li><a href="/demos">Demos</a></li>
-        <li><a href="/register">Sign Up</a></li>
-        <li><a href="/login">Log In</a></li>
-        <li>
-          <a href="/dashboard" id="dashboard-link" style="display: none"
-            >📊 Dashboard</a
+    <nav
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--form-element-border-color);
+      "
+    >
+      <div style="display: flex; gap: 2rem">
+        <a
+          href="/"
+          style="font-weight: bold; font-size: 1.1rem; text-decoration: none"
+          >SemanticSearch</a
+        >
+        <a href="/api-docs" style="text-decoration: none">API Docs</a>
+        <a href="/demos" style="text-decoration: none">Demos</a>
+      </div>
+
+      <div style="display: flex; gap: 1rem; align-items: center">
+        <!-- User Menu (shown when logged in) -->
+        <div id="user-menu" style="display: none; position: relative">
+          <button
+            onclick="toggleUserMenu()"
+            style="
+              background: none;
+              border: 1px solid var(--form-element-border-color);
+              padding: 0.5rem 1rem;
+              border-radius: 4px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            "
           >
-        </li>
-      </ul>
+            👤 <span id="user-email" style="font-size: 0.9rem"></span>
+            <span id="menu-arrow">▼</span>
+          </button>
+
+          <div
+            id="user-dropdown"
+            style="
+              display: none;
+              position: absolute;
+              top: 100%;
+              right: 0;
+              background: white;
+              border: 1px solid var(--form-element-border-color);
+              border-radius: 4px;
+              margin-top: 0.5rem;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              z-index: 1000;
+              min-width: 200px;
+            "
+          >
+            <a
+              href="/dashboard"
+              style="
+                display: block;
+                padding: 0.75rem 1rem;
+                text-decoration: none;
+                border-bottom: 1px solid var(--form-element-border-color);
+                color: inherit;
+              "
+              >📊 Dashboard</a
+            >
+            <a
+              href="/profile"
+              style="
+                display: block;
+                padding: 0.75rem 1rem;
+                text-decoration: none;
+                border-bottom: 1px solid var(--form-element-border-color);
+                color: inherit;
+              "
+              >⚙️ Profile Settings</a
+            >
+            <button
+              onclick="logout()"
+              style="
+                width: 100%;
+                text-align: left;
+                padding: 0.75rem 1rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #e74c3c;
+                font-weight: 500;
+              "
+            >
+              🚪 Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Auth Links (shown when not logged in) -->
+        <div id="auth-links" style="display: flex; gap: 1rem">
+          <a href="/register" style="text-decoration: none">Sign Up</a>
+          <a
+            href="/login"
+            style="
+              background-color: #667eea;
+              color: white;
+              padding: 0.5rem 1rem;
+              border-radius: 4px;
+              text-decoration: none;
+            "
+            >Log In</a
+          >
+        </div>
+      </div>
     </nav>
 
     <main>{% block content %}{% endblock %}</main>
@@ -190,11 +288,53 @@
     </footer>
 
     <script>
-      // Show dashboard link if user is logged in
-      const apiKey = localStorage.getItem("api_key");
-      if (apiKey) {
-        document.getElementById("dashboard-link").style.display = "block";
+      // Professional navbar with user menu
+      function initializeNavbar() {
+        const apiKey = localStorage.getItem("api_key");
+        const userEmail = localStorage.getItem("user_email");
+
+        const userMenu = document.getElementById("user-menu");
+        const authLinks = document.getElementById("auth-links");
+        const userEmailSpan = document.getElementById("user-email");
+
+        if (apiKey && userEmail) {
+          // User is logged in
+          userMenu.style.display = "block";
+          authLinks.style.display = "none";
+          userEmailSpan.textContent = userEmail;
+        } else {
+          // User is not logged in
+          userMenu.style.display = "none";
+          authLinks.style.display = "flex";
+        }
       }
+
+      function toggleUserMenu() {
+        const dropdown = document.getElementById("user-dropdown");
+        const arrow = document.getElementById("menu-arrow");
+        const isOpen = dropdown.style.display === "block";
+        dropdown.style.display = isOpen ? "none" : "block";
+        arrow.textContent = isOpen ? "▼" : "▲";
+      }
+
+      function logout() {
+        localStorage.removeItem("api_key");
+        localStorage.removeItem("user_email");
+        window.location.href = "/";
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", function (event) {
+        const userMenu = document.getElementById("user-menu");
+        const dropdown = document.getElementById("user-dropdown");
+        if (userMenu && dropdown && !userMenu.contains(event.target)) {
+          dropdown.style.display = "none";
+        }
+      });
+
+      // Initialize on page load
+      window.addEventListener("load", initializeNavbar);
+      initializeNavbar();
     </script>
   </body>
 </html>
