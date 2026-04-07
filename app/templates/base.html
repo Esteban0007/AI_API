@@ -310,10 +310,7 @@
         id="nav-menu"
         style="display: flex; gap: 2rem; flex: 1; margin-left: 2rem"
       >
-        <a
-          href="/dashboard"
-          id="nav-dashboard"
-          style="text-decoration: none; display: none"
+        <a href="/dashboard" id="nav-dashboard" style="text-decoration: none"
           >Dashboard</a
         >
         <a href="/demos" style="text-decoration: none">Demos</a>
@@ -539,7 +536,6 @@
         const userMenu = document.getElementById("user-menu");
         const authLinks = document.getElementById("auth-links");
         const userEmailSpan = document.getElementById("user-email");
-        const navDashboard = document.getElementById("nav-dashboard");
 
         if (!userMenu || !authLinks) {
           setTimeout(initializeNavbar, 100);
@@ -551,12 +547,10 @@
           userMenu.style.display = "block";
           authLinks.style.display = "none";
           if (userEmailSpan) userEmailSpan.textContent = userEmail;
-          if (navDashboard) navDashboard.style.display = "block";
         } else {
           // User is not logged in
           userMenu.style.display = "none";
           authLinks.style.display = "flex";
-          if (navDashboard) navDashboard.style.display = "none";
         }
       }
 
