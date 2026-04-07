@@ -209,19 +209,26 @@ block content %}
               </thead>
               <tbody>
                 ${documents
-                  .map(
-                    (doc) => `
+                  .map((doc) => {
+                    const title = doc.title || doc.id;
+                    const keywordArray = Array.isArray(doc.keywords)
+                      ? doc.keywords
+                      : [];
+                    const keywordCount = keywordArray.length;
+                    const contentPreview = escapeHtml(
+                      (doc.content || "").substring(0, 80),
+                    );
+                    return `
                   <tr style="border-bottom: 1px solid var(--form-element-border-color);">
-                    <td style="padding: 1rem; font-weight: 500;">${escapeHtml(doc.title || doc.id)}</td>
+                    <td style="padding: 1rem; font-weight: 500;">${escapeHtml(title)}</td>
                     <td style="padding: 1rem; color: var(--muted-color); font-size: 0.9rem;">
-                      ${escapeHtml((doc.content || "").substring(0, 100))}${(doc.content || "").length > 100 ? "..." : ""}
+                      ${contentPreview}${(doc.content || "").length > 80 ? "..." : ""}
                     </td>
                     <td style="padding: 1rem; text-align: center; color: #667eea; font-size: 0.85rem;">
-                      ${(doc.keywords || []).length} tags
+                      ${keywordCount} tag${keywordCount !== 1 ? "s" : ""}
                     </td>
-                  </tr>
-                `,
-                  )
+                  </tr>`;
+                  })
                   .join("")}
               </tbody>
             </table>
