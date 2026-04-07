@@ -179,13 +179,176 @@
 
   <section style="margin: 4rem 0">
     <h2>Example Usage</h2>
-    <pre><code>curl -X POST "https://api.readyapi.net/api/v1/search/query" \
+
+    <div style="margin-bottom: 2rem">
+      <h3 style="margin-top: 0">Basic API Request</h3>
+      <pre><code>curl -X POST "https://readyapi.net/api/v1/search/query" \
   -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "cute robot cleans the earth",
     "top_k": 5
   }'</code></pre>
+    </div>
+
+    <div
+      style="
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        margin-top: 2rem;
+      "
+    >
+      <!-- Upload Documents -->
+      <div
+        style="
+          padding: 1.5rem;
+          border: 1px solid var(--form-element-border-color);
+          border-radius: 6px;
+          background: var(--card-background-color);
+        "
+      >
+        <h4 style="margin-top: 0; color: var(--primary-color)">
+          📤 Step 1: Upload Documents
+        </h4>
+        <p style="font-size: 0.9rem; color: var(--muted-color)">
+          Send your documents as JSON:
+        </p>
+        <pre style="font-size: 0.75rem; overflow-x: auto"><code>{
+  "documents": [
+    {
+      "id": "part-001",
+      "title": "Charge System",
+      "content": "solar panels energy reactor battery charging power",
+      "keywords": ["charge", "energy", "power"]
+    },
+    {
+      "id": "part-002",
+      "title": "Flight System",
+      "content": "thruster engine fly speed navigate",
+      "keywords": ["fly", "speed", "navigate"]
+    }
+  ]
+}</code></pre>
+        <pre
+          style="
+            font-size: 0.75rem;
+            background: var(--form-element-background-color);
+            padding: 0.8rem;
+            border-radius: 4px;
+            overflow-x: auto;
+          "
+        ><code>curl -X POST \
+  https://readyapi.net/api/v1/documents/upload \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @documents.json</code></pre>
+      </div>
+
+      <!-- Natural Language Query -->
+      <div
+        style="
+          padding: 1.5rem;
+          border: 1px solid var(--form-element-border-color);
+          border-radius: 6px;
+          background: var(--card-background-color);
+        "
+      >
+        <h4 style="margin-top: 0; color: var(--primary-color)">
+          🔍 Step 2: Search with Natural Language
+        </h4>
+        <p style="font-size: 0.9rem; color: var(--muted-color)">
+          Example queries:
+        </p>
+        <div
+          style="
+            font-size: 0.85rem;
+            font-family: monospace;
+            background: var(--form-element-background-color);
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+          "
+        >
+          "I need to get somewhere far away quickly"
+        </div>
+        <div
+          style="
+            font-size: 0.85rem;
+            font-family: monospace;
+            background: var(--form-element-background-color);
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+          "
+        >
+          "Hide the ship so they can't find us"
+        </div>
+        <div
+          style="
+            font-size: 0.85rem;
+            font-family: monospace;
+            background: var(--form-element-background-color);
+            padding: 0.8rem;
+            border-radius: 4px;
+          "
+        >
+          "Fire all weapons at the enemy"
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div
+        style="
+          padding: 1.5rem;
+          border: 1px solid var(--form-element-border-color);
+          border-radius: 6px;
+          background: var(--card-background-color);
+        "
+      >
+        <h4 style="margin-top: 0; color: var(--primary-color)">
+          ✅ Step 3: Get Ranked Results
+        </h4>
+        <p style="font-size: 0.9rem; color: var(--muted-color)">
+          Semantic search returns ranked matches:
+        </p>
+        <pre style="font-size: 0.75rem; overflow-x: auto"><code>{
+  "results": [
+    {
+      "id": "part-007",
+      "title": "Warp System",
+      "score": 0.48,
+      "content": "warp jump teleport..."
+    },
+    {
+      "id": "part-002",
+      "title": "Flight System",
+      "score": 0.46,
+      "content": "thruster engine..."
+    }
+  ],
+  "count": 2,
+  "processing_ms": 124
+}</code></pre>
+      </div>
+    </div>
+
+    <div
+      style="
+        margin-top: 2rem;
+        padding: 1rem;
+        background: rgba(76, 175, 80, 0.1);
+        border-radius: 4px;
+        border-left: 4px solid var(--form-element-valid-border-color);
+      "
+    >
+      <p style="margin: 0; font-size: 0.9rem">
+        <strong>💡 How it works:</strong> Upload JSON documents once. Then use
+        natural language queries to find semantically similar content. The
+        search engine understands meaning, not just keywords. Results include
+        similarity scores from 0 to 1 (higher = better match).
+      </p>
+    </div>
   </section>
 </div>
 
