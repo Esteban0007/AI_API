@@ -742,22 +742,42 @@ class VectorStore:
                 return []
 
             all_data = self.collection.get(
-                include=["embeddings", "metadatas", "documents"], limit=count
+                include=["embeddings", "metadatas", "documents", "uris"], limit=count
             )
 
             documents = []
             ids = all_data.get("ids", [])
             docs_content = all_data.get("documents", [])
             metadatas = all_data.get("metadatas", [])
+            uris = all_data.get("uris", [])
 
             for i, doc_id in enumerate(ids):
-                documents.append(
-                    {
-                        "id": doc_id,
-                        "content": docs_content[i] if i < len(docs_content) else "",
-                        "metadata": metadatas[i] if i < len(metadatas) else {},
-                    }
-                )
+                doc_entry = {
+                    "id": doc_id,
+                    "content": docs_content[i] if i < len(docs_content) else "",
+                    "metadata": metadatas[i] if i < len(metadatas) else {},
+                    "title": (
+                        metadatas[i].get("title", "") if i < len(metadatas) else ""
+                    ),
+                    "keywords": [],
+                }
+
+                # Try to extract full document info from URI
+                if i < len(uris) and uris[i]:
+                    try:
+                        import json
+
+                        full_doc = json.loads(uris[i])
+                        if "title" in full_doc:
+                            doc_entry["title"] = full_doc["title"]
+                        if "keywords" in full_doc:
+                            doc_entry["keywords"] = full_doc["keywords"]
+                        if "content" in full_doc:
+                            doc_entry["content"] = full_doc["content"]
+                    except:
+                        pass
+
+                documents.append(doc_entry)
 
             return documents
         except Exception as e:
