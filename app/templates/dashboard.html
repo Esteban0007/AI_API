@@ -277,10 +277,9 @@ block content %}
 
   function showError(title, message) {
     document.getElementById("dashboard").innerHTML = `
-      <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 2rem; border-radius: var(--border-radius);">
-        <h3>⚠️ ${title}</h3>
-        <p>${message}</p>
-        <a href="/login" style="display: inline-block; margin-top: 1rem; background-color: #2196F3; color: white; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none;">Go to Login</a>
+      <article style="text-align: center; padding: 3rem; background-color: #ffebee; border-color: #f44336; border-radius: var(--border-radius);">
+        <p style="color: #c62828; margin-bottom: 1.5rem;">Unable to load dashboard. Please log in again.</p>
+        <a href="/login" style="display: inline-block; background-color: #2196F3; color: white; padding: 0.75rem 1.5rem; border-radius: 4px; text-decoration: none; font-weight: 500;">Go to Login</a>
       </article>
     `;
   }
