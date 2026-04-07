@@ -734,6 +734,36 @@ class VectorStore:
             logger.error(f"Error getting collection stats: {e}")
             return {}
 
+    def get_all_documents(self) -> List[Dict]:
+        """Get all documents in the collection."""
+        try:
+            count = self.collection.count()
+            if count == 0:
+                return []
+
+            all_data = self.collection.get(
+                include=["embeddings", "metadatas", "documents"], limit=count
+            )
+
+            documents = []
+            ids = all_data.get("ids", [])
+            docs_content = all_data.get("documents", [])
+            metadatas = all_data.get("metadatas", [])
+
+            for i, doc_id in enumerate(ids):
+                documents.append(
+                    {
+                        "id": doc_id,
+                        "content": docs_content[i] if i < len(docs_content) else "",
+                        "metadata": metadatas[i] if i < len(metadatas) else {},
+                    }
+                )
+
+            return documents
+        except Exception as e:
+            logger.error(f"Error getting all documents: {e}")
+            return []
+
     def clear_collection(self) -> None:
         """Delete all documents in the collection."""
         try:
