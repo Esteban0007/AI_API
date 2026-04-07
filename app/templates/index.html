@@ -178,69 +178,52 @@
   </section>
 
   <section style="margin: 4rem 0">
-    <h2>Example Usage</h2>
+    <h2>Example Usage - Step by Step</h2>
+    <p
+      style="font-size: 0.95rem; color: var(--muted-color); margin-bottom: 2rem"
+    >
+      Follow this complete example to understand how ReadyAPI works. We'll use a
+      spaceship with 7 systems.
+    </p>
 
-    <div style="margin-bottom: 2rem">
-      <h3 style="margin-top: 0">Spaceship Demo - Complete Example</h3>
-      <p style="color: var(--muted-color); font-size: 0.9rem">
-        Search a spaceship with 7 systems using natural language:
-      </p>
-      <pre><code>{
-  "query": "I need to get somewhere far away quickly",
-  "top_k": 3
-}
-
-Response:
-{
-  "results": [
-    {
-      "id": "part-007",
-      "title": "Warp System",
-      "score": 0.48,
-      "content": "warp jump teleport hyperdrive lightspeed..."
-    },
-    {
-      "id": "part-002",
-      "title": "Flight System",
-      "score": 0.46,
-      "content": "thruster engine propulsion fly speed..."
-    },
-    {
-      "id": "part-006",
-      "title": "Scan System",
-      "score": 0.46,
-      "content": "radar scanner detect analyze search..."
-    }
-  ],
-  "count": 3,
-  "processing_ms": 124
-}</code></pre>
-    </div>
-
+    <!-- Step 1: Upload Documents -->
     <div
       style="
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        margin-top: 2rem;
+        margin: 3rem 0;
+        padding: 2rem;
+        border: 2px solid var(--form-element-border-color);
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.05);
       "
     >
-      <!-- Upload Documents -->
-      <div
+      <h3 style="margin-top: 0; color: var(--primary-color)">
+        📤 Step 1: Create Your Documents (JSON)
+      </h3>
+      <p style="color: var(--muted-color)">
+        First, prepare your documents as a JSON file. Each document needs:
+      </p>
+      <ul style="color: var(--muted-color)">
+        <li><strong>id:</strong> Unique identifier</li>
+        <li><strong>title:</strong> Name of the document</li>
+        <li>
+          <strong>content:</strong> The actual text to search (keywords,
+          descriptions, etc)
+        </li>
+        <li><strong>keywords:</strong> Optional list of related terms</li>
+        <li>
+          <strong>metadata:</strong> Optional extra data (styling, state, etc)
+        </li>
+      </ul>
+
+      <pre
         style="
-          padding: 1.5rem;
-          border: 1px solid var(--form-element-border-color);
-          border-radius: 6px;
-          background: var(--card-background-color);
+          background: var(--form-element-background-color);
+          padding: 1rem;
+          border-radius: 4px;
+          overflow-x: auto;
+          font-size: 0.8rem;
         "
-      >
-        <h4 style="margin-top: 0; color: var(--primary-color)">
-          📤 Step 1: Upload Documents
-        </h4>
-        <p style="font-size: 0.9rem; color: var(--muted-color)">
-          Send your documents as JSON:
-        </p>
-        <pre style="font-size: 0.75rem; overflow-x: auto"><code>{
+      ><code>{
   "documents": [
     {
       "id": "part-001",
@@ -293,110 +276,397 @@ Response:
     }
   ]
 }</code></pre>
-      </div>
 
-      <!-- Natural Language Query -->
-      <div
+      <p
         style="
-          padding: 1.5rem;
-          border: 1px solid var(--form-element-border-color);
-          border-radius: 6px;
-          background: var(--card-background-color);
+          color: var(--muted-color);
+          font-size: 0.9rem;
+          background: rgba(76, 175, 80, 0.1);
+          padding: 0.8rem;
+          border-radius: 4px;
         "
       >
-        <h4 style="margin-top: 0; color: var(--primary-color)">
-          🔍 Step 2: Search with Natural Language
-        </h4>
-        <p style="font-size: 0.9rem; color: var(--muted-color)">
-          Example queries:
+        <strong>💡 Tip:</strong> The more detailed your content field, the
+        better the semantic search will understand your documents.
+      </p>
+    </div>
+
+    <!-- Step 2: Upload to ReadyAPI -->
+    <div
+      style="
+        margin: 3rem 0;
+        padding: 2rem;
+        border: 2px solid var(--form-element-border-color);
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.05);
+      "
+    >
+      <h3 style="margin-top: 0; color: var(--primary-color)">
+        🚀 Step 2: Send Documents to ReadyAPI
+      </h3>
+      <p style="color: var(--muted-color)">
+        Use your API Key to upload the documents. ReadyAPI will process and
+        index them instantly.
+      </p>
+
+      <div
+        style="
+          background: var(--form-element-background-color);
+          padding: 1rem;
+          border-radius: 4px;
+          margin: 1rem 0;
+        "
+      >
+        <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
+          <strong>Using curl (command line):</strong>
         </p>
+        <pre
+          style="overflow-x: auto; font-size: 0.75rem; margin: 0"
+        ><code>curl -X POST https://readyapi.net/api/v1/documents/upload \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @documents.json</code></pre>
+      </div>
+
+      <div
+        style="
+          background: var(--form-element-background-color);
+          padding: 1rem;
+          border-radius: 4px;
+          margin: 1rem 0;
+        "
+      >
+        <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
+          <strong>API Response (Success):</strong>
+        </p>
+        <pre style="overflow-x: auto; font-size: 0.75rem; margin: 0"><code>{
+  "success": true,
+  "message": "Successfully uploaded 7 documents",
+  "uploaded_count": 7,
+  "failed_count": 0
+}</code></pre>
+      </div>
+
+      <p
+        style="
+          color: var(--muted-color);
+          font-size: 0.9rem;
+          background: rgba(76, 175, 80, 0.1);
+          padding: 0.8rem;
+          border-radius: 4px;
+        "
+      >
+        <strong>✅ Done!</strong> Your 7 spaceship systems are now indexed and
+        searchable. You only need to do this once!
+      </p>
+    </div>
+
+    <!-- Step 3: Search with Natural Language -->
+    <div
+      style="
+        margin: 3rem 0;
+        padding: 2rem;
+        border: 2px solid var(--form-element-border-color);
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.05);
+      "
+    >
+      <h3 style="margin-top: 0; color: var(--primary-color)">
+        🔍 Step 3: Search with Natural Language (No Keywords Required!)
+      </h3>
+      <p style="color: var(--muted-color)">
+        Now you can ask questions in plain English. ReadyAPI understands
+        meaning, not just keywords.
+      </p>
+
+      <div style="display: grid; gap: 1.5rem; margin: 1.5rem 0">
         <div
           style="
-            font-size: 0.85rem;
-            font-family: monospace;
             background: var(--form-element-background-color);
-            padding: 0.8rem;
+            padding: 1rem;
             border-radius: 4px;
-            margin-bottom: 0.8rem;
           "
         >
-          "I need to get somewhere far away quickly"
+          <p
+            style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem"
+          >
+            <strong>Example 1: Travel Far Away</strong>
+          </p>
+          <p style="margin: 0; font-family: monospace; color: var(--color)">
+            Query: "I need to get somewhere far away quickly"
+          </p>
+          <p
+            style="
+              margin: 0.5rem 0 0 0;
+              color: var(--muted-color);
+              font-size: 0.8rem;
+            "
+          >
+            → Finds: Warp System, Flight System, Scan System
+          </p>
         </div>
+
         <div
           style="
-            font-size: 0.85rem;
-            font-family: monospace;
             background: var(--form-element-background-color);
-            padding: 0.8rem;
+            padding: 1rem;
             border-radius: 4px;
-            margin-bottom: 0.8rem;
           "
         >
-          "Hide the ship so they can't find us"
+          <p
+            style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem"
+          >
+            <strong>Example 2: Hide & Stealth</strong>
+          </p>
+          <p style="margin: 0; font-family: monospace; color: var(--color)">
+            Query: "Hide the ship so they can't find us"
+          </p>
+          <p
+            style="
+              margin: 0.5rem 0 0 0;
+              color: var(--muted-color);
+              font-size: 0.8rem;
+            "
+          >
+            → Finds: Stealth System, Scan System, Defense System
+          </p>
         </div>
+
         <div
           style="
-            font-size: 0.85rem;
-            font-family: monospace;
             background: var(--form-element-background-color);
-            padding: 0.8rem;
+            padding: 1rem;
             border-radius: 4px;
           "
         >
-          "Fire all weapons at the enemy"
+          <p
+            style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem"
+          >
+            <strong>Example 3: Attack!</strong>
+          </p>
+          <p style="margin: 0; font-family: monospace; color: var(--color)">
+            Query: "Fire all weapons at the enemy"
+          </p>
+          <p
+            style="
+              margin: 0.5rem 0 0 0;
+              color: var(--muted-color);
+              font-size: 0.8rem;
+            "
+          >
+            → Finds: Attack System, Defense System, Scan System
+          </p>
         </div>
       </div>
 
-      <!-- Results -->
-      <div
+      <p
         style="
-          padding: 1.5rem;
-          border: 1px solid var(--form-element-border-color);
-          border-radius: 6px;
-          background: var(--card-background-color);
+          color: var(--muted-color);
+          font-size: 0.9rem;
+          background: rgba(76, 175, 80, 0.1);
+          padding: 0.8rem;
+          border-radius: 4px;
         "
       >
-        <h4 style="margin-top: 0; color: var(--primary-color)">
-          ✅ Step 3: Get Ranked Results
-        </h4>
-        <p style="font-size: 0.9rem; color: var(--muted-color)">
-          Semantic search returns ranked matches:
+        <strong>🧠 How it works:</strong> ReadyAPI uses advanced AI (Arctic
+        embeddings) to understand what you mean, not just what keywords you use.
+        So "get somewhere far away quickly" understands you need speed and
+        distance, and finds the Warp System!
+      </p>
+    </div>
+
+    <!-- Step 4: Get Results -->
+    <div
+      style="
+        margin: 3rem 0;
+        padding: 2rem;
+        border: 2px solid var(--form-element-border-color);
+        border-radius: 8px;
+        background: rgba(102, 126, 234, 0.05);
+      "
+    >
+      <h3 style="margin-top: 0; color: var(--primary-color)">
+        ✅ Step 4: Get Ranked Results
+      </h3>
+      <p style="color: var(--muted-color)">
+        ReadyAPI returns the most relevant documents, ranked by similarity.
+      </p>
+
+      <div
+        style="
+          background: var(--form-element-background-color);
+          padding: 1rem;
+          border-radius: 4px;
+          margin: 1rem 0;
+        "
+      >
+        <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
+          <strong>API Call (Search):</strong>
         </p>
-        <pre style="font-size: 0.75rem; overflow-x: auto"><code>{
+        <pre
+          style="overflow-x: auto; font-size: 0.75rem; margin: 0"
+        ><code>curl -X POST https://readyapi.net/api/v1/search/query \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "I need to get somewhere far away quickly",
+    "top_k": 3
+  }'</code></pre>
+      </div>
+
+      <div
+        style="
+          background: var(--form-element-background-color);
+          padding: 1rem;
+          border-radius: 4px;
+          margin: 1rem 0;
+        "
+      >
+        <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
+          <strong>API Response (Results):</strong>
+        </p>
+        <pre style="overflow-x: auto; font-size: 0.75rem; margin: 0"><code>{
   "results": [
     {
       "id": "part-007",
       "title": "Warp System",
       "score": 0.48,
-      "content": "warp jump teleport..."
+      "content": "warp jump teleport hyperdrive lightspeed..."
     },
     {
       "id": "part-002",
       "title": "Flight System",
       "score": 0.46,
-      "content": "thruster engine..."
+      "content": "thruster engine propulsion fly speed..."
+    },
+    {
+      "id": "part-006",
+      "title": "Scan System",
+      "score": 0.46,
+      "content": "radar scanner detect analyze search..."
     }
   ],
-  "count": 2,
+  "count": 3,
   "processing_ms": 124
 }</code></pre>
       </div>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 1rem;
+          margin: 1rem 0;
+        "
+      >
+        <div
+          style="
+            background: rgba(76, 175, 80, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--form-element-valid-border-color);
+          "
+        >
+          <p
+            style="
+              margin: 0;
+              font-weight: 600;
+              color: var(--primary-color);
+              font-size: 0.9rem;
+            "
+          >
+            Score = Relevance
+          </p>
+          <p
+            style="
+              margin: 0.5rem 0 0 0;
+              font-size: 0.8rem;
+              color: var(--muted-color);
+            "
+          >
+            Higher score = better match. Range: 0 to 1
+          </p>
+        </div>
+        <div
+          style="
+            background: rgba(76, 175, 80, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--form-element-valid-border-color);
+          "
+        >
+          <p
+            style="
+              margin: 0;
+              font-weight: 600;
+              color: var(--primary-color);
+              font-size: 0.9rem;
+            "
+          >
+            Top 3 Results
+          </p>
+          <p
+            style="
+              margin: 0.5rem 0 0 0;
+              font-size: 0.8rem;
+              color: var(--muted-color);
+            "
+          >
+            Ranked best first (0.48 > 0.46)
+          </p>
+        </div>
+        <div
+          style="
+            background: rgba(76, 175, 80, 0.1);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--form-element-valid-border-color);
+          "
+        >
+          <p
+            style="
+              margin: 0;
+              font-weight: 600;
+              color: var(--primary-color);
+              font-size: 0.9rem;
+            "
+          >
+            Fast & Accurate
+          </p>
+          <p
+            style="
+              margin: 0.5rem 0 0 0;
+              font-size: 0.8rem;
+              color: var(--muted-color);
+            "
+          >
+            124ms processing time
+          </p>
+        </div>
+      </div>
     </div>
 
+    <!-- Summary -->
     <div
       style="
-        margin-top: 2rem;
-        padding: 1rem;
-        background: rgba(76, 175, 80, 0.1);
-        border-radius: 4px;
-        border-left: 4px solid var(--form-element-valid-border-color);
+        margin: 3rem 0;
+        padding: 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1) 0%,
+          rgba(118, 75, 162, 0.1) 100%
+        );
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
       "
     >
-      <p style="margin: 0; font-size: 0.9rem">
-        <strong>💡 How it works:</strong> Upload JSON documents once. Then use
-        natural language queries to find semantically similar content. The
-        search engine understands meaning, not just keywords. Results include
-        similarity scores from 0 to 1 (higher = better match).
+      <h3 style="margin-top: 0; color: var(--primary-color)">
+        🎯 That's It! You're Ready
+      </h3>
+      <p style="margin: 0; color: var(--muted-color)">
+        <strong>Three simple steps:</strong> Create JSON → Upload Documents →
+        Search Naturally. No complex setup, no coding required. Just ask in
+        plain language and get smart results.
       </p>
     </div>
   </section>
