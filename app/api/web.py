@@ -537,6 +537,12 @@ async def reset_password(
     )
 
 
+@router.get("/dashboard", response_class=HTMLResponse, include_in_schema=False)
+async def dashboard_page(request: Request):
+    """User dashboard page."""
+    return templates.TemplateResponse("dashboard.html", {"request": request})
+
+
 @router.get("/profile", response_class=HTMLResponse, include_in_schema=False)
 async def profile_page(request: Request):
     """Profile settings page."""
