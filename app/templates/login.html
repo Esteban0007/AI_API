@@ -100,21 +100,12 @@
         window.location.href = "/dashboard";
       }
 
-      // Auto-redirect if API key is present
+      // Auto-redirect if API key is present - immediately
       document.addEventListener("DOMContentLoaded", function () {
         const apiKeyInput = document.getElementById("api-key");
         if (apiKeyInput && apiKeyInput.value) {
-          // Show a message and redirect after 2 seconds
-          const successMsg = document.querySelector(
-            'article[style*="background-color: #e8f5e9"]',
-          );
-          if (successMsg) {
-            successMsg.innerHTML +=
-              '<p style="margin-top: 0.5rem; color: #2e7d32;"><strong>Redirecting to dashboard in 2 seconds...</strong></p>';
-            setTimeout(function () {
-              goToDashboard(apiKeyInput.value);
-            }, 2000);
-          }
+          // Redirect immediately
+          goToDashboard(apiKeyInput.value);
         }
       });
     </script>
