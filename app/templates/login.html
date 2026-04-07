@@ -83,7 +83,7 @@
       <button
         type="button"
         style="margin-left: 1rem; background-color: #667eea; color: white"
-        onclick="goToDashboard('{{ api_key }}')"
+        onclick="goToDashboard('{{ api_key }}', '{{ user_email }}')"
       >
         Go to Dashboard
       </button>
@@ -91,10 +91,7 @@
 
     <script>
       // Auto-redirect to dashboard after login
-      function goToDashboard(apiKey) {
-        const emailInput = document.getElementById("email");
-        const userEmail = emailInput ? emailInput.value : "User";
-
+      function goToDashboard(apiKey, userEmail) {
         // Save to localStorage
         localStorage.setItem("api_key", apiKey);
         localStorage.setItem("user_email", userEmail);
