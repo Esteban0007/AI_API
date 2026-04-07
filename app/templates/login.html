@@ -80,7 +80,40 @@
       >
         Copy API Key
       </button>
+      <button
+        type="button"
+        style="margin-left: 1rem; background-color: #667eea; color: white"
+        onclick="goToDashboard('{{ api_key }}')"
+      >
+        Go to Dashboard
+      </button>
     </article>
+
+    <script>
+      // Auto-redirect to dashboard after login
+      function goToDashboard(apiKey) {
+        localStorage.setItem("api_key", apiKey);
+        window.location.href = "/dashboard?key=" + apiKey;
+      }
+
+      // Auto-redirect if API key is present
+      document.addEventListener("DOMContentLoaded", function () {
+        const apiKeyInput = document.getElementById("api-key");
+        if (apiKeyInput && apiKeyInput.value) {
+          // Show a message and redirect after 2 seconds
+          const successMsg = document.querySelector(
+            'article[style*="background-color: #e8f5e9"]',
+          );
+          if (successMsg) {
+            successMsg.innerHTML +=
+              '<p style="margin-top: 0.5rem; color: #2e7d32;"><strong>Redirecting to dashboard in 2 seconds...</strong></p>';
+            setTimeout(function () {
+              goToDashboard(apiKeyInput.value);
+            }, 2000);
+          }
+        }
+      });
+    </script>
     {% endif %}
 
     <p style="text-align: center; margin-top: 2rem; color: var(--muted-color)">
