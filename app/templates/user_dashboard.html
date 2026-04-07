@@ -238,10 +238,26 @@
 
     <script>
       const API_BASE = "/api/v1";
-      const API_KEY = localStorage.getItem("api_key");
+
+      // Get API key from URL parameter or localStorage
+      const urlParams = new URLSearchParams(window.location.search);
+      let API_KEY = urlParams.get("key") || localStorage.getItem("api_key");
 
       if (!API_KEY) {
-        window.location.href = "/";
+        document.getElementById("dashboard").innerHTML = `
+          <div class="error">
+            <strong>Error:</strong> No API key provided. 
+            <br><br>
+            Please provide your API key using the dashboard URL:
+            <br><code style="background: #f0f0f0; padding: 5px; border-radius: 3px;">/dashboard?key=your_api_key_here</code>
+            <br><br>
+            Example: <code>/dashboard?key=rapi_58XFcT4P7kcw4ZVxyrh_G8-dnI-Fj60HYPyUD7XFdqc</code>
+          </div>
+        `;
+      } else {
+        // Save to localStorage for future visits
+        localStorage.setItem("api_key", API_KEY);
+        loadDashboard();
       }
 
       async function loadDashboard() {
@@ -253,6 +269,11 @@
               headers: { "X-API-Key": API_KEY },
             },
           );
+
+          if (!monthlyResponse.ok) {
+            throw new Error(`Stats error: ${monthlyResponse.statusText}`);
+          }
+
           const monthlyStats = await monthlyResponse.json();
 
           const docsResponse = await fetch(
@@ -261,12 +282,17 @@
               headers: { "X-API-Key": API_KEY },
             },
           );
+
+          if (!docsResponse.ok) {
+            throw new Error(`Docs error: ${docsResponse.statusText}`);
+          }
+
           const docsStats = await docsResponse.json();
 
-          // Simulate API keys data (you'll need an endpoint for this)
+          // API keys data
           const apiKeys = [
             {
-              name: "Main API Key",
+              name: "Your API Key",
               key: API_KEY,
               is_active: true,
             },
@@ -276,8 +302,8 @@
         } catch (error) {
           console.error(error);
           document.getElementById("dashboard").innerHTML = `
-                    <div class="error">Error loading dashboard: ${error.message}</div>
-                `;
+            <div class="error"><strong>Error:</strong> ${error.message}</div>
+          `;
         }
       }
 
@@ -347,8 +373,10 @@
         window.location.href = "/";
       }
 
-      // Load dashboard on page load
-      loadDashboard();
+      // Load dashboard on page load (only if API_KEY exists)
+      if (API_KEY) {
+        // Don't call loadDashboard here - it's called above after checking API_KEY
+      }
     </script>
   </body>
 </html>
