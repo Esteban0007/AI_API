@@ -123,10 +123,45 @@
       @media (max-width: 768px) {
         nav {
           padding: 1rem;
-        }
-        nav ul {
           flex-wrap: wrap;
-          gap: 1rem;
+          position: relative;
+        }
+        .nav-menu {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border-bottom: 1px solid var(--form-element-border-color);
+          padding: 1rem;
+          gap: 0.75rem;
+          width: 100%;
+          z-index: 999;
+        }
+        .nav-menu.mobile-open {
+          display: flex;
+        }
+        .hamburger-btn {
+          display: block;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1.5rem;
+          padding: 0.5rem;
+          margin-left: auto;
+        }
+        .nav-logo {
+          font-weight: bold;
+          font-size: 1rem;
+          text-decoration: none;
+        }
+        nav a {
+          font-size: 0.9rem;
+          margin-right: 0;
+          display: block;
+          padding: 0.5rem 0;
         }
         .container {
           padding: 1rem;
@@ -167,14 +202,16 @@
         align-items: center;
         padding: 1rem 2rem;
         border-bottom: 1px solid var(--form-element-border-color);
+        position: relative;
       "
     >
-      <div style="display: flex; gap: 2rem">
-        <a
-          href="/"
-          style="font-weight: bold; font-size: 1.1rem; text-decoration: none"
-          >SemanticSearch</a
-        >
+      <a
+        href="/"
+        style="font-weight: bold; font-size: 1.1rem; text-decoration: none"
+        >SemanticSearch</a
+      >
+
+      <div class="nav-menu" id="nav-menu" style="display: flex; gap: 2rem">
         <a
           href="/dashboard"
           id="nav-dashboard"
@@ -184,6 +221,15 @@
         <a href="/demos" style="text-decoration: none">Demos</a>
         <a href="/api-docs" style="text-decoration: none">API Docs</a>
       </div>
+
+      <button
+        class="hamburger-btn"
+        id="hamburger-btn"
+        onclick="toggleMobileMenu()"
+        style="display: none"
+      >
+        ☰
+      </button>
 
       <div style="display: flex; gap: 1rem; align-items: center">
         <!-- User Menu (shown when logged in) -->
@@ -294,6 +340,39 @@
     </footer>
 
     <script>
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const navMenu = document.getElementById("nav-menu");
+        navMenu.classList.toggle("mobile-open");
+      }
+
+      // Close mobile menu when a link is clicked
+      document.querySelectorAll("#nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          const navMenu = document.getElementById("nav-menu");
+          navMenu.classList.remove("mobile-open");
+        });
+      });
+
+      // Show/hide hamburger button based on screen size
+      function updateHamburgerMenu() {
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const navMenu = document.getElementById("nav-menu");
+        if (window.innerWidth <= 768) {
+          hamburgerBtn.style.display = "block";
+          navMenu.style.display = "none";
+        } else {
+          hamburgerBtn.style.display = "none";
+          navMenu.style.display = "flex";
+          navMenu.classList.remove("mobile-open");
+        }
+      }
+
+      // Run on page load
+      updateHamburgerMenu();
+      // Run on window resize
+      window.addEventListener("resize", updateHamburgerMenu);
+
       // Professional navbar with user menu
       function initializeNavbar() {
         const apiKey = localStorage.getItem("api_key");
