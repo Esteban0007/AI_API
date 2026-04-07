@@ -286,8 +286,23 @@
           border-radius: 4px;
         "
       >
-        <strong>💡 Tip:</strong> The more detailed your content field, the
-        better the semantic search will understand your documents.
+        <strong>💡 Tip</strong>
+        <br />
+        ReadyAPI combines three fields to find matches:
+        <br />
+        <br />
+        <strong>1. Content field:</strong> This is the primary search field.
+        It's converted into AI embeddings that understand meaning. Include
+        descriptive text, features, specifications, and anything customers might
+        ask about.
+        <br />
+        <strong>2. Title field:</strong> Gets a relevance boost if it matches
+        the search. Used for exact and partial matches.
+        <br />
+        <strong>3. Keywords field:</strong> Optional but helpful. Provides hints
+        about the document's topic.
+        <br />
+        <br />
       </p>
     </div>
 
@@ -473,6 +488,31 @@
         So "get somewhere far away quickly" understands you need speed and
         distance, and finds the Warp System!
       </p>
+
+      <p
+        style="
+          color: var(--muted-color);
+          font-size: 0.9rem;
+          background: rgba(108, 92, 231, 0.1);
+          padding: 0.8rem;
+          border-radius: 4px;
+          margin-top: 1rem;
+          border-left: 4px solid var(--primary-color);
+        "
+      >
+        <strong>🎯 Optional Filters:</strong> You can also add filters to narrow
+        down results. For example, search in documents with
+        <code
+          style="
+            background: rgba(0, 0, 0, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+          "
+          >state: "active"</code
+        >
+        to only get running systems. Filters work on the metadata field, giving
+        you precise control over results.
+      </p>
     </div>
 
     <!-- Step 4: Get Results -->
@@ -512,6 +552,49 @@
     "query": "I need to get somewhere far away quickly",
     "top_k": 3
   }'</code></pre>
+      </div>
+
+      <div
+        style="
+          background: var(--form-element-background-color);
+          padding: 1rem;
+          border-radius: 4px;
+          margin: 1rem 0;
+        "
+      >
+        <p style="margin-top: 0; color: var(--muted-color); font-size: 0.85rem">
+          <strong>API Call with Filters (Only Active Systems):</strong>
+        </p>
+        <pre
+          style="overflow-x: auto; font-size: 0.75rem; margin: 0"
+        ><code>curl -X POST https://readyapi.net/api/v1/search/query \
+  -H "x-api-key: YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "I need to get somewhere far away quickly",
+    "top_k": 3,
+    "filters": {
+      "metadata.state": "active"
+    }
+  }'</code></pre>
+        <p
+          style="
+            margin: 0.5rem 0 0 0;
+            color: var(--muted-color);
+            font-size: 0.75rem;
+          "
+        >
+          This filters results to only show systems with
+          <code
+            style="
+              background: rgba(0, 0, 0, 0.1);
+              padding: 0.2rem 0.4rem;
+              border-radius: 2px;
+            "
+            >state: active</code
+          >
+          in their metadata.
+        </p>
       </div>
 
       <div
