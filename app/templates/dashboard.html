@@ -198,13 +198,13 @@ block content %}
           </div>
         `
             : `
-          <div style="overflow-y: auto; max-height: 500px; border: 1px solid var(--form-element-border-color); border-radius: var(--border-radius);">
+          <div style="overflow-y: auto; max-height: 500px; border: 1px solid #444; border-radius: var(--border-radius); background: #1a1a1a;">
             <table role="grid" style="width: 100%; border-collapse: collapse;">
-              <thead style="position: sticky; top: 0; background: var(--form-element-background-color); z-index: 10;">
+              <thead style="position: sticky; top: 0; background: #0d0d0d; z-index: 10;">
                 <tr>
-                  <th style="text-align: left; padding: 1rem; border-bottom: 2px solid var(--form-element-border-color);">Title</th>
-                  <th style="text-align: left; padding: 1rem; border-bottom: 2px solid var(--form-element-border-color);">Content Preview</th>
-                  <th style="text-align: center; padding: 1rem; border-bottom: 2px solid var(--form-element-border-color);">Keywords</th>
+                  <th style="text-align: left; padding: 1rem; border-bottom: 1px solid #444; color: #ccc;">Title</th>
+                  <th style="text-align: left; padding: 1rem; border-bottom: 1px solid #444; color: #ccc;">Content Preview</th>
+                  <th style="text-align: center; padding: 1rem; border-bottom: 1px solid #444; color: #ccc;">Keywords</th>
                 </tr>
               </thead>
               <tbody>
@@ -219,9 +219,9 @@ block content %}
                       (doc.content || "").substring(0, 80),
                     );
                     return `
-                  <tr style="border-bottom: 1px solid var(--form-element-border-color);">
-                    <td style="padding: 1rem; font-weight: 500;">${escapeHtml(title)}</td>
-                    <td style="padding: 1rem; color: var(--muted-color); font-size: 0.9rem;">
+                  <tr style="border-bottom: 1px solid #333; background: #1a1a1a;">
+                    <td style="padding: 1rem; font-weight: 500; color: #fff;">${escapeHtml(title)}</td>
+                    <td style="padding: 1rem; color: #999; font-size: 0.9rem;">
                       ${contentPreview}${(doc.content || "").length > 80 ? "..." : ""}
                     </td>
                     <td style="padding: 1rem; text-align: center; color: #667eea; font-size: 0.85rem;">
@@ -249,7 +249,7 @@ block content %}
         </p>
 
         <div class="api-key-container">
-          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Primary Key</label>
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">API KEY</label>
           <input 
             type="password" 
             value="${API_KEY}" 
