@@ -92,6 +92,13 @@ block content %}
   let API_KEY = localStorage.getItem("api_key");
   const USER_EMAIL = localStorage.getItem("user_email");
 
+  // Escape HTML to prevent XSS
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   // Load dashboard data
   if (!API_KEY) {
     showError(
@@ -114,14 +121,26 @@ block content %}
 
       const monthlyStats = await monthlyResponse.json();
 
-      displayDashboard(monthlyStats);
+      // Load documents
+      const documentsResponse = await fetch(API_BASE + "/documents/all", {
+        headers: { "X-API-Key": API_KEY },
+      });
+
+      let documents = [];
+      if (documentsResponse.ok) {
+        documents = await documentsResponse.json();
+      }
+
+      displayDashboard(monthlyStats, documents);
     } catch (error) {
       console.error(error);
       showError("Error Loading Dashboard", error.message);
     }
   }
 
-  function displayDashboard(monthlyStats) {
+  function displayDashboard(monthlyStats, documents) {
+    const documentCount = documents?.length || 0;
+
     const html = `
       <!-- Statistics Cards -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
@@ -133,6 +152,14 @@ block content %}
           <p class="stat-label">Total searches in <strong>${monthlyStats.month}</strong></p>
         </div>
 
+        <!-- Documents Card -->
+        <div class="stat-card">
+          <div class="stat-icon">📄</div>
+          <h3 style="margin: 1rem 0 0.5rem 0;">Documents</h3>
+          <div class="stat-value">${documentCount}</div>
+          <p class="stat-label">Total documents indexed</p>
+        </div>
+
         <!-- Status Card -->
         <div class="stat-card">
           <div class="stat-icon">✅</div>
@@ -141,6 +168,58 @@ block content %}
           <p class="stat-label">Your API key is active</p>
         </div>
       </div>
+
+      <!-- Documents Section -->
+      <article style="margin-top: 3rem;">
+        <h2 class="section-title">📚 Your Documents</h2>
+        
+        <p style="color: var(--muted-color); margin-bottom: 1.5rem;">
+          Manage and view all your indexed documents. These documents are searchable through the SemanticSearch API.
+        </p>
+
+        ${
+          documentCount === 0
+            ? `
+          <div style="text-align: center; padding: 3rem; background: #f8f9fa; border-radius: var(--border-radius); border: 2px dashed var(--form-element-border-color);">
+            <p style="color: var(--muted-color); font-size: 1rem;">No documents yet</p>
+            <p style="color: var(--muted-color); font-size: 0.9rem;">Upload documents to start searching. Visit the <a href="/api-docs" style="color: #667eea;">API Docs</a> to learn how.</p>
+          </div>
+        `
+            : `
+          <div style="overflow-x: auto;">
+            <table role="grid" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th style="text-align: left; padding: 1rem;">Title</th>
+                  <th style="text-align: left; padding: 1rem;">Content Preview</th>
+                  <th style="text-align: center; padding: 1rem;">Keywords</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${documents
+                  .map(
+                    (doc) => `
+                  <tr style="border-bottom: 1px solid var(--form-element-border-color);">
+                    <td style="padding: 1rem; font-weight: 500;">${escapeHtml(doc.title || doc.id)}</td>
+                    <td style="padding: 1rem; color: var(--muted-color); font-size: 0.9rem;">
+                      ${escapeHtml((doc.content || "").substring(0, 100))}${(doc.content || "").length > 100 ? "..." : ""}
+                    </td>
+                    <td style="padding: 1rem; text-align: center; color: #667eea; font-size: 0.85rem;">
+                      ${(doc.keywords || []).length} tags
+                    </td>
+                  </tr>
+                `,
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+          </div>
+          <p style="color: var(--muted-color); margin-top: 1rem; font-size: 0.9rem;">
+            Total: <strong>${documentCount}</strong> document${documentCount !== 1 ? "s" : ""}
+          </p>
+        `
+        }
+      </article>
 
       <!-- API Keys Section -->
       <article style="margin-top: 3rem;">
