@@ -128,22 +128,27 @@
         border: none !important;
         box-shadow: none !important;
         padding: 0 !important;
-        gap: 2rem !important;
+        gap: 0.5rem !important;
         flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
       }
       .nav-menu a {
         color: inherit !important;
-        padding: 0.5rem 1rem !important;
-        border: 1px solid transparent !important;
-        border-radius: 4px !important;
-        background: transparent !important;
-        transition: all 0.2s;
+        padding: 0.6rem 1.2rem !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        border-radius: 6px !important;
+        background: rgba(255, 255, 255, 0.5) !important;
+        transition: all 0.3s ease !important;
         display: inline-block !important;
+        font-weight: 500 !important;
+        font-size: 0.95rem !important;
       }
       .nav-menu a:hover {
         opacity: 1 !important;
-        background-color: rgba(0, 0, 0, 0.05) !important;
-        border-color: rgba(0, 0, 0, 0.1) !important;
+        background-color: rgba(102, 126, 234, 0.1) !important;
+        border-color: rgba(102, 126, 234, 0.3) !important;
+        transform: translateY(-2px) !important;
       }
       @media (max-width: 768px) {
         nav {
@@ -191,7 +196,7 @@
           gap: 0 !important;
           width: 100% !important;
           z-index: 998 !important;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4) !important;
           margin-top: 0 !important;
           margin-left: 0 !important;
           flex: none !important;
@@ -201,20 +206,23 @@
         }
         .nav-menu a {
           color: #fff !important;
-          padding: 0.75rem 1rem !important;
-          border-bottom: 1px solid #333 !important;
+          padding: 1rem 1.5rem !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
           transition:
             background-color 0.2s,
             color 0.2s !important;
           text-decoration: none !important;
           display: block !important;
           background-color: transparent !important;
+          border: none !important;
+          border-radius: 0 !important;
+          font-weight: 500 !important;
         }
         .nav-menu a:last-child {
           border-bottom: none !important;
         }
         .nav-menu a:hover {
-          background-color: rgba(255, 255, 255, 0.1) !important;
+          background-color: rgba(102, 126, 234, 0.15) !important;
           opacity: 1 !important;
         }
         nav > div:last-child {
@@ -311,9 +319,11 @@
         justify-content: space-between;
         align-items: center;
         padding: 1rem 2rem;
-        border-bottom: 1px solid var(--form-element-border-color);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         position: relative;
         flex-wrap: nowrap;
+        background: white;
+        gap: 2rem;
       "
     >
       <!-- Hamburger Button - Left -->
@@ -337,11 +347,7 @@
       </button>
 
       <!-- Navigation Menu - Center -->
-      <div
-        class="nav-menu"
-        id="nav-menu"
-        style="gap: 2rem; flex: 1; margin-left: 2rem"
-      >
+      <div class="nav-menu" id="nav-menu" style="margin: 0 auto">
         <a href="/" style="text-decoration: none">SemanticSearch</a>
         <a href="/dashboard" id="nav-dashboard" style="text-decoration: none"
           >Dashboard</a
@@ -368,16 +374,29 @@
           <button
             onclick="toggleUserMenu(event)"
             style="
-              background: none;
-              border: 1px solid var(--form-element-border-color);
-              padding: 0.5rem 1rem;
-              border-radius: 4px;
+              background: transparent;
+              border: 1px solid rgba(0, 0, 0, 0.15);
+              padding: 0.6rem 1rem;
+              border-radius: 6px;
               cursor: pointer;
               display: flex;
               align-items: center;
-              gap: 0.5rem;
-              width: 100%;
+              gap: 0.75rem;
+              width: auto;
               justify-content: center;
+              font-weight: 500;
+              font-size: 0.9rem;
+              transition: all 0.3s ease;
+            "
+            onmouseover="
+              this.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+              this.style.borderColor = 'rgba(0, 0, 0, 0.25)';
+              this.style.transform = 'translateY(-2px)';
+            "
+            onmouseout="
+              this.style.backgroundColor = 'transparent';
+              this.style.borderColor = 'rgba(0, 0, 0, 0.15)';
+              this.style.transform = 'translateY(0)';
             "
           >
             👤
@@ -462,13 +481,29 @@
         </div>
 
         <!-- Auth Links (shown when not logged in) -->
-        <div id="auth-links" style="display: flex; gap: 0.5rem">
+        <div
+          id="auth-links"
+          style="display: flex; gap: 1rem; align-items: center"
+        >
           <a
             href="/register"
             style="
               text-decoration: none;
-              padding: 0.5rem 1rem;
+              padding: 0.6rem 1.2rem;
               font-size: 0.9rem;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              border-radius: 6px;
+              transition: all 0.3s ease;
+              display: inline-block;
+              font-weight: 500;
+            "
+            onmouseover="
+              this.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
+              this.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+            "
+            onmouseout="
+              this.style.backgroundColor = 'transparent';
+              this.style.borderColor = 'rgba(0, 0, 0, 0.1)';
             "
             >Sign Up</a
           >
@@ -477,11 +512,26 @@
             style="
               background-color: #667eea;
               color: white;
-              padding: 0.5rem 1rem;
-              border-radius: 4px;
+              padding: 0.6rem 1.4rem;
+              border-radius: 6px;
               text-decoration: none;
               font-size: 0.9rem;
               white-space: nowrap;
+              font-weight: 500;
+              border: none;
+              transition: all 0.3s ease;
+              display: inline-block;
+              cursor: pointer;
+            "
+            onmouseover="
+              this.style.backgroundColor = '#5568d3';
+              this.style.transform = 'translateY(-2px)';
+              this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.3)';
+            "
+            onmouseout="
+              this.style.backgroundColor = '#667eea';
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
             "
             >Log In</a
           >
