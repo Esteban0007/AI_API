@@ -158,6 +158,46 @@ async def get_stats(x_api_key: Optional[str] = Header(None)) -> dict:
         )
 
 
+@router.get("/all")
+async def get_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
+    """
+    Get all documents in the collection as JSON.
+
+    Returns all indexed documents with their metadata.
+
+    **Returns:**
+    - `documents`: Array of all documents with id, content, and metadata
+    - `total_documents`: Total count of documents
+    - `collection_name`: Name of the collection
+
+    **Example:**
+    ```bash
+    curl -H "X-API-Key: YOUR_API_KEY" https://readyapi.net/api/v1/documents/all
+    ```
+    """
+    # Validate API key
+    user_context = await validate_api_key(x_api_key)
+
+    try:
+        tenant_id = user_context["tenant_id"]
+        vector_store = _get_vector_store_for_tenant(tenant_id)
+
+        # Get all documents
+        all_docs = vector_store.get_all_documents()
+
+        return {
+            "documents": all_docs,
+            "total_documents": len(all_docs),
+            "collection_name": vector_store.collection_name,
+        }
+    except Exception as e:
+        logger.error(f"Error getting all documents: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error retrieving documents",
+        )
+
+
 @router.delete("/clear-all")
 async def clear_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
     """

@@ -116,18 +116,6 @@ def create_app() -> FastAPI:
             "redoc": "/api/redoc",
         }
 
-    # User Dashboard endpoint
-    @app.get("/dashboard", tags=["Web"])
-    async def user_dashboard(request: Request):
-        """Render user dashboard page with Jinja2 template."""
-        try:
-            return templates.TemplateResponse("dashboard.html", {"request": request})
-        except Exception as e:
-            logger.error(f"Dashboard render error: {str(e)}")
-            from fastapi.responses import RedirectResponse
-
-            return RedirectResponse(url="/login", status_code=302)
-
     # Health check endpoint
     @app.get("/health", tags=["System"])
     async def health():
