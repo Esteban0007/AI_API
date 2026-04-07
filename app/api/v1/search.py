@@ -149,11 +149,13 @@ async def search(
 
                 if not usage:
                     usage = Usage(
-                        user_id=user_context["user_id"], date=datetime.utcnow()
+                        user_id=user_context["user_id"],
+                        date=datetime.utcnow(),
+                        searches_count=0,
                     )
                     db.add(usage)
 
-                usage.searches_count += 1
+                usage.searches_count = (usage.searches_count or 0) + 1
                 db.commit()
                 db.close()
             except Exception as e:
