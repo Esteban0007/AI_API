@@ -69,6 +69,7 @@
         Keep it private. Use it in the <code>x-api-key</code> header.
       </p>
       <input id="api-key" type="text" value="{{ api_key }}" readonly />
+      <input id="user-email-hidden" type="hidden" value="{{ user_email }}" />
       <button
         type="button"
         class="secondary"
@@ -83,7 +84,7 @@
       <button
         type="button"
         style="margin-left: 1rem; background-color: #667eea; color: white"
-        onclick="goToDashboard('{{ api_key }}', '{{ user_email }}')"
+        onclick="goToDashboard()"
       >
         Go to Dashboard
       </button>
@@ -91,10 +92,18 @@
 
     <script>
       // Auto-redirect to dashboard after login
-      function goToDashboard(apiKey, userEmail) {
+      function goToDashboard() {
+        const apiKey = document.getElementById("api-key").value;
+        const userEmail = document.getElementById("user-email-hidden").value;
+
+        console.log("goToDashboard called with:", {
+          apiKey: apiKey ? "exists" : "null",
+          userEmail,
+        });
+
         // Save to localStorage
         localStorage.setItem("api_key", apiKey);
-        localStorage.setItem("user_email", userEmail);
+        localStorage.setItem("user_email", userEmail || "");
 
         // Update navbar immediately before redirect
         const userMenu = document.getElementById("user-menu");
@@ -116,7 +125,7 @@
         const apiKeyInput = document.getElementById("api-key");
         if (apiKeyInput && apiKeyInput.value) {
           // Redirect immediately
-          goToDashboard(apiKeyInput.value);
+          goToDashboard();
         }
       });
     </script>

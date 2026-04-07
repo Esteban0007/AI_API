@@ -104,7 +104,6 @@ def _extract_keywords(content: str) -> list[str]:
     return [k.strip() for k in keyword_text.split(",") if k.strip()]
 
 
-
 def _get_definition_image(title: str) -> str:
     """Get reference image for plant definition cards."""
     image_map = {
@@ -536,3 +535,87 @@ async def reset_password(
             "message": "Password reset successfully! You can now log in with your new password.",
         },
     )
+
+
+@router.get("/profile", response_class=HTMLResponse, include_in_schema=False)
+async def profile_page(request: Request):
+    """Profile settings page."""
+    return templates.TemplateResponse("profile.html", {"request": request})
+
+
+@router.post("/change-password", response_class=HTMLResponse, include_in_schema=False)
+async def change_password(
+    request: Request,
+    current_password: str = Form(...),
+    new_password: str = Form(...),
+    confirm_password: str = Form(...),
+):
+    """Change user password when logged in."""
+    from app.db.users import verify_password, update_password
+
+    # Get user email from localStorage via a hidden field or from form
+    # Since we can't directly access localStorage in a form POST,
+    # we'll use the API key sent in a hidden field (from localStorage via JS)
+
+    # Get API key from form (hidden field set by JavaScript)
+    form_data = await request.form()
+    api_key = form_data.get("api_key")
+
+    if not api_key:
+        return templates.TemplateResponse(
+            "profile.html",
+            {"request": request, "error": "Not authenticated. Please log in first."},
+        )
+
+    # Get user by API key
+    from app.db.users import get_user_by_api_key
+
+    user = get_user_by_api_key(api_key)
+    if not user:
+        return templates.TemplateResponse(
+            "profile.html",
+            {"request": request, "error": "Invalid session. Please log in again."},
+        )
+
+    email = user.get("email")
+
+    # Validate passwords match
+    if new_password != confirm_password:
+        return templates.TemplateResponse(
+            "profile.html",
+            {"request": request, "error": "New passwords do not match."},
+        )
+
+    # Validate new password length
+    if len(new_password) < 8:
+        return templates.TemplateResponse(
+            "profile.html",
+            {"request": request, "error": "Password must be at least 8 characters."},
+        )
+
+    # Verify current password
+    if not verify_password(email, current_password):
+        return templates.TemplateResponse(
+            "profile.html",
+            {"request": request, "error": "Current password is incorrect."},
+        )
+
+    # Change password
+    try:
+        update_password(email, new_password)
+        return templates.TemplateResponse(
+            "profile.html",
+            {
+                "request": request,
+                "success": "Password changed successfully!",
+            },
+        )
+    except Exception as e:
+        logger.error(f"Password change error for {email}: {str(e)}")
+        return templates.TemplateResponse(
+            "profile.html",
+            {
+                "request": request,
+                "error": "Failed to change password. Please try again.",
+            },
+        )

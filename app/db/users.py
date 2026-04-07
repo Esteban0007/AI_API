@@ -316,5 +316,36 @@ def reset_password_with_token(reset_token: str, new_password: str) -> dict:
     }
 
 
+def update_password(email: str, new_password: str) -> dict:
+    """Update user password when logged in."""
+    conn = get_db_connection()
+    c = conn.cursor()
+
+    # Check if user exists
+    c.execute("SELECT id FROM users WHERE email = ?", (email,))
+    user = c.fetchone()
+
+    if not user:
+        conn.close()
+        return {"success": False, "message": "User not found."}
+
+    user_id = user[0]
+    new_password_hash = hash_password(new_password)
+
+    # Update password
+    c.execute(
+        "UPDATE users SET password_hash = ? WHERE id = ?",
+        (new_password_hash, user_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "success": True,
+        "message": "Password updated successfully.",
+    }
+
+
 # Initialize DB on import
 init_db()

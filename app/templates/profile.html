@@ -1,0 +1,131 @@
+{% extends "base.html" %} {% block title %}Profile Settings - SemanticSearch{%
+endblock %} {% block content %}
+<div class="container" style="max-width: 640px; margin: 4rem auto">
+  <h1>Profile Settings</h1>
+  <p style="color: var(--muted-color)">
+    Manage your account and security settings.
+  </p>
+  <hr style="margin: 2rem 0" />
+
+  {% if error %}
+  <article
+    style="
+      background-color: #ffebee;
+      border-color: #f44336;
+      color: #c62828;
+      margin-bottom: 2rem;
+    "
+  >
+    <strong>Error:</strong> {{ error }}
+  </article>
+  {% endif %} {% if success %}
+  <article
+    style="
+      background-color: #e8f5e9;
+      border-color: #4caf50;
+      color: #2e7d32;
+      margin-bottom: 2rem;
+    "
+  >
+    <strong>✅ Success:</strong> {{ success }}
+  </article>
+  {% endif %}
+
+  <!-- Change Password Section -->
+  <section>
+    <h2 style="font-size: 1.3rem; margin-bottom: 1rem">Change Password</h2>
+    <p style="color: var(--muted-color); margin-bottom: 1.5rem">
+      Update your password to keep your account secure.
+    </p>
+
+    <form method="post" action="/change-password" style="margin-bottom: 3rem">
+      <!-- Hidden field with API key from localStorage -->
+      <input type="hidden" id="api-key-field" name="api_key" value="" />
+
+      <label for="current-password">
+        Current Password
+        <input
+          type="password"
+          id="current-password"
+          name="current_password"
+          placeholder="Enter your current password"
+          required
+        />
+      </label>
+
+      <label for="new-password">
+        New Password
+        <input
+          type="password"
+          id="new-password"
+          name="new_password"
+          placeholder="Enter a strong password (min. 8 characters)"
+          required
+          minlength="8"
+        />
+      </label>
+
+      <label for="confirm-password">
+        Confirm Password
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm_password"
+          placeholder="Confirm your new password"
+          required
+          minlength="8"
+        />
+      </label>
+
+      <button type="submit" style="background-color: #667eea; color: white">
+        Update Password
+      </button>
+    </form>
+  </section>
+
+  <!-- Account Information -->
+  <section
+    style="
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin-top: 2rem;
+    "
+  >
+    <h2 style="font-size: 1.3rem; margin-bottom: 1rem; margin-top: 0">
+      Account Information
+    </h2>
+    <p style="color: var(--muted-color); margin-bottom: 1rem">
+      <strong>Email:</strong> <span id="account-email">Loading...</span>
+    </p>
+    <p style="color: var(--muted-color); margin-bottom: 1rem">
+      <strong>Account Status:</strong>
+      <span style="color: #4caf50; font-weight: bold">✅ Active</span>
+    </p>
+    <p style="color: var(--muted-color); margin-bottom: 0">
+      <a href="/" style="color: #667eea; text-decoration: none"
+        >← Back to Home</a
+      >
+    </p>
+  </section>
+</div>
+
+<script>
+  // Display email from localStorage and fill API key in form
+  document.addEventListener("DOMContentLoaded", function () {
+    const userEmail = localStorage.getItem("user_email");
+    const apiKey = localStorage.getItem("api_key");
+
+    const emailSpan = document.getElementById("account-email");
+    if (userEmail && emailSpan) {
+      emailSpan.textContent = userEmail;
+    }
+
+    // Fill the hidden API key field for form submission
+    const apiKeyField = document.getElementById("api-key-field");
+    if (apiKeyField && apiKey) {
+      apiKeyField.value = apiKey;
+    }
+  });
+</script>
+{% endblock %}
