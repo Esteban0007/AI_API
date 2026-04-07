@@ -119,14 +119,28 @@ def create_app() -> FastAPI:
     # User Dashboard endpoint
     @app.get("/dashboard", tags=["Web"])
     async def user_dashboard(request: Request):
-        """Render user dashboard page with Jinja2 template."""
+        """Render user dashboard page - requires valid API key in header or redirect to login."""
+        from fastapi.responses import RedirectResponse
+        from app.db.users import get_user_by_api_key
+
+        api_key = request.headers.get("X-API-Key")
+
+        # If no API key provided, redirect to login
+        if not api_key:
+            return RedirectResponse(url="/login", status_code=302)
+
         try:
+            # Verify API key is valid
+            user = get_user_by_api_key(api_key)
+
+            if not user:
+                # Invalid API key, redirect to login
+                return RedirectResponse(url="/login", status_code=302)
+
             return templates.TemplateResponse("dashboard.html", {"request": request})
         except Exception as e:
             logger.error(f"Dashboard render error: {str(e)}")
-            return JSONResponse(
-                status_code=404, content={"detail": "Dashboard not found"}
-            )
+            return RedirectResponse(url="/login", status_code=302)
 
     # Health check endpoint
     @app.get("/health", tags=["System"])

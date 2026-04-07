@@ -175,9 +175,14 @@
           style="font-weight: bold; font-size: 1.1rem; text-decoration: none"
           >SemanticSearch</a
         >
+        <a
+          href="/dashboard"
+          id="nav-dashboard"
+          style="text-decoration: none; display: none"
+          >Dashboard</a
+        >
         <a href="/demos" style="text-decoration: none">Demos</a>
         <a href="/api-docs" style="text-decoration: none">API Docs</a>
-        <a href="/dashboard" style="text-decoration: none">Dashboard</a>
       </div>
 
       <div style="display: flex; gap: 1rem; align-items: center">
@@ -297,16 +302,19 @@
         const userMenu = document.getElementById("user-menu");
         const authLinks = document.getElementById("auth-links");
         const userEmailSpan = document.getElementById("user-email");
+        const navDashboard = document.getElementById("nav-dashboard");
 
         if (apiKey && userEmail) {
           // User is logged in
           userMenu.style.display = "block";
           authLinks.style.display = "none";
           userEmailSpan.textContent = userEmail;
+          navDashboard.style.display = "block";
         } else {
           // User is not logged in
           userMenu.style.display = "none";
           authLinks.style.display = "flex";
+          navDashboard.style.display = "none";
         }
       }
 
