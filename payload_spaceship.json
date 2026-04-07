@@ -44,13 +44,6 @@
     },
     {
       "id": "part-007",
-      "title": "Warp System",
-      "content": "warp jump teleport hyperdrive lightspeed portal dimension quantum leap transport instant fast travel distant",
-      "keywords": ["warp", "jump", "teleport", "hyperdrive", "lightspeed", "fast", "portal", "instant", "transport", "leap"],
-      "metadata": {"css_class": "mode-warp", "state": "ready"}
-    },
-    {
-      "id": "part-008",
       "title": "Repair System",
       "content": "repair fix heal restore maintenance regenerate recover rebuild patch mend cure treatment restore refurbish",
       "keywords": ["repair", "fix", "heal", "restore", "maintenance", "recover", "regenerate", "rebuild", "patch", "mend"],
