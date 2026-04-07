@@ -4,8 +4,9 @@ FastAPI application factory and middleware setup.
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 import logging
 import time
 from typing import Callable
@@ -48,6 +49,9 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    # Mount templates for Jinja2
+    templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 
     # Mount static files
     static_path = Path(__file__).parent / "static"
@@ -114,14 +118,15 @@ def create_app() -> FastAPI:
 
     # User Dashboard endpoint
     @app.get("/dashboard", tags=["Web"])
-    async def user_dashboard():
-        """Render user dashboard page."""
-        from fastapi.responses import FileResponse
-
-        dashboard_path = Path(__file__).parent / "templates" / "user_dashboard.html"
-        if dashboard_path.exists():
-            return FileResponse(str(dashboard_path), media_type="text/html")
-        return JSONResponse(status_code=404, content={"detail": "Dashboard not found"})
+    async def user_dashboard(request: Request):
+        """Render user dashboard page with Jinja2 template."""
+        try:
+            return templates.TemplateResponse("dashboard.html", {"request": request})
+        except Exception as e:
+            logger.error(f"Dashboard render error: {str(e)}")
+            return JSONResponse(
+                status_code=404, content={"detail": "Dashboard not found"}
+            )
 
     # Health check endpoint
     @app.get("/health", tags=["System"])

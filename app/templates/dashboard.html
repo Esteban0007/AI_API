@@ -1,0 +1,131 @@
+{% extends "base.html" %} {% block title %}Dashboard - ReadyAPI{% endblock %} {%
+block content %}
+<div class="container">
+  <div style="margin-bottom: 2rem">
+    <h1>📊 Dashboard</h1>
+    <p style="color: var(--muted-color)">
+      View your API usage, documents, and activity.
+    </p>
+  </div>
+
+  <div id="dashboard" style="margin-top: 2rem">
+    <article>
+      <p style="text-align: center; color: var(--muted-color)">
+        Loading dashboard...
+      </p>
+    </article>
+  </div>
+</div>
+
+<script>
+  const API_BASE = "/api/v1";
+
+  // Get API key from URL parameter or localStorage
+  const urlParams = new URLSearchParams(window.location.search);
+  let API_KEY = urlParams.get("key") || localStorage.getItem("api_key");
+
+  if (!API_KEY) {
+    document.getElementById("dashboard").innerHTML = `
+      <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 1.5rem;">
+        <strong>⚠️ Error:</strong> No API key provided. 
+        <br><br>
+        Please log in first to access your dashboard.
+        <br><br>
+        <a href="/login" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; background-color: #2196F3; color: white; border-radius: 4px; text-decoration: none;">Go to Login</a>
+      </article>
+    `;
+  } else {
+    // Save to localStorage for future visits
+    localStorage.setItem("api_key", API_KEY);
+    loadDashboard();
+  }
+
+  async function loadDashboard() {
+    try {
+      // Fetch all stats in parallel
+      const [monthlyResponse, docsResponse] = await Promise.all([
+        fetch(`${API_BASE}/search/stats/monthly`, {
+          headers: { "X-API-Key": API_KEY },
+        }),
+        fetch(`${API_BASE}/search/stats/documents`, {
+          headers: { "X-API-Key": API_KEY },
+        }),
+      ]);
+
+      if (!monthlyResponse.ok || !docsResponse.ok) {
+        throw new Error("Failed to load dashboard stats");
+      }
+
+      const monthlyStats = await monthlyResponse.json();
+      const docsStats = await docsResponse.json();
+
+      displayDashboard(monthlyStats, docsStats);
+    } catch (error) {
+      console.error(error);
+      document.getElementById("dashboard").innerHTML = `
+        <article style="background-color: #ffebee; border-color: #f44336; color: #c62828; padding: 1.5rem;">
+          <strong>⚠️ Error:</strong> ${error.message}
+          <br><br>
+          <a href="/login" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; background-color: #2196F3; color: white; border-radius: 4px; text-decoration: none;">Try logging in again</a>
+        </article>
+      `;
+    }
+  }
+
+  function displayDashboard(monthlyStats, docsStats) {
+    const html = `
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <!-- Monthly Searches -->
+        <article>
+          <h3>📈 Searches (Monthly)</h3>
+          <h2 style="color: #667eea; margin: 1rem 0; font-size: 2.5rem;">${monthlyStats.total_searches}</h2>
+          <p style="color: var(--muted-color); font-size: 0.9rem;">Total searches in <strong>${monthlyStats.month}</strong></p>
+        </article>
+
+        <!-- Documents -->
+        <article>
+          <h3>📄 Documents</h3>
+          <h2 style="color: #667eea; margin: 1rem 0; font-size: 2.5rem;">${docsStats.total_documents}</h2>
+          <p style="color: var(--muted-color); font-size: 0.9rem;">Total indexed documents</p>
+          <small style="color: #999;">Collection: <code>${docsStats.collection_name}</code></small>
+        </article>
+      </div>
+
+      <!-- API Keys Section -->
+      <article>
+        <h3>🔑 Your API Key</h3>
+        <p style="color: var(--muted-color); margin-bottom: 1rem;">Use this key in the <code>X-API-Key</code> header for API requests.</p>
+        
+        <div style="background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 1rem; margin-bottom: 1rem;">
+          <input 
+            type="text" 
+            value="${API_KEY}" 
+            readonly 
+            style="width: 100%; padding: 0.5rem; font-family: monospace; font-size: 0.85rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px;"
+            id="api-key-input"
+          >
+          <button type="button" onclick="copyAPI()" style="margin-right: 1rem;">📋 Copy Key</button>
+          <button type="button" onclick="logout()" class="secondary" style="margin-left: 1rem;">Logout</button>
+        </div>
+
+        <p style="color: #999; font-size: 0.9rem;">✓ <strong>Active</strong> - Keep this key private and secure.</p>
+      </article>
+    `;
+
+    document.getElementById("dashboard").innerHTML = html;
+  }
+
+  function copyAPI() {
+    const input = document.getElementById("api-key-input");
+    input.select();
+    navigator.clipboard.writeText(API_KEY).then(() => {
+      alert("✓ API Key copied to clipboard!");
+    });
+  }
+
+  function logout() {
+    localStorage.removeItem("api_key");
+    window.location.href = "/login";
+  }
+</script>
+{% endblock %}
