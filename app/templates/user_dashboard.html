@@ -276,19 +276,6 @@
 
           const monthlyStats = await monthlyResponse.json();
 
-          const docsResponse = await fetch(
-            `${API_BASE}/search/stats/documents`,
-            {
-              headers: { "X-API-Key": API_KEY },
-            },
-          );
-
-          if (!docsResponse.ok) {
-            throw new Error(`Docs error: ${docsResponse.statusText}`);
-          }
-
-          const docsStats = await docsResponse.json();
-
           // API keys data
           const apiKeys = [
             {
@@ -298,7 +285,7 @@
             },
           ];
 
-          displayDashboard(monthlyStats, docsStats, apiKeys);
+          displayDashboard(monthlyStats, apiKeys);
         } catch (error) {
           console.error(error);
           document.getElementById("dashboard").innerHTML = `
@@ -307,7 +294,7 @@
         }
       }
 
-      function displayDashboard(monthlyStats, docsStats, apiKeys) {
+      function displayDashboard(monthlyStats, apiKeys) {
         const html = `
                 <div class="dashboard-grid">
                     <!-- Monthly Searches -->
@@ -317,16 +304,6 @@
                             <div class="stat-label">Total Searches - ${monthlyStats.month}</div>
                             <div class="stat-value">${monthlyStats.total_searches}</div>
                         </div>
-                    </div>
-
-                    <!-- Documents -->
-                    <div class="card">
-                        <h2>📄 Documents</h2>
-                        <div class="stat-item">
-                            <div class="stat-label">Total Indexed</div>
-                            <div class="stat-value">${docsStats.total_documents}</div>
-                        </div>
-                        <div class="stat-label" style="font-size: 12px; color: #999;">Collection: ${docsStats.collection_name}</div>
                     </div>
 
                     <!-- API Keys Section -->

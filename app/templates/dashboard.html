@@ -108,25 +108,20 @@ block content %}
         headers: { "X-API-Key": API_KEY },
       });
 
-      const docsResponse = await fetch(API_BASE + "/search/stats/documents", {
-        headers: { "X-API-Key": API_KEY },
-      });
-
-      if (!monthlyResponse.ok || !docsResponse.ok) {
+      if (!monthlyResponse.ok) {
         throw new Error("Failed to load dashboard stats");
       }
 
       const monthlyStats = await monthlyResponse.json();
-      const docsStats = await docsResponse.json();
 
-      displayDashboard(monthlyStats, docsStats);
+      displayDashboard(monthlyStats);
     } catch (error) {
       console.error(error);
       showError("Error Loading Dashboard", error.message);
     }
   }
 
-  function displayDashboard(monthlyStats, docsStats) {
+  function displayDashboard(monthlyStats) {
     const html = `
       <!-- Statistics Cards -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
@@ -136,14 +131,6 @@ block content %}
           <h3 style="margin: 1rem 0 0.5rem 0;">Monthly Searches</h3>
           <div class="stat-value">${monthlyStats.total_searches}</div>
           <p class="stat-label">Total searches in <strong>${monthlyStats.month}</strong></p>
-        </div>
-
-        <!-- Documents Card -->
-        <div class="stat-card">
-          <div class="stat-icon">📄</div>
-          <h3 style="margin: 1rem 0 0.5rem 0;">Indexed Documents</h3>
-          <div class="stat-value">${docsStats.total_documents}</div>
-          <p class="stat-label">Documents in your collection</p>
         </div>
 
         <!-- Status Card -->

@@ -127,31 +127,6 @@
         </p>
       </div>
 
-      <!-- Documents -->
-      <div
-        style="
-          background: rgba(255, 255, 255, 0.1);
-          padding: 1.5rem;
-          border-radius: 8px;
-          text-align: center;
-        "
-      >
-        <h3 style="margin: 0 0 0.5rem 0; color: white">📄 Indexed Documents</h3>
-        <div
-          style="
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 0.5rem 0;
-            color: #fff;
-          "
-        >
-          <span id="doc-count">0</span>
-        </div>
-        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9">
-          Total documents
-        </p>
-      </div>
-
       <!-- Status -->
       <div
         style="
@@ -233,22 +208,15 @@
 
     const API_BASE = "/api/v1";
 
-    Promise.all([
-      fetch(API_BASE + "/search/stats/monthly", {
-        headers: { "X-API-Key": apiKey },
-      }),
-      fetch(API_BASE + "/search/stats/documents", {
-        headers: { "X-API-Key": apiKey },
-      }),
-    ])
-      .then((responses) => Promise.all(responses.map((r) => r.json())))
-      .then(([monthlyStats, docsStats]) => {
+    fetch(API_BASE + "/search/stats/monthly", {
+      headers: { "X-API-Key": apiKey },
+    })
+      .then((response) => response.json())
+      .then((monthlyStats) => {
         document.getElementById("monthly-searches").textContent =
           monthlyStats.total_searches;
         document.getElementById("monthly-label").textContent =
           "Total searches in " + monthlyStats.month;
-        document.getElementById("doc-count").textContent =
-          docsStats.total_documents;
       })
       .catch((error) => {
         console.error("Error loading dashboard stats:", error);
