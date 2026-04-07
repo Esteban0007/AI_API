@@ -129,6 +129,36 @@ async def search(
             for result in results
         ]
 
+        # Track usage if user is authenticated
+        if user_context.get("user_id"):
+            try:
+                from ...db.session import SessionLocal
+                from ...models.user import Usage
+                from datetime import date, datetime
+
+                db = SessionLocal()
+                today = date.today()
+                usage = (
+                    db.query(Usage)
+                    .filter(
+                        Usage.user_id == user_context["user_id"],
+                        Usage.date >= datetime.combine(today, datetime.min.time()),
+                    )
+                    .first()
+                )
+
+                if not usage:
+                    usage = Usage(
+                        user_id=user_context["user_id"], date=datetime.utcnow()
+                    )
+                    db.add(usage)
+
+                usage.searches_count += 1
+                db.commit()
+                db.close()
+            except Exception as e:
+                logger.warning(f"Failed to track usage: {e}")
+
         response = SearchResponse(
             query=search_query.query,
             total_results=len(formatted_results),
@@ -168,4 +198,73 @@ async def health_check() -> dict:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Search service is unavailable",
+        )
+
+
+@router.get("/stats/monthly")
+async def get_monthly_stats(
+    x_api_key: Optional[str] = Header(None),
+) -> dict:
+    """
+    Get total searches for current month.
+
+    Requires valid API key in header.
+
+    **Returns:**
+    - `month`: Current month (YYYY-MM)
+    - `total_searches`: Total searches this month
+
+    **Example:**
+    ```bash
+    curl -H "X-API-Key: YOUR_API_KEY" https://readyapi.net/api/v1/search/stats/monthly
+    ```
+    """
+    try:
+        # Validate API key
+        user_context = await validate_api_key(x_api_key)
+
+        if not user_context.get("user_id"):
+            # Dev mode - return dummy stats
+            from datetime import datetime
+
+            current_month = datetime.utcnow().strftime("%Y-%m")
+            return {
+                "month": current_month,
+                "total_searches": 0,
+                "note": "Development mode - no tracking",
+            }
+
+        # Get monthly stats from database
+        from ...db.session import SessionLocal
+        from ...models.user import Usage
+        from datetime import datetime, date
+
+        db = SessionLocal()
+        try:
+            # Get first day of current month
+            today = date.today()
+            first_day = today.replace(day=1)
+
+            # Query usage records for this month
+            monthly_usage = (
+                db.query(Usage)
+                .filter(
+                    Usage.user_id == user_context["user_id"],
+                    Usage.date >= datetime.combine(first_day, datetime.min.time()),
+                )
+                .all()
+            )
+
+            total_searches = sum(u.searches_count for u in monthly_usage)
+            current_month = today.strftime("%Y-%m")
+
+            return {"month": current_month, "total_searches": total_searches}
+        finally:
+            db.close()
+
+    except Exception as e:
+        logger.error(f"Error getting monthly stats: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Error retrieving monthly statistics",
         )
