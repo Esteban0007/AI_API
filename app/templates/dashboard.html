@@ -198,13 +198,13 @@ block content %}
           </div>
         `
             : `
-          <div style="overflow-x: auto;">
+          <div style="overflow-y: auto; max-height: 500px; border: 1px solid var(--form-element-border-color); border-radius: var(--border-radius);">
             <table role="grid" style="width: 100%; border-collapse: collapse;">
-              <thead>
+              <thead style="position: sticky; top: 0; background: var(--form-element-background-color); z-index: 10;">
                 <tr>
-                  <th style="text-align: left; padding: 1rem;">Title</th>
-                  <th style="text-align: left; padding: 1rem;">Content Preview</th>
-                  <th style="text-align: center; padding: 1rem;">Keywords</th>
+                  <th style="text-align: left; padding: 1rem; border-bottom: 2px solid var(--form-element-border-color);">Title</th>
+                  <th style="text-align: left; padding: 1rem; border-bottom: 2px solid var(--form-element-border-color);">Content Preview</th>
+                  <th style="text-align: center; padding: 1rem; border-bottom: 2px solid var(--form-element-border-color);">Keywords</th>
                 </tr>
               </thead>
               <tbody>
