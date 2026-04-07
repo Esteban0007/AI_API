@@ -181,14 +181,40 @@
     <h2>Example Usage</h2>
 
     <div style="margin-bottom: 2rem">
-      <h3 style="margin-top: 0">Basic API Request</h3>
-      <pre><code>curl -X POST "https://readyapi.net/api/v1/search/query" \
-  -H "x-api-key: YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "cute robot cleans the earth",
-    "top_k": 5
-  }'</code></pre>
+      <h3 style="margin-top: 0">Spaceship Demo - Complete Example</h3>
+      <p style="color: var(--muted-color); font-size: 0.9rem">
+        Search a spaceship with 7 systems using natural language:
+      </p>
+      <pre><code>{
+  "query": "I need to get somewhere far away quickly",
+  "top_k": 3
+}
+
+Response:
+{
+  "results": [
+    {
+      "id": "part-007",
+      "title": "Warp System",
+      "score": 0.48,
+      "content": "warp jump teleport hyperdrive lightspeed..."
+    },
+    {
+      "id": "part-002",
+      "title": "Flight System",
+      "score": 0.46,
+      "content": "thruster engine propulsion fly speed..."
+    },
+    {
+      "id": "part-006",
+      "title": "Scan System",
+      "score": 0.46,
+      "content": "radar scanner detect analyze search..."
+    }
+  ],
+  "count": 3,
+  "processing_ms": 124
+}</code></pre>
     </div>
 
     <div
@@ -219,30 +245,40 @@
     {
       "id": "part-001",
       "title": "Charge System",
-      "content": "solar panels energy reactor battery charging power",
-      "keywords": ["charge", "energy", "power"]
+      "content": "solar panels energy reactor battery charging power"
     },
     {
       "id": "part-002",
       "title": "Flight System",
-      "content": "thruster engine fly speed navigate",
-      "keywords": ["fly", "speed", "navigate"]
+      "content": "thruster engine propulsion fly speed navigate"
+    },
+    {
+      "id": "part-003",
+      "title": "Stealth System",
+      "content": "cloak invisibility hide camouflage stealth radar ghost"
+    },
+    {
+      "id": "part-004",
+      "title": "Attack System",
+      "content": "laser cannon weapon shoot fire attack combat strike"
+    },
+    {
+      "id": "part-005",
+      "title": "Defense System",
+      "content": "shield barrier protect defense guard armor block"
+    },
+    {
+      "id": "part-006",
+      "title": "Scan System",
+      "content": "radar scanner detect analyze search probe sensor"
+    },
+    {
+      "id": "part-007",
+      "title": "Repair System",
+      "content": "repair fix heal restore maintenance regenerate"
     }
   ]
 }</code></pre>
-        <pre
-          style="
-            font-size: 0.75rem;
-            background: var(--form-element-background-color);
-            padding: 0.8rem;
-            border-radius: 4px;
-            overflow-x: auto;
-          "
-        ><code>curl -X POST \
-  https://readyapi.net/api/v1/documents/upload \
-  -H "x-api-key: YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d @documents.json</code></pre>
       </div>
 
       <!-- Natural Language Query -->
