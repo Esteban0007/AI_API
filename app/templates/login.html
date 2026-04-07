@@ -95,8 +95,22 @@
         const emailInput = document.getElementById("email");
         const userEmail = emailInput ? emailInput.value : "User";
 
+        // Save to localStorage
         localStorage.setItem("api_key", apiKey);
         localStorage.setItem("user_email", userEmail);
+
+        // Update navbar immediately before redirect
+        const userMenu = document.getElementById("user-menu");
+        const authLinks = document.getElementById("auth-links");
+        const userEmailSpan = document.getElementById("user-email");
+        const navDashboard = document.getElementById("nav-dashboard");
+
+        if (userMenu) userMenu.style.display = "block";
+        if (authLinks) authLinks.style.display = "none";
+        if (userEmailSpan) userEmailSpan.textContent = userEmail;
+        if (navDashboard) navDashboard.style.display = "block";
+
+        // Redirect to dashboard
         window.location.href = "/dashboard";
       }
 
