@@ -166,7 +166,7 @@ block content %}
         <div class="api-key-container">
           <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Primary Key</label>
           <input 
-            type="text" 
+            type="password" 
             value="${API_KEY}" 
             readonly 
             style="width: 100%; padding: 0.75rem; font-family: monospace; font-size: 0.85rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px; background: white;"
@@ -179,7 +179,7 @@ block content %}
           </div>
 
           <p style="color: #27ae60; margin-top: 1rem; font-size: 0.9rem;">
-            ✅ <strong>Active</strong> – This key has full read access to your collections.
+            ✅ <strong>Active</strong>
           </p>
         </div>
       </article>
@@ -191,15 +191,6 @@ block content %}
         <pre style="background: white; border: 1px solid #ddd; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.85rem;"><code>curl -H "X-API-Key: ${API_KEY.substring(0, 20)}..." https://api.semanticsearch.io/api/v1/search/query</code></pre>
         <p style="color: var(--muted-color); font-size: 0.9rem;">
           For full documentation, visit <a href="/api-docs" style="color: #667eea;">API Docs</a>
-        </p>
-      </article>
-
-      <!-- Collection Info -->
-      <article style="margin-top: 2rem; background: #f0f7ff; border-color: #2196F3;">
-        <h3>📁 Your Collection</h3>
-        <p><strong>Collection Name:</strong> <code style="background: white; padding: 2px 6px; border-radius: 3px;">${docsStats.collection_name}</code></p>
-        <p style="color: var(--muted-color); font-size: 0.9rem;">
-          This is the collection where your documents are indexed. You can search across all documents in this collection using the API.
         </p>
       </article>
     `;
