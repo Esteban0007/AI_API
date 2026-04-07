@@ -137,7 +137,6 @@ async def get_stats(x_api_key: Optional[str] = Header(None)) -> dict:
     Get statistics about the document collection.
 
     **Returns:**
-    - `collection_name`: Name of the vector collection
     - `document_count`: Total number of indexed documents
     - `embedding_dimension`: Dimension of embeddings
     - `model`: Model used for embeddings
@@ -149,6 +148,9 @@ async def get_stats(x_api_key: Optional[str] = Header(None)) -> dict:
         tenant_id = user_context["tenant_id"]
         vector_store = _get_vector_store_for_tenant(tenant_id)
         stats = vector_store.get_collection_stats()
+        # Remove collection_name from response
+        stats.pop("collection_name", None)
+        stats.pop("tenant_id", None)
         return stats
     except Exception as e:
         logger.error(f"Error getting stats: {e}")

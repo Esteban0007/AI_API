@@ -121,7 +121,18 @@ block content %}
 
       const monthlyStats = await monthlyResponse.json();
 
-      // Load documents
+      // Load documents stats
+      const statsResponse = await fetch(API_BASE + "/documents/stats", {
+        headers: { "X-API-Key": API_KEY },
+      });
+
+      let documentCount = 0;
+      if (statsResponse.ok) {
+        const stats = await statsResponse.json();
+        documentCount = stats.document_count || 0;
+      }
+
+      // Load full documents list
       const documentsResponse = await fetch(API_BASE + "/documents/all", {
         headers: { "X-API-Key": API_KEY },
       });
@@ -131,15 +142,15 @@ block content %}
         documents = await documentsResponse.json();
       }
 
-      displayDashboard(monthlyStats, documents);
+      displayDashboard(monthlyStats, documents, documentCount);
     } catch (error) {
       console.error(error);
       showError("Error Loading Dashboard", error.message);
     }
   }
 
-  function displayDashboard(monthlyStats, documents) {
-    const documentCount = documents?.length || 0;
+  function displayDashboard(monthlyStats, documents, documentCount) {
+    const docCount = documentCount || documents?.length || 0;
 
     const html = `
       <!-- Statistics Cards -->
@@ -156,7 +167,7 @@ block content %}
         <div class="stat-card">
           <div class="stat-icon">📄</div>
           <h3 style="margin: 1rem 0 0.5rem 0;">Documents</h3>
-          <div class="stat-value">${documentCount}</div>
+          <div class="stat-value">${docCount}</div>
           <p class="stat-label">Total documents indexed</p>
         </div>
 
@@ -178,7 +189,7 @@ block content %}
         </p>
 
         ${
-          documentCount === 0
+          docCount === 0
             ? `
           <div style="text-align: center; padding: 3rem; background: #f8f9fa; border-radius: var(--border-radius); border: 2px dashed var(--form-element-border-color);">
             <p style="color: var(--muted-color); font-size: 1rem;">No documents yet</p>
@@ -215,7 +226,7 @@ block content %}
             </table>
           </div>
           <p style="color: var(--muted-color); margin-top: 1rem; font-size: 0.9rem;">
-            Total: <strong>${documentCount}</strong> document${documentCount !== 1 ? "s" : ""}
+            Total: <strong>${docCount}</strong> document${docCount !== 1 ? "s" : ""}
           </p>
         `
         }
