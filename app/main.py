@@ -112,6 +112,17 @@ def create_app() -> FastAPI:
             "redoc": "/api/redoc",
         }
 
+    # User Dashboard endpoint
+    @app.get("/dashboard", tags=["Web"])
+    async def user_dashboard():
+        """Render user dashboard page."""
+        from fastapi.responses import FileResponse
+
+        dashboard_path = Path(__file__).parent / "templates" / "user_dashboard.html"
+        if dashboard_path.exists():
+            return FileResponse(str(dashboard_path), media_type="text/html")
+        return JSONResponse(status_code=404, content={"detail": "Dashboard not found"})
+
     # Health check endpoint
     @app.get("/health", tags=["System"])
     async def health():
