@@ -139,7 +139,8 @@ block content %}
 
       let documents = [];
       if (documentsResponse.ok) {
-        documents = await documentsResponse.json();
+        const docsData = await documentsResponse.json();
+        documents = docsData.documents || [];
       }
 
       displayDashboard(monthlyStats, documents, documentCount);
