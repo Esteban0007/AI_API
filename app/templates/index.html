@@ -77,6 +77,121 @@
     </div>
   </div>
 
+  <!-- Dashboard Widget (shown only when logged in) -->
+  <div
+    id="dashboard-widget"
+    style="
+      display: none;
+      margin: 4rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 20%);
+      border-radius: 12px;
+      color: white;
+    "
+  >
+    <h2 style="margin-top: 0; color: white">📊 Your Stats</h2>
+
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      "
+    >
+      <!-- Monthly Searches -->
+      <div
+        style="
+          background: rgba(255, 255, 255, 0.1);
+          padding: 1.5rem;
+          border-radius: 8px;
+          text-align: center;
+        "
+      >
+        <h3 style="margin: 0 0 0.5rem 0; color: white">📈 Monthly Searches</h3>
+        <div
+          style="
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #fff;
+          "
+        >
+          <span id="monthly-searches">0</span>
+        </div>
+        <p
+          style="margin: 0; font-size: 0.9rem; opacity: 0.9"
+          id="monthly-label"
+        >
+          -
+        </p>
+      </div>
+
+      <!-- Documents -->
+      <div
+        style="
+          background: rgba(255, 255, 255, 0.1);
+          padding: 1.5rem;
+          border-radius: 8px;
+          text-align: center;
+        "
+      >
+        <h3 style="margin: 0 0 0.5rem 0; color: white">📄 Indexed Documents</h3>
+        <div
+          style="
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #fff;
+          "
+        >
+          <span id="doc-count">0</span>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9">
+          Total documents
+        </p>
+      </div>
+
+      <!-- Status -->
+      <div
+        style="
+          background: rgba(255, 255, 255, 0.1);
+          padding: 1.5rem;
+          border-radius: 8px;
+          text-align: center;
+        "
+      >
+        <h3 style="margin: 0 0 0.5rem 0; color: white">✅ API Status</h3>
+        <div
+          style="
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            color: #4ade80;
+          "
+        >
+          Active
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9">Ready to use</p>
+      </div>
+    </div>
+
+    <div style="text-align: center">
+      <a
+        href="/dashboard"
+        style="
+          background: white;
+          color: #667eea;
+          padding: 0.75rem 1.5rem;
+          border-radius: 6px;
+          text-decoration: none;
+          font-weight: 600;
+        "
+        >View Full Dashboard →</a
+      >
+    </div>
+  </div>
+
   <section style="margin: 4rem 0">
     <h2>How to Use?</h2>
     <ol>
@@ -98,4 +213,50 @@
   }'</code></pre>
   </section>
 </div>
+
+<script>
+  // Dashboard widget - load stats once when user logs in
+  function initDashboardWidget() {
+    const apiKey = localStorage.getItem("api_key");
+    const userEmail = localStorage.getItem("user_email");
+    const widget = document.getElementById("dashboard-widget");
+
+    if (apiKey && userEmail) {
+      widget.style.display = "block";
+      loadDashboardStats();
+    }
+  }
+
+  function loadDashboardStats() {
+    const apiKey = localStorage.getItem("api_key");
+    if (!apiKey) return;
+
+    const API_BASE = "/api/v1";
+
+    Promise.all([
+      fetch(API_BASE + "/search/stats/monthly", {
+        headers: { "X-API-Key": apiKey },
+      }),
+      fetch(API_BASE + "/search/stats/documents", {
+        headers: { "X-API-Key": apiKey },
+      }),
+    ])
+      .then((responses) => Promise.all(responses.map((r) => r.json())))
+      .then(([monthlyStats, docsStats]) => {
+        document.getElementById("monthly-searches").textContent =
+          monthlyStats.total_searches;
+        document.getElementById("monthly-label").textContent =
+          "Total searches in " + monthlyStats.month;
+        document.getElementById("doc-count").textContent =
+          docsStats.total_documents;
+      })
+      .catch((error) => {
+        console.error("Error loading dashboard stats:", error);
+      });
+  }
+
+  // Initialize on page load
+  window.addEventListener("load", initDashboardWidget);
+  initDashboardWidget();
+</script>
 {% endblock %}
