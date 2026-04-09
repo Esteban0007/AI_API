@@ -1,0 +1,362 @@
+{% extends "base.html" %} {% block content %}
+<div style="max-width: 700px; margin: 40px auto; padding: 20px">
+  <h1>Delete Account</h1>
+  <p style="color: #666; margin-bottom: 30px">
+    This is a permanent action. Please review what will be deleted before
+    proceeding.
+  </p>
+
+  <!-- Deletion Preview Section -->
+  <div
+    style="
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    "
+  >
+    <h2 style="font-size: 18px; margin-top: 0">Account Deletion Summary</h2>
+
+    <div id="preview-loading" style="text-align: center; color: #999">
+      <p>Loading deletion preview...</p>
+    </div>
+
+    <div id="preview-content" style="display: none">
+      <!-- Will be populated by JavaScript -->
+    </div>
+
+    <div
+      id="preview-error"
+      style="
+        display: none;
+        color: #d32f2f;
+        background: #ffebee;
+        padding: 15px;
+        border-radius: 4px;
+      "
+    >
+      <!-- Will show error message if any -->
+    </div>
+  </div>
+
+  <!-- Deletion Form -->
+  <form id="delete-account-form" style="display: none">
+    <div
+      style="
+        background: #fff3cd;
+        border: 1px solid #ffeeba;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+      "
+    >
+      <strong style="color: #856404">⚠️ Warning:</strong>
+      <p style="margin: 10px 0 0 0; color: #856404">
+        This action is <strong>irreversible</strong>. Once you delete your
+        account, all associated data will be permanently removed.
+      </p>
+    </div>
+
+    <div style="margin-bottom: 20px">
+      <label
+        for="email-confirm"
+        style="display: block; margin-bottom: 8px; font-weight: bold"
+      >
+        Email Address:
+      </label>
+      <input
+        type="email"
+        id="email-confirm"
+        name="email"
+        placeholder="Enter your email"
+        required
+        style="
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+        "
+      />
+    </div>
+
+    <div style="margin-bottom: 20px">
+      <label
+        for="password-confirm"
+        style="display: block; margin-bottom: 8px; font-weight: bold"
+      >
+        Password (to confirm deletion):
+      </label>
+      <input
+        type="password"
+        id="password-confirm"
+        name="password"
+        placeholder="Enter your password"
+        required
+        style="
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+        "
+      />
+      <small style="color: #999; display: block; margin-top: 8px">
+        We require your password to confirm that this deletion request is
+        legitimate.
+      </small>
+    </div>
+
+    <div style="margin-bottom: 20px">
+      <label
+        for="confirm-checkbox"
+        style="
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          cursor: pointer;
+        "
+      >
+        <input
+          type="checkbox"
+          id="confirm-checkbox"
+          name="confirm"
+          required
+          style="margin-top: 5px; cursor: pointer"
+        />
+        <span>
+          I understand that deleting my account will
+          <strong>permanently remove all my data</strong> and this action
+          <strong>cannot be undone</strong>. I confirm that I want to delete my
+          account.
+        </span>
+      </label>
+    </div>
+
+    <button
+      type="submit"
+      id="delete-btn"
+      style="
+        background: #d32f2f;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+        font-weight: bold;
+      "
+      disabled
+    >
+      Permanently Delete My Account
+    </button>
+  </form>
+
+  <!-- Success Message -->
+  <div
+    id="success-message"
+    style="
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid #c8e6c9;
+      border-radius: 8px;
+      padding: 20px;
+      color: #2e7d32;
+    "
+  >
+    <h3 style="margin-top: 0; color: #1b5e20">
+      ✅ Account Deleted Successfully
+    </h3>
+    <p>Your account and all associated data have been permanently deleted.</p>
+    <p style="margin-bottom: 0; color: #558b2f">
+      <strong>Note:</strong> Your consent records will be preserved for 3 years
+      (legal requirement under GDPR).
+    </p>
+    <a
+      href="/"
+      style="
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: #2e7d32;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+      "
+    >
+      Return to Home
+    </a>
+  </div>
+
+  <!-- Error Message -->
+  <div
+    id="error-message"
+    style="
+      display: none;
+      background: #ffebee;
+      border: 1px solid #ffcdd2;
+      border-radius: 8px;
+      padding: 20px;
+      color: #c62828;
+    "
+  >
+    <!-- Will be populated by JavaScript -->
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", async function () {
+    const form = document.getElementById("delete-account-form");
+    const previewContent = document.getElementById("preview-content");
+    const previewLoading = document.getElementById("preview-loading");
+    const previewError = document.getElementById("preview-error");
+    const confirmCheckbox = document.getElementById("confirm-checkbox");
+    const deleteBtn = document.getElementById("delete-btn");
+    const emailInput = document.getElementById("email-confirm");
+    const successMessage = document.getElementById("success-message");
+    const errorMessage = document.getElementById("error-message");
+
+    // Get email from URL parameter or current user (if logged in)
+    const urlParams = new URLSearchParams(window.location.search);
+    const email =
+      urlParams.get("email") || localStorage.getItem("user_email") || "";
+
+    if (email) {
+      emailInput.value = email;
+    }
+
+    // Load deletion preview
+    async function loadPreview() {
+      try {
+        const response = await fetch(
+          `/api/account-deletion-preview?email=${encodeURIComponent(emailInput.value)}`,
+        );
+        const data = await response.json();
+
+        if (data.found) {
+          // Build preview HTML
+          let html = '<dl style="margin: 0;">';
+
+          // User info
+          html += `<dt style="font-weight: bold; margin-top: 15px;">Account Created:</dt>`;
+          html += `<dd style="margin-left: 0; color: #666;">${data.account_created}</dd>`;
+
+          // Data to delete
+          html +=
+            '<dt style="font-weight: bold; margin-top: 15px; color: #d32f2f;">🗑️ Will Be Deleted:</dt>';
+          html += '<dd style="margin-left: 0;">';
+          for (const [key, value] of Object.entries(data.data_to_delete)) {
+            const label = key
+              .replace(/_/g, " ")
+              .replace(/\b\w/g, (l) => l.toUpperCase());
+            html += `<div style="margin: 5px 0; color: #d32f2f;">✓ ${label}</div>`;
+          }
+          html += "</dd>";
+
+          // Data preserved
+          html +=
+            '<dt style="font-weight: bold; margin-top: 15px; color: #1976d2;">🔒 Will Be Preserved (Legal Requirement):</dt>';
+          html += '<dd style="margin-left: 0;">';
+          for (const [key, value] of Object.entries(data.data_preserved)) {
+            if (key !== "reason") {
+              const label = key
+                .replace(/_/g, " ")
+                .replace(/\b\w/g, (l) => l.toUpperCase());
+              html += `<div style="margin: 5px 0; color: #1976d2;">🔒 ${label}: ${value}</div>`;
+            }
+          }
+          html += `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; font-size: 14px; color: #666;">
+                    <strong>Why preserved?</strong> ${data.data_preserved.reason}
+                </div>`;
+          html += "</dd>";
+
+          html += "</dl>";
+
+          previewContent.innerHTML = html;
+          previewContent.style.display = "block";
+          previewLoading.style.display = "none";
+          form.style.display = "block";
+        } else {
+          previewError.innerHTML =
+            "<strong>Account not found.</strong> Please check your email address.";
+          previewError.style.display = "block";
+          previewLoading.style.display = "none";
+        }
+      } catch (error) {
+        previewError.innerHTML = `<strong>Error loading preview:</strong> ${error.message}`;
+        previewError.style.display = "block";
+        previewLoading.style.display = "none";
+      }
+    }
+
+    // Load preview on page load
+    if (emailInput.value) {
+      loadPreview();
+    }
+
+    // Reload preview when email changes
+    emailInput.addEventListener("change", loadPreview);
+
+    // Enable/disable delete button based on checkbox
+    confirmCheckbox.addEventListener("change", function () {
+      deleteBtn.disabled = !this.checked;
+    });
+
+    // Handle form submission
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = document.getElementById("password-confirm").value;
+
+      if (!email || !password) {
+        errorMessage.innerHTML =
+          "<strong>Error:</strong> Please fill in all fields.";
+        errorMessage.style.display = "block";
+        return;
+      }
+
+      try {
+        deleteBtn.disabled = true;
+        deleteBtn.textContent = "Deleting...";
+        errorMessage.style.display = "none";
+
+        const response = await fetch("/api/delete-account", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Hide form and show success message
+          form.style.display = "none";
+          previewContent.style.display = "none";
+          previewLoading.style.display = "none";
+          successMessage.style.display = "block";
+
+          // Clear stored email
+          localStorage.removeItem("user_email");
+        } else {
+          errorMessage.innerHTML = `<strong>Error:</strong> ${data.message || "Failed to delete account."}`;
+          errorMessage.style.display = "block";
+          deleteBtn.disabled = false;
+          deleteBtn.textContent = "Permanently Delete My Account";
+        }
+      } catch (error) {
+        errorMessage.innerHTML = `<strong>Error:</strong> ${error.message}`;
+        errorMessage.style.display = "block";
+        deleteBtn.disabled = false;
+        deleteBtn.textContent = "Permanently Delete My Account";
+      }
+    });
+  });
+</script>

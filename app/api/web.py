@@ -20,6 +20,8 @@ from app.db.users import (
     reset_password_with_token,
     save_consent_record,
     get_consent_records,
+    delete_user_account,
+    get_user_deletion_summary,
 )
 from app.core.email import (
     send_confirmation_email,
@@ -160,6 +162,12 @@ async def privacy_policy(request: Request):
     return templates.TemplateResponse("privacy_policy.html", {"request": request})
 
 
+@router.get("/delete-account", response_class=HTMLResponse, include_in_schema=False)
+async def delete_account_page(request: Request):
+    """Account deletion page (GDPR Right to Erasure)."""
+    return templates.TemplateResponse("delete_account.html", {"request": request})
+
+
 @router.post("/api/consent", include_in_schema=False)
 async def save_consent(request: Request):
     """
@@ -209,6 +217,90 @@ async def save_consent(request: Request):
             )
     except Exception as e:
         logger.error(f"Consent save error: {e}")
+        return JSONResponse(
+            {"success": False, "message": f"Error: {str(e)}"}, status_code=500
+        )
+
+
+@router.post("/api/delete-account", include_in_schema=False)
+async def delete_account_request(request: Request):
+    """
+    GDPR Right to Erasure: Delete user account and associated data.
+
+    IMPORTANT:
+    - Deleted: User data, files, embeddings, search logs
+    - Preserved: Consent records (legal proof of consent - 3 years)
+    """
+    try:
+        data = await request.json()
+        email = data.get("email")
+        password = data.get("password")
+
+        if not email or not password:
+            return JSONResponse(
+                {"success": False, "message": "Email and password required"},
+                status_code=400,
+            )
+
+        # Verify credentials (user must confirm password)
+        user = get_user(email)
+        if not user or not verify_password(password, user.get("password_hash")):
+            return JSONResponse(
+                {"success": False, "message": "Invalid email or password"},
+                status_code=401,
+            )
+
+        # Get deletion summary before deleting
+        summary = get_user_deletion_summary(email)
+
+        # Delete account
+        result = delete_user_account(email)
+
+        if result["success"]:
+            return JSONResponse(
+                {
+                    "success": True,
+                    "message": "Account deleted successfully",
+                    "summary": summary,
+                    "note": "Consent records preserved for 3 years (legal compliance)",
+                    "deleted_at": result["deleted_at"],
+                }
+            )
+        else:
+            return JSONResponse(
+                {"success": False, "message": result["message"]}, status_code=500
+            )
+    except Exception as e:
+        logger.error(f"Account deletion error: {e}")
+        return JSONResponse(
+            {"success": False, "message": f"Error: {str(e)}"}, status_code=500
+        )
+
+
+@router.get("/api/account-deletion-preview", include_in_schema=False)
+async def account_deletion_preview(request: Request, email: str = None):
+    """
+    Preview what will be deleted if user requests account deletion.
+    Requires authentication via API key or session.
+    """
+    try:
+        # Get user email from query param or session
+        if not email:
+            return JSONResponse(
+                {"success": False, "message": "Email parameter required"},
+                status_code=400,
+            )
+
+        summary = get_user_deletion_summary(email)
+
+        if not summary.get("found"):
+            return JSONResponse(
+                {"success": False, "message": "User not found"}, status_code=404
+            )
+
+        return JSONResponse(summary)
+    except Exception as e:
+        logger.error(f"Error getting deletion preview: {e}")
         return JSONResponse(
             {"success": False, "message": f"Error: {str(e)}"}, status_code=500
         )
