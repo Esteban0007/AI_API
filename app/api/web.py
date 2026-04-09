@@ -152,6 +152,12 @@ async def demos(request: Request):
     return templates.TemplateResponse("demos.html", {"request": request})
 
 
+@router.get("/privacy-policy", response_class=HTMLResponse, include_in_schema=False)
+async def privacy_policy(request: Request):
+    """Privacy policy page."""
+    return templates.TemplateResponse("privacy_policy.html", {"request": request})
+
+
 @router.post("/search-partial", response_class=HTMLResponse, include_in_schema=False)
 async def search_partial(
     request: Request,

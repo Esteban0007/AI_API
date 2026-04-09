@@ -1,0 +1,117 @@
+{% extends "base.html" %} {% block title %}Privacy Policy - SemanticSearch API{%
+endblock %} {% block content %}
+<div class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem">
+  <div style="margin-bottom: 3rem">
+    <h1 style="margin-bottom: 0.5rem">Privacy Policy</h1>
+    <p style="color: var(--muted-color); margin: 0">
+      Last Updated: April 9, 2026
+    </p>
+  </div>
+
+  <div style="line-height: 1.8">
+    <p style="font-size: 1.1rem; margin-bottom: 2rem">
+      At Ready API, we prioritize your privacy and the sovereignty of your data.
+      This policy outlines how we handle your personal information and our
+      strict commitment to AI ethics and security.
+    </p>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">
+      1. Data Residency (EU-Based Infrastructure)
+    </h2>
+    <p>
+      All your personal data, including your email address and uploaded JSON
+      files, is stored and processed exclusively on secured servers located
+      within the European Union (Spain). We utilize a private Linux VPS
+      infrastructure (STRATO) to ensure that your data remains under European
+      legal jurisdiction and strict security standards.
+    </p>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">
+      2. Information We Collect and Purpose
+    </h2>
+    <p>We adhere to the principle of "Data Minimization." We only collect:</p>
+    <ul>
+      <li>
+        <strong>Email Address:</strong> Used solely for account identification,
+        authentication, and communication regarding your service.
+      </li>
+      <li>
+        <strong>Registration IP Address:</strong> Stored at the time of sign-up
+        as a legal record of your explicit consent to these terms.
+      </li>
+      <li>
+        <strong>User-Uploaded Content (JSON):</strong> Processed only to provide
+        you with your private semantic search results.
+      </li>
+    </ul>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">
+      3. Private AI & Zero-Training Commitment
+    </h2>
+    <p>
+      Your data is processed using private AI models (snowflake-arctic-embed and
+      mxbai-rerank) running directly on our local servers.
+    </p>
+    <ul>
+      <li>
+        <strong>No Third-Party APIs:</strong> We do not send your data to
+        external AI providers. All inference happens on our hardware.
+      </li>
+      <li>
+        <strong>Zero-Training Policy:</strong> We do not use your personal data,
+        JSON files, or search history to train, improve, or fine-tune our AI
+        models. Your information is used strictly to serve your own queries in
+        real-time.
+      </li>
+    </ul>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">
+      4. Multitenancy and Data Isolation
+    </h2>
+    <p>
+      Our system is built with a "Privacy by Design" architecture. Your data is
+      logically and mathematically isolated from other users. Metadata-level
+      filtering ensures that only you can access the semantic search results
+      derived from your uploaded files.
+    </p>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">
+      5. Data Retention and Your "Right to be Forgotten"
+    </h2>
+    <p>You retain full ownership and control over your data:</p>
+    <ul>
+      <li>
+        <strong>On-Demand Deletion:</strong> You can delete your uploaded JSON
+        files at any time through the dashboard.
+      </li>
+      <li>
+        <strong>Account Termination:</strong> If you choose to delete your
+        account, our system will execute a permanent purge of your email, all
+        stored files, and their associated vector embeddings from our databases
+        within 72 hours.
+      </li>
+    </ul>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">6. Security Measures</h2>
+    <p>
+      Access to the infrastructure is strictly limited to authorized
+      administration. We implement industry-standard security protocols,
+      including SSH-key authentication, database encryption, and secure HTTPS
+      transmission, to protect your information against unauthorized access.
+    </p>
+
+    <h2 style="margin-top: 2rem; margin-bottom: 1rem">
+      7. Contact Information
+    </h2>
+    <p>
+      For any questions regarding your data or to exercise your rights under the
+      GDPR, please contact:
+      <a
+        href="mailto:info@readyapi.net"
+        style="color: #4da6d6; text-decoration: none"
+        >info@readyapi.net</a
+      >.
+    </p>
+  </div>
+</div>
+{% endblock %}
