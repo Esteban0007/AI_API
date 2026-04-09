@@ -68,7 +68,35 @@
         />
       </label>
 
-      <button type="submit">Sign Up</button>
+      <label
+        for="terms-agreement"
+        style="
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+          margin-bottom: 1.5rem;
+        "
+      >
+        <input
+          type="checkbox"
+          id="terms-agreement"
+          name="terms_agreement"
+          required
+          style="margin-top: 0.25rem; cursor: pointer; flex-shrink: 0"
+        />
+        <span style="font-size: 0.95rem; line-height: 1.5">
+          I have read and agree to the
+          <a
+            href="/privacy-policy"
+            style="color: #4da6d6; text-decoration: none"
+            target="_blank"
+            >Terms of Service and Privacy Policy</a
+          >. I consent to the processing of my data for private semantic search
+          under a Zero-Training policy.
+        </span>
+      </label>
+
+      <button type="submit" id="signup-btn">Sign Up</button>
     </form>
 
     <p style="text-align: center; margin-top: 2rem; color: var(--muted-color)">
@@ -80,4 +108,66 @@
     </p>
   </div>
 </div>
+
+<script>
+  // Save consent record when form is submitted
+  async function saveConsentRecord(email) {
+    try {
+      const response = await fetch("/api/consent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          privacy_version: "v1.0",
+          consent_method: "Web Form",
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        console.log("✓ Consent record saved:", data.timestamp);
+      } else {
+        console.warn("Warning: Consent record not saved:", data.message);
+      }
+    } catch (error) {
+      console.error("Error saving consent record:", error);
+    }
+  }
+
+  // Handle form submission validation
+  document.querySelector("form").addEventListener("submit", function (e) {
+    const termsCheckbox = document.getElementById("terms-agreement");
+    const emailInput = document.getElementById("email");
+
+    if (!termsCheckbox.checked) {
+      e.preventDefault();
+      alert(
+        "You must agree to the Terms of Service and Privacy Policy to create an account.",
+      );
+      termsCheckbox.focus();
+    } else {
+      // Save consent record before form submission
+      saveConsentRecord(emailInput.value);
+    }
+  });
+
+  // Disable/enable submit button based on checkbox state
+  const termsCheckbox = document.getElementById("terms-agreement");
+  const signupBtn = document.getElementById("signup-btn");
+
+  function updateButtonState() {
+    signupBtn.disabled = !termsCheckbox.checked;
+    signupBtn.style.opacity = termsCheckbox.checked ? "1" : "0.6";
+    signupBtn.style.cursor = termsCheckbox.checked ? "pointer" : "not-allowed";
+  }
+
+  // Initial state
+  updateButtonState();
+
+  // Update state when checkbox changes
+  termsCheckbox.addEventListener("change", updateButtonState);
+</script>
+
 {% endblock %}

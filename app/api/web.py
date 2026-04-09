@@ -1,7 +1,7 @@
 """Web UI endpoints (HTML templates with Jinja2)."""
 
 from fastapi import APIRouter, Request, Form, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 import os
 import logging
@@ -18,6 +18,8 @@ from app.db.users import (
     regenerate_confirmation_token,
     request_password_reset,
     reset_password_with_token,
+    save_consent_record,
+    get_consent_records,
 )
 from app.core.email import (
     send_confirmation_email,
@@ -156,6 +158,60 @@ async def demos(request: Request):
 async def privacy_policy(request: Request):
     """Privacy policy page."""
     return templates.TemplateResponse("privacy_policy.html", {"request": request})
+
+
+@router.post("/api/consent", include_in_schema=False)
+async def save_consent(request: Request):
+    """
+    API endpoint to save consent record (GDPR compliance).
+    Called when user accepts privacy policy during registration.
+    """
+    try:
+        data = await request.json()
+
+        # Extract consent data
+        user_email = data.get("email")
+        privacy_version = data.get("privacy_version", "v1.0")
+        consent_method = data.get("consent_method", "Web Form")
+
+        # Get user IP from request headers
+        client_host = request.client.host if request.client else None
+        user_agent = request.headers.get("user-agent")
+
+        # Validate email
+        if not user_email:
+            return JSONResponse(
+                {"success": False, "message": "Email is required"}, status_code=400
+            )
+
+        # Save consent record
+        result = save_consent_record(
+            user_email=user_email,
+            consent_status=True,
+            consent_type="privacy_policy",
+            privacy_version=privacy_version,
+            consent_method=consent_method,
+            consent_ip=client_host,
+            user_agent=user_agent,
+        )
+
+        if result["success"]:
+            return JSONResponse(
+                {
+                    "success": True,
+                    "message": "Consent recorded successfully",
+                    "timestamp": result["timestamp"],
+                }
+            )
+        else:
+            return JSONResponse(
+                {"success": False, "message": result["message"]}, status_code=500
+            )
+    except Exception as e:
+        logger.error(f"Consent save error: {e}")
+        return JSONResponse(
+            {"success": False, "message": f"Error: {str(e)}"}, status_code=500
+        )
 
 
 @router.post("/search-partial", response_class=HTMLResponse, include_in_schema=False)

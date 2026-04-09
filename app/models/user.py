@@ -182,3 +182,40 @@ class PaymentHistory(Base):
     # Timestamps
     created_at = Column(DateTime, default=datetime.utcnow)
     paid_at = Column(DateTime, nullable=True)
+
+
+class ConsentRecord(Base):
+    """GDPR Compliance: Track user consent for Privacy Policy and Terms of Service."""
+
+    __tablename__ = "consent_records"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    # User reference (optional - can be null for pre-registration consents)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    user_email = Column(String, index=True, nullable=False)  # Email at time of consent
+
+    # Consent details
+    consent_status = Column(
+        Boolean, default=True, nullable=False
+    )  # True = accepted, False = withdrawn
+    consent_type = Column(
+        String, default="privacy_policy", nullable=False
+    )  # Type of consent
+    privacy_version = Column(
+        String, nullable=False
+    )  # Version of policy accepted (e.g., "v1.0")
+    consent_method = Column(
+        String, default="Web Form", nullable=False
+    )  # How consent was given
+
+    # Technical details for audit trail
+    consent_ip = Column(String, nullable=True)  # IP address of consent action
+    user_agent = Column(String, nullable=True)  # Browser/User-Agent info
+
+    # Timestamps
+    consent_timestamp = Column(
+        DateTime, default=datetime.utcnow, nullable=False
+    )  # When consent was given
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
