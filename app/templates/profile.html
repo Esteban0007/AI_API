@@ -108,6 +108,156 @@ endblock %} {% block content %}
       >
     </p>
   </section>
+
+  <!-- Delete Account Section -->
+  <section style="margin-top: 3rem">
+    <h2 style="font-size: 1.3rem; margin-bottom: 1rem; color: #d32f2f">
+      ⚠️ Danger Zone
+    </h2>
+    <p style="color: var(--muted-color); margin-bottom: 1.5rem">
+      Permanently delete your account and all associated data.
+    </p>
+
+    <div
+      style="
+        background: #ffebee;
+        border: 2px solid #f44336;
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+      "
+    >
+      <h3 style="margin-top: 0; color: #d32f2f">Delete Account</h3>
+
+      <p style="color: #c62828; font-weight: 500; margin-bottom: 1rem">
+        This action is <strong>IRREVERSIBLE</strong>. All your data will be
+        permanently deleted:
+      </p>
+
+      <ul style="color: #c62828; margin-bottom: 1.5rem">
+        <li>Your account and personal information</li>
+        <li>All uploaded files and documents</li>
+        <li>Your API keys and access tokens</li>
+        <li>Your search history and logs</li>
+        <li>Your vector embeddings</li>
+      </ul>
+
+      <div
+        style="
+          background: #fff3e0;
+          border-left: 4px solid #ff9800;
+          padding: 1rem;
+          margin-bottom: 1.5rem;
+          border-radius: 4px;
+        "
+      >
+        <p style="margin: 0; color: #e65100; font-size: 0.95rem">
+          <strong>ℹ️ Note:</strong> Your consent records will be preserved for 3
+          years per GDPR compliance requirements.
+        </p>
+      </div>
+
+      <form id="delete-account-form">
+        <label
+          for="delete-confirmation"
+          style="display: block; margin-bottom: 1rem"
+        >
+          <strong style="color: #d32f2f">
+            To confirm, type
+            <code
+              style="
+                background: #fff;
+                padding: 0.2rem 0.4rem;
+                border: 1px solid #f44336;
+                border-radius: 3px;
+              "
+              >DELETE</code
+            >
+            in the box below:
+          </strong>
+          <input
+            type="text"
+            id="delete-confirmation"
+            placeholder='Type "DELETE" to confirm'
+            style="margin-top: 0.5rem; border-color: #f44336; border-width: 2px"
+            autocomplete="off"
+          />
+          <small
+            style="
+              display: block;
+              margin-top: 0.5rem;
+              color: var(--muted-color);
+            "
+          >
+            This field is case-sensitive
+          </small>
+        </label>
+
+        <label
+          for="delete-password"
+          style="display: block; margin-bottom: 1rem"
+        >
+          <strong>Your Password:</strong>
+          <input
+            type="password"
+            id="delete-password"
+            placeholder="Enter your password to confirm"
+            style="margin-top: 0.5rem"
+          />
+        </label>
+
+        <button
+          type="submit"
+          id="delete-btn"
+          style="
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: not-allowed;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+          "
+          disabled
+        >
+          🗑️ Delete Account Permanently
+        </button>
+
+        <div
+          id="delete-error"
+          style="
+            display: none;
+            background: #ffebee;
+            border: 1px solid #f44336;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+          "
+        ></div>
+
+        <div
+          id="delete-success"
+          style="
+            display: none;
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+            color: #2e7d32;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+          "
+        >
+          <strong>✅ Account Deleted</strong>
+          <p>
+            Your account has been permanently deleted. You will be redirected
+            shortly...
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
 </div>
 
 <script>
@@ -125,6 +275,94 @@ endblock %} {% block content %}
     const apiKeyField = document.getElementById("api-key-field");
     if (apiKeyField && apiKey) {
       apiKeyField.value = apiKey;
+    }
+
+    // Handle delete account form validation (GitHub-style)
+    const deleteForm = document.getElementById("delete-account-form");
+    const deleteConfirmation = document.getElementById("delete-confirmation");
+    const deletePassword = document.getElementById("delete-password");
+    const deleteBtn = document.getElementById("delete-btn");
+
+    if (deleteForm && deleteConfirmation && deletePassword && deleteBtn) {
+      // Validate both fields to enable button
+      function validateDeleteForm() {
+        const confirmationValue = deleteConfirmation.value.trim();
+        const passwordValue = deletePassword.value.trim();
+        const isValid =
+          confirmationValue === "DELETE" && passwordValue.length > 0;
+
+        deleteBtn.disabled = !isValid;
+        deleteBtn.style.opacity = isValid ? "1" : "0.5";
+        deleteBtn.style.cursor = isValid ? "pointer" : "not-allowed";
+      }
+
+      deleteConfirmation.addEventListener("input", validateDeleteForm);
+      deletePassword.addEventListener("input", validateDeleteForm);
+
+      // Handle form submission
+      deleteForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const userEmail = localStorage.getItem("user_email");
+        const password = deletePassword.value.trim();
+        const deleteError = document.getElementById("delete-error");
+        const deleteSuccess = document.getElementById("delete-success");
+
+        if (deleteConfirmation.value !== "DELETE") {
+          deleteError.textContent =
+            "Error: You must type DELETE exactly to confirm.";
+          deleteError.style.display = "block";
+          return;
+        }
+
+        if (!password) {
+          deleteError.textContent = "Error: Password is required.";
+          deleteError.style.display = "block";
+          return;
+        }
+
+        try {
+          deleteBtn.disabled = true;
+          deleteBtn.textContent = "🔄 Deleting...";
+          deleteError.style.display = "none";
+
+          const response = await fetch("/api/delete-account", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: userEmail,
+              password: password,
+            }),
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            // Show success message
+            deleteForm.style.display = "none";
+            deleteSuccess.style.display = "block";
+
+            // Clear storage and redirect after 2 seconds
+            setTimeout(() => {
+              localStorage.removeItem("api_key");
+              localStorage.removeItem("user_email");
+              window.location.href = "/";
+            }, 2000);
+          } else {
+            deleteError.textContent = `Error: ${data.message || "Failed to delete account."}`;
+            deleteError.style.display = "block";
+            deleteBtn.disabled = false;
+            deleteBtn.textContent = "🗑️ Delete Account Permanently";
+          }
+        } catch (error) {
+          deleteError.textContent = `Error: ${error.message}`;
+          deleteError.style.display = "block";
+          deleteBtn.disabled = false;
+          deleteBtn.textContent = "🗑️ Delete Account Permanently";
+        }
+      });
     }
   });
 </script>
