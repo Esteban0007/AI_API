@@ -430,7 +430,373 @@ def search(self, query: str, top_k: int = 5, include_content: bool = True):
 
 ---
 
-## 📊 Example: Searching for "sci-fi action with robots"
+## � Implementation Examples (Code-Focused)
+
+### 1. Query Embedding Process
+
+**File:** [`app/engine/embedder.py`](app/engine/embedder.py)
+
+```python
+from sentence_transformers import SentenceTransformer
+
+class EmbeddingModel:
+    def __init__(self):
+        # Load Snowflake Arctic-768D model (ONNX INT8 quantized)
+        self.model = SentenceTransformer(
+            'Snowflake/snowflake-arctic-embed-m',
+            model_kwargs={"trust_remote_code": True},
+            cache_folder="./models"
+        )
+
+    def encode(self, text: str) -> list:
+        """Convert text to 768-dimensional embedding vector."""
+        embedding = self.model.encode(text, convert_to_numpy=True)
+        return embedding.tolist()  # Returns: [0.234, -0.156, 0.892, ..., 0.445]
+
+# Usage:
+embedder = EmbeddingModel()
+query = "superhero saves the world"
+embedding = embedder.encode(query)
+print(f"Query embedding shape: {len(embedding)}")  # Output: 768
+print(f"First 5 dimensions: {embedding[:5]}")      # Output: [0.234, -0.156, 0.892, ...]
+```
+
+**Key metrics:**
+
+- Latency: ~41ms per embedding
+- Dimensions: 768
+- Model: Snowflake Arctic-768D ONNX INT8
+- Quantization: INT8 (reduces memory 4x vs FP32)
+
+---
+
+### 2. Vector Similarity Search
+
+**File:** [`app/engine/searcher.py`](app/engine/searcher.py)
+
+```python
+import chromadb
+from scipy.spatial.distance import cosine
+
+class SearchEngine:
+    def __init__(self, tenant_id: str = "admin"):
+        # Initialize ChromaDB persistent client
+        self.client = chromadb.PersistentClient(
+            path="./data/chroma_db"
+        )
+        self.collection = self.client.get_or_create_collection(
+            name=f"movies_{tenant_id}",
+            metadata={"hnsw:space": "cosine"}  # Cosine similarity metric
+        )
+        self.embedder = EmbeddingModel()
+
+    def search(self, query: str, top_k: int = 5) -> list:
+        """Search for similar movies using vector similarity."""
+        # Step 1: Encode query to embedding
+        query_embedding = self.embedder.encode(query)
+
+        # Step 2: Query ChromaDB (returns top_k most similar)
+        results = self.collection.query(
+            query_embeddings=[query_embedding],
+            n_results=top_k,
+            include=["embeddings", "metadatas", "documents", "distances"]
+        )
+
+        # Step 3: Format results with similarity scores
+        formatted_results = []
+        for i, (doc_id, metadata, distance) in enumerate(
+            zip(results['ids'][0], results['metadatas'][0], results['distances'][0])
+        ):
+            # Distance to similarity (for cosine: similarity = 1 - distance)
+            similarity_score = 1 - distance
+
+            formatted_results.append({
+                "title": metadata.get("title"),
+                "year": metadata.get("year"),
+                "cast": metadata.get("cast", []),
+                "summary": results['documents'][0][i],
+                "score": round(similarity_score, 3),
+                "rank": i + 1
+            })
+
+        return formatted_results
+
+# Usage:
+engine = SearchEngine()
+results = engine.search(query="sci-fi action with robots", top_k=3)
+for result in results:
+    print(f"{result['rank']}. {result['title']} ({result['year']}) - Score: {result['score']}")
+```
+
+**Output example:**
+
+```
+1. The Terminator 2 (1991) - Score: 0.91
+2. Transformers (2007) - Score: 0.88
+3. Blade Runner 2049 (2017) - Score: 0.85
+```
+
+---
+
+### 3. FastAPI Search Endpoint
+
+**File:** [`app/api/web.py`](app/api/web.py#L160-L200)
+
+```python
+from fastapi import APIRouter, Form, Request
+from fastapi.responses import TemplateResponse
+from fastapi.templating import Jinja2Templates
+import time
+
+router = APIRouter()
+templates = Jinja2Templates(directory="app/templates")
+
+@router.post("/search-partial")
+async def search_partial(request: Request, query: str = Form(...)):
+    """
+    Real-time semantic search endpoint.
+    Called via HTMX from /simulator page.
+    Returns HTML partial with movie results.
+    """
+    start_time = time.time()
+
+    try:
+        # Initialize search engine
+        search_engine = SearchEngine(tenant_id="admin")
+
+        # Perform semantic search
+        results = search_engine.search(
+            query=query,
+            top_k=5
+        )
+
+        # Calculate latency
+        latency_ms = int((time.time() - start_time) * 1000)
+
+        # Render HTML partial with results
+        return TemplateResponse(
+            "results_list.html",
+            {
+                "request": request,
+                "results": results,
+                "query": query,
+                "timing_ms": latency_ms,
+                "result_count": len(results)
+            }
+        )
+
+    except Exception as e:
+        return TemplateResponse(
+            "results_list.html",
+            {
+                "request": request,
+                "results": [],
+                "error": str(e),
+                "query": query,
+                "timing_ms": 0
+            }
+        )
+```
+
+---
+
+### 4. API Endpoint with Authentication
+
+**File:** [`app/api/v1.py`](app/api/v1.py#L50-L120)
+
+```python
+from fastapi import APIRouter, Header, HTTPException
+from pydantic import BaseModel
+import json
+
+router = APIRouter(prefix="/api/v1", tags=["API"])
+
+class SearchRequest(BaseModel):
+    query: str
+    top_k: int = 5
+
+class SearchResponse(BaseModel):
+    results: list
+    timing_ms: int
+    query: str
+
+@router.post("/search/query", response_model=SearchResponse)
+async def search_query(
+    request_data: SearchRequest,
+    x_api_key: str = Header(...)
+):
+    """
+    Semantic search API endpoint (requires API key).
+
+    Usage:
+        curl -X POST https://api.readyapi.net/api/v1/search/query \
+          -H "x-api-key: rapi_your_key_here" \
+          -H "Content-Type: application/json" \
+          -d '{"query": "superhero saves the world", "top_k": 5}'
+    """
+    start_time = time.time()
+
+    # Step 1: Authenticate user
+    user = get_user_by_api_key(x_api_key)
+    if not user or not user.is_confirmed:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or unconfirmed API key"
+        )
+
+    # Step 2: Validate query
+    if not request_data.query or len(request_data.query) < 2:
+        raise HTTPException(
+            status_code=400,
+            detail="Query must be at least 2 characters"
+        )
+
+    # Step 3: Perform search
+    search_engine = SearchEngine(tenant_id=user.tenant_id)
+    results = search_engine.search(
+        query=request_data.query,
+        top_k=request_data.top_k
+    )
+
+    # Step 4: Log search (for analytics)
+    log_search(
+        user_id=user.id,
+        query=request_data.query,
+        result_count=len(results),
+        latency_ms=int((time.time() - start_time) * 1000)
+    )
+
+    # Step 5: Return formatted response
+    return SearchResponse(
+        results=results,
+        timing_ms=int((time.time() - start_time) * 1000),
+        query=request_data.query
+    )
+```
+
+---
+
+### 5. Full Request/Response Example
+
+**Request:**
+
+```bash
+curl -X POST "https://api.readyapi.net/api/v1/search/query" \
+  -H "x-api-key: rapi_abc123xyz789" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "sci-fi action with robots",
+    "top_k": 3
+  }'
+```
+
+**Response (200 OK):**
+
+```json
+{
+  "results": [
+    {
+      "rank": 1,
+      "title": "The Terminator 2",
+      "year": 1991,
+      "summary": "A cyborg is sent back in time to protect Sarah Connor...",
+      "cast": ["Arnold Schwarzenegger", "Linda Hamilton"],
+      "score": 0.91
+    },
+    {
+      "rank": 2,
+      "title": "Transformers",
+      "year": 2007,
+      "summary": "Giant robots battle for possession of a powerful energy cube...",
+      "cast": ["Shia LaBeouf", "Megan Fox"],
+      "score": 0.88
+    },
+    {
+      "rank": 3,
+      "title": "Blade Runner 2049",
+      "year": 2017,
+      "summary": "A replicant hunter uncovers a secret that could change humanity...",
+      "cast": ["Ryan Gosling", "Harrison Ford"],
+      "score": 0.85
+    }
+  ],
+  "timing_ms": 185,
+  "query": "sci-fi action with robots"
+}
+```
+
+---
+
+### 6. Performance Comparison Table
+
+| Stage                  | Technology                   | Code Location                                                        | Latency   | % of Total |
+| ---------------------- | ---------------------------- | -------------------------------------------------------------------- | --------- | ---------- |
+| **Query Embedding**    | Arctic-768D ONNX INT8        | [`app/engine/embedder.py`](app/engine/embedder.py#L20-L40)           | 41ms      | 22%        |
+| **Vector Search**      | ChromaDB (cosine similarity) | [`app/engine/searcher.py`](app/engine/searcher.py#L30-L60)           | 15ms      | 8%         |
+| **Template Rendering** | Jinja2                       | [`app/templates/results_list.html`](app/templates/results_list.html) | 129ms     | 70%        |
+| **Network/Total**      | -                            | -                                                                    | **185ms** | **100%**   |
+
+**Optimization removed:**
+
+```python
+# REMOVED (was consuming 4,300ms):
+if self.config.ENABLE_RERANKING:
+    results = self.reranker.rerank(results)  # Cross-encoder re-ranking
+```
+
+**Config setting:** [`app/core/config.py`](app/core/config.py#L15)
+
+```python
+ENABLE_RERANKING = False  # Disabled for 10x performance improvement
+```
+
+---
+
+### 7. Database Schema for Vectors
+
+**File:** [`data/chroma_db/`](data/chroma_db/)
+
+ChromaDB stores movies with embeddings:
+
+```json
+{
+  "ids": ["movie_1", "movie_2", "movie_3"],
+  "embeddings": [
+    [0.234, -0.156, 0.892, ..., 0.445],    // Avengers embedding (768 dims)
+    [0.342, -0.078, 0.156, ..., 0.234],    // Terminator embedding (768 dims)
+    [0.456, 0.012, 0.789, ..., 0.567]      // Blade Runner embedding (768 dims)
+  ],
+  "metadatas": [
+    {"title": "Avengers: Endgame", "year": 2019, "cast": [...]},
+    {"title": "The Terminator 2", "year": 1991, "cast": [...]},
+    {"title": "Blade Runner 2049", "year": 2017, "cast": [...]}
+  ],
+  "documents": [
+    "When an alien army invades Earth...",
+    "A cyborg is sent back in time...",
+    "A replicant hunter searches for clues..."
+  ]
+}
+```
+
+Total movies indexed: **1,958 TMDB movies**
+Total embeddings: **1,958 × 768 dimensions = 1,504,704 values**
+
+---
+
+### 8. Complete Code Files
+
+| Feature       | Main File                                          | Related Files                                                        |
+| ------------- | -------------------------------------------------- | -------------------------------------------------------------------- |
+| **Embedding** | [`app/engine/embedder.py`](app/engine/embedder.py) | [`app/core/config.py`](app/core/config.py)                           |
+| **Search**    | [`app/engine/searcher.py`](app/engine/searcher.py) | [`app/engine/store.py`](app/engine/store.py)                         |
+| **Web API**   | [`app/api/web.py`](app/api/web.py)                 | [`app/templates/results_list.html`](app/templates/results_list.html) |
+| **API v1**    | [`app/api/v1.py`](app/api/v1.py)                   | [`app/models/search.py`](app/models/search.py)                       |
+| **Database**  | [`app/db/users.py`](app/db/users.py)               | [`app/db/session.py`](app/db/session.py)                             |
+
+---
+
+## �📊 Example: Searching for "sci-fi action with robots"
 
 ### 1. User Interaction
 
