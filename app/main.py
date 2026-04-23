@@ -104,18 +104,6 @@ def create_app() -> FastAPI:
         init_db()
         logger.info("Database initialized successfully")
 
-    # Root endpoint
-    @app.get("/", tags=["System"])
-    async def root():
-        """Root endpoint with API information."""
-        return {
-            "name": settings.API_TITLE,
-            "version": settings.API_VERSION,
-            "description": settings.API_DESCRIPTION,
-            "docs": "/api/docs",
-            "redoc": "/api/redoc",
-        }
-
     # Health check endpoint
     @app.get("/health", tags=["System"])
     async def health():
