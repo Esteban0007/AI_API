@@ -144,8 +144,6 @@ async def api_docs(request: Request):
     )
 
 
-
-
 @router.get("/demos", response_class=HTMLResponse, include_in_schema=False)
 async def demos(request: Request):
     """Live demos page with multiple datasets."""
@@ -775,3 +773,9 @@ async def change_password(
                 "error": "Failed to change password. Please try again.",
             },
         )
+
+
+@router.api_route("/{path_name:path}", methods=["GET"], include_in_schema=False)
+async def catch_all_404(request: Request, path_name: str):
+    """Catch-all route for 404 errors."""
+    return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
