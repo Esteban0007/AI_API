@@ -144,10 +144,6 @@ async def api_docs(request: Request):
     )
 
 
-@router.get("/simulator", response_class=HTMLResponse, include_in_schema=False)
-async def simulator(request: Request):
-    """Movie search simulator page."""
-    return templates.TemplateResponse("simulator.html", {"request": request})
 
 
 @router.get("/demos", response_class=HTMLResponse, include_in_schema=False)
