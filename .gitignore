@@ -81,5 +81,7 @@ data/*.json
 data/*.csv
 
 # EXCEPTION: Important production data files
-!data/dataset_movies_en_clean.json
-!data/movies_dataset.json
+!data/data_demo_spaceship.json
+!data/data_demo_readyapi_instructions.json
+!data/data_demo_movies.json
+
