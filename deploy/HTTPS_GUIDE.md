@@ -1,105 +1,153 @@
-# 🔐 HTTPS Configuration Guide
+# HTTPS Deployment Guide
 
-Guía paso a paso para configurar HTTPS en tu API de búsqueda semántica.
+This document explains how I configured HTTPS for ReadyAPI on the VPS. I wrote it in a student-friendly way, but it still reflects the real setup used in the project.
 
-## 📋 Opciones de Configuración
+The production architecture is intentionally simple:
 
-### Opción 1: Producción con Let's Encrypt (RECOMENDADO)
+1. the FastAPI application runs locally on `127.0.0.1:8000`
+2. `nginx` receives public traffic on ports 80 and 443
+3. Let's Encrypt provides the trusted TLS certificate
+4. HTTP traffic is redirected to HTTPS
+5. the certificate is renewed automatically with Certbot
 
-**Para:** Servidores públicos con dominio propio
-**Certificado:** Gratuito y renovable automáticamente
-**Dificultad:** Media
-
-### Opción 2: Desarrollo Local con SSL Auto-firmado
-
-**Para:** Testing local HTTPS
-**Certificado:** Auto-generado (no válido públicamente)
-**Dificultad:** Fácil
-
-### Opción 3: Docker + Nginx + Let's Encrypt
-
-**Para:** Deployment containerizado
-**Certificado:** Gratuito y renovable
-**Dificultad:** Media-Alta
+This is a realistic production pattern and it also makes the system easier to explain in a dissertation.
 
 ---
 
-## 🚀 Opción 1: Producción con Let's Encrypt
+## 1. Why I Used This Setup
 
-### Requisitos
+I did not expose the Python application directly to the internet. Instead, I placed `nginx` in front of the app and used it as a reverse proxy. I chose this design because it is:
 
-- ✅ Servidor Linux (Ubuntu/Debian recomendado)
-- ✅ Dominio apuntando a tu servidor (ej: `api.tudominio.com`)
-- ✅ Puertos 80 y 443 abiertos en firewall
-- ✅ Acceso root/sudo
+- more secure than exposing FastAPI directly
+- easier to manage in production
+- closer to a real-world deployment
+- simple enough to explain clearly in an academic report
 
-### Paso 1: Preparar el Servidor
+The VPS in this project is public, so HTTPS is important. Without HTTPS, credentials, API requests, and user data would travel in plain text.
+
+---
+
+## 2. Production Deployment Overview
+
+### 2.1 What Happens in Production
+
+The real production flow is:
+
+```text
+User browser
+	↓
+https://readyapi.net
+	↓
+nginx on the VPS
+	↓
+FastAPI running on 127.0.0.1:8000
+	↓
+Search engine, authentication, and database logic
+```
+
+### 2.2 Main Files Used
+
+The deployment is based on these files:
+
+- `deploy/nginx.conf` for the reverse proxy and TLS configuration
+- `deploy/setup_https.sh` for automatic installation and certificate setup
+- `scripts/run_server_https.py` for local HTTPS development
+- `scripts/run_server.py` for normal local development
+
+---
+
+## 3. Production HTTPS Configuration
+
+### 3.1 Server Requirements
+
+Before enabling HTTPS, the server needs:
+
+- a Linux VPS with root or sudo access
+- a domain pointing to the VPS public IP
+- ports 80 and 443 open in the firewall
+- the FastAPI app running locally on port 8000
+
+### 3.2 What the Setup Script Does
+
+The script `deploy/setup_https.sh` automates the deployment process. Based on the actual script in the repository, it does the following:
+
+1. checks that it is running as root
+2. asks for the domain and email address
+3. installs `nginx`, `certbot`, and `python3-certbot-nginx`
+4. replaces the placeholder domain in `nginx.conf`
+5. enables the nginx site and disables the default site
+6. tests the nginx configuration
+7. restarts nginx
+8. requests a certificate from Let's Encrypt
+9. enables automatic renewal using `certbot.timer`
+
+This is useful because it reduces manual errors and gives me a repeatable deployment process.
+
+### 3.3 Nginx Configuration
+
+The file `deploy/nginx.conf` contains two server blocks.
+
+#### HTTP block
+
+- listens on port 80
+- serves the Let's Encrypt challenge path
+- redirects all normal traffic to HTTPS
+
+#### HTTPS block
+
+- listens on port 443 with SSL and HTTP/2
+- uses the certificate stored in `/etc/letsencrypt/live/readyapi.net/`
+- applies modern TLS settings
+- adds security headers
+- forwards requests to `http://127.0.0.1:8000`
+
+The important idea is that only `nginx` is public. The Python app stays private on the local machine.
+
+### 3.4 Security Headers
+
+The nginx configuration includes these headers:
+
+- `Strict-Transport-Security`
+- `X-Content-Type-Options: nosniff`
+- `X-Frame-Options: DENY`
+- `X-XSS-Protection: 1; mode=block`
+
+These do not replace proper application security, but they improve the overall protection of the site.
+
+### 3.5 Automatic Certificate Renewal
+
+Let's Encrypt certificates expire, so renewal is important. The script enables `certbot.timer` to make the process automatic.
+
+You can test renewal with:
 
 ```bash
-# Conectar a tu servidor
-ssh usuario@tu-servidor.com
-
-# Clonar el repositorio
-cd /var/www
-git clone https://github.com/Esteban0007/AI_API.git
-cd AI_API
-
-# Crear entorno virtual
-python3 -m venv venv
-source venv/bin/activate
-
-# Instalar dependencias
-pip install -r requirements.txt
+sudo certbot renew --dry-run
 ```
 
-### Paso 2: Configurar Variables de Entorno
+This is a safe test because it checks the renewal process without actually changing the live certificate.
 
-```bash
-# Copiar configuración de ejemplo
-cp .env.example .env
+---
 
-# Editar configuración
-nano .env
-```
+## 4. Production Service Management
 
-Configuración recomendada para producción:
+### 4.1 Why the App Should Run as a Service
 
-```env
-DEBUG=false
-HOST=127.0.0.1  # Solo acceso local (Nginx hace proxy)
-PORT=8000
-ENABLE_HTTPS=true
-REQUIRE_HTTPS=true
-ALLOWED_ORIGINS=["https://api.tudominio.com"]
-```
+On the VPS, the application should run continuously in the background. For that reason, the correct approach is to run it through `systemd` and `gunicorn`, not manually inside a terminal.
 
-### Paso 3: Ejecutar Script de Configuración HTTPS
+This gives me:
 
-```bash
-# Dar permisos de ejecución
-chmod +x deploy/setup_https.sh
+- automatic restart if the process crashes
+- better control over startup and shutdown
+- a more professional production setup
+- a clearer explanation in the project report
 
-# Ejecutar (requiere sudo)
-sudo deploy/setup_https.sh
-```
+### 4.2 Typical Service Configuration
 
-El script te preguntará:
-
-- **Dominio:** `api.tudominio.com`
-- **Email:** `tu@email.com` (para notificaciones de renovación)
-
-### Paso 4: Configurar Systemd para Auto-inicio
-
-```bash
-# Crear servicio systemd
-sudo nano /etc/systemd/system/semantic-search-api.service
-```
-
-Contenido:
+In this project, the service is expected to start FastAPI through Gunicorn and Uvicorn workers, bound to `127.0.0.1:8000`.
 
 ```ini
 [Unit]
-Description=Semantic Search FastAPI
+Description=ReadyAPI FastAPI Service
 After=network.target
 
 [Service]
@@ -114,187 +162,173 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-Activar el servicio:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable semantic-search-api
-sudo systemctl start semantic-search-api
-sudo systemctl status semantic-search-api
-```
-
-### Paso 5: Verificar
-
-```bash
-# Verificar HTTPS
-curl https://api.tudominio.com/api/v1/search/health
-
-# Verificar redirección HTTP → HTTPS
-curl -I http://api.tudominio.com
-# Debería devolver: HTTP/1.1 301 Moved Permanently
-```
-
-### Renovación Automática
-
-Let's Encrypt configura renovación automática. Verifica:
-
-```bash
-# Test de renovación (no renueva realmente)
-sudo certbot renew --dry-run
-
-# Ver timer de renovación
-sudo systemctl status certbot.timer
-```
+This separation between the web server and the application server is an important part of the deployment design.
 
 ---
 
-## 💻 Opción 2: Desarrollo Local (SSL Auto-firmado)
+## 5. Local HTTPS for Development
 
-### Para Testing Local de HTTPS
+For local testing, the project includes `scripts/run_server_https.py`.
 
-```bash
-# Generar certificado y arrancar servidor
-python scripts/run_server_https.py
-```
+### 5.1 What the Script Does
 
-Esto:
+This script:
 
-1. Genera certificado auto-firmado en `certs/`
-2. Inicia servidor en `https://localhost:8000`
-3. Muestra warning del navegador (normal, cert no es de CA confiable)
+1. loads the application settings
+2. checks whether the certificate files already exist
+3. creates a self-signed certificate with `openssl` if needed
+4. starts Uvicorn with SSL enabled
 
-### Acceder a la API
+The result is a local HTTPS server on `https://localhost:8000`.
 
-1. Abre `https://localhost:8000/api/docs`
-2. El navegador mostrará warning de seguridad
-3. Click en "Avanzado" → "Continuar a localhost"
-4. ✅ Ya puedes probar la API con HTTPS
+### 5.2 Why I Added It
 
-**⚠️ IMPORTANTE:** Solo para desarrollo. NUNCA uses certificados auto-firmados en producción.
+I needed this script so I could test HTTPS behavior before deployment. It is useful for:
 
----
+- checking that the application starts correctly with SSL
+- testing the docs page locally
+- validating HTTPS-related configuration without using the production certificate
 
-## 🐳 Opción 3: Docker + Nginx + Let's Encrypt
+### 5.3 Important Limitation
 
-### Paso 1: Preparar Configuración
-
-Edita `deploy/docker-compose.https.yml`:
-
-```yaml
-# Línea 31-32: Cambia el dominio y email
-command: certonly --webroot --webroot-path=/var/www/certbot --email TU_EMAIL --agree-tos --no-eff-email -d TU_DOMINIO
-```
-
-### Paso 2: Levantar Servicios
-
-```bash
-# Primera vez (obtener certificado)
-docker-compose -f deploy/docker-compose.https.yml up -d certbot
-
-# Esperar a que certbot termine
-sleep 10
-
-# Levantar todos los servicios
-docker-compose -f deploy/docker-compose.https.yml up -d
-```
-
-### Paso 3: Renovación Automática
-
-Agregar cron job:
-
-```bash
-# Editar crontab
-crontab -e
-
-# Agregar renovación semanal
-0 0 * * 0 docker-compose -f /ruta/deploy/docker-compose.https.yml run certbot renew && docker-compose -f /ruta/deploy/docker-compose.https.yml restart nginx
-```
+The certificate created by this script is self-signed, so browsers will show a warning. That is normal. It should only be used for development and testing.
 
 ---
 
-## 🔒 Headers de Seguridad (Ya Configurados)
+## 6. How I Configured the Server in Practice
 
-El archivo `deploy/nginx.conf` incluye:
+The real production setup for ReadyAPI follows these principles:
 
-```nginx
-# HSTS - Fuerza HTTPS por 2 años
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+- the domain is `readyapi.net`
+- the public IP of the VPS is used only for incoming traffic
+- `nginx` manages the public HTTPS endpoint
+- FastAPI is hidden behind the reverse proxy
+- Let's Encrypt provides the trusted certificate
+- Certbot handles certificate renewal
 
-# Previene MIME sniffing
-X-Content-Type-Options: nosniff
-
-# Previene clickjacking
-X-Frame-Options: DENY
-
-# XSS Protection
-X-XSS-Protection: 1; mode=block
-```
+This is a strong configuration because it keeps the application simple while still giving it a professional production layer.
 
 ---
 
-## ✅ Checklist de Seguridad Post-Configuración
+## 7. Verification Steps
 
-- [ ] HTTPS funcionando correctamente
-- [ ] HTTP redirige automáticamente a HTTPS
-- [ ] Certificado válido (no auto-firmado en producción)
-- [ ] `DEBUG=false` en `.env`
-- [ ] `ALLOWED_ORIGINS` actualizado con tu dominio HTTPS
-- [ ] Firewall configurado (solo puertos 80, 443, 22)
-- [ ] Auto-renovación de certificado configurada
-- [ ] Logs monitoreados (`/var/log/nginx/error.log`)
-
----
-
-## 🛠️ Troubleshooting
-
-### Error: "Certificate verification failed"
+After deployment, I would verify the server with these commands:
 
 ```bash
-# Verificar configuración Nginx
+curl -I http://readyapi.net
+curl https://readyapi.net/api/v1/search/health
 sudo nginx -t
-
-# Ver logs
-sudo tail -f /var/log/nginx/error.log
+sudo certbot renew --dry-run
 ```
 
-### Error: "Port 443 already in use"
+### 7.1 What Each Check Confirms
+
+- `curl -I http://readyapi.net` checks that HTTP redirects to HTTPS
+- `curl https://readyapi.net/api/v1/search/health` checks that the public API is responding correctly
+- `sudo nginx -t` checks that nginx syntax is valid
+- `sudo certbot renew --dry-run` checks that certificate renewal works
+
+These checks are important because deployment is not only about installation. It is also about verifying that the server behaves correctly over time.
+
+---
+
+## 8. Post-Deployment Checklist
+
+Before considering the HTTPS setup complete, I would confirm that:
+
+- HTTPS works on the public domain
+- HTTP redirects automatically to HTTPS
+- the certificate is valid and trusted
+- the Python app only listens on the local interface
+- `DEBUG` is disabled in production
+- the allowed origins use the HTTPS domain
+- the firewall only exposes the necessary ports
+- automatic renewal is enabled
+- nginx logs are available for debugging
+
+---
+
+## 9. Troubleshooting
+
+### 9.1 If nginx Does Not Start
 
 ```bash
-# Ver qué está usando el puerto
+sudo nginx -t
+sudo journalctl -u nginx
+```
+
+This helps identify configuration mistakes or service errors.
+
+### 9.2 If Port 443 Is Busy
+
+```bash
 sudo lsof -i :443
-sudo netstat -tulpn | grep :443
+sudo systemctl status nginx
 ```
 
-### Renovación de certificado falla
+This tells me whether another process is already using the HTTPS port.
+
+### 9.3 If Certificate Renewal Fails
 
 ```bash
-# Ver logs de certbot
 sudo journalctl -u certbot
-
-# Renovar manualmente
 sudo certbot renew --force-renewal
 ```
 
-### Browser muestra "Not Secure"
+This helps diagnose certificate-related problems.
 
-1. Verifica que el certificado sea de Let's Encrypt (no auto-firmado)
-2. Verifica que el dominio coincida exactamente
-3. Limpia caché del navegador
+### 9.4 If the Browser Shows "Not Secure"
+
+That usually means one of these things:
+
+- the certificate is self-signed
+- the domain does not match the certificate
+- the HTTPS redirect is not working
+- the browser cache is outdated
+
+In production, this should not happen if the setup is correct.
 
 ---
 
-## 📚 Recursos Adicionales
+## 10. Why This Is a Good Solution for My TFG
 
-- [Let's Encrypt Documentation](https://letsencrypt.org/docs/)
-- [Nginx SSL Configuration](https://ssl-config.mozilla.org/)
-- [FastAPI HTTPS Guide](https://fastapi.tiangolo.com/deployment/https/)
+I think this configuration is appropriate for my final year project because it demonstrates a complete deployment workflow:
+
+- application development in Python
+- production HTTPS configuration
+- certificate management
+- reverse proxy deployment
+- secure server organization
+
+It also shows that I understand not only how to build an API, but also how to deploy it in a realistic and maintainable way.
 
 ---
 
-## 🆘 ¿Necesitas Ayuda?
+## 11. Short Summary
 
-Si encuentras problemas:
+In summary, the HTTPS setup used in ReadyAPI is based on:
 
-1. Revisa los logs: `sudo journalctl -u semantic-search-api`
-2. Verifica Nginx: `sudo nginx -t`
-3. Test de conectividad: `curl -v https://tu-dominio.com`
+- a FastAPI app running locally on the VPS
+- an `nginx` reverse proxy in front of it
+- a Let's Encrypt certificate for production
+- a self-signed certificate only for local testing
+- automatic renewal through Certbot
+
+This gave me a secure, understandable, and production-style deployment that fits the technical goals of the project.
+
+---
+
+## 12. Useful Files
+
+- `deploy/nginx.conf` - public HTTPS and reverse proxy configuration
+- `deploy/setup_https.sh` - automated HTTPS setup
+- `scripts/run_server_https.py` - local HTTPS testing server
+- `scripts/run_server.py` - normal local development server
+
+---
+
+## 13. References
+
+- Let's Encrypt Documentation: https://letsencrypt.org/docs/
+- Nginx SSL Configuration: https://ssl-config.mozilla.org/
+- FastAPI Deployment Guide: https://fastapi.tiangolo.com/deployment/
