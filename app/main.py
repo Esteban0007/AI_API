@@ -87,7 +87,9 @@ def create_app() -> FastAPI:
                     history.popleft()
 
                 if len(history) >= settings.RATE_LIMIT_REQUESTS:
-                    retry_after = max(1, int(window_seconds - (current_time - history[0])))
+                    retry_after = max(
+                        1, int(window_seconds - (current_time - history[0]))
+                    )
                     logger.warning(
                         "Rate limit exceeded for %s on %s", client_ip, request.url.path
                     )
