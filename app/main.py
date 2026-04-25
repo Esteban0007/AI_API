@@ -2,6 +2,7 @@
 FastAPI application factory and middleware setup.
 """
 
+from collections import defaultdict, deque
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, HTMLResponse
@@ -9,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import logging
 import time
+from datetime import datetime, timedelta
 from typing import Callable
 from pathlib import Path
 
@@ -20,6 +22,11 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
+
+# In-memory rate limiter state.
+# This is intentionally simple and lightweight so it works on the VPS without
+# introducing new dependencies.
+_request_history: dict[str, deque[float]] = defaultdict(deque)
 
 
 def create_app() -> FastAPI:
@@ -64,6 +71,36 @@ def create_app() -> FastAPI:
     async def log_requests(request: Request, call_next: Callable):
         """Log all HTTP requests and responses."""
         start_time = time.time()
+        settings = get_settings()
+
+        # Lightweight IP-based rate limiting.
+        # When enabled, requests over the configured window return 429.
+        if settings.RATE_LIMIT_ENABLED:
+            client_ip = request.client.host if request.client else "unknown"
+            current_time = time.time()
+            window_seconds = 60
+
+            if request.url.path not in {"/health", "/api/v1/search/health"}:
+                history = _request_history[client_ip]
+
+                while history and current_time - history[0] > window_seconds:
+                    history.popleft()
+
+                if len(history) >= settings.RATE_LIMIT_REQUESTS:
+                    retry_after = max(1, int(window_seconds - (current_time - history[0])))
+                    logger.warning(
+                        "Rate limit exceeded for %s on %s", client_ip, request.url.path
+                    )
+                    return JSONResponse(
+                        status_code=429,
+                        content={
+                            "detail": "Too many requests",
+                            "message": "Rate limit exceeded. Please try again later.",
+                        },
+                        headers={"Retry-After": str(retry_after)},
+                    )
+
+                history.append(current_time)
 
         # Log request
         logger.info(

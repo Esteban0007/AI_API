@@ -65,8 +65,8 @@ class Settings(BaseSettings):
     REQUIRE_HTTPS: bool = False  # Redirect HTTP to HTTPS
 
     # Rate Limiting (requests per minute)
-    RATE_LIMIT_ENABLED: bool = False
-    RATE_LIMIT_REQUESTS: int = 60
+    RATE_LIMIT_ENABLED: bool = True
+    RATE_LIMIT_REQUESTS: int = 200
 
     # Email Configuration
     SMTP_HOST: str = "smtp.strato.com"
