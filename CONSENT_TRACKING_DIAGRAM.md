@@ -225,7 +225,7 @@ Query to Retrieve Audit Trail:
 └──────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Flujo de Datos Simplificado
+## Data
 
 ```
 USER MARKS CHECKBOX
@@ -249,7 +249,7 @@ FORM SUBMIT
         (Standard registration flow)
 ```
 
-## Auditoría Regulatoria
+## Auditory
 
 ```
 AUDITOR REQUESTS: "Prove this user consented to your Privacy Policy"
