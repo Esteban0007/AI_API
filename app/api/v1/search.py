@@ -221,14 +221,14 @@ async def get_monthly_stats(
     curl -H "X-API-Key: YOUR_API_KEY" https://readyapi.net/api/v1/search/stats/monthly
     ```
     """
+    from datetime import datetime, date
+
     try:
         # Validate API key using internal function
         user_context = await _validate_api_key_internal(x_api_key)
 
         if not user_context.get("user_id"):
             # Dev mode - return dummy stats
-            from datetime import datetime
-
             current_month = datetime.utcnow().strftime("%Y-%m")
             return {
                 "month": current_month,
@@ -237,9 +237,8 @@ async def get_monthly_stats(
             }
 
         # Get monthly stats from database
-        from ...db.session import SessionLocal
-        from ...models.user import Usage
-        from datetime import datetime, date
+        from app.db.session import SessionLocal
+        from app.models.user import Usage
 
         db = SessionLocal()
         try:
@@ -265,7 +264,7 @@ async def get_monthly_stats(
             db.close()
 
     except Exception as e:
-        logger.error(f"Error getting monthly stats: {e}")
+        logger.error(f"Error getting monthly stats: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Error retrieving monthly statistics",
