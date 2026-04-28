@@ -14,7 +14,7 @@ from ...engine.embedder import Embedder
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1/search", tags=["Search"])
+router = APIRouter(prefix="/search", tags=["Search"])
 
 # Global instances
 embedder = Embedder()

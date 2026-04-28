@@ -14,7 +14,7 @@ from ...engine.embedder import Embedder
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1/documents", tags=["documents"])
+router = APIRouter(prefix="/documents", tags=["documents"])
 
 # Maximum docs to embed in a single internal chunk (avoids OOM)
 INTERNAL_CHUNK_SIZE = 50

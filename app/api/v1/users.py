@@ -15,7 +15,7 @@ from datetime import datetime, date
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1/users", tags=["users"])
+router = APIRouter(prefix="/users", tags=["users"])
 
 
 # Pydantic models for requests/responses
