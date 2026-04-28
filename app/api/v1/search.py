@@ -7,7 +7,7 @@ import logging
 from typing import Optional
 
 from ...models.search import SearchQuery, SearchResponse, SearchResult
-from ...core.security import validate_api_key
+from ...core.security import validate_api_key, _validate_api_key_internal
 from ...engine.searcher import SearchEngine
 from ...engine.store import VectorStore
 from ...engine.embedder import Embedder
@@ -98,7 +98,7 @@ async def search(
     - `execution_time_ms`: Query execution time
     """
     # Validate API key
-    user_context = await validate_api_key(x_api_key)
+    user_context = await _validate_api_key_internal(x_api_key)
     try:
         logger.info(f"Received search query: '{search_query.query}'")
 
@@ -222,8 +222,8 @@ async def get_monthly_stats(
     ```
     """
     try:
-        # Validate API key
-        user_context = await validate_api_key(x_api_key)
+        # Validate API key using internal function
+        user_context = await _validate_api_key_internal(x_api_key)
 
         if not user_context.get("user_id"):
             # Dev mode - return dummy stats

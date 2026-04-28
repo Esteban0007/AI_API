@@ -14,17 +14,10 @@ logger = logging.getLogger(__name__)
 DB_PATH = "./data/users.db"
 
 
-async def validate_api_key(
-    x_api_key: Optional[str] = Header(None),
-) -> dict:
+async def _validate_api_key_internal(x_api_key: Optional[str]) -> dict:
     """
-    Validate API key from request header using SQLite.
-
-    Returns:
-        dict with user_id, email, plan, and limits
-
-    Raises:
-        HTTPException: If API key is invalid or user exceeded limits
+    Internal function to validate API key.
+    This is the core logic that doesn't depend on FastAPI's Header().
     """
     settings = get_settings()
 
@@ -100,6 +93,33 @@ async def validate_api_key(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Email not confirmed. Please confirm your email first.",
         )
+
+    # Return user context
+    return {
+        "user_id": user_id,
+        "email": email,
+        "name": email.split("@")[0],
+        "plan": "pro",
+        "is_admin": False,
+        "api_key": x_api_key,
+        "tenant_id": f"user_{user_id}",
+    }
+
+
+async def validate_api_key(
+    x_api_key: Optional[str] = Header(None),
+) -> dict:
+    """
+    Validate API key from request header.
+    This is a FastAPI dependency that wraps the internal validation logic.
+
+    Returns:
+        dict with user_id, email, plan, and limits
+
+    Raises:
+        HTTPException: If API key is invalid or user exceeded limits
+    """
+    return await _validate_api_key_internal(x_api_key)
 
     # Return user context
     return {

@@ -8,7 +8,7 @@ from typing import List, Optional
 
 from ...models.document import DocumentCreate, DocumentBatch, DocumentResponse
 from ...models.search import DocumentUploadResponse
-from ...core.security import validate_api_key
+from ...core.security import validate_api_key, _validate_api_key_internal
 from ...engine.store import VectorStore
 from ...engine.embedder import Embedder
 
@@ -70,7 +70,7 @@ async def upload_documents(
     - `failed_count`: Number of documents that failed
     """
     # Validate API key
-    user_context = await validate_api_key(x_api_key)
+    user_context = await _validate_api_key_internal(x_api_key)
     try:
         if not batch.documents:
             raise HTTPException(
@@ -142,7 +142,7 @@ async def get_stats(x_api_key: Optional[str] = Header(None)) -> dict:
     - `model`: Model used for embeddings
     """
     # Validate API key
-    user_context = await validate_api_key(x_api_key)
+    user_context = await _validate_api_key_internal(x_api_key)
 
     try:
         tenant_id = user_context["tenant_id"]
@@ -178,7 +178,7 @@ async def get_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
     ```
     """
     # Validate API key
-    user_context = await validate_api_key(x_api_key)
+    user_context = await _validate_api_key_internal(x_api_key)
 
     try:
         tenant_id = user_context["tenant_id"]
@@ -207,7 +207,7 @@ async def clear_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
     Use before re-loading a new dataset.
     """
     # Validate API key
-    user_context = await validate_api_key(x_api_key)
+    user_context = await _validate_api_key_internal(x_api_key)
 
     try:
         tenant_id = user_context["tenant_id"]
@@ -242,7 +242,7 @@ async def delete_document(
     - `message`: Result message
     """
     # Validate API key
-    user_context = await validate_api_key(x_api_key)
+    user_context = await _validate_api_key_internal(x_api_key)
 
     try:
         tenant_id = user_context["tenant_id"]
