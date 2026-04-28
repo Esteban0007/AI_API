@@ -8,7 +8,7 @@ from typing import List
 from pydantic import BaseModel, EmailStr
 import logging
 
-from ...core.security import validate_api_key, create_api_key, check_rate_limit
+from ...core.security import validate_api_key, create_api_key
 from ...db.session import get_db_session
 from ...models.user import User, APIKey, Usage, Plan
 from datetime import datetime, date
