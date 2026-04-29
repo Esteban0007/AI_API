@@ -10,7 +10,7 @@
 
 ## Abstract
 
-This thesis presents a comprehensive implementation of **ReadyAPI**, a self-hosted semantic search platform designed to democratize access to neural information retrieval technology while maintaining data sovereignty and regulatory compliance. The system achieves state-of-the-art retrieval performance (nDCG@5: 0.94) on commodity hardware (2-core CPU, 4GB RAM) through strategic architectural decisions, including hybrid dense-sparse retrieval with Reciprocal Rank Fusion, INT8 quantization of embedding models, and multi-tenant data isolation via vector collection namespacing. The platform is deployed on sovereign European infrastructure (STRATO VPS, Spain) ensuring full compliance with GDPR Article 32 (data residency requirements) and implements comprehensive audit logging, consent tracking, and the Right to Erasure via simultaneous deletion of JSON assets and vector embeddings. Performance benchmarking demonstrates 185ms average latency (P95: 269ms), handles 10,000+ documents without Out-Of-Memory errors, and supports zero-training data practices, addressing a critical gap between academic semantic search research and practical production requirements for organizations requiring privacy-preserving intelligent retrieval.
+This thesis presents a comprehensive implementation of **ReadyAPI**, a self-hosted semantic search platform designed to democratize access to neural information retrieval technology while maintaining data sovereignty and regulatory compliance. The system achieves state-of-the-art retrieval performance (nDCG@5: 0.94) on commodity hardware (2-core CPU, 4GB RAM) through strategic architectural decisions, including hybrid dense-sparse retrieval with Reciprocal Rank Fusion, INT8 quantization of embedding models, and multi-tenant data isolation via vector collection namespacing. The platform is deployed on sovereign European infrastructure (STRATO VPS, Spain) ensuring full compliance with GDPR Article 32 (data residency requirements) and implements comprehensive audit logging, consent tracking, and the Right to Erasure via simultaneous deletion of JSON assets and vector embeddings. Performance benchmarking demonstrates  average latency (P95: 240ms), handles 10,000+ documents without Out-Of-Memory errors, and supports zero-training data practices, addressing a critical gap between academic semantic search research and practical production requirements for organizations requiring privacy-preserving intelligent retrieval.
 
 ---
 
@@ -1015,7 +1015,7 @@ Measurement Points:
 ├─ Serialization: 5ms (JSON encoding)
 ├─ Network: 50-100ms (geographic dependent)
 └─ Total P50: ~60ms
-Total P95: ~185ms (3x faster than target)
+Total P95: ~240ms (2x faster than target)
 
 Distribution:
 ├─ <50ms: 40% of queries (fast)
@@ -1024,7 +1024,7 @@ Distribution:
 └─ >200ms: 5% of queries (outliers, 10K docs+)
 
 Target: <500ms (P95)
-Achieved: 185ms (P95) → 2.7x better
+Achieved: 240ms (P95) → 2x better
 
 ```
 
@@ -1275,7 +1275,7 @@ Monitoring:
 | Metric | Target | Achieved | Status |
 |--------|--------|----------|--------|
 | **nDCG@5** | 0.80 | 0.94 | ✅ 18% better |
-| **Latency P95** | <500ms | 185ms | ✅ 2.7x better |
+| **Latency P95** | <500ms | 240ms | ✅ 2x better |
 | **Throughput** | 10 req/sec | 15 req/sec | ✅ 50% better |
 | **Memory (4GB)** | <2.5GB used | 1.8GB used | ✅ 28% margin |
 | **Scalability** | 2000 docs | 10K docs | ✅ 5x capacity |
@@ -1345,7 +1345,7 @@ This thesis successfully demonstrates that **production-grade semantic search is
 
 1. ✅ **Technical Feasibility**
    - Deployed working system on 2-core, 4GB RAM VPS
-   - Achieved 185ms P95 latency (vs 500ms target)
+   - Achieved 240ms P95 latency (vs 500ms target)
    - Scaled to 10,000 documents (5x beyond target)
 
 2. ✅ **Quality Assurance**
