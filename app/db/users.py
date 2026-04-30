@@ -17,8 +17,7 @@ def init_db():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
-    c.execute(
-        """
+    c.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT UNIQUE NOT NULL,
@@ -32,12 +31,10 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             last_login TIMESTAMP
         )
-    """
-    )
+    """)
 
     # Create consent_records table for GDPR compliance
-    c.execute(
-        """
+    c.execute("""
         CREATE TABLE IF NOT EXISTS consent_records (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             user_id INTEGER,
@@ -53,8 +50,7 @@ def init_db():
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY(user_id) REFERENCES users(id)
         )
-    """
-    )
+    """)
 
     conn.commit()
     conn.close()
@@ -87,7 +83,7 @@ def register_user(email: str, password: str) -> dict:
         # Check if email already exists
         c.execute("SELECT id FROM users WHERE email = ?", (email,))
         if c.fetchone():
-            return {"success": False, "message": "Email ya registrado"}
+            return {"success": False, "message": "Email already registered"}
 
         # Generate credentials
         password_hash = hash_password(password)
@@ -108,7 +104,7 @@ def register_user(email: str, password: str) -> dict:
 
         return {
             "success": True,
-            "message": "Registro exitoso. Revisa tu email para confirmar.",
+            "message": "Registration successful. Check your email to confirm.",
             "email": email,
             "confirmation_token": confirmation_token,
         }
@@ -154,13 +150,13 @@ def confirm_user(confirmation_token: str) -> dict:
     user = c.fetchone()
 
     if not user:
-        return {"success": False, "message": "Token inválido"}
+        return {"success": False, "message": "Invalid token"}
 
     user_id, email, expires = user
 
     # Check if token expired
     if datetime.fromisoformat(expires) < datetime.utcnow():
-        return {"success": False, "message": "Token expirado"}
+        return {"success": False, "message": "Token expired"}
 
     # Mark as confirmed
     c.execute(
@@ -177,7 +173,7 @@ def confirm_user(confirmation_token: str) -> dict:
 
     return {
         "success": True,
-        "message": f"Email confirmado. ¡Bienvenido {email}!",
+        "message": f"Email confirmed. Welcome {email}!",
         "email": email,
     }
 
@@ -616,14 +612,12 @@ def get_users_pending_deletion() -> list[dict]:
         c = conn.cursor()
 
         # Get deleted users (marked as deleted_ID_timestamp)
-        c.execute(
-            """
+        c.execute("""
             SELECT id, email, created_at
             FROM users
             WHERE email LIKE 'deleted_%'
             ORDER BY id DESC
-        """
-        )
+        """)
 
         rows = c.fetchall()
         conn.close()

@@ -158,15 +158,15 @@ SemanticSearch API
 <body>
     <div class="container">
         <div class="header">
-            <h1>✅ ¡Cuenta Confirmada!</h1>
+            <h1>✅ Account Confirmed!</h1>
         </div>
         <div class="content">
-            <p>Tu cuenta ha sido activada con éxito.</p>
-            <p><strong>Tu API Key:</strong></p>
+            <p>Your account has been activated successfully.</p>
+            <p><strong>Your API Key:</strong></p>
             <div class="api-key">{api_key}</div>
-            <p style="color: #d32f2f; font-weight: bold;">⚠️ Guárdala en un lugar seguro. No la compartas.</p>
+            <p style="color: #d32f2f; font-weight: bold;">⚠️ Keep it safe and secure. Do not share it.</p>
             
-            <p style="margin-top: 30px;"><strong>Ejemplo de uso:</strong></p>
+            <p style="margin-top: 30px;"><strong>Usage Example:</strong></p>
             <pre class="code">curl -X POST "https://api.readyapi.net/api/v1/search/query" \\
   -H "x-api-key: {api_key}" \\
   -H "Content-Type: application/json" \\
