@@ -129,8 +129,7 @@ async def home(request: Request):
 @router.get("/api-docs", response_class=HTMLResponse, include_in_schema=False)
 async def api_docs(request: Request):
     """Redirect to Swagger docs in a new tab."""
-    return HTMLResponse(
-        """
+    return HTMLResponse("""
     <html>
     <head><title>Redirecting...</title></head>
     <body>
@@ -140,8 +139,7 @@ async def api_docs(request: Request):
         <p>Redirecting to API documentation...</p>
     </body>
     </html>
-    """
-    )
+    """)
 
 
 @router.get("/demos", response_class=HTMLResponse, include_in_schema=False)
@@ -238,7 +236,7 @@ async def delete_account_request(request: Request):
 
         # Verify credentials (user must confirm password)
         user = get_user(email)
-        if not user or not verify_password(password, user.get("password_hash")):
+        if not user or not verify_password(email, password):
             return JSONResponse(
                 {"success": False, "message": "Invalid email or password"},
                 status_code=401,
