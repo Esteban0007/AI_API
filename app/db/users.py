@@ -338,7 +338,7 @@ def reset_password_with_token(reset_token: str, new_password: str) -> dict:
 
 def update_password(email: str, new_password: str) -> dict:
     """Update user password when logged in."""
-    conn = get_db_connection()
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
     # Check if user exists
