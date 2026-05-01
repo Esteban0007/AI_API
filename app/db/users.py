@@ -342,7 +342,7 @@ def update_password(email: str, new_password: str) -> dict:
     c = conn.cursor()
 
     # Check if user exists
-    c.execute("SELECT id FROM users WHERE email = ?", (email,))
+    c.execute("SELECT id FROM users WHERE LOWER(email) = LOWER(?)", (email,))
     user = c.fetchone()
 
     if not user:
