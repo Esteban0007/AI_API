@@ -118,7 +118,7 @@ def get_user(email: str) -> Optional[dict]:
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
 
-    c.execute("SELECT * FROM users WHERE email = ?", (email,))
+    c.execute("SELECT * FROM users WHERE LOWER(email) = LOWER(?)", (email,))
     user = c.fetchone()
     conn.close()
 
@@ -184,7 +184,10 @@ def get_user_by_api_key(api_key: str) -> Optional[dict]:
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
 
-    c.execute("SELECT * FROM users WHERE api_key = ? AND is_confirmed = 1", (api_key,))
+    c.execute(
+        "SELECT * FROM users WHERE LOWER(api_key) = LOWER(?) AND is_confirmed = 1",
+        (api_key,),
+    )
     user = c.fetchone()
     conn.close()
 

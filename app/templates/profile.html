@@ -321,6 +321,13 @@ endblock %} {% block content %}
           return;
         }
 
+        if (!userEmail) {
+          deleteError.textContent =
+            "Error: Email not found. Please login again.";
+          deleteError.style.display = "block";
+          return;
+        }
+
         try {
           deleteBtn.disabled = true;
           deleteBtn.textContent = "🔄 Deleting...";
@@ -339,7 +346,7 @@ endblock %} {% block content %}
 
           const data = await response.json();
 
-          if (data.success) {
+          if (response.ok && data.success) {
             // Show success message
             deleteForm.style.display = "none";
             deleteSuccess.style.display = "block";
@@ -357,6 +364,7 @@ endblock %} {% block content %}
             deleteBtn.textContent = "🗑️ Delete Account Permanently";
           }
         } catch (error) {
+          console.error("Delete account error:", error);
           deleteError.textContent = `Error: ${error.message}`;
           deleteError.style.display = "block";
           deleteBtn.disabled = false;
