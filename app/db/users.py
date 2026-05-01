@@ -498,7 +498,7 @@ def delete_user_account(user_email: str) -> dict:
         c.execute(
             """
             UPDATE users 
-            SET email = ?, password_hash = NULL, api_key = NULL
+            SET email = ?, api_key = NULL
             WHERE id = ?
         """,
             (f"deleted_{user_id}_{datetime.utcnow().isoformat()}", user_id),
