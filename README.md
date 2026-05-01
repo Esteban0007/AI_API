@@ -5,6 +5,7 @@ Self-hosted semantic search platform with hybrid retrieval (dense embeddings + B
 **Status:** Production Ready  
 **Performance:** nDCG@5 = 0.94 | P95 latency = 240ms | 2-core CPU, 4GB RAM
 
+# GIT https://github.com/Esteban0007/AI_API
 ---
 
 ## Complete Setup Guide
