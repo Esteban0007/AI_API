@@ -464,15 +464,6 @@ def delete_user_account(user_email: str) -> dict:
 
     IMPORTANT: Consent records are PRESERVED for 3 years (legal compliance).
 
-    Deleted:
-    - User account from users table
-    - Search logs (if any)
-    - API keys
-    - User files/embeddings (if any)
-
-    Preserved (3 years):
-    - Consent records (legal proof that consent was obtained)
-
     Args:
         user_email: Email of user to delete
 
@@ -483,8 +474,8 @@ def delete_user_account(user_email: str) -> dict:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
 
-        # Get user ID first
-        c.execute("SELECT id FROM users WHERE email = ?", (user_email,))
+        # Get user ID first (case-insensitive)
+        c.execute("SELECT id FROM users WHERE LOWER(email) = LOWER(?)", (user_email,))
         user = c.fetchone()
 
         if not user:
@@ -493,40 +484,12 @@ def delete_user_account(user_email: str) -> dict:
 
         user_id = user[0]
 
-        # STEP 1: Mark user as deleted (soft delete for reference)
-        # We'll keep this for reference but mark as deleted
-        c.execute(
-            """
-            UPDATE users 
-            SET email = ?, api_key = NULL
-            WHERE id = ?
-        """,
-            (f"deleted_{user_id}_{datetime.utcnow().isoformat()}", user_id),
-        )
+        # Delete user account completely
+        c.execute("DELETE FROM users WHERE id = ?", (user_id,))
 
-        # STEP 2: Delete search logs if exists
-        # (This would be in a future logs table)
-        # For now, placeholder for future implementation
-
-        # STEP 3: Delete associated files/embeddings if stored
-        # This would delete from document storage, vector store, etc.
-        # Placeholder for future implementation
-
-        # STEP 4: Clear sensitive user data
-        c.execute(
-            """
-            UPDATE users 
-            SET confirmation_token = NULL,
-                password_reset_token = NULL,
-                last_login = NULL
-            WHERE id = ?
-        """,
-            (user_id,),
-        )
-
-        # STEP 5: PRESERVE consent records (legal requirement - 3 years)
+        # PRESERVE consent records (legal requirement - 3 years)
         # Consent records are NOT deleted - they're needed to prove consent was valid
-        # They're just disassociated from the user
+        # Just disassociate them from the user
         c.execute(
             """
             UPDATE consent_records 
