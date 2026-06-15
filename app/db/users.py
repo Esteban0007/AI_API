@@ -593,5 +593,71 @@ def get_users_pending_deletion() -> list[dict]:
         return []
 
 
+def get_user_by_shopify_domain(shop_domain: str) -> Optional[dict]:
+    """Busca si una tienda de Shopify ya está registrada en el sistema."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+
+    c.execute("SELECT * FROM users WHERE shopify_domain = ?", (shop_domain,))
+    user = c.fetchone()
+    conn.close()
+
+    return dict(user) if user else None
+
+
+def register_shopify_shop(shop_domain: str) -> dict:
+    """Registra una tienda de Shopify automáticamente generando su API Key."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+
+        # 1. Por seguridad, comprobamos si ya existe en la base de datos
+        c.execute(
+            "SELECT id, api_key FROM users WHERE shopify_domain = ?", (shop_domain,)
+        )
+        existing_shop = c.fetchone()
+        if existing_shop:
+            conn.close()
+            return {
+                "success": True,
+                "message": "Shop already registered",
+                "api_key": existing_shop[1],
+            }
+
+        # 2. Generamos credenciales seguras por defecto para este canal de Shopify
+        api_key = generate_api_key()
+
+        # 3. Insertamos el nuevo usuario guardando únicamente su dominio
+        # Nota: Ponemos vacíos email y password_hash para saltar la restricción del script antiguo
+        c.execute(
+            """
+            INSERT INTO users (email, password_hash, api_key, is_confirmed, shopify_domain)
+            VALUES (?, ?, ?, 1, ?)
+        """,
+            (
+                f"shopify_{secrets.token_hex(4)}@readyapi.local",
+                "shopify_managed_account",
+                api_key,
+                shop_domain,
+            ),
+        )
+
+        conn.commit()
+        conn.close()
+
+        return {
+            "success": True,
+            "message": "Shop registered successfully within Ready API",
+            "shopify_domain": shop_domain,
+            "api_key": api_key,
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "message": f"Error registering Shopify store: {str(e)}",
+        }
+
+
 # Initialize DB on import
 init_db()
