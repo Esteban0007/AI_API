@@ -67,12 +67,14 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True, nullable=False)
-    name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=True)  
+    name = Column(String, nullable=True)  
     company = Column(String, nullable=True)
 
+    shopify_domain = Column(String, unique=True, index=True, nullable=True)
+
     # Authentication (for future web dashboard)
-    hashed_password = Column(String, nullable=True)  # Optional for now
+    hashed_password = Column(String, nullable=True)  
 
     # Plan & Billing
     plan_id = Column(Integer, ForeignKey("plans.id"), default=1)  # Default: Free
