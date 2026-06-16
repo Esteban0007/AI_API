@@ -2,7 +2,7 @@
 API endpoints for semantic search.
 """
 
-from fastapi import APIRouter, HTTPException, status, Header
+from fastapi import APIRouter, HTTPException, status, Header, Query
 import logging
 from typing import Optional
 
@@ -45,59 +45,8 @@ async def search(
     x_api_key: Optional[str] = Header(None),
 ) -> SearchResponse:
     """
-    Perform semantic search with cross-encoder re-ranking.
-
-    Pipeline:
-    1. Converts query to embedding
-    2. Retrieves similar documents using vector search
-    3. Re-ranks results using cross-encoder for better relevance
-    4. Returns sorted documents with relevance scores
-
-    **Request Body:**
-    - `query`: Search query string (required)
-    - `top_k`: Number of results to return (1-50, default: 5)
-    - `filters`: Optional metadata filters (filter by category, language, author, etc.)
-    - `include_content`: Include document content in results (default: true)
-
-    **Example without filters:**
-    ```json
-    {
-        "query": "How does machine learning work?",
-        "top_k": 5,
-        "include_content": true
-    }
-    ```
-
-    **Example with filters:**
-    ```json
-    {
-        "query": "artificial intelligence",
-        "top_k": 10,
-        "filters": {
-            "category": "tutorial",
-            "language": "es",
-            "author": "John Doe"
-        },
-        "include_content": true
-    }
-    ```
-
-    **Available filter fields:**
-    Any field in metadata with simple types (str, int, float, bool).
-
-    Auto-indexed field: language
-    **Response:**
-    - `query`: The original search query
-    - `total_results`: Number of results found
-    - `results`: Array of ranked documents with:
-      - `id`: Document identifier
-      - `title`: Document title
-      - `score`: Relevance score (0-1)
-      - `content`: Document content (if requested)
-      - `metadata`: Document metadata
-    - `execution_time_ms`: Query execution time
+    Perform semantic search with cross-encoder re-ranking using API Key.
     """
-    # Validate API key
     user_context = await _validate_api_key_internal(x_api_key)
     try:
         logger.info(f"Received search query: '{search_query.query}'")
@@ -105,7 +54,6 @@ async def search(
         tenant_id = user_context["tenant_id"]
         search_engine = _get_search_engine_for_tenant(tenant_id)
 
-        # Perform search
         results, execution_time = search_engine.search(
             query=search_query.query,
             top_k=search_query.top_k,
@@ -113,7 +61,6 @@ async def search(
             include_content=search_query.include_content,
         )
 
-        # Format results
         formatted_results = [
             SearchResult(
                 id=result["id"],
@@ -129,7 +76,6 @@ async def search(
             for result in results
         ]
 
-        # Track usage if user is authenticated
         if user_context.get("user_id"):
             try:
                 from ...db.session import SessionLocal
@@ -161,17 +107,12 @@ async def search(
             except Exception as e:
                 logger.warning(f"Failed to track usage: {e}")
 
-        response = SearchResponse(
+        return SearchResponse(
             query=search_query.query,
             total_results=len(formatted_results),
             results=formatted_results,
             execution_time_ms=execution_time,
         )
-
-        logger.info(
-            f"Search completed. Found {len(formatted_results)} results in {execution_time:.2f}ms"
-        )
-        return response
 
     except Exception as e:
         logger.error(f"Error performing search: {e}")
@@ -181,15 +122,81 @@ async def search(
         )
 
 
+@router.post("/shopify-query", response_model=SearchResponse)
+async def shopify_search_dynamic(
+    search_query: SearchQuery,
+    x_shopify_shop_domain: Optional[str] = Header(None, alias="X-Shopify-Shop-Domain"),
+) -> SearchResponse:
+    """
+    Endpoint POST dinámico para Shopify que soporta filtros complejos en el JSON.
+    Identifica al tenant en la base de datos usando la cabecera X-Shopify-Shop-Domain.
+    """
+    if not x_shopify_shop_domain:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Falta la cabecera X-Shopify-Shop-Domain para identificar la tienda",
+        )
+
+    from app.db.users import get_user_by_shopify_domain
+
+    user_context = get_user_by_shopify_domain(x_shopify_shop_domain)
+
+    if not user_context:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"La tienda {x_shopify_shop_domain} no está registrada",
+        )
+
+    try:
+        logger.info(
+            f"Búsqueda con filtros desde Shopify [{x_shopify_shop_domain}]: '{search_query.query}'"
+        )
+
+        tenant_id = (
+            user_context["tenant_id"]
+            if "tenant_id" in user_context
+            else f"user_{user_context['id']}"
+        )
+        search_engine = _get_search_engine_for_tenant(tenant_id)
+
+        results, execution_time = search_engine.search(
+            query=search_query.query,
+            top_k=search_query.top_k,
+            filters=search_query.filters,  # Filtros dinámicos aplicados aquí
+            include_content=search_query.include_content,
+        )
+
+        formatted_results = [
+            SearchResult(
+                id=result["id"],
+                title=result["title"],
+                score=result["score"],
+                content=result.get("content"),
+                metadata={
+                    k: v
+                    for k, v in result.get("metadata", {}).items()
+                    if k != "tenant_id"
+                },
+            )
+            for result in results
+        ]
+
+        return SearchResponse(
+            query=search_query.query,
+            total_results=len(formatted_results),
+            results=formatted_results,
+            execution_time_ms=execution_time,
+        )
+
+    except Exception as e:
+        logger.error(f"Error en búsqueda con filtros desde Shopify: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )
+
+
 @router.get("/health", tags=["Search"], include_in_schema=False)
 async def health_check() -> dict:
-    """
-    Health check endpoint for the search service.
-
-    **Returns:**
-    - `status`: Service status
-    - `message`: Status message
-    """
     try:
         return {
             "status": "healthy",
@@ -207,28 +214,11 @@ async def health_check() -> dict:
 async def get_monthly_stats(
     x_api_key: Optional[str] = Header(None),
 ) -> dict:
-    """
-    Get total searches for current month.
-
-    Requires valid API key in header.
-
-    **Returns:**
-    - `month`: Current month (YYYY-MM)
-    - `total_searches`: Total searches this month
-
-    **Example:**
-    ```bash
-    curl -H "X-API-Key: YOUR_API_KEY" https://readyapi.net/api/v1/search/stats/monthly
-    ```
-    """
     from datetime import datetime, date
 
     try:
-        # Validate API key using internal function
         user_context = await _validate_api_key_internal(x_api_key)
-
         if not user_context.get("user_id"):
-            # Dev mode - return dummy stats
             current_month = datetime.utcnow().strftime("%Y-%m")
             return {
                 "month": current_month,
@@ -236,17 +226,13 @@ async def get_monthly_stats(
                 "note": "Development mode - no tracking",
             }
 
-        # Get monthly stats from database
         from app.db.session import SessionLocal
         from app.models.user import Usage
 
         db = SessionLocal()
         try:
-            # Get first day of current month
             today = date.today()
             first_day = today.replace(day=1)
-
-            # Query usage records for this month
             monthly_usage = (
                 db.query(Usage)
                 .filter(
@@ -255,14 +241,11 @@ async def get_monthly_stats(
                 )
                 .all()
             )
-
             total_searches = sum(u.searches_count for u in monthly_usage)
             current_month = today.strftime("%Y-%m")
-
             return {"month": current_month, "total_searches": total_searches}
         finally:
             db.close()
-
     except Exception as e:
         logger.error(f"Error getting monthly stats: {str(e)}", exc_info=True)
         raise HTTPException(
