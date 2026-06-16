@@ -39,6 +39,72 @@ def _get_search_engine_for_tenant(tenant_id: str) -> SearchEngine:
     return _search_engine_cache[tenant_id]
 
 
+@router.get("/query", response_model=SearchResponse)
+async def search_get(
+    query: str = Query(..., description="Término de búsqueda"),
+    shop: str = Query(..., description="Dominio de la tienda de Shopify"),
+    top_k: int = 5,
+    include_content: bool = True,
+) -> SearchResponse:
+    """
+    Endpoint dinámico para el buscador de Shopify por método GET.
+    Busca la API Key del tenant usando el dominio de la tienda de forma automática.
+    """
+    # 1. Recuperamos el usuario/tenant de forma dinámica usando tu función existente
+    from app.db.users import get_user_by_shopify_domain
+
+    user_context = get_user_by_shopify_domain(shop)
+
+    if not user_context:
+        raise HTTPException(
+            status_code=404, detail="Tienda no registrada en el sistema"
+        )
+
+    try:
+        logger.info(f"Búsqueda dinámica desde Shopify ({shop}): '{query}'")
+
+        tenant_id = (
+            user_context["tenant_id"]
+            if "tenant_id" in user_context
+            else f"user_{user_context['id']}"
+        )
+        search_engine = _get_search_engine_for_tenant(tenant_id)
+
+        # 2. Ejecutamos la búsqueda exacta en los vectores
+        results, execution_time = search_engine.search(
+            query=query,
+            top_k=top_k,
+            filters=None,
+            include_content=include_content,
+        )
+
+        formatted_results = [
+            SearchResult(
+                id=result["id"],
+                title=result["title"],
+                score=result["score"],
+                content=result.get("content"),
+                metadata={
+                    k: v
+                    for k, v in result.get("metadata", {}).items()
+                    if k != "tenant_id"
+                },
+            )
+            for result in results
+        ]
+
+        return SearchResponse(
+            query=query,
+            total_results=len(formatted_results),
+            results=formatted_results,
+            execution_time_ms=execution_time,
+        )
+
+    except Exception as e:
+        logger.error(f"Error en búsqueda dinámica: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.post("/query", response_model=SearchResponse)
 async def search(
     search_query: SearchQuery,
