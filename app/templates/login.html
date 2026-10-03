@@ -1,43 +1,54 @@
 {% extends "base.html" %} {% block title %}Log In - SemanticSearch{% endblock %}
 {% block content %}
-<div class="container">
-  <div style="max-width: 640px; margin: 4rem auto">
-    <h1>Log In</h1>
-    <p style="color: var(--muted-color)">
+<div class="container" style="max-width: 500px; padding: 2rem 1rem;">
+  <div style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2.25rem; backdrop-filter: blur(10px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
+    
+    <h1 style="color: #f8fafc; font-size: 1.5rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem; text-align: center;">Log In</h1>
+    <p style="color: #94a3b8; font-size: 0.9rem; text-align: center; margin-bottom: 1.75rem;">
       Log in with your account to view your active API Key.
     </p>
 
     {% if error %}
     <article
       style="
-        background-color: #ffebee;
-        border-color: #f44336;
-        color: #c62828;
-        margin-bottom: 2rem;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #f87171;
+        border-radius: 8px;
+        padding: 1rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
       "
     >
-      <strong>Error:</strong> {{ error }}
+      <strong style="color: #ef4444;">[ERROR]:</strong>[cite: 1] {{ error }}
     </article>
-    {% endif %} {% if success %}
+    {% endif %} 
+    
+    {% if success %}
     <article
       style="
-        background-color: #e8f5e9;
-        border-color: #4caf50;
-        color: #2e7d32;
-        margin-bottom: 2rem;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        color: #34d399;
+        border-radius: 8px;
+        padding: 1rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
       "
     >
-      <strong>{{ success }}</strong>
+      <strong style="color: #10b981;">[SUCCESS]:</strong>[cite: 1] {{ success }}
       {% if user_email %}
-      <p style="margin-top: 0.5rem; margin-bottom: 0">
-        Signed in as {{ user_email }}
+      <p style="margin-top: 0.5rem; margin-bottom: 0; color: #cbd5e1;">
+        Signed in as {{ user_email }}[cite: 1]
       </p>
       {% endif %}
     </article>
     {% endif %}
 
-    <form method="post" action="/login" style="margin-bottom: 2rem">
-      <label for="email">
+    <form method="post" action="/login" style="margin-bottom: 1.5rem;">
+      <label for="email" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 1rem;">
         Email
         <input
           type="email"
@@ -45,10 +56,11 @@
           name="email"
           placeholder="your@email.com"
           required
+          style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem;"
         />
       </label>
 
-      <label for="password">
+      <label for="password" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 1.25rem;">
         Password
         <input
           type="password"
@@ -56,38 +68,42 @@
           name="password"
           placeholder="Your password"
           required
+          style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem;"
         />
       </label>
 
-      <button type="submit">Log In</button>
+      <button type="submit" style="width: 100%; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);">Log In</button>
     </form>
 
     {% if api_key %}
-    <article>
-      <h3 style="margin-top: 0">Your API Key</h3>
-      <p style="color: var(--muted-color)">
-        Keep it private. Use it in the <code>x-api-key</code> header.
+    <article style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; padding: 1.25rem; margin-top: 1.5rem;">
+      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1rem; font-family: 'JetBrains Mono', monospace;">Your API Key</h3>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">
+        Keep it private. Use it in the <code style="color: #00f2fe; font-family: 'JetBrains Mono', monospace;">x-api-key</code> header.[cite: 1]
       </p>
-      <input id="api-key" type="text" value="{{ api_key }}" readonly />
-      <input id="user-email-hidden" type="hidden" value="{{ user_email }}" />
-      <button
-        type="button"
-        class="secondary"
-        onclick="
-          navigator.clipboard.writeText(
-            document.getElementById('api-key').value,
-          )
-        "
-      >
-        Copy API Key
-      </button>
-      <button
-        type="button"
-        style="margin-left: 1rem; background-color: #667eea; color: white"
-        onclick="goToDashboard()"
-      >
-        Go to Dashboard
-      </button>
+      <input id="api-key" type="text" value="{{ api_key }}" readonly style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #cbd5e1; padding: 0.5rem; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; border-radius: 4px; margin-bottom: 0.75rem;" />[cite: 1]
+      <input id="user-email-hidden" type="hidden" value="{{ user_email }}" />[cite: 1]
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button
+          type="button"
+          class="secondary"
+          onclick="
+            navigator.clipboard.writeText(
+              document.getElementById('api-key').value,
+            )
+          "
+          style="background: rgba(30, 41, 59, 0.8); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.3); padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer;"
+        >
+          Copy API Key
+        </button>
+        <button
+          type="button"
+          style="background: #00f2fe; color: #0f172a; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.85rem; border: none; cursor: pointer;"
+          onclick="goToDashboard()"
+        >
+          Go to Dashboard
+        </button>
+      </div>
     </article>
 
     <script>
@@ -96,48 +112,49 @@
         const apiKey = document.getElementById("api-key").value;
         const userEmail = document.getElementById("user-email-hidden").value;
 
-        console.log("goToDashboard called with:", {
-          apiKey: apiKey ? "exists" : "null",
-          userEmail,
+        console.log("goToDashboard called with:", {[cite: 1]
+          apiKey: apiKey ? "exists" : "null",[cite: 1]
+          userEmail,[cite: 1]
         });
 
         // Save to localStorage
-        localStorage.setItem("api_key", apiKey);
-        localStorage.setItem("user_email", userEmail || "");
+        localStorage.setItem("api_key", apiKey);[cite: 1]
+        localStorage.setItem("user_email", userEmail || "");[cite: 1]
 
         // Update navbar immediately before redirect
-        const userMenu = document.getElementById("user-menu");
-        const authLinks = document.getElementById("auth-links");
-        const userEmailSpan = document.getElementById("user-email");
-        const navDashboard = document.getElementById("nav-dashboard");
+        const userMenu = document.getElementById("user-menu");[cite: 1]
+        const authLinks = document.getElementById("auth-links");[cite: 1]
+        const userEmailSpan = document.getElementById("user-email");[cite: 1]
+        const navDashboard = document.getElementById("nav-dashboard");[cite: 1]
 
-        if (userMenu) userMenu.style.display = "block";
-        if (authLinks) authLinks.style.display = "none";
-        if (userEmailSpan) userEmailSpan.textContent = userEmail;
-        if (navDashboard) navDashboard.style.display = "block";
+        if (userMenu) userMenu.style.display = "block";[cite: 1]
+        if (authLinks) authLinks.style.display = "none";[cite: 1]
+        if (userEmailSpan) userEmailSpan.textContent = userEmail;[cite: 1]
+        if (navDashboard) navDashboard.style.display = "block";[cite: 1]
 
         // Redirect to dashboard
-        window.location.href = "/dashboard";
+        window.location.href = "/dashboard";[cite: 1]
       }
 
       // Auto-redirect if API key is present - immediately
       document.addEventListener("DOMContentLoaded", function () {
-        const apiKeyInput = document.getElementById("api-key");
-        if (apiKeyInput && apiKeyInput.value) {
+        const apiKeyInput = document.getElementById("api-key");[cite: 1]
+        if (apiKeyInput && apiKeyInput.value) {[cite: 1]
           // Redirect immediately
-          goToDashboard();
+          goToDashboard();[cite: 1]
         }
       });
     </script>
     {% endif %}
 
-    <p style="text-align: center; margin-top: 2rem; color: var(--muted-color)">
-      New here? <a href="/register">Create an account</a><br />
-      <span style="font-size: 0.9em">
-        <a href="/forgot-password">Forgot your password?</a> •
-        <a href="/resend-confirmation">Resend confirmation</a>
+    <p style="text-align: center; margin-top: 1.5rem; color: #94a3b8; font-size: 0.85rem;">
+      New here? <a href="/register" style="color: #00f2fe; text-decoration: none;">Create an account</a><br />[cite: 1]
+      <span style="font-size: 0.85em; margin-top: 0.4rem; display: inline-block;">
+        <a href="/forgot-password" style="color: #94a3b8; text-decoration: none;">Forgot your password?</a> •[cite: 1]
+        <a href="/resend-confirmation" style="color: #94a3b8; text-decoration: none;">Resend confirmation</a>[cite: 1]
       </span>
     </p>
+
   </div>
 </div>
 {% endblock %}
