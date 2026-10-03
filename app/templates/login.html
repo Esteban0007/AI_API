@@ -21,7 +21,7 @@
         margin-bottom: 1.5rem;
       "
     >
-      <strong style="color: #ef4444;">[ERROR]:</strong>[cite: 1] {{ error }}
+      <strong style="color: #ef4444;">[ERROR]:</strong> {{ error }}
     </article>
     {% endif %} 
     
@@ -38,10 +38,10 @@
         margin-bottom: 1.5rem;
       "
     >
-      <strong style="color: #10b981;">[SUCCESS]:</strong>[cite: 1] {{ success }}
+      <strong style="color: #10b981;">[SUCCESS]:</strong> {{ success }}
       {% if user_email %}
       <p style="margin-top: 0.5rem; margin-bottom: 0; color: #cbd5e1;">
-        Signed in as {{ user_email }}[cite: 1]
+        Signed in as {{ user_email }}
       </p>
       {% endif %}
     </article>
@@ -79,10 +79,10 @@
     <article style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; padding: 1.25rem; margin-top: 1.5rem;">
       <h3 style="margin-top: 0; color: #00f2fe; font-size: 1rem; font-family: 'JetBrains Mono', monospace;">Your API Key</h3>
       <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem;">
-        Keep it private. Use it in the <code style="color: #00f2fe; font-family: 'JetBrains Mono', monospace;">x-api-key</code> header.[cite: 1]
+        Keep it private. Use it in the <code style="color: #00f2fe; font-family: 'JetBrains Mono', monospace;">x-api-key</code> header.
       </p>
-      <input id="api-key" type="text" value="{{ api_key }}" readonly style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #cbd5e1; padding: 0.5rem; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; border-radius: 4px; margin-bottom: 0.75rem;" />[cite: 1]
-      <input id="user-email-hidden" type="hidden" value="{{ user_email }}" />[cite: 1]
+      <input id="api-key" type="text" value="{{ api_key }}" readonly style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #cbd5e1; padding: 0.5rem; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; border-radius: 4px; margin-bottom: 0.75rem;" />
+      <input id="user-email-hidden" type="hidden" value="{{ user_email }}" />
       <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
         <button
           type="button"
@@ -105,53 +105,51 @@
         </button>
       </div>
     </article>
+    {% endif %}
 
     <script>
-      // Auto-redirect to dashboard after login
+      // Global function definition so it's always accessible
       function goToDashboard() {
-        const apiKey = document.getElementById("api-key").value;
-        const userEmail = document.getElementById("user-email-hidden").value;
+        const apiKeyInput = document.getElementById("api-key");
+        const userEmailInput = document.getElementById("user-email-hidden");
+        
+        const apiKey = apiKeyInput ? apiKeyInput.value : "";
+        const userEmail = userEmailInput ? userEmailInput.value : "";
 
-        console.log("goToDashboard called with:", {[cite: 1]
-          apiKey: apiKey ? "exists" : "null",[cite: 1]
-          userEmail,[cite: 1]
-        });
+        if (apiKey) {
+          localStorage.setItem("api_key", apiKey);
+        }
+        if (userEmail) {
+          localStorage.setItem("user_email", userEmail);
+        }
 
-        // Save to localStorage
-        localStorage.setItem("api_key", apiKey);[cite: 1]
-        localStorage.setItem("user_email", userEmail || "");[cite: 1]
+        const userMenu = document.getElementById("user-menu");
+        const authLinks = document.getElementById("auth-links");
+        const userEmailSpan = document.getElementById("user-email");
+        const navDashboard = document.getElementById("nav-dashboard");
 
-        // Update navbar immediately before redirect
-        const userMenu = document.getElementById("user-menu");[cite: 1]
-        const authLinks = document.getElementById("auth-links");[cite: 1]
-        const userEmailSpan = document.getElementById("user-email");[cite: 1]
-        const navDashboard = document.getElementById("nav-dashboard");[cite: 1]
+        if (userMenu) userMenu.style.display = "block";
+        if (authLinks) authLinks.style.display = "none";
+        if (userEmailSpan && userEmail) userEmailSpan.textContent = userEmail;
+        if (navDashboard) navDashboard.style.display = "block";
 
-        if (userMenu) userMenu.style.display = "block";[cite: 1]
-        if (authLinks) authLinks.style.display = "none";[cite: 1]
-        if (userEmailSpan) userEmailSpan.textContent = userEmail;[cite: 1]
-        if (navDashboard) navDashboard.style.display = "block";[cite: 1]
-
-        // Redirect to dashboard
-        window.location.href = "/dashboard";[cite: 1]
+        window.location.href = "/dashboard";
       }
 
-      // Auto-redirect if API key is present - immediately
+      // Auto-redirect if API key is present on load
       document.addEventListener("DOMContentLoaded", function () {
-        const apiKeyInput = document.getElementById("api-key");[cite: 1]
-        if (apiKeyInput && apiKeyInput.value) {[cite: 1]
-          // Redirect immediately
-          goToDashboard();[cite: 1]
+        const apiKeyInput = document.getElementById("api-key");
+        if (apiKeyInput && apiKeyInput.value) {
+          goToDashboard();
         }
       });
     </script>
-    {% endif %}
 
     <p style="text-align: center; margin-top: 1.5rem; color: #94a3b8; font-size: 0.85rem;">
-      New here? <a href="/register" style="color: #00f2fe; text-decoration: none;">Create an account</a><br />[cite: 1]
+      New here? <a href="/register" style="color: #00f2fe; text-decoration: none;">Create an account</a><br />
       <span style="font-size: 0.85em; margin-top: 0.4rem; display: inline-block;">
-        <a href="/forgot-password" style="color: #94a3b8; text-decoration: none;">Forgot your password?</a> •[cite: 1]
-        <a href="/resend-confirmation" style="color: #94a3b8; text-decoration: none;">Resend confirmation</a>[cite: 1]
+        <a href="/forgot-password" style="color: #94a3b8; text-decoration: none;">Forgot your password?</a> •
+        <a href="/resend-confirmation" style="color: #94a3b8; text-decoration: none;">Resend confirmation</a>
       </span>
     </p>
 
