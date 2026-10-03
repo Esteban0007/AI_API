@@ -3,13 +3,13 @@
 <div class="container" style="max-width: 1200px;">
   {% if message %}
   <article
-    style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; border-radius: 12px; padding: 1.25rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 2rem;"
+    style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #4ade80; border-radius: 12px; padding: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; margin-bottom: 2rem;"
   >
-    <strong style="color: #10b981;">[SYSTEM SUCCESS]:</strong> {{ message }}
+    <strong style="color: #22c55e;">[SYSTEM SUCCESS]:</strong> {{ message }}
   </article>
   {% endif %} {% if error %}
   <article
-    style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; border-radius: 12px; padding: 1.25rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 2rem;"
+    style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; border-radius: 12px; padding: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; margin-bottom: 2rem;"
   >
     <strong style="color: #ef4444;">[SYSTEM ERROR]:</strong> {{ error }}
   </article>
@@ -17,81 +17,81 @@
 
   <!-- Hero Section -->
   <div class="hero" style="text-align: center; padding: 4rem 1rem; position: relative;">
-    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%); filter: blur(50px); pointer-events: none; z-index: -1;"></div>
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 350px; height: 350px; background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%); filter: blur(60px); pointer-events: none; z-index: -1;"></div>
     
     <img
       src="/static/logo.png"
       alt="SemanticSearch Logo"
       style="
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
         margin: 0 auto 1.5rem;
         display: block;
         border-radius: 50%;
-        border: 2px solid rgba(0, 242, 254, 0.4);
-        box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+        border: 2px solid rgba(0, 242, 254, 0.5);
+        box-shadow: 0 0 35px rgba(0, 242, 254, 0.3);
         object-fit: cover;
       "
     />
-    <h1 style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #667eea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: 3rem; margin-bottom: 1rem; letter-spacing: -0.025em;">
-      SemanticSearch Core API
+    <h1 style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #667eea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: 3.2rem; margin-bottom: 1.25rem; letter-spacing: -0.025em;">
+      SemanticSearch API
     </h1>
-    <p style="font-size: 1.15rem; color: #94a3b8; max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;">
-      High-performance neural search infrastructure. Interprets semantic meaning and context instantly across multilingual vector spaces.
+    <p style="font-size: 1.25rem; color: #cbd5e1; max-width: 750px; margin: 0 auto 2.5rem; line-height: 1.7;">
+      Fast semantic search with AI. Understands meaning, not just keywords.
     </p>
-    <div class="btn-group" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/demos" role="button" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3); transition: all 0.2s;">⚡ Launch Demos</a>
-      <a href="/register" role="button" class="secondary" style="background: rgba(30, 41, 59, 0.8); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.4); padding: 0.85rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; backdrop-filter: blur(10px); transition: all 0.2s;">🔑 Initialize Account</a>
+    <div class="btn-group" style="display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/demos" role="button" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 1rem 2.25rem; border-radius: 8px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 4px 20px rgba(0, 242, 254, 0.35); transition: all 0.2s;">⚡ Try Demo</a>
+      <a href="/register" role="button" class="secondary" style="background: rgba(30, 41, 59, 0.85); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.5); padding: 1rem 2.25rem; border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-decoration: none; backdrop-filter: blur(10px); transition: all 0.2s;">🔑 Sign Up</a>
     </div>
   </div>
 
   <!-- Features Grid -->
-  <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin: 4rem 0;">
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 1.5rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">[01]</div>
-      <h3 style="color: #f8fafc; font-size: 1.2rem; margin-top: 0; font-weight: 700;">Ultra-Fast Inference</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Sub-200ms query resolution powered by state-of-the-art quantized embedding models (Arctic-768D ONNX INT8).
+  <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.75rem; margin: 4rem 0;">
+    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 14px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.4)'; this.style.transform='translateY(0)'">
+      <div style="font-size: 1.1rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;">[01]</div>
+      <h3 style="color: #f8fafc; font-size: 1.4rem; margin-top: 0; font-weight: 700; margin-bottom: 0.75rem;">🚀 Ultra Fast</h3>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">
+        Searches in ~200ms with state-of-the-art embeddings (Arctic-768D ONNX INT8).
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 1.5rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">[02]</div>
-      <h3 style="color: #f8fafc; font-size: 1.2rem; margin-top: 0; font-weight: 700;">Semantic Reasoning</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Transcends literal character matching. Interprets contextual concepts—mapping queries like "superhero saves world" to Avengers datasets.
+    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 14px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.4)'; this.style.transform='translateY(0)'">
+      <div style="font-size: 1.1rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;">[02]</div>
+      <h3 style="color: #f8fafc; font-size: 1.4rem; margin-top: 0; font-weight: 700; margin-bottom: 0.75rem;">🧠 Semantic Understanding</h3>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">
+        Doesn't search for exact words. Understands concepts: "superhero saves world" finds Avengers.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 1.5rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">[03]</div>
-      <h3 style="color: #f8fafc; font-size: 1.2rem; margin-top: 0; font-weight: 700;">Native Multilingual</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Cross-lingual embedding architecture allows querying in Spanish, English, or mixed syntax without manual translation layers.
+    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 14px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.4)'; this.style.transform='translateY(0)'">
+      <div style="font-size: 1.1rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;">[03]</div>
+      <h3 style="color: #f8fafc; font-size: 1.4rem; margin-top: 0; font-weight: 700; margin-bottom: 0.75rem;">🌍 Multilingual</h3>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">
+        Works with queries in Spanish, English and other languages without changing anything.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 1.5rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">[04]</div>
-      <h3 style="color: #f8fafc; font-size: 1.2rem; margin-top: 0; font-weight: 700;">RESTful JSON Pipeline</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Seamless integration interface. Standardized JSON in/out structures equipped with interactive Swagger documentation.
+    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 14px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.4)'; this.style.transform='translateY(0)'">
+      <div style="font-size: 1.1rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;">[04]</div>
+      <h3 style="color: #f8fafc; font-size: 1.4rem; margin-top: 0; font-weight: 700; margin-bottom: 0.75rem;">📊 RESTful API</h3>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">
+        Easy integration. JSON in, JSON out. With interactive Swagger documentation.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 1.5rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">[05]</div>
-      <h3 style="color: #f8fafc; font-size: 1.2rem; margin-top: 0; font-weight: 700;">Cryptographic API Tokens</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Immediate provisioning via streamlined authentication. Free tier access secured through verified email handshakes.
+    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 14px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.4)'; this.style.transform='translateY(0)'">
+      <div style="font-size: 1.1rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;">[05]</div>
+      <h3 style="color: #f8fafc; font-size: 1.4rem; margin-top: 0; font-weight: 700; margin-bottom: 0.75rem;">🔐 Personal API Key</h3>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">
+        Get your API key with free registration. No payment, just email confirmation.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 1.5rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;">[06]</div>
-      <h3 style="color: #f8fafc; font-size: 1.2rem; margin-top: 0; font-weight: 700;">Interactive Demos</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
-        Explore live semantic search performance across cinema registries, spacecraft command systems, and documentation matrices.
+    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 14px; padding: 2.25rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.4)'; this.style.transform='translateY(0)'">
+      <div style="font-size: 1.1rem; color: #00f2fe; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-weight: 700;">[06]</div>
+      <h3 style="color: #f8fafc; font-size: 1.4rem; margin-top: 0; font-weight: 700; margin-bottom: 0.75rem;">🎯 Live Demos</h3>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin: 0;">
+        Explore semantic search across different product categories.
       </p>
     </div>
   </div>
@@ -102,60 +102,60 @@
     style="
       display: none;
       margin: 4rem 0;
-      padding: 2.5rem;
+      padding: 3rem;
       background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
-      border: 1px solid rgba(0, 242, 254, 0.4);
+      border: 1px solid rgba(0, 242, 254, 0.5);
       border-radius: 16px;
       color: white;
-      box-shadow: 0 12px 40px rgba(0, 242, 254, 0.15);
+      box-shadow: 0 12px 40px rgba(0, 242, 254, 0.2);
       backdrop-filter: blur(12px);
     "
   >
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-      <h2 style="margin: 0; color: #f8fafc; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 0.75rem;">
-        <span style="color: #00f2fe;">📊</span> Neural Telemetry Matrix
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+      <h2 style="margin: 0; color: #f8fafc; font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; gap: 0.75rem;">
+        <span style="color: #00f2fe;">📊</span> Your Stats
       </h2>
       <a
         href="/dashboard"
         style="
-          background: rgba(0, 242, 254, 0.1);
+          background: rgba(0, 242, 254, 0.15);
           color: #00f2fe;
-          border: 1px solid rgba(0, 242, 254, 0.4);
-          padding: 0.6rem 1.25rem;
+          border: 1px solid rgba(0, 242, 254, 0.5);
+          padding: 0.75rem 1.5rem;
           border-radius: 8px;
           text-decoration: none;
           font-weight: 600;
-          font-size: 0.9rem;
+          font-size: 1.05rem;
           font-family: 'JetBrains Mono', monospace;
           transition: all 0.2s;
         "
-      >Access Full Dashboard →</a>
+      >View Full Dashboard →</a>
     </div>
 
     <div
       style="
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
         margin-bottom: 2rem;
       "
     >
       <!-- Monthly Searches -->
       <div
         style="
-          background: rgba(10, 15, 30, 0.8);
-          border: 1px solid rgba(100, 116, 139, 0.3);
-          padding: 1.75rem;
+          background: rgba(10, 15, 30, 0.9);
+          border: 1px solid rgba(100, 116, 139, 0.4);
+          padding: 2rem;
           border-radius: 12px;
           text-align: center;
         "
       >
-        <h3 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">Monthly Queries</h3>
+        <h3 style="margin: 0 0 0.75rem 0; color: #94a3b8; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em;">📈 Monthly Searches</h3>
         <div
           style="
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
-            margin: 0.5rem 0;
+            margin: 0.75rem 0;
             color: #00f2fe;
             font-family: 'JetBrains Mono', monospace;
           "
@@ -163,7 +163,7 @@
           <span id="monthly-searches">0</span>
         </div>
         <p
-          style="margin: 0; font-size: 0.85rem; color: #64748b; font-family: 'JetBrains Mono', monospace;"
+          style="margin: 0; font-size: 1rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;"
           id="monthly-label"
         >
           -
@@ -173,43 +173,43 @@
       <!-- Status -->
       <div
         style="
-          background: rgba(10, 15, 30, 0.8);
-          border: 1px solid rgba(100, 116, 139, 0.3);
-          padding: 1.75rem;
+          background: rgba(10, 15, 30, 0.9);
+          border: 1px solid rgba(100, 116, 139, 0.4);
+          padding: 2rem;
           border-radius: 12px;
           text-align: center;
         "
       >
-        <h3 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">Node Handshake</h3>
+        <h3 style="margin: 0 0 0.75rem 0; color: #94a3b8; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em;">✅ API Status</h3>
         <div
           style="
-            font-size: 2.2rem;
+            font-size: 2.6rem;
             font-weight: 800;
-            margin: 0.5rem 0;
+            margin: 0.75rem 0;
             color: #10b981;
             font-family: 'JetBrains Mono', monospace;
-            text-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+            text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
           "
         >
-          ACTIVE
+          Active
         </div>
-        <p style="margin: 0; font-size: 0.85rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">Operational & Secure</p>
+        <p style="margin: 0; font-size: 1rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">Ready to use</p>
       </div>
     </div>
   </div>
 
-  <section style="margin: 5rem 0; background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 16px; padding: 3rem; backdrop-filter: blur(12px);">
-    <h2 style="color: #f8fafc; font-size: 2rem; font-weight: 800; margin-top: 0; margin-bottom: 1.5rem;">What is Semantic Search?</h2>
+  <section style="margin: 5rem 0; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 16px; padding: 3.5rem; backdrop-filter: blur(12px);">
+    <h2 style="color: #f8fafc; font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 1.75rem;">What is Semantic Search?</h2>
 
     <p
       style="
-        font-size: 1.05rem;
-        line-height: 1.8;
-        color: #94a3b8;
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: #cbd5e1;
         margin-bottom: 2.5rem;
       "
     >
-      <strong style="color: #f8fafc;">Semantic Search</strong> is an advanced data retrieval technology
+      <strong>Semantic Search</strong> is an advanced data retrieval technology
       that understands the intent and contextual meaning of a query rather than
       just matching literal keywords. By converting text into mathematical
       "concept maps" (vectors), the system can identify relationships between
@@ -218,164 +218,170 @@
     </p>
 
     <!-- Comparison Table -->
-    <div style="overflow-x: auto; margin: 2rem 0;">
+    <div style="overflow-x: auto; margin: 2.5rem 0;">
       <table
         style="
           width: 100%;
           border-collapse: collapse;
-          font-size: 0.95rem;
-          min-width: 680px;
-          border-radius: 8px;
+          font-size: 1.05rem;
+          min-width: 720px;
+          border-radius: 10px;
           overflow: hidden;
         "
       >
         <thead>
           <tr
             style="
-              background: rgba(0, 242, 254, 0.1);
-              border-bottom: 1px solid rgba(0, 242, 254, 0.3);
+              background: rgba(0, 242, 254, 0.15);
+              border-bottom: 2px solid rgba(0, 242, 254, 0.4);
             "
           >
-            <th style="padding: 1rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace;">
-              Feature
+            <th style="padding: 1.25rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">
+              <strong>Feature</strong>
             </th>
-            <th style="padding: 1rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace;">
-              Traditional Search (Lexical)
+            <th style="padding: 1.25rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">
+              <strong>Traditional Search (Lexical)</strong>
             </th>
-            <th style="padding: 1rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace;">
-              Semantic Search (SemanticSearch AI)
+            <th style="padding: 1.25rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 1.1rem;">
+              <strong>Semantic Search (AI READY API)</strong>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='transparent'">
-            <td style="padding: 1rem; font-weight: 600; color: #f8fafc;">Search Logic</td>
-            <td style="padding: 1rem; color: #94a3b8;">Matches exact characters/keywords.</td>
-            <td style="padding: 1rem; color: #cbd5e1;">Understands intent and concepts.</td>
+          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.3); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.04)'" onmouseout="this.style.background='transparent'">
+            <td style="padding: 1.25rem; font-weight: 700; color: #f8fafc;"><strong>Search Logic</strong></td>
+            <td style="padding: 1.25rem; color: #cbd5e1;">Matches exact characters/keywords.</td>
+            <td style="padding: 1.25rem; color: #e2e8f0;">Understands intent and concepts.</td>
           </tr>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2); background: rgba(30, 41, 59, 0.4); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.4)'">
-            <td style="padding: 1rem; font-weight: 600; color: #f8fafc;">Language</td>
-            <td style="padding: 1rem; color: #94a3b8;">
+          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.3); background: rgba(30, 41, 59, 0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.04)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.5)'">
+            <td style="padding: 1.25rem; font-weight: 700; color: #f8fafc;"><strong>Language</strong></td>
+            <td style="padding: 1.25rem; color: #cbd5e1;">
               Limited to the language of the document.
             </td>
-            <td style="padding: 1rem; color: #cbd5e1;">
+            <td style="padding: 1.25rem; color: #e2e8f0;">
               Multilingual: Search in English, find in Spanish.
             </td>
           </tr>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='transparent'">
-            <td style="padding: 1rem; font-weight: 600; color: #f8fafc;">Synonyms</td>
-            <td style="padding: 1rem; color: #94a3b8;">Fails unless words match exactly.</td>
-            <td style="padding: 1rem; color: #cbd5e1;">
+          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.3); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.04)'" onmouseout="this.style.background='transparent'">
+            <td style="padding: 1.25rem; font-weight: 700; color: #f8fafc;"><strong>Synonyms</strong></td>
+            <td style="padding: 1.25rem; color: #cbd5e1;">Fails unless words match exactly.</td>
+            <td style="padding: 1.25rem; color: #e2e8f0;">
               Succeeds by matching meaning (e.g., "Home" = "House").
             </td>
           </tr>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2); background: rgba(30, 41, 59, 0.4); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.4)'">
-            <td style="padding: 1rem; font-weight: 600; color: #f8fafc;">Data Quality</td>
-            <td style="padding: 1rem; color: #94a3b8;">Requires clean, tagged metadata.</td>
-            <td style="padding: 1rem; color: #cbd5e1;">
+          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.3); background: rgba(30, 41, 59, 0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.04)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.5)'">
+            <td style="padding: 1.25rem; font-weight: 700; color: #f8fafc;"><strong>Data Quality</strong></td>
+            <td style="padding: 1.25rem; color: #cbd5e1;">Requires clean, tagged metadata.</td>
+            <td style="padding: 1.25rem; color: #e2e8f0;">
               Works perfectly with messy, unstructured text.
             </td>
           </tr>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='transparent'">
-            <td style="padding: 1rem; font-weight: 600; color: #f8fafc;">User Experience</td>
-            <td style="padding: 1rem; color: #94a3b8;">
-              Frustrating; needs specific "search terms."
+          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.3); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.04)'" onmouseout="this.style.background='transparent'">
+            <td style="padding: 1.25rem; font-weight: 700; color: #f8fafc;"><strong>User Experience</strong></td>
+            <td style="padding: 1.25rem; color: #cbd5e1;">
+              Frustrating; needs specific "search terms".
             </td>
-            <td style="padding: 1rem; color: #cbd5e1;">Intuitive; uses natural human language.</td>
+            <td style="padding: 1.25rem; color: #e2e8f0;">Intuitive; uses natural human language.</td>
           </tr>
-          <tr style="background: rgba(30, 41, 59, 0.4); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.4)'">
-            <td style="padding: 1rem; font-weight: 600; color: #f8fafc;">Primary Goal</td>
-            <td style="padding: 1rem; color: #94a3b8;">Finds Words.</td>
-            <td style="padding: 1rem; color: #cbd5e1;">Finds Answers.</td>
+          <tr style="background: rgba(30, 41, 59, 0.5); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.04)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.5)'">
+            <td style="padding: 1.25rem; font-weight: 700; color: #f8fafc;"><strong>Primary Goal</strong></td>
+            <td style="padding: 1.25rem; color: #cbd5e1;">Finds Words.</td>
+            <td style="padding: 1.25rem; color: #e2e8f0;">Finds Answers.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <!-- Key Benefits -->
-    <h3 style="margin-top: 3rem; margin-bottom: 1.25rem; color: #f8fafc; font-size: 1.4rem;">Key Architectural Benefits:</h3>
-    <ul style="line-height: 2; color: #94a3b8; padding-left: 1.25rem;">
-      <li style="margin-bottom: 0.75rem;">
-        <strong style="color: #f8fafc;">No AI Expertise Required:</strong> You don't need to hire a
-        Machine Learning engineer. The API handles the mathematical vector and embedding pipelines
-        automatically, enabling any web developer to integrate intelligence instantly.
+    <h3 style="margin-top: 3.5rem; margin-bottom: 1.5rem; color: #f8fafc; font-size: 1.6rem; font-weight: 800;">Key Benefits:</h3>
+    <ul style="line-height: 2.2; color: #cbd5e1; padding-left: 1.5rem; font-size: 1.1rem;">
+      <li style="margin-bottom: 1rem;">
+        <strong>No AI Expertise Required:</strong> You don't need to hire a
+        Machine Learning engineer. The API handles the "math" (vectors and
+        embeddings) automatically, so any web developer can use it.
       </li>
-      <li style="margin-bottom: 0.75rem;">
-        <strong style="color: #f8fafc;">Plug-and-Play Infrastructure:</strong> Forget about provisioning
-        and maintaining complex Vector Databases. The API is a turnkey system: you
-        send structured data in, you receive semantic answers out.
+      <li style="margin-bottom: 1.0rem;">
+        <strong>Plug-and-Play Infrastructure:</strong> Forget about setting up
+        and maintaining a Vector Database. The API is an all-in-one box: you
+        send data in, you get answers out.
       </li>
-      <li style="margin-bottom: 0.75rem;">
-        <strong style="color: #f8fafc;">Hardware Cost Optimization:</strong> Eliminates the need for expensive
-        GPUs or high-RAM clusters. Optimized execution runs smoothly on standard, cost-effective servers.
+      <li style="margin-bottom: 1.0rem;">
+        <strong>Hardware Cost Savings:</strong> You don't need expensive GPUs or
+        massive RAM. The system is optimized to run on standard, cheap servers
+        without losing speed.
       </li>
-      <li style="margin-bottom: 0.75rem;">
-        <strong style="color: #f8fafc;">Universal Device Compatibility:</strong> Because the heavy intelligence
-        resides in the API core, you can deploy neural search across web apps, mobile clients, or edge IoT devices.
+      <li style="margin-bottom: 1.0rem;">
+        <strong>Ready for Any Device:</strong> Because the "brain" is in the
+        API, you can add intelligent search to a website, a mobile app, or even
+        a small robot without overloading their local processors.
       </li>
       <li>
-        <strong style="color: #f8fafc;">Guaranteed Privacy:</strong> Your data remains strictly private and is never utilized for external model training.
+        <strong>Privacy:</strong> Your data is private and it's not used for
+        training models.
       </li>
     </ul>
   </section>
 
-  <section style="margin: 5rem 0; background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 16px; padding: 3rem; backdrop-filter: blur(12px);">
-    <h2 style="color: #f8fafc; font-size: 2rem; font-weight: 800; margin-top: 0; margin-bottom: 1.5rem;">Integration Protocol</h2>
-    <ol style="line-height: 2.2; color: #94a3b8; padding-left: 1.25rem; font-size: 1.05rem;">
-      <li><a href="/register" style="color: #00f2fe; text-decoration: none;">Sign Up</a> with your email and credentials</li>
-      <li>Verify your email address via confirmation handshake</li>
-      <li>Retrieve your cryptographic API Key from your dashboard</li>
-      <li>Execute queries using the <a href="/api-docs" style="color: #00f2fe; text-decoration: none;">API documentation guide</a></li>
+  <section style="margin: 5rem 0; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%); border: 1px solid rgba(100, 116, 139, 0.4); border-radius: 16px; padding: 3.5rem; backdrop-filter: blur(12px);">
+    <h2 style="color: #f8fafc; font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 1.75rem;">How to Use?</h2>
+    <ol style="line-height: 2.4; color: #cbd5e1; padding-left: 1.5rem; font-size: 1.15rem;">
+      <li><a href="/register" style="color: #00f2fe; text-decoration: none; font-weight: 700;">Sign Up</a> (email + password)</li>
+      <li>Confirm your email</li>
+      <li>Copy your API Key from the dashboard</li>
+      <li>Use the API (see <a href="/api-docs" style="color: #00f2fe; text-decoration: none; font-weight: 700;">documentation</a>)</li>
     </ol>
   </section>
 
   <section style="margin: 5rem 0;">
-    <h2 style="color: #f8fafc; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">End-to-End Implementation Walkthrough</h2>
+    <h2 style="color: #f8fafc; font-size: 2.4rem; font-weight: 800; margin-bottom: 1.25rem;">Example Usage - Step by Step</h2>
     <p
-      style="font-size: 1.05rem; color: #94a3b8; margin-bottom: 3rem;"
+      style="font-size: 1.15rem; color: #cbd5e1; margin-bottom: 3.5rem;"
     >
-      Review this reference implementation modeling a spaceship equipped with 7 core telemetry systems.
+      Follow this complete example to understand how ReadyAPI works. We'll use a
+      spaceship with 7 systems.
     </p>
 
     <!-- Step 1: Upload Documents -->
     <div
       style="
-        margin: 3rem 0;
-        padding: 2.5rem;
-        border: 1px solid rgba(0, 242, 254, 0.3);
+        margin: 3.5rem 0;
+        padding: 3rem;
+        border: 1px solid rgba(0, 242, 254, 0.4);
         border-radius: 16px;
-        background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       "
     >
-      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.3rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-        <span>📤</span> [STEP 01]: Constructing JSON Document Schema
+      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.5rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+        📤 Step 1: Create Your Documents (JSON)
       </h3>
-      <p style="color: #94a3b8; margin-bottom: 1.5rem;">
-        Prepare your datasets in JSON format. Each indexed entity requires unique metadata attributes:
+      <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.7;">
+        First, prepare your documents as a JSON file. Each document needs:
       </p>
-      <ul style="color: #94a3b8; line-height: 1.8; margin-bottom: 1.5rem;">
-        <li><strong style="color: #f8fafc;">id:</strong> Unique string identifier</li>
-        <li><strong style="color: #f8fafc;">title:</strong> Entity designation label</li>
+      <ul style="color: #cbd5e1; line-height: 2; margin-bottom: 2rem; font-size: 1.05rem; padding-left: 1.5rem;">
+        <li><strong>id:</strong> Unique identifier</li>
+        <li><strong>title:</strong> Name of the document</li>
         <li>
-          <strong style="color: #f8fafc;">content:</strong> Natural text corpus for vector embedding and context matching
+          <strong>content:</strong> The actual text to search (keywords,
+          descriptions, etc)
         </li>
-        <li><strong style="color: #f8fafc;">keywords:</strong> Optional indexing array for enhanced token weighting</li>
+        <li><strong>keywords:</strong> Optional list of related terms</li>
         <li>
-          <strong style="color: #f8fafc;">metadata:</strong> Flexible key-value pairs for filtering and state storage
+          <strong>metadata:</strong> Optional extra data (styling, state, etc)
         </li>
       </ul>
 
       <pre
         style="
           background: rgba(10, 15, 30, 0.95);
-          border: 1px solid rgba(0, 242, 254, 0.2);
-          padding: 1.5rem;
-          border-radius: 8px;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          padding: 2rem;
+          border-radius: 10px;
           overflow-x: auto;
-          font-size: 0.85rem;
+          font-size: 0.95rem;
           font-family: 'JetBrains Mono', monospace;
           color: #00f2fe;
+          line-height: 1.6;
         "
       ><code>{
   "documents": [
@@ -431,61 +437,70 @@
   ]
 }</code></pre>
 
-      <div
+      <p
         style="
-          color: #94a3b8;
-          font-size: 0.9rem;
+          color: #cbd5e1;
+          font-size: 1.05rem;
           background: rgba(0, 242, 254, 0.05);
-          border: 1px solid rgba(0, 242, 254, 0.2);
-          padding: 1.25rem;
-          border-radius: 8px;
-          margin-top: 1.5rem;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          padding: 1.5rem;
+          border-radius: 10px;
+          margin-top: 1.75rem;
+          line-height: 1.7;
         "
       >
-        <strong style="color: #00f2fe; font-family: 'JetBrains Mono', monospace;">[INDEXING ARCHITECTURE]:</strong>
+        <strong>💡 Tip</strong>
         <br /><br />
-        SemanticSearch weights three distinct fields during evaluation:
+        ReadyAPI combines three fields to find matches:
         <br /><br />
-        <strong style="color: #f8fafc;">1. Content Field:</strong> Primary semantic core. Converted into dense numerical embeddings capturing contextual intent.<br />
-        <strong style="color: #f8fafc;">2. Title Field:</strong> Receives direct relevance multipliers for exact and fuzzy lexical matches.<br />
-        <strong style="color: #f8fafc;">3. Keywords Field:</strong> Optional topical array used to bias semantic clustering.
-      </div>
+        <strong>1. Content field:</strong> This is the primary search field.
+        It's converted into AI embeddings that understand meaning. Include
+        descriptive text, features, specifications, and anything customers might
+        ask about.
+        <br />
+        <strong>2. Title field:</strong> Gets a relevance boost if it matches
+        the search. Used for exact and partial matches.
+        <br />
+        <strong>3. Keywords field:</strong> Optional but helpful. Provides hints
+        about the document's topic.
+      </p>
     </div>
 
-    <!-- Step 2: Upload to SemanticSearch -->
+    <!-- Step 2: Upload to ReadyAPI -->
     <div
       style="
-        margin: 3rem 0;
-        padding: 2.5rem;
-        border: 1px solid rgba(0, 242, 254, 0.3);
+        margin: 3.5rem 0;
+        padding: 3rem;
+        border: 1px solid rgba(0, 242, 254, 0.4);
         border-radius: 16px;
-        background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       "
     >
-      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.3rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-        <span>🚀</span> [STEP 02]: Transmitting Payload to Core API
+      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.5rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+        🚀 Step 2: Send Documents to ReadyAPI
       </h3>
-      <p style="color: #94a3b8; margin-bottom: 1.5rem;">
-        Authenticate using your API key to upload and instantly index your document cluster.
+      <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.7;">
+        Use your API Key to upload the documents. ReadyAPI will process and
+        index them instantly.
       </p>
 
       <div
         style="
           background: rgba(10, 15, 30, 0.95);
-          border: 1px solid rgba(0, 242, 254, 0.2);
-          padding: 1.25rem;
-          border-radius: 8px;
-          margin: 1rem 0;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          padding: 1.5rem;
+          border-radius: 10px;
+          margin: 1.25rem 0;
         "
       >
-        <p style="margin-top: 0; color: #00f2fe; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-          <strong>[CURL TRANSMISSION]:</strong>
+        <p style="margin-top: 0; color: #00f2fe; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;">
+          <strong>Using curl (command line):</strong>
         </p>
         <pre
-          style="overflow-x: auto; font-size: 0.8rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;"
-        ><code>curl -X POST https://api.semanticsearch.io/api/v1/documents/upload \
-  -H "X-API-Key: YOUR_API_KEY" \
+          style="overflow-x: auto; font-size: 0.9rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; line-height: 1.6;"
+        ><code>curl -X POST https://readyapi.net/api/v1/documents/upload \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d @documents.json</code></pre>
       </div>
@@ -493,16 +508,16 @@
       <div
         style="
           background: rgba(10, 15, 30, 0.95);
-          border: 1px solid rgba(16, 185, 129, 0.3);
-          padding: 1.25rem;
-          border-radius: 8px;
-          margin: 1rem 0;
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 1.5rem;
+          border-radius: 10px;
+          margin: 1.25rem 0;
         "
       >
-        <p style="margin-top: 0; color: #34d399; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-          <strong>[EXPECTED JSON RESPONSE]:</strong>
+        <p style="margin-top: 0; color: #34d399; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;">
+          <strong>API Response (Success):</strong>
         </p>
-        <pre style="overflow-x: auto; font-size: 0.8rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;"><code>{
+        <pre style="overflow-x: auto; font-size: 0.9rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; line-height: 1.6;"><code>{
   "success": true,
   "message": "Successfully uploaded 7 documents",
   "uploaded_count": 7,
@@ -510,147 +525,183 @@
 }</code></pre>
       </div>
 
-      <div
+      <p
         style="
-          color: #34d399;
-          font-size: 0.9rem;
-          background: rgba(16, 185, 129, 0.1);
-          border: 1px solid rgba(16, 185, 129, 0.3);
-          padding: 1rem;
-          border-radius: 8px;
-          margin-top: 1.5rem;
+          color: #4ade80;
+          font-size: 1.05rem;
+          background: rgba(16, 185, 129, 0.15);
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 1.25rem;
+          border-radius: 10px;
+          margin-top: 1.75rem;
           font-family: 'JetBrains Mono', monospace;
         "
       >
-        <span>🟢</span> <strong>[STATUS]:</strong> Nodes successfully vectorized and indexed in vector storage.
-      </div>
+        <strong>✅ Done!</strong> Your 7 spaceship systems are now indexed and
+        searchable. You only need to do this once!
+      </p>
     </div>
 
     <!-- Step 3: Search with Natural Language -->
     <div
       style="
-        margin: 3rem 0;
-        padding: 2.5rem;
-        border: 1px solid rgba(0, 242, 254, 0.3);
+        margin: 3.5rem 0;
+        padding: 3rem;
+        border: 1px solid rgba(0, 242, 254, 0.4);
         border-radius: 16px;
-        background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       "
     >
-      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.3rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-        <span>🔍</span> [STEP 03]: Natural Language Semantic Query Execution
+      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.5rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+        🔍 Step 3: Search with Natural Language (No Keywords Required!)
       </h3>
-      <p style="color: #94a3b8; margin-bottom: 1.5rem;">
-        Perform queries using conversational intent. The engine maps contextual meaning across entries:
+      <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.7;">
+        Now you can ask questions in plain English. ReadyAPI understands
+        meaning, not just keywords.
       </p>
 
-      <div style="display: grid; gap: 1.25rem; margin: 1.5rem 0">
+      <div style="display: grid; gap: 1.5rem; margin: 1.75rem 0">
         <div
           style="
-            background: rgba(10, 15, 30, 0.9);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            padding: 1.25rem;
-            border-radius: 8px;
+            background: rgba(10, 15, 30, 0.95);
+            border: 1px solid rgba(100, 116, 139, 0.4);
+            padding: 1.5rem;
+            border-radius: 10px;
           "
         >
           <p
-            style="margin-top: 0; color: #00f2fe; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;"
+            style="margin-top: 0; color: #00f2fe; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;"
           >
-            <strong>QUERY INSTANCE A:</strong>
+            <strong>Example 1: Travel Far Away</strong>
           </p>
-          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #f8fafc; font-size: 0.95rem;">
-            "I need to get somewhere far away quickly"
+          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #f8fafc; font-size: 1.1rem;">
+            Query: "I need to get somewhere far away quickly"
           </p>
           <p
             style="
               margin: 0.75rem 0 0 0;
-              color: #64748b;
-              font-size: 0.85rem;
+              color: #94a3b8;
+              font-size: 0.95rem;
               font-family: 'JetBrains Mono', monospace;
             "
           >
-            → <strong style="color: #38bdf8;">Resolved Matches:</strong> Flight System, Stealth System, Scan System
+            → Finds: Flight System, Stealth System, Scan System
           </p>
         </div>
 
         <div
           style="
-            background: rgba(10, 15, 30, 0.9);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            padding: 1.25rem;
-            border-radius: 8px;
+            background: rgba(10, 15, 30, 0.95);
+            border: 1px solid rgba(100, 116, 139, 0.4);
+            padding: 1.5rem;
+            border-radius: 10px;
           "
         >
           <p
-            style="margin-top: 0; color: #00f2fe; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;"
+            style="margin-top: 0; color: #00f2fe; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;"
           >
-            <strong>QUERY INSTANCE B:</strong>
+            <strong>Example 2: Hide & Stealth</strong>
           </p>
-          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #f8fafc; font-size: 0.95rem;">
-            "Hide the ship so they can't find us"
+          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #f8fafc; font-size: 1.1rem;">
+            Query: "Hide the ship so they can't find us"
           </p>
           <p
             style="
               margin: 0.75rem 0 0 0;
-              color: #64748b;
-              font-size: 0.85rem;
+              color: #94a3b8;
+              font-size: 0.95rem;
               font-family: 'JetBrains Mono', monospace;
             "
           >
-            → <strong style="color: #38bdf8;">Resolved Matches:</strong> Stealth System, Scan System, Defense System
+            → Finds: Stealth System, Scan System, Defense System
           </p>
         </div>
 
         <div
           style="
-            background: rgba(10, 15, 30, 0.9);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            padding: 1.25rem;
-            border-radius: 8px;
+            background: rgba(10, 15, 30, 0.95);
+            border: 1px solid rgba(100, 116, 139, 0.4);
+            padding: 1.5rem;
+            border-radius: 10px;
           "
         >
           <p
-            style="margin-top: 0; color: #00f2fe; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;"
+            style="margin-top: 0; color: #00f2fe; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;"
           >
-            <strong>QUERY INSTANCE C:</strong>
+            <strong>Example 3: Attack!</strong>
           </p>
-          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #f8fafc; font-size: 0.95rem;">
-            "Fire all weapons at the enemy"
+          <p style="margin: 0; font-family: 'JetBrains Mono', monospace; color: #f8fafc; font-size: 1.1rem;">
+            Query: "Fire all weapons at the enemy"
           </p>
           <p
             style="
               margin: 0.75rem 0 0 0;
-              color: #64748b;
-              font-size: 0.85rem;
+              color: #94a3b8;
+              font-size: 0.95rem;
               font-family: 'JetBrains Mono', monospace;
             "
           >
-            → <strong style="color: #38bdf8;">Resolved Matches:</strong> Attack System, Defense System, Scan System
+            → Finds: Attack System, Defense System, Scan System
           </p>
         </div>
       </div>
 
+      <p
+        style="
+          color: #cbd5e1;
+          font-size: 1.05rem;
+          background: rgba(16, 185, 129, 0.15);
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 1.25rem;
+          border-radius: 10px;
+          line-height: 1.7;
+        "
+      >
+        <strong>🧠 How it works:</strong> ReadyAPI uses advanced AI (Arctic
+        embeddings) to understand what you mean, not just what keywords you use.
+        So "get somewhere far away quickly" understands you need speed and
+        distance, and finds the Flight System!
+      </p>
+
+      <p
+        style="
+          color: #cbd5e1;
+          font-size: 1.05rem;
+          background: rgba(16, 185, 129, 0.15);
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 1.25rem;
+          border-radius: 10px;
+          line-height: 1.7;
+        "
+      >
+        <strong>🧠 How it works:</strong> ReadyAPI uses advanced AI (Arctic
+        embeddings) to understand what you mean, not just what keywords you use.
+        So "get somewhere far away quickly" understands you need speed and
+        distance, and finds the Warp System!
+      </p>
+
       <!-- API Call Examples -->
-      <p style="color: #f8fafc; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;">
-        API REQUEST ENDPOINTS:
+      <p style="color: #f8fafc; font-weight: 700; margin-top: 3rem; margin-bottom: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 1rem;">
+        Now make the API call to search:
       </p>
 
       <div
         style="
           background: rgba(10, 15, 30, 0.95);
-          border: 1px solid rgba(0, 242, 254, 0.2);
-          padding: 1.25rem;
-          border-radius: 8px;
-          margin: 1rem 0;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          padding: 1.5rem;
+          border-radius: 10px;
+          margin: 1.25rem 0;
         "
       >
-        <p style="margin-top: 0; color: #00f2fe; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-          <strong>[UNFILTERED SEARCH PAYLOAD]:</strong>
+        <p style="margin-top: 0; color: #00f2fe; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;">
+          <strong>Basic Search (No Filters):</strong>
         </p>
         <pre
-          style="overflow-x: auto; font-size: 0.8rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;"
-        ><code>curl -X POST https://api.semanticsearch.io/api/v1/search/query \
-  -H "X-API-Key: YOUR_API_KEY" \
+          style="overflow-x: auto; font-size: 0.9rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; line-height: 1.6;"
+        ><code>curl -X POST https://readyapi.net/api/v1/search/query \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "I need to get somewhere far away quickly",
@@ -661,19 +712,19 @@
       <div
         style="
           background: rgba(10, 15, 30, 0.95);
-          border: 1px solid rgba(0, 242, 254, 0.2);
-          padding: 1.25rem;
-          border-radius: 8px;
-          margin: 1rem 0;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          padding: 1.5rem;
+          border-radius: 10px;
+          margin: 1.25rem 0;
         "
       >
-        <p style="margin-top: 0; color: #00f2fe; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-          <strong>[FILTERED METADATA SEARCH PAYLOAD]:</strong>
+        <p style="margin-top: 0; color: #00f2fe; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;">
+          <strong>Search with Filters (Only Active Systems):</strong>
         </p>
         <pre
-          style="overflow-x: auto; font-size: 0.8rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;"
-        ><code>curl -X POST https://api.semanticsearch.io/api/v1/search/query \
-  -H "X-API-Key: YOUR_API_KEY" \
+          style="overflow-x: auto; font-size: 0.9rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; line-height: 1.6;"
+        ><code>curl -X POST https://readyapi.net/api/v1/search/query \
+  -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "I need to get somewhere far away quickly",
@@ -682,40 +733,79 @@
       "metadata.state": "active"
     }
   }'</code></pre>
+        <p
+          style="
+            margin: 0.75rem 0 0 0;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+          "
+        >
+          This filters results to only show systems with
+          <code
+            style="
+              background: rgba(0, 242, 254, 0.15);
+              color: #00f2fe;
+              padding: 0.2rem 0.5rem;
+              border-radius: 4px;
+              font-family: 'JetBrains Mono', monospace;
+            "
+            >state: active</code
+          >
+          in their metadata.
+        </p>
       </div>
+
+      <p
+        style="
+          color: #cbd5e1;
+          font-size: 1.05rem;
+          background: rgba(108, 92, 231, 0.2);
+          border: 1px solid rgba(108, 92, 231, 0.5);
+          padding: 1.25rem;
+          border-radius: 10px;
+          margin-top: 1.5rem;
+          border-left: 4px solid #00f2fe;
+          line-height: 1.7;
+        "
+      >
+        <strong>🎯 Optional Filters:</strong> You can add filters to narrow down
+        results by metadata. Filters give you precise control over which
+        documents are returned.
+      </p>
     </div>
 
     <!-- Step 4: Get Results -->
     <div
       style="
-        margin: 3rem 0;
-        padding: 2.5rem;
-        border: 1px solid rgba(0, 242, 254, 0.3);
+        margin: 3.5rem 0;
+        padding: 3rem;
+        border: 1px solid rgba(0, 242, 254, 0.4);
         border-radius: 16px;
-        background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
       "
     >
-      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.3rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-        <span>✅</span> [STEP 04]: Vector Similarity Response Delivery
+      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.5rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+        ✅ Step 4: Get Ranked Results
       </h3>
-      <p style="color: #94a3b8; margin-bottom: 1.5rem;">
-        The system returns rank-ordered vectors evaluated against cosine distance metrics.
+      <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.7;">
+        ReadyAPI returns the most relevant documents, ranked by similarity.
       </p>
 
       <div
         style="
           background: rgba(10, 15, 30, 0.95);
-          border: 1px solid rgba(16, 185, 129, 0.3);
-          padding: 1.25rem;
-          border-radius: 8px;
-          margin: 1rem 0;
+          border: 1px solid rgba(16, 185, 129, 0.4);
+          padding: 1.5rem;
+          border-radius: 10px;
+          margin: 1.25rem 0;
         "
       >
-        <p style="margin-top: 0; color: #34d399; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace;">
-          <strong>[RESPONSE PAYLOAD]:</strong>
+        <p style="margin-top: 0; color: #34d399; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace;">
+          <strong>API Response (Results):</strong>
         </p>
-        <pre style="overflow-x: auto; font-size: 0.8rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #cbd5e1;"><code>{
+        <pre style="overflow-x: auto; font-size: 0.9rem; margin: 0; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; line-height: 1.6;"><code>{
   "results": [
     {
       "id": "part-002",
@@ -744,99 +834,127 @@
       <div
         style="
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-          gap: 1.25rem;
-          margin-top: 1.5rem;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 1.5rem;
+          margin-top: 2rem;
         "
       >
         <div
           style="
-            background: rgba(10, 15, 30, 0.8);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            padding: 1.25rem;
-            border-radius: 8px;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 1.5rem;
+            border-radius: 10px;
           "
         >
           <p
             style="
               margin: 0;
               font-weight: 700;
-              color: #00f2fe;
-              font-size: 0.9rem;
+              color: #34d399;
+              font-size: 1rem;
               font-family: 'JetBrains Mono', monospace;
             "
           >
-            [SCORE METRIC]
+            Score = Relevance
           </p>
           <p
             style="
-              margin: 0.5rem 0 0 0;
-              font-size: 0.85rem;
-              color: #94a3b8;
+              margin: 0.75rem 0 0 0;
+              font-size: 0.95rem;
+              color: #cbd5e1;
+              line-height: 1.6;
             "
           >
-            Higher score indicates higher vector proximity (0.0 to 1.0)
+            Higher score = better match. Range: 0 to 1
           </p>
         </div>
         <div
           style="
-            background: rgba(10, 15, 30, 0.8);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            padding: 1.25rem;
-            border-radius: 8px;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 1.5rem;
+            border-radius: 10px;
           "
         >
           <p
             style="
               margin: 0;
               font-weight: 700;
-              color: #00f2fe;
-              font-size: 0.9rem;
+              color: #34d399;
+              font-size: 1rem;
               font-family: 'JetBrains Mono', monospace;
             "
           >
-            [RANKING ALGORITHM]
+            Top 3 Results
           </p>
           <p
             style="
-              margin: 0.5rem 0 0 0;
-              font-size: 0.85rem;
-              color: #94a3b8;
+              margin: 0.75rem 0 0 0;
+              font-size: 0.95rem;
+              color: #cbd5e1;
+              line-height: 1.6;
             "
           >
-            Sorted automatically by descending semantic relevance
+            Ranked best first (0.48 > 0.46)
           </p>
         </div>
         <div
           style="
-            background: rgba(10, 15, 30, 0.8);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            padding: 1.25rem;
-            border-radius: 8px;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 1.5rem;
+            border-radius: 10px;
           "
         >
           <p
             style="
               margin: 0;
               font-weight: 700;
-              color: #00f2fe;
-              font-size: 0.9rem;
+              color: #34d399;
+              font-size: 1rem;
               font-family: 'JetBrains Mono', monospace;
             "
           >
-            [LATENCY BENCHMARK]
+            Fast & Accurate
           </p>
           <p
             style="
-              margin: 0.5rem 0 0 0;
-              font-size: 0.85rem;
-              color: #94a3b8;
+              margin: 0.75rem 0 0 0;
+              font-size: 0.95rem;
+              color: #cbd5e1;
+              line-height: 1.6;
             "
           >
-            Optimized pipeline execution in 124ms
+            124ms processing time
           </p>
         </div>
       </div>
+    </div>
+
+    <!-- Summary -->
+    <div
+      style="
+        margin: 3.5rem 0;
+        padding: 2.5rem;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 242, 254, 0.15) 0%,
+          rgba(102, 126, 234, 0.15) 100%
+        );
+        border-radius: 16px;
+        border: 1px solid rgba(0, 242, 254, 0.4);
+        border-left: 6px solid #00f2fe;
+      "
+    >
+      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.5rem;">
+        🎯 That's It! You're Ready
+      </h3>
+      <p style="margin: 0; color: #cbd5e1; font-size: 1.15rem; line-height: 1.7;">
+        <strong>Three simple steps:</strong> Create JSON → Upload Documents →
+        Search Naturally. No complex setup, just ask in plain language and get
+        smart results.
+      </p>
     </div>
   </section>
 </div>
@@ -868,7 +986,7 @@
         document.getElementById("monthly-searches").textContent =
           monthlyStats.total_searches;
         document.getElementById("monthly-label").textContent =
-          "Total telemetry queries in " + monthlyStats.month;
+          "Total searches in " + monthlyStats.month;
       })
       .catch((error) => {
         console.error("Error loading dashboard stats:", error);
