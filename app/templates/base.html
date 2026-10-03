@@ -1,24 +1,84 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}SemanticSearch API{% endblock %}</title>
     <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="apple-touch-icon" href="/static/logo.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
-    />
+    <!-- Google Fonts: Inter and Space Grotesk for futuristic cyber tech vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/htmx.org"></script>
-    <style>
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              cyber: {
+                950: '#030712',
+                900: '#0a0f1d',
+                800: '#111827',
+                700: '#1f293d',
+                600: '#374151',
+                cyan: '#00f2fe',
+                indigo: '#4facfe',
+                purple: '#7928ca',
+                neon: '#10b981'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+          }
+        }
       }
+    </script>
+    <style>
+      :root {
+        --form-element-border-color: rgba(0, 242, 254, 0.2);
+        --muted-color: #94a3b8;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #030712;
+        color: #f8fafc;
+        background-image: 
+          radial-gradient(circle at 50% 0%, rgba(79, 172, 254, 0.08) 0%, transparent 50%),
+          linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 100% 100%, 40px 40px, 40px 40px;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Cybernetic Glow Elements */
+      .cyber-glow-cyan {
+        box-shadow: 0 0 20px rgba(0, 242, 254, 0.25);
+      }
+      .cyber-glow-indigo {
+        box-shadow: 0 0 25px rgba(79, 172, 254, 0.3);
+      }
+      .glass-panel {
+        background: rgba(10, 15, 29, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 242, 254, 0.15);
+      }
+      .glass-dropdown {
+        background: rgba(10, 15, 29, 0.95) !important;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 242, 254, 0.3) !important;
+      }
+
       nav {
         padding: 1rem 2rem;
-        border-bottom: 1px solid var(--form-element-border-color);
+        border-bottom: 1px solid rgba(0, 242, 254, 0.15);
       }
       nav a {
         margin-right: 2rem;
@@ -34,8 +94,13 @@
         padding: 4rem 2rem;
       }
       .hero h1 {
+        font-family: 'Space Grotesk', sans-serif;
         font-size: 2.5rem;
         margin-bottom: 1rem;
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
       }
       .hero p {
         font-size: 1.1rem;
@@ -50,26 +115,37 @@
       }
       .feature-card {
         padding: 2rem;
-        border: 1px solid var(--form-element-border-color);
-        border-radius: var(--border-radius);
+        border: 1px solid rgba(0, 242, 254, 0.15);
+        border-radius: 12px;
+        background: rgba(17, 24, 39, 0.6);
+        backdrop-filter: blur(12px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .feature-card:hover {
+        border-color: rgba(0, 242, 254, 0.5);
+        box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+        transform: translateY(-4px);
       }
       .feature-card h3 {
         margin-top: 0;
+        font-family: 'Space Grotesk', sans-serif;
+        color: #f8fafc;
       }
       .movie-card {
-        border: 1px solid var(--form-element-border-color);
-        border-radius: var(--border-radius);
-        padding: 1rem;
+        border: 1px solid rgba(0, 242, 254, 0.15);
+        border-radius: 12px;
+        padding: 1.25rem;
         margin-bottom: 1rem;
         display: flex;
         gap: 1rem;
         align-items: flex-start;
-        transition:
-          box-shadow 0.3s,
-          transform 0.2s;
+        background: rgba(17, 24, 39, 0.6);
+        backdrop-filter: blur(12px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .movie-card:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-color: rgba(0, 242, 254, 0.5);
+        box-shadow: 0 8px 24px rgba(0, 242, 254, 0.15);
         transform: translateY(-2px);
       }
       .movie-info {
@@ -81,26 +157,30 @@
         font-size: 1.1rem;
         margin-bottom: 0.3rem;
         word-break: break-word;
+        color: #f8fafc;
       }
       .movie-year {
         color: var(--muted-color);
         font-size: 0.85rem;
       }
       .score-badge {
-        background: var(--form-element-valid-border-color);
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         color: white;
         padding: 0.5rem 1rem;
-        border-radius: var(--border-radius);
+        border-radius: 8px;
         font-weight: bold;
         margin-left: 1rem;
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
       }
       .fast-path-badge {
-        background: #4caf50;
-        color: white;
+        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        color: #030712;
+        font-weight: 700;
         padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
+        border-radius: 9999px;
         font-size: 0.8rem;
         margin-left: 0.5rem;
+        box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
       }
       .search-box {
         position: relative;
@@ -112,8 +192,9 @@
         display: none;
       }
       .loading {
-        color: var(--muted-color);
+        color: #00f2fe;
         font-style: italic;
+        text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
       }
       .btn-group {
         display: flex;
@@ -134,30 +215,30 @@
         justify-content: center !important;
       }
       .nav-menu a {
-        color: #4da6d6 !important;
-        padding: 0.5rem 0.75rem !important;
-        border: none !important;
-        border-radius: 0 !important;
+        color: #94a3b8 !important;
+        padding: 0.5rem 1rem !important;
+        border: 1px solid transparent !important;
+        border-radius: 8px !important;
         background: transparent !important;
-        transition: all 0.3s ease !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         display: inline-block !important;
         font-weight: 500 !important;
         font-size: 0.95rem !important;
         box-shadow: none !important;
       }
       .nav-menu a:hover {
-        opacity: 0.7 !important;
-        background-color: transparent !important;
-        color: #3d8fb8 !important;
-        border-color: transparent !important;
-        transform: none !important;
-        box-shadow: none !important;
+        background: rgba(0, 242, 254, 0.08) !important;
+        color: #00f2fe !important;
+        border-color: rgba(0, 242, 254, 0.3) !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 0 15px rgba(0, 242, 254, 0.15) !important;
       }
       .nav-menu a.active {
-        background-color: transparent !important;
-        color: #3d8fb8 !important;
-        border-color: transparent !important;
+        background: rgba(0, 242, 254, 0.12) !important;
+        color: #00f2fe !important;
+        border-color: rgba(0, 242, 254, 0.4) !important;
         font-weight: 600 !important;
+        box-shadow: 0 0 20px rgba(0, 242, 254, 0.2) !important;
       }
       @media (max-width: 768px) {
         nav {
@@ -179,17 +260,19 @@
         }
         .hamburger-btn {
           display: block;
-          background: none;
-          border: none;
+          background: rgba(17, 24, 39, 0.8);
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          border-radius: 8px;
           cursor: pointer;
           font-size: 1.5rem;
-          padding: 0.5rem;
-          color: inherit;
-          transition: opacity 0.2s;
+          padding: 0.5rem 0.75rem;
+          color: #00f2fe;
+          transition: all 0.2s;
           order: 1;
         }
         .hamburger-btn:hover {
-          opacity: 0.7;
+          background: rgba(0, 242, 254, 0.15);
+          box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
         }
         .nav-menu {
           display: none !important;
@@ -198,14 +281,15 @@
           top: 100% !important;
           left: 0 !important;
           right: 0 !important;
-          background: #0f0f0f !important;
-          border-bottom: 2px solid #667eea !important;
-          border-top: 2px solid #667eea !important;
-          padding: 0 !important;
-          gap: 0 !important;
+          background: rgba(3, 7, 18, 0.98) !important;
+          backdrop-filter: blur(24px) !important;
+          border-bottom: 2px solid rgba(0, 242, 254, 0.4) !important;
+          border-top: 2px solid rgba(0, 242, 254, 0.4) !important;
+          padding: 1rem 0 !important;
+          gap: 0.5rem !important;
           width: 100% !important;
           z-index: 998 !important;
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8) !important;
           margin-top: 0 !important;
           margin-left: 0 !important;
           flex: none !important;
@@ -214,19 +298,16 @@
           display: flex !important;
         }
         .nav-menu a {
-          color: #fff !important;
-          padding: 1.8rem 2rem !important;
-          border-bottom: 1px solid rgba(102, 126, 234, 0.3) !important;
-          transition:
-            background-color 0.2s,
-            color 0.2s !important;
+          color: #f8fafc !important;
+          padding: 1rem 2rem !important;
+          border-bottom: 1px solid rgba(0, 242, 254, 0.1) !important;
+          transition: all 0.2s !important;
           text-decoration: none !important;
           display: block !important;
           background-color: transparent !important;
-          border: none !important;
           border-radius: 0 !important;
           font-weight: 600 !important;
-          font-size: 1.15rem !important;
+          font-size: 1.1rem !important;
           cursor: pointer !important;
           text-align: center !important;
         }
@@ -234,8 +315,8 @@
           border-bottom: none !important;
         }
         .nav-menu a:hover {
-          background-color: #667eea !important;
-          color: #fff !important;
+          background-color: rgba(0, 242, 254, 0.15) !important;
+          color: #00f2fe !important;
           opacity: 1 !important;
         }
         nav > div:last-child {
@@ -267,15 +348,15 @@
           top: 100% !important;
           width: auto !important;
           margin-top: 0.5rem !important;
-          border-radius: 4px !important;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-          border: 1px solid var(--form-element-border-color) !important;
+          border-radius: 8px !important;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+          border: 1px solid rgba(0, 242, 254, 0.3) !important;
           min-width: 180px !important;
         }
         #user-dropdown a,
         #user-dropdown button {
           border: none;
-          border-bottom: 1px solid var(--form-element-border-color);
+          border-bottom: 1px solid rgba(0, 242, 254, 0.1);
           border-radius: 0;
         }
         #user-dropdown a:last-child,
@@ -325,17 +406,18 @@
     </style>
     {% block extra_css %}{% endblock %}
   </head>
-  <body>
+  <body class="bg-cyber-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
     <nav
       style="
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(0, 242, 254, 0.2);
         position: relative;
         flex-wrap: nowrap;
-        background: #f8f9fa;
+        background: rgba(10, 15, 29, 0.85);
+        backdrop-filter: blur(16px);
         gap: 2rem;
       "
     >
@@ -349,10 +431,11 @@
           min-width: fit-content;
           cursor: pointer;
           padding: 0.5rem;
-          background: none;
-          border: none;
+          background: rgba(17, 24, 39, 0.8);
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          border-radius: 8px;
           font-size: 1.5rem;
-          color: inherit;
+          color: #00f2fe;
         "
         aria-label="Toggle menu"
       >
@@ -361,7 +444,7 @@
 
       <!-- Navigation Menu - Center -->
       <div class="nav-menu" id="nav-menu" style="margin: 0 auto">
-        <a href="/" style="text-decoration: none">SemanticSearch</a>
+        <a href="/" style="text-decoration: none" class="font-display tracking-wide">SemanticSearch</a>
         <a href="/dashboard" id="nav-dashboard" style="text-decoration: none"
           >Dashboard</a
         >
@@ -387,10 +470,10 @@
           <button
             onclick="toggleUserMenu(event)"
             style="
-              background: transparent;
-              border: 1px solid rgba(0, 0, 0, 0.15);
+              background: rgba(17, 24, 39, 0.8);
+              border: 1px solid rgba(0, 242, 254, 0.3);
               padding: 0.6rem 1rem;
-              border-radius: 6px;
+              border-radius: 8px;
               cursor: pointer;
               display: flex;
               align-items: center;
@@ -402,17 +485,19 @@
               transition: all 0.3s ease;
             "
             onmouseover="
-              this.style.backgroundColor = 'rgba(0, 0, 0, 0.05)';
-              this.style.borderColor = 'rgba(0, 0, 0, 0.25)';
+              this.style.backgroundColor = 'rgba(0, 242, 254, 0.1)';
+              this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
               this.style.transform = 'translateY(-2px)';
+              this.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.2)';
             "
             onmouseout="
-              this.style.backgroundColor = 'transparent';
-              this.style.borderColor = 'rgba(0, 0, 0, 0.15)';
+              this.style.backgroundColor = 'rgba(17, 24, 39, 0.8)';
+              this.style.borderColor = 'rgba(0, 242, 254, 0.3)';
               this.style.transform = 'translateY(0)';
+              this.style.boxShadow = 'none';
             "
           >
-            👤
+            <span class="text-cyan-400">⚡</span>
             <span
               id="user-email"
               style="
@@ -421,27 +506,27 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 150px;
-                color: #667eea;
+                color: #00f2fe;
                 font-weight: 600;
               "
             ></span>
-            <span id="menu-arrow">▼</span>
+            <span id="menu-arrow" class="text-xs text-cyan-400">▼</span>
           </button>
 
           <div
             id="user-dropdown"
+            class="glass-dropdown"
             style="
               display: none;
               position: absolute;
               top: 100%;
               right: 0;
-              background: white;
-              border: 1px solid var(--form-element-border-color);
-              border-radius: 4px;
+              border-radius: 10px;
               margin-top: 0.5rem;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
               z-index: 1001;
               min-width: 200px;
+              overflow: hidden;
             "
           >
             <a
@@ -450,11 +535,11 @@
                 display: block;
                 padding: 0.75rem 1rem;
                 text-decoration: none;
-                border-bottom: 1px solid var(--form-element-border-color);
-                color: inherit;
+                border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+                color: #f8fafc;
                 transition: background-color 0.2s;
               "
-              onmouseover="this.style.backgroundColor = 'rgba(0,0,0,0.05)'"
+              onmouseover="this.style.backgroundColor = 'rgba(0, 242, 254, 0.15)'"
               onmouseout="this.style.backgroundColor = 'transparent'"
               >📊 Dashboard</a
             >
@@ -464,11 +549,11 @@
                 display: block;
                 padding: 0.75rem 1rem;
                 text-decoration: none;
-                border-bottom: 1px solid var(--form-element-border-color);
-                color: inherit;
+                border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+                color: #f8fafc;
                 transition: background-color 0.2s;
               "
-              onmouseover="this.style.backgroundColor = 'rgba(0,0,0,0.05)'"
+              onmouseover="this.style.backgroundColor = 'rgba(0, 242, 254, 0.15)'"
               onmouseout="this.style.backgroundColor = 'transparent'"
               >⚙️ Profile Settings</a
             >
@@ -481,12 +566,12 @@
                 background: none;
                 border: none;
                 cursor: pointer;
-                color: #e74c3c;
+                color: #f87171;
                 font-weight: 500;
                 transition: background-color 0.2s;
               "
               onmouseover="
-                this.style.backgroundColor = 'rgba(231, 76, 60, 0.1)'
+                this.style.backgroundColor = 'rgba(239, 68, 68, 0.15)'
               "
               onmouseout="this.style.backgroundColor = 'transparent'"
             >
@@ -506,49 +591,50 @@
               text-decoration: none;
               padding: 0.6rem 1.2rem;
               font-size: 0.9rem;
-              border: 1px solid rgba(0, 0, 0, 0.2);
-              border-radius: 6px;
+              border: 1px solid rgba(0, 242, 254, 0.3);
+              border-radius: 8px;
               transition: all 0.3s ease;
               display: inline-block;
               font-weight: 500;
-              background: white;
-              color: inherit;
+              background: rgba(17, 24, 39, 0.6);
+              color: #f8fafc;
             "
             onmouseover="
-              this.style.backgroundColor = '#f0f4ff';
-              this.style.borderColor = 'rgba(102, 126, 234, 0.5)';
+              this.style.backgroundColor = 'rgba(0, 242, 254, 0.1)';
+              this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
+              this.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.15)';
             "
             onmouseout="
-              this.style.backgroundColor = 'white';
-              this.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+              this.style.backgroundColor = 'rgba(17, 24, 39, 0.6)';
+              this.style.borderColor = 'rgba(0, 242, 254, 0.3)';
+              this.style.boxShadow = 'none';
             "
             >Sign Up</a
           >
           <a
             href="/login"
             style="
-              background-color: #667eea;
-              color: white;
+              background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+              color: #030712;
               padding: 0.6rem 1.4rem;
-              border-radius: 6px;
+              border-radius: 8px;
               text-decoration: none;
               font-size: 0.9rem;
               white-space: nowrap;
-              font-weight: 500;
+              font-weight: 700;
               border: none;
               transition: all 0.3s ease;
               display: inline-block;
               cursor: pointer;
+              box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
             "
             onmouseover="
-              this.style.backgroundColor = '#5568d3';
               this.style.transform = 'translateY(-2px)';
-              this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.3)';
+              this.style.boxShadow = '0 0 30px rgba(0, 242, 254, 0.5)';
             "
             onmouseout="
-              this.style.backgroundColor = '#667eea';
               this.style.transform = 'translateY(0)';
-              this.style.boxShadow = 'none';
+              this.style.boxShadow = '0 0 20px rgba(0, 242, 254, 0.3)';
             "
             >Log In</a
           >
@@ -561,17 +647,20 @@
     <footer
       style="
         text-align: center;
-        padding: 2rem;
+        padding: 2.5rem 2rem;
         color: var(--muted-color);
-        border-top: 1px solid var(--form-element-border-color);
+        border-top: 1px solid rgba(0, 242, 254, 0.15);
         margin-top: 4rem;
+        background: rgba(3, 7, 18, 0.6);
+        backdrop-filter: blur(10px);
       "
     >
-      <p>&copy; 2026 SemanticSearch API. By Esteban Bardolet</p>
-      <p>
+      <p class="font-medium text-slate-400">&copy; 2026 SemanticSearch API. By Esteban Bardolet</p>
+      <p class="mt-2 text-sm">
         <a
           href="/privacy-policy"
-          style="color: #4da6d6; text-decoration: none; margin-right: 1rem"
+          style="color: #00f2fe; text-decoration: none; margin-right: 1rem"
+          class="hover:underline"
           >Privacy Policy</a
         >
         |
@@ -579,7 +668,8 @@
           Contact:
           <a
             href="mailto:info@readyapi.net"
-            style="color: #4da6d6; text-decoration: none"
+            style="color: #00f2fe; text-decoration: none"
+            class="hover:underline"
             >info@readyapi.net</a
           >
         </span>

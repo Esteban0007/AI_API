@@ -1,25 +1,33 @@
 {% extends "base.html" %} {% block content %}
-<div style="max-width: 700px; margin: 40px auto; padding: 20px">
-  <h1>Delete Account</h1>
-  <p style="color: #666; margin-bottom: 30px">
-    This is a permanent action. Please review what will be deleted before
-    proceeding.
-  </p>
+<div style="max-width: 750px; margin: 40px auto; padding: 20px">
+  <div style="margin-bottom: 2.5rem; text-align: center;">
+    <h1 style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: 2.2rem; margin-bottom: 0.5rem;">
+      Protocol: Terminal Node Deletion
+    </h1>
+    <p style="color: #94a3b8; font-size: 1.05rem">
+      Permanent account termination. Please verify your telemetry before proceeding.
+    </p>
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.4), transparent); margin-top: 1.5rem;"></div>
+  </div>
 
   <!-- Deletion Preview Section -->
   <div
     style="
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 30px;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
     "
   >
-    <h2 style="font-size: 18px; margin-top: 0">Account Deletion Summary</h2>
+    <h2 style="font-size: 1.25rem; margin-top: 0; color: #f8fafc; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
+      <span>📊</span> Telemetry Deletion Audit
+    </h2>
 
-    <div id="preview-loading" style="text-align: center; color: #999">
-      <p>Loading deletion preview...</p>
+    <div id="preview-loading" style="text-align: center; color: #00f2fe; padding: 2rem; font-family: 'JetBrains Mono', monospace;">
+      <p>⚡ Analyzing neural vectors & associated records...</p>
     </div>
 
     <div id="preview-content" style="display: none">
@@ -30,10 +38,13 @@
       id="preview-error"
       style="
         display: none;
-        color: #d32f2f;
-        background: #ffebee;
-        padding: 15px;
-        border-radius: 4px;
+        color: #f87171;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        padding: 1.25rem;
+        border-radius: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9rem;
       "
     >
       <!-- Will show error message if any -->
@@ -44,26 +55,28 @@
   <form id="delete-account-form" style="display: none">
     <div
       style="
-        background: #fff3cd;
-        border: 1px solid #ffeeba;
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 20px;
+        background: rgba(245, 158, 11, 0.1);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
       "
     >
-      <strong style="color: #856404">⚠️ Warning:</strong>
-      <p style="margin: 10px 0 0 0; color: #856404">
-        This action is <strong>irreversible</strong>. Once you delete your
-        account, all associated data will be permanently removed.
+      <strong style="color: #fbbf24; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
+        <span>⚠️</span> [WARNING: IRREVERSIBLE ACTION]
+      </strong>
+      <p style="margin: 0.75rem 0 0 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">
+        Execution of this command will <strong style="color: #f8fafc;">permanently purge</strong> all associated neural records, API cryptographic keys, and indexed vectors from the core storage matrix.
       </p>
     </div>
 
-    <div style="margin-bottom: 20px">
+    <div style="margin-bottom: 1.5rem">
       <label
         for="email-confirm"
-        style="display: block; margin-bottom: 8px; font-weight: bold"
+        style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;"
       >
-        Email Address:
+        CONFIRM IDENTIFIER (EMAIL):
       </label>
       <input
         type="email"
@@ -73,20 +86,23 @@
         required
         style="
           width: 100%;
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 16px;
+          padding: 0.85rem 1rem;
+          border: 1px solid rgba(100, 116, 139, 0.4);
+          border-radius: 8px;
+          font-size: 0.95rem;
+          background: rgba(10, 15, 30, 0.9);
+          color: #f8fafc;
+          font-family: 'JetBrains Mono', monospace;
         "
       />
     </div>
 
-    <div style="margin-bottom: 20px">
+    <div style="margin-bottom: 1.5rem">
       <label
         for="password-confirm"
-        style="display: block; margin-bottom: 8px; font-weight: bold"
+        style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;"
       >
-        Password (to confirm deletion):
+        CREDENTIAL VERIFICATION (PASSWORD):
       </label>
       <input
         type="password"
@@ -96,26 +112,30 @@
         required
         style="
           width: 100%;
-          padding: 10px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 16px;
+          padding: 0.85rem 1rem;
+          border: 1px solid rgba(100, 116, 139, 0.4);
+          border-radius: 8px;
+          font-size: 0.95rem;
+          background: rgba(10, 15, 30, 0.9);
+          color: #f8fafc;
+          font-family: 'JetBrains Mono', monospace;
         "
       />
-      <small style="color: #999; display: block; margin-top: 8px">
-        We require your password to confirm that this deletion request is
-        legitimate.
+      <small style="color: #64748b; display: block; margin-top: 0.5rem; font-size: 0.85rem;">
+        Cryptographic validation required to authenticate terminal request legitimacy.
       </small>
     </div>
 
-    <div style="margin-bottom: 20px">
+    <div style="margin-bottom: 2rem">
       <label
         for="confirm-checkbox"
         style="
           display: flex;
           align-items: flex-start;
-          gap: 10px;
+          gap: 12px;
           cursor: pointer;
+          color: #cbd5e1;
+          font-size: 0.95rem;
         "
       >
         <input
@@ -123,13 +143,10 @@
           id="confirm-checkbox"
           name="confirm"
           required
-          style="margin-top: 5px; cursor: pointer"
+          style="margin-top: 3px; cursor: pointer; accent-color: #ef4444;"
         />
         <span>
-          I understand that deleting my account will
-          <strong>permanently remove all my data</strong> and this action
-          <strong>cannot be undone</strong>. I confirm that I want to delete my
-          account.
+          I acknowledge that account termination is <strong>irreversible</strong> and will completely wipe all telemetry data. I authorize full system node purge.
         </span>
       </label>
     </div>
@@ -138,19 +155,22 @@
       type="submit"
       id="delete-btn"
       style="
-        background: #d32f2f;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
         color: white;
-        padding: 12px 30px;
+        padding: 1rem 2rem;
         border: none;
-        border-radius: 4px;
-        font-size: 16px;
+        border-radius: 8px;
+        font-size: 1rem;
         cursor: pointer;
         width: 100%;
-        font-weight: bold;
+        font-weight: 700;
+        letter-spacing: 0.025em;
+        transition: all 0.2s;
+        box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
       "
       disabled
     >
-      Permanently Delete My Account
+      ⚠️ EXECUTE PERMANENT ACCOUNT PURGE
     </button>
   </form>
 
@@ -159,34 +179,36 @@
     id="success-message"
     style="
       display: none;
-      background: #e8f5e9;
-      border: 1px solid #c8e6c9;
-      border-radius: 8px;
-      padding: 20px;
-      color: #2e7d32;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      color: #34d399;
+      backdrop-filter: blur(12px);
     "
   >
-    <h3 style="margin-top: 0; color: #1b5e20">
-      ✅ Account Deleted Successfully
+    <h3 style="margin-top: 0; color: #10b981; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
+      <span>🟢</span> NODE PURGE COMPLETED SUCCESSFULLY
     </h3>
-    <p>Your account and all associated data have been permanently deleted.</p>
-    <p style="margin-bottom: 0; color: #558b2f">
-      <strong>Note:</strong> Your consent records will be preserved for 3 years
-      (legal requirement under GDPR).
+    <p style="color: #cbd5e1;">Your account profile and all corresponding vector data streams have been permanently expunged.</p>
+    <p style="margin-bottom: 1.5rem; color: #94a3b8; font-size: 0.9rem;">
+      <strong>Compliance Notice:</strong> Consent telemetry logs will be retained securely for 3 years to comply with statutory GDPR framework standards.
     </p>
     <a
       href="/"
       style="
         display: inline-block;
-        margin-top: 15px;
-        padding: 10px 20px;
-        background: #2e7d32;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         color: white;
         text-decoration: none;
-        border-radius: 4px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        transition: all 0.2s;
       "
     >
-      Return to Home
+      Return to Neural Gateway
     </a>
   </div>
 
@@ -195,11 +217,14 @@
     id="error-message"
     style="
       display: none;
-      background: #ffebee;
-      border: 1px solid #ffcdd2;
-      border-radius: 8px;
-      padding: 20px;
-      color: #c62828;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #f87171;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      backdrop-filter: blur(12px);
     "
   >
     <!-- Will be populated by JavaScript -->
@@ -237,38 +262,38 @@
 
         if (data.found) {
           // Build preview HTML
-          let html = '<dl style="margin: 0;">';
+          let html = '<dl style="margin: 0; font-size: 0.95rem;">';
 
           // User info
-          html += `<dt style="font-weight: bold; margin-top: 15px;">Account Created:</dt>`;
-          html += `<dd style="margin-left: 0; color: #666;">${data.account_created}</dd>`;
+          html += `<dt style="font-weight: 600; margin-top: 1rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">INITIALIZATION TIMESTAMP:</dt>`;
+          html += `<dd style="margin-left: 0; color: #f8fafc; font-family: 'JetBrains Mono', monospace;">${data.account_created}</dd>`;
 
           // Data to delete
           html +=
-            '<dt style="font-weight: bold; margin-top: 15px; color: #d32f2f;">🗑️ Will Be Deleted:</dt>';
+            '<dt style="font-weight: 600; margin-top: 1.25rem; color: #ef4444; font-family: \'JetBrains Mono', monospace; font-size: 0.85rem;\">🗑️ TARGETED FOR IMMEDIATE PURGE:</dt>';
           html += '<dd style="margin-left: 0;">';
           for (const [key, value] of Object.entries(data.data_to_delete)) {
             const label = key
               .replace(/_/g, " ")
               .replace(/\b\w/g, (l) => l.toUpperCase());
-            html += `<div style="margin: 5px 0; color: #d32f2f;">✓ ${label}</div>`;
+            html += `<div style="margin: 6px 0; color: #f87171; display: flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;"><span>✕</span> ${label}</div>`;
           }
           html += "</dd>";
 
           // Data preserved
           html +=
-            '<dt style="font-weight: bold; margin-top: 15px; color: #1976d2;">🔒 Will Be Preserved (Legal Requirement):</dt>';
+            '<dt style="font-weight: 600; margin-top: 1.25rem; color: #38bdf8; font-family: \'JetBrains Mono', monospace; font-size: 0.85rem;\">🔒 PRESERVED (STATUTORY COMPLIANCE):</dt>';
           html += '<dd style="margin-left: 0;">';
           for (const [key, value] of Object.entries(data.data_preserved)) {
             if (key !== "reason") {
               const label = key
                 .replace(/_/g, " ")
                 .replace(/\b\w/g, (l) => l.toUpperCase());
-              html += `<div style="margin: 5px 0; color: #1976d2;">🔒 ${label}: ${value}</div>`;
+              html += `<div style="margin: 6px 0; color: #38bdf8; display: flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;"><span>🔒</span> ${label}: <span style="color: #cbd5e1;">${value}</span></div>`;
             }
           }
-          html += `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd; font-size: 14px; color: #666;">
-                    <strong>Why preserved?</strong> ${data.data_preserved.reason}
+          html += `<div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(100, 116, 139, 0.3); font-size: 0.85rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                    <strong style="color: #38bdf8;">Compliance Directive:</strong> ${data.data_preserved.reason}
                 </div>`;
           html += "</dd>";
 
@@ -280,12 +305,12 @@
           form.style.display = "block";
         } else {
           previewError.innerHTML =
-            "<strong>Account not found.</strong> Please check your email address.";
+            "<strong>[NODE ERROR]:</strong> Target account identifier not found in cluster registry. Please verify email.";
           previewError.style.display = "block";
           previewLoading.style.display = "none";
         }
       } catch (error) {
-        previewError.innerHTML = `<strong>Error loading preview:</strong> ${error.message}`;
+        previewError.innerHTML = `<strong>[TELEMETRY EXCEPTION]:</strong> ${error.message}`;
         previewError.style.display = "block";
         previewLoading.style.display = "none";
       }
@@ -302,7 +327,18 @@
     // Enable/disable delete button based on checkbox
     confirmCheckbox.addEventListener("change", function () {
       deleteBtn.disabled = !this.checked;
+      if (!this.checked) {
+        deleteBtn.style.opacity = "0.6";
+        deleteBtn.style.cursor = "not-allowed";
+      } else {
+        deleteBtn.style.opacity = "1";
+        deleteBtn.style.cursor = "pointer";
+      }
     });
+    
+    // Initial style state for disabled button
+    deleteBtn.style.opacity = "0.6";
+    deleteBtn.style.cursor = "not-allowed";
 
     // Handle form submission
     form.addEventListener("submit", async function (e) {
@@ -313,14 +349,14 @@
 
       if (!email || !password) {
         errorMessage.innerHTML =
-          "<strong>Error:</strong> Please fill in all fields.";
+          "<strong>[VALIDATION ERROR]:</strong> All authorization parameters must be provided.";
         errorMessage.style.display = "block";
         return;
       }
 
       try {
         deleteBtn.disabled = true;
-        deleteBtn.textContent = "Deleting...";
+        deleteBtn.textContent = "⚡ EXECUTING PURGE PROTOCOL...";
         errorMessage.style.display = "none";
 
         const response = await fetch("/api/delete-account", {
@@ -345,18 +381,24 @@
 
           // Clear stored email
           localStorage.removeItem("user_email");
+          localStorage.removeItem("api_key");
         } else {
-          errorMessage.innerHTML = `<strong>Error:</strong> ${data.message || "Failed to delete account."}`;
+          errorMessage.innerHTML = `<strong>[EXECUTION FAILED]:</strong> ${data.message || "Termination sequence rejected by server core."}`;
           errorMessage.style.display = "block";
           deleteBtn.disabled = false;
-          deleteBtn.textContent = "Permanently Delete My Account";
+          deleteBtn.style.opacity = "1";
+          deleteBtn.style.cursor = "pointer";
+          deleteBtn.textContent = "⚠️ EXECUTE PERMANENT ACCOUNT PURGE";
         }
       } catch (error) {
-        errorMessage.innerHTML = `<strong>Error:</strong> ${error.message}`;
+        errorMessage.innerHTML = `<strong>[NETWORK EXCEPTION]:</strong> ${error.message}`;
         errorMessage.style.display = "block";
         deleteBtn.disabled = false;
-        deleteBtn.textContent = "Permanently Delete My Account";
+        deleteBtn.style.opacity = "1";
+        deleteBtn.style.cursor = "pointer";
+        deleteBtn.textContent = "⚠️ EXECUTE PERMANENT ACCOUNT PURGE";
       }
     });
   });
 </script>
+{% endblock %}

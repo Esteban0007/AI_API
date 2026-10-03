@@ -1,53 +1,73 @@
 {% if error %}
 <article
   style="
-    background-color: #ffebee;
-    border-color: #f44336;
-    color: #c62828;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    border-radius: 12px;
+    padding: 1.5rem;
     margin-top: 1rem;
+    backdrop-filter: blur(10px);
   "
 >
-  <strong>Error:</strong> {{ error }}
+  <strong style="color: #ef4444; font-family: 'JetBrains Mono', monospace;">[SYSTEM ERROR]:</strong> {{ error }}
 </article>
 {% elif results %}
 <div style="margin-top: 0.5rem">
   {% for result in results %}
-  <article class="definition-card">
-    <h3 class="definition-title">� {{ result.get('title', 'Instruction') }}</h3>
-    <p class="definition-content">
-      {{ result.get('content', 'No instruction available') }}
+  <article 
+    class="definition-card"
+    style="
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    "
+    onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.8)'; this.style.transform='translateY(-2px)'"
+    onmouseout="this.style.borderColor='rgba(0, 242, 254, 0.3)'; this.style.transform='translateY(0)'"
+  >
+    <h3 class="definition-title" style="color: #00f2fe; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+      ⚡ {{ result.get('title', 'Instruction Node') }}
+    </h3>
+    <p class="definition-content" style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+      {{ result.get('content', 'No instruction telemetry available') }}
     </p>
   </article>
   {% endfor %}
 
-  <div class="definitions-meta">
-    Showing {{ results|length }} instructions in {{ timing|round(2) }}ms
+  <div class="definitions-meta" style="color: #64748b; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 1.5rem; text-align: right;">
+    [Telemetry]: Retrieved {{ results|length }} instruction nodes in <span style="color: #00f2fe;">{{ timing|round(2) }}ms</span>
   </div>
 </div>
 {% else %}
-<div style="color: var(--muted-color); margin-top: 1rem; line-height: 1.6">
+<div style="color: #94a3b8; margin-top: 1rem; line-height: 1.6">
   <section
     style="
-      background: #f8f9fb;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1rem 1.1rem;
-      margin-bottom: 1rem;
-      color: #111827;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+      border: 1px solid rgba(100, 116, 139, 0.3);
+      border-radius: 14px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
     "
   >
-    <h3 style="margin-top: 0; margin-bottom: 0.7rem; font-size: 1.1rem">
-      AI READY API Context
+    <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #00f2fe 0%, #667eea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      AI READY API Context Matrix
     </h3>
 
-    <p style="margin: 0 0 0.8rem 0">
+    <p style="margin: 0 0 1rem 0; color: #cbd5e1;">
       API is an all-in-one neural search infrastructure that automates the
       entire semantic pipeline—from data ingestion to high-precision
       retrieval—enabling developers to build private, multilingual, and
       intelligent search into any application or robotic system.
     </p>
 
-    <p style="margin: 0 0 0.8rem 0">
+    <p style="margin: 0 0 1rem 0; color: #cbd5e1;">
       The proliferation of unstructured textual data across enterprises has
       created a critical challenge: enabling efficient, semantically-aware
       retrieval without relying on expensive third-party APIs or sacrificing
@@ -56,7 +76,7 @@
       lifecycle of neural search.
     </p>
 
-    <p style="margin: 0 0 0.8rem 0">
+    <p style="margin: 0 0 1.25rem 0; color: #cbd5e1;">
       Semantic Search is an advanced data retrieval technology that understands
       the intent and contextual meaning of a query rather than just matching
       literal keywords. By converting text into mathematical “concept maps”
@@ -65,40 +85,48 @@
       information—regardless of how it is phrased.
     </p>
 
-    <div style="overflow-x: auto; margin: 0.9rem 0 1rem 0">
+    <div style="overflow-x: auto; margin: 1.25rem 0">
       <table
         style="
           width: 100%;
           border-collapse: collapse;
           min-width: 680px;
-          font-size: 0.92rem;
+          font-size: 0.9rem;
+          border-radius: 8px;
+          overflow: hidden;
         "
       >
         <thead>
-          <tr style="background: #eef2ff">
+          <tr style="background: rgba(0, 242, 254, 0.1); border-bottom: 1px solid rgba(0, 242, 254, 0.3);">
             <th
               style="
-                border: 1px solid #dbe2ea;
+                border: 1px solid rgba(100, 116, 139, 0.3);
                 text-align: left;
-                padding: 0.55rem;
+                padding: 0.85rem;
+                color: #00f2fe;
+                font-family: 'JetBrains Mono', monospace;
               "
             >
               Feature
             </th>
             <th
               style="
-                border: 1px solid #dbe2ea;
+                border: 1px solid rgba(100, 116, 139, 0.3);
                 text-align: left;
-                padding: 0.55rem;
+                padding: 0.85rem;
+                color: #00f2fe;
+                font-family: 'JetBrains Mono', monospace;
               "
             >
               Traditional Search (Lexical)
             </th>
             <th
               style="
-                border: 1px solid #dbe2ea;
+                border: 1px solid rgba(100, 116, 139, 0.3);
                 text-align: left;
-                padding: 0.55rem;
+                padding: 0.85rem;
+                color: #00f2fe;
+                font-family: 'JetBrains Mono', monospace;
               "
             >
               Semantic Search (AI READY API)
@@ -106,69 +134,69 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+          <tr style="transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='transparent'">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; font-weight: 600;">
               Search Logic
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #94a3b8;">
               Matches exact characters/keywords.
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #cbd5e1;">
               Understands intent and concepts.
             </td>
           </tr>
-          <tr style="background: #fafafa">
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+          <tr style="background: rgba(30, 41, 59, 0.4); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.4)'">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; font-weight: 600;">
               Language
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #94a3b8;">
               Limited to the language of the document.
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #cbd5e1;">
               Multilingual: Search in English, find in Spanish.
             </td>
           </tr>
-          <tr>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+          <tr style="transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='transparent'">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; font-weight: 600;">
               Synonyms
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #94a3b8;">
               Fails unless words match exactly.
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #cbd5e1;">
               Succeeds by matching meaning (e.g., “Home” = “House”).
             </td>
           </tr>
-          <tr style="background: #fafafa">
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+          <tr style="background: rgba(30, 41, 59, 0.4); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.4)'">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; font-weight: 600;">
               Data Quality
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #94a3b8;">
               Requires clean, tagged metadata.
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #cbd5e1;">
               Works perfectly with messy, unstructured text.
             </td>
           </tr>
-          <tr>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+          <tr style="transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='transparent'">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; font-weight: 600;">
               User Experience
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #94a3b8;">
               Frustrating; needs specific “search terms.”
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #cbd5e1;">
               Intuitive; uses natural human language.
             </td>
           </tr>
-          <tr style="background: #fafafa">
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+          <tr style="background: rgba(30, 41, 59, 0.4); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,242,254,0.03)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.4)'">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; font-weight: 600;">
               Primary Goal
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #94a3b8;">
               Finds Words.
             </td>
-            <td style="border: 1px solid #dbe2ea; padding: 0.55rem">
+            <td style="border: 1px solid rgba(100, 116, 139, 0.2); padding: 0.85rem; color: #cbd5e1;">
               Finds Answers.
             </td>
           </tr>
@@ -176,57 +204,57 @@
       </table>
     </div>
 
-    <p style="margin: 0 0 0.8rem 0">
+    <p style="margin: 1.25rem 0 1rem 0; color: #cbd5e1;">
       Unlike traditional implementations that require developers to manually
       orchestrate embedding generation, vector database management, and
       re-ranking logic, AI READY API provides a unified abstraction layer.
     </p>
 
-    <ul style="margin: 0 0 0.8rem 1.2rem; padding: 0">
-      <li>
-        <strong>Managed Pipeline:</strong> The client uploads data, then the API
+    <ul style="margin: 0 0 1.25rem 1.2rem; padding: 0; color: #94a3b8;">
+      <li style="margin-bottom: 0.5rem;">
+        <strong style="color: #f8fafc;">Managed Pipeline:</strong> The client uploads data, then the API
         executes the embedding process, manages vector persistence, and performs
         real-time retrieval.
       </li>
       <li>
-        <strong>Direct Result Delivery:</strong> The system receives raw text
+        <strong style="color: #f8fafc;">Direct Result Delivery:</strong> The system receives raw text
         inputs and returns ranked, contextually relevant results directly,
         bypassing the need for client-side data processing.
       </li>
     </ul>
 
-    <h4 style="margin: 0.3rem 0 0.5rem 0; font-size: 1rem">Key Benefits</h4>
-    <ul style="margin: 0 0 0 1.2rem; padding: 0">
-      <li>
-        <strong>No AI Expertise Required:</strong> You don’t need to hire a
+    <h4 style="margin: 1.5rem 0 0.75rem 0; font-size: 1.1rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace;">Key Neural Benefits</h4>
+    <ul style="margin: 0 0 0 1.2rem; padding: 0; color: #94a3b8;">
+      <li style="margin-bottom: 0.5rem;">
+        <strong style="color: #f8fafc;">No AI Expertise Required:</strong> You don’t need to hire a
         Machine Learning engineer. The API handles vectors and embeddings
         automatically, so any web developer can use it.
       </li>
-      <li>
-        <strong>Plug-and-Play Infrastructure:</strong> Forget about setting up
+      <li style="margin-bottom: 0.5rem;">
+        <strong style="color: #f8fafc;">Plug-and-Play Infrastructure:</strong> Forget about setting up
         and maintaining a vector database. The API is all-in-one: you send data
         in, you get answers out.
       </li>
-      <li>
-        <strong>Hardware Cost Savings:</strong> You don’t need expensive GPUs or
+      <li style="margin-bottom: 0.5rem;">
+        <strong style="color: #f8fafc;">Hardware Cost Savings:</strong> You don’t need expensive GPUs or
         massive RAM. The system is optimized to run on standard, affordable
         servers without losing speed.
       </li>
-      <li>
-        <strong>Ready for Any Device:</strong> Because the “brain” is in the
+      <li style="margin-bottom: 0.5rem;">
+        <strong style="color: #f8fafc;">Ready for Any Device:</strong> Because the “brain” is in the
         API, you can add intelligent search to a website, a mobile app, or even
         a small robot without overloading local processors.
       </li>
       <li>
-        <strong>Privacy:</strong> Your data is private and it is not used for
+        <strong style="color: #f8fafc;">Privacy:</strong> Your data is private and it is not used for
         training models.
       </li>
     </ul>
   </section>
 
-  <div style="text-align: center">
-    <p style="margin-bottom: 0.4rem">Type to search manual instructions...</p>
-    <p style="font-size: 0.9rem; margin: 0">
+  <div style="text-align: center; padding: 1.5rem; background: rgba(15, 23, 42, 0.4); border-radius: 12px; border: 1px dashed rgba(0, 242, 254, 0.2);">
+    <p style="margin-bottom: 0.5rem; color: #f8fafc; font-weight: 600;">Type to search manual instructions...</p>
+    <p style="font-size: 0.85rem; margin: 0; color: #00f2fe; font-family: 'JetBrains Mono', monospace;">
       Try: Installation · Configuration · Troubleshooting · Maintenance · Safety
       · Operation · Calibration · Firmware Update · Network Setup · Performance
       Tuning

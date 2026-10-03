@@ -1,207 +1,221 @@
-{% extends "base.html" %} {% block title %}Demos - SemanticSearch{% endblock %}
-{% block content %}
-<div class="container">
-  <h1>🎯 Live Demos</h1>
-  <p>
-    Explore semantic search across movies, spaceship systems, and manual
-    instructions.
+{% extends "base.html" %} {% block title %}Demos - SemanticSearch AI{% endblock
+%} {% block content %}
+<div class="container" style="max-width: 1200px;">
+  <div style="margin-bottom: 2.5rem; text-align: center; margin-top: 2rem;">
+    <h1 style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #667eea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; font-size: 2.4rem; margin-bottom: 0.5rem;">
+      🎯 Neural Interactive Demos
+    </h1>
+    <p style="color: #94a3b8; font-size: 1.05rem">
+      Test multidimensional semantic indexing across cinematic databases, autonomous flight systems, and core API documentation.
+    </p>
+    <div style="height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.4), transparent); margin-top: 1.5rem;"></div>
+  </div>
 
-    <!-- Tabs Navigation -->
-  </p>
-
+  <!-- Tabs Navigation -->
   <div
     style="
       margin: 2rem 0;
       display: flex;
       gap: 1rem;
-      border-bottom: 2px solid var(--form-element-border-color);
+      border-bottom: 1px solid rgba(100, 116, 139, 0.3);
       padding-bottom: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     "
   >
     <button
       class="demo-tab-btn active"
-      onclick="switchDemo('movies')"
+      onclick="switchDemo('movies', event)"
       style="
-        background: none;
-        border: none;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
+        background: rgba(0, 242, 254, 0.1);
+        border: 1px solid rgba(0, 242, 254, 0.4);
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
         cursor: pointer;
-        border-bottom: 3px solid var(--primary-color);
-        color: var(--primary-color);
+        border-radius: 8px;
+        color: #00f2fe;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+        transition: all 0.2s;
       "
     >
-      🎬 Movies
+      🎬 CINEMA MATRIX
     </button>
     <button
       class="demo-tab-btn"
-      onclick="switchDemo('spaceship')"
+      onclick="switchDemo('spaceship', event)"
       style="
-        background: none;
-        border: none;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
         cursor: pointer;
-        color: var(--muted-color);
+        border-radius: 8px;
+        color: #94a3b8;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+        transition: all 0.2s;
       "
     >
-      🚀 Spaceship
+      🛸 SPACESHIP TELEMETRY
     </button>
     <button
       class="demo-tab-btn"
-      onclick="switchDemo('readyapi')"
+      onclick="switchDemo('readyapi', event)"
       style="
-        background: none;
-        border: none;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
         cursor: pointer;
-        color: var(--muted-color);
+        border-radius: 8px;
+        color: #94a3b8;
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+        transition: all 0.2s;
       "
     >
-      📚 ReadyAPI Docs
+      📚 READYAPI DOCUMENTATION
     </button>
   </div>
 
   <!-- Movies Demo -->
   <div id="movies-demo" class="demo-section">
-    <h2>🎬 Movie Search</h2>
-    <p>Search from 2000 TMDB movies using semantic understanding.</p>
+    <div style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: 14px; padding: 2.5rem; box-shadow: 0 12px 40px rgba(0,0,0,0.4); backdrop-filter: blur(12px);">
+      <h2 style="color: #f8fafc; font-size: 1.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">🎬 Cinematic Vector Search</h2>
+      <p style="color: #94a3b8; margin-bottom: 2rem;">Query over 2,000 TMDB movies using semantic concept interpretation rather than exact keyword matching.</p>
 
-    <div style="margin: 2rem 0">
-      <label for="movies-search">Search movies:</label>
-      <form
-        hx-post="/search-partial"
-        hx-trigger="keyup changed delay:500ms from:#movies-search, submit from:#movies-search"
-        hx-target="#movies-results"
-      >
-        <div class="search-box">
-          <input
-            type="text"
-            id="movies-search"
-            name="query"
-            placeholder="E.g: 'cute robot cleans the earth' or 'action adventure'"
-            autocomplete="off"
-          />
-          <input type="hidden" name="dataset" value="movies" />
-          <span class="htmx-indicator loading">Searching...</span>
-        </div>
-      </form>
-    </div>
+      <div style="margin: 2rem 0">
+        <label for="movies-search" style="display: block; margin-bottom: 0.5rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">QUERY CINEMA CLUSTER:</label>
+        <form
+          hx-post="/search-partial"
+          hx-trigger="keyup changed delay:500ms from:#movies-search, submit from:#movies-search"
+          hx-target="#movies-results"
+        >
+          <div class="search-box">
+            <input
+              type="text"
+              id="movies-search"
+              name="query"
+              placeholder="E.g: 'cute robot cleans the earth' or 'action adventure'"
+              autocomplete="off"
+              style="width: 100%; padding: 0.9rem 1rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; background: rgba(10, 15, 30, 0.9); color: #f8fafc; font-size: 1rem; font-family: 'JetBrains Mono', monospace;"
+            />
+            <input type="hidden" name="dataset" value="movies" />
+            <span class="htmx-indicator loading" style="color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; display: block; margin-top: 0.5rem;">⚡ Querying neural vector space...</span>
+          </div>
+        </form>
+      </div>
 
-    <div id="movies-results" style="margin-top: 2rem">
-      <p style="color: var(--muted-color); text-align: center">
-        Type to see results...
-      </p>
+      <div id="movies-results" style="margin-top: 2rem">
+        <p style="color: #64748b; text-align: center; font-family: 'JetBrains Mono', monospace; padding: 2rem;">
+          [Awaiting query string...]
+        </p>
+      </div>
     </div>
   </div>
 
   <!-- Spaceship Demo -->
   <div id="spaceship-demo" class="demo-section" style="display: none">
-    <h2>🛸 Interactive Spaceship</h2>
-    <p style="font-size: 0.9rem; color: var(--muted-color)">
-      ⚡ Charge · 🚀 Fly · 🕶️ Stealth · 🎯 Attack · 🛡️ Shield · 📡 Scan · 🔧
-      Repair
-    </p>
+    <div style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: 14px; padding: 2.5rem; box-shadow: 0 12px 40px rgba(0,0,0,0.4); backdrop-filter: blur(12px);">
+      <h2 style="color: #f8fafc; font-size: 1.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">🛸 Interactive Autonomous Spaceship Console</h2>
+      <p style="font-size: 0.9rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; margin-bottom: 1.5rem;">
+        ⚡ Charge · 🚀 Fly · 🕶️ Stealth · 🎯 Attack · 🛡️ Shield · 📡 Scan · 🔧 Repair
+      </p>
 
-    <!-- Interactive Spaceship Visualization -->
-    <div id="spaceship-viz" class="spaceship-container">
-      <div class="ship-body">
-        <div class="ship-core">🛸</div>
-        <div class="ship-effect"></div>
-      </div>
-      <div class="ship-status">IDLE</div>
-    </div>
-
-    <div style="margin: 1rem 0">
-      <label for="spaceship-search" style="font-size: 0.9rem"
-        >Command Console:</label
-      >
-      <form
-        hx-post="/search-partial"
-        hx-trigger="keyup changed delay:400ms from:#spaceship-search"
-        hx-target="#spaceship-results"
-        onsubmit="return false;"
-      >
-        <div class="search-box">
-          <input
-            type="text"
-            id="spaceship-search"
-            name="query"
-            placeholder="Type: power, navigate, hide, combat, defend, search, fix..."
-            autocomplete="off"
-            oninput="reactToInput(this.value)"
-            style="text-align: center; font-family: monospace"
-          />
-          <input type="hidden" name="dataset" value="spaceship" />
-          <span class="htmx-indicator loading">Searching...</span>
+      <!-- Interactive Spaceship Visualization -->
+      <div id="spaceship-viz" class="spaceship-container" style="border: 1px solid rgba(0, 242, 254, 0.3);">
+        <div class="ship-body">
+          <div class="ship-core">🛸</div>
+          <div class="ship-effect"></div>
         </div>
-      </form>
-    </div>
+        <div class="ship-status" style="font-family: 'JetBrains Mono', monospace;">IDLE</div>
+      </div>
 
-    <div id="spaceship-results" style="display: none"></div>
+      <div style="margin: 1.5rem 0">
+        <label for="spaceship-search" style="font-size: 0.85rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; display: block; margin-bottom: 0.5rem;">COMMAND CONSOLE PROTOCOL:</label>
+        <form
+          hx-post="/search-partial"
+          hx-trigger="keyup changed delay:400ms from:#spaceship-search"
+          hx-target="#spaceship-results"
+          onsubmit="return false;"
+        >
+          <div class="search-box">
+            <input
+              type="text"
+              id="spaceship-search"
+              name="query"
+              placeholder="Type: power, navigate, hide, combat, defend, search, fix..."
+              autocomplete="off"
+              oninput="reactToInput(this.value)"
+              style="width: 100%; padding: 0.9rem 1rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; background: rgba(10, 15, 30, 0.9); color: #00f2fe; font-size: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace;"
+            />
+            <input type="hidden" name="dataset" value="spaceship" />
+            <span class="htmx-indicator loading" style="color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; display: block; margin-top: 0.5rem; text-align: center;">⚡ Executing command...</span>
+          </div>
+        </form>
+      </div>
+
+      <div id="spaceship-results" style="display: none"></div>
+    </div>
   </div>
 
   <!-- ReadyAPI Documentation Demo -->
   <div id="readyapi-demo" class="demo-section" style="display: none">
-    <h2>⚙️ ReadyAPI Documentation</h2>
-    <p style="font-size: 0.9rem; color: var(--muted-color)">
-      Explore comprehensive documentation for deploying and using ReadyAPI.
-    </p>
-    <p
-      style="
-        font-size: 0.86rem;
-        color: var(--muted-color);
-        margin-top: -0.35rem;
-      "
-    >
-      <strong>Available sections:</strong> How to Sign Up and Get Your API Key,
-      Understanding What ReadyAPI Does, Making Your First Search Request, How to
-      Upload Your Documents to Search, Understanding the JSON Format for
-      Uploads, Finding Your Documents After Upload - Check Statistics, Making
-      Search Work - Common Questions, Using Python or JavaScript Instead of
-      Curl, Understanding Your API Key and Keeping It Safe, Pricing Plans and
-      Understanding Your Quota, Testing Search with the Live Demo, Getting Help
-      - What To Do When Something Goes Wrong.
-    </p>
-
-    <div style="margin: 1rem 0">
-      <label for="readyapi-search" style="font-size: 0.9rem"
-        >Search documentation:</label
-      >
-      <form
-        hx-post="/search-partial"
-        hx-trigger="keyup changed delay:400ms from:#readyapi-search"
-        hx-target="#readyapi-results"
-        onsubmit="return false;"
-      >
-        <div class="search-box">
-          <input
-            type="text"
-            id="readyapi-search"
-            name="query"
-            placeholder="Search: how to sign up, upload documents, JSON format, pricing..."
-            autocomplete="off"
-            style="text-align: center"
-          />
-          <input type="hidden" name="dataset" value="readyapi" />
-          <input type="hidden" name="include_content" value="true" />
-          <span class="htmx-indicator loading">Searching...</span>
-        </div>
-      </form>
-    </div>
-
-    <div id="readyapi-results" style="margin-top: 1rem">
-      <p style="color: var(--muted-color); text-align: center">
-        Type to see documentation...
+    <div style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: 14px; padding: 2.5rem; box-shadow: 0 12px 40px rgba(0,0,0,0.4); backdrop-filter: blur(12px);">
+      <h2 style="color: #f8fafc; font-size: 1.5rem; margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">⚙️ ReadyAPI Neural Documentation Matrix</h2>
+      <p style="font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.75rem;">
+        Explore comprehensive semantic manuals for deploying and utilizing ReadyAPI infrastructure.
       </p>
+      <p
+        style="
+          font-size: 0.85rem;
+          color: #64748b;
+          margin-bottom: 1.5rem;
+          font-family: 'JetBrains Mono', monospace;
+          line-height: 1.5;
+        "
+      >
+        <strong style="color: #00f2fe;">Available Index Topics:</strong> Sign up & API keys, platform architecture overview, first query execution, JSON upload schemas, statistical auditing, common configuration questions, Python/JavaScript integrations, cryptographic security, pricing tiers, and diagnostic troubleshooting.
+      </p>
+
+      <div style="margin: 1.5rem 0">
+        <label for="readyapi-search" style="font-size: 0.85rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; display: block; margin-bottom: 0.5rem;">SEARCH MANUAL DATABASE:</label>
+        <form
+          hx-post="/search-partial"
+          hx-trigger="keyup changed delay:400ms from:#readyapi-search"
+          hx-target="#readyapi-results"
+          onsubmit="return false;"
+        >
+          <div class="search-box">
+            <input
+              type="text"
+              id="readyapi-search"
+              name="query"
+              placeholder="Search: how to sign up, upload documents, JSON format, pricing..."
+              autocomplete="off"
+              style="width: 100%; padding: 0.9rem 1rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; background: rgba(10, 15, 30, 0.9); color: #f8fafc; font-size: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace;"
+            />
+            <input type="hidden" name="dataset" value="readyapi" />
+            <input type="hidden" name="include_content" value="true" />
+            <span class="htmx-indicator loading" style="color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; display: block; margin-top: 0.5rem; text-align: center;">⚡ Querying documentation matrix...</span>
+          </div>
+        </form>
+      </div>
+
+      <div id="readyapi-results" style="margin-top: 1.5rem">
+        <p style="color: #64748b; text-align: center; font-family: 'JetBrains Mono', monospace; padding: 2rem;">
+          [Type query to retrieve documentation nodes...]
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <style>
   .demo-tab-btn:hover {
-    opacity: 0.8;
+    border-color: rgba(0, 242, 254, 0.8) !important;
+    color: #00f2fe !important;
   }
 
   .demo-section {
@@ -222,34 +236,36 @@
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 2rem;
   }
 
   .product-card {
-    border: 1px solid var(--form-element-border-color);
-    border-radius: 8px;
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+    border-radius: 12px;
     overflow: hidden;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
   }
 
   .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    border-color: rgba(0, 242, 254, 0.6);
+    box-shadow: 0 12px 35px rgba(0, 242, 254, 0.2);
   }
 
   .product-image {
     width: 100%;
     height: 250px;
-    background: var(--form-element-valid-border-color);
+    background: rgba(10, 15, 30, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 3rem;
     overflow: hidden;
+    border-bottom: 1px solid rgba(100, 116, 139, 0.2);
   }
 
   .product-image img {
@@ -263,17 +279,17 @@
   }
 
   .product-title {
-    font-weight: 600;
-    font-size: 1.1rem;
+    font-weight: 700;
+    font-size: 1.15rem;
     margin: 0 0 0.5rem 0;
-    color: var(--color);
+    color: #f8fafc;
   }
 
   .product-description {
     font-size: 0.9rem;
-    color: var(--muted-color);
+    color: #94a3b8;
     margin: 0.5rem 0 1rem 0;
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   .product-meta {
@@ -281,6 +297,7 @@
     gap: 1rem;
     margin: 1rem 0;
     font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   .meta-item {
@@ -289,50 +306,54 @@
   }
 
   .meta-label {
-    color: var(--muted-color);
+    color: #64748b;
     font-weight: 500;
+    font-size: 0.75rem;
   }
 
   .meta-value {
-    color: var(--color);
+    color: #00f2fe;
     font-weight: 600;
   }
 
   .price {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #10b981;
     margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   .similarity-score {
-    background: var(--form-element-valid-border-color);
-    padding: 0.5rem 1rem;
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    padding: 0.4rem 0.8rem;
     border-radius: 20px;
-    font-size: 0.85rem;
-    color: var(--muted-color);
+    font-size: 0.8rem;
+    color: #00f2fe;
     display: inline-block;
     margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   .mode-charging .product-image {
-    background: linear-gradient(135deg, #0f2d4d 0%, #2d7dd2 100%);
+    background: linear-gradient(135deg, #0a1f35 0%, #1e3a8a 100%);
   }
 
   .mode-flying .product-image {
-    background: linear-gradient(135deg, #0b1026 0%, #145da0 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
   }
 
   .mode-stealth .product-image {
-    background: linear-gradient(135deg, #111 0%, #333 100%);
+    background: linear-gradient(135deg, #090d16 0%, #1f2937 100%);
   }
 
   .mode-attack .product-image {
-    background: linear-gradient(135deg, #3a0f0f 0%, #9f1d1d 100%);
+    background: linear-gradient(135deg, #380808 0%, #991b1b 100%);
   }
 
   .mode-shield .product-image {
-    background: linear-gradient(135deg, #0c2e1c 0%, #2f9e44 100%);
+    background: linear-gradient(135deg, #062414 0%, #065f46 100%);
   }
 
   /* Spaceship Visualization */
@@ -348,6 +369,7 @@
     position: relative;
     min-height: 250px;
     overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(0, 242, 254, 0.1);
   }
 
   .ship-body {
@@ -357,7 +379,7 @@
 
   .ship-core {
     font-size: 8rem;
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    filter: drop-shadow(0 0 20px rgba(0, 242, 254, 0.4));
     transition: all 0.5s ease;
     animation: float 3s ease-in-out infinite;
   }
@@ -386,29 +408,29 @@
 
   .ship-status {
     margin-top: 2rem;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 3px;
-    color: #888;
+    color: #64748b;
     text-transform: uppercase;
     transition: all 0.3s ease;
   }
 
   /* Ship States */
   .ship-charging .ship-core {
-    filter: drop-shadow(0 0 40px #2d7dd2);
+    filter: drop-shadow(0 0 40px #00f2fe);
     animation: pulse 1s ease-in-out infinite;
   }
 
   .ship-charging .ship-effect {
     opacity: 0.6;
-    background: radial-gradient(circle, #2d7dd2 0%, transparent 70%);
+    background: radial-gradient(circle, #00f2fe 0%, transparent 70%);
     animation: energyPulse 1.5s ease-in-out infinite;
   }
 
   .ship-charging .ship-status {
-    color: #2d7dd2;
-    text-shadow: 0 0 10px #2d7dd2;
+    color: #00f2fe;
+    text-shadow: 0 0 15px #00f2fe;
   }
 
   @keyframes pulse {
@@ -435,12 +457,12 @@
 
   .ship-flying .ship-core {
     animation: flyUp 0.8s ease-in-out infinite;
-    filter: drop-shadow(0 10px 30px #145da0);
+    filter: drop-shadow(0 10px 30px #38bdf8);
   }
 
   .ship-flying .ship-effect {
     opacity: 0.8;
-    background: linear-gradient(180deg, transparent 0%, #145da0 100%);
+    background: linear-gradient(180deg, transparent 0%, #38bdf8 100%);
     width: 150px;
     height: 300px;
     top: 100%;
@@ -448,8 +470,8 @@
   }
 
   .ship-flying .ship-status {
-    color: #145da0;
-    text-shadow: 0 0 10px #145da0;
+    color: #38bdf8;
+    text-shadow: 0 0 15px #38bdf8;
   }
 
   @keyframes flyUp {
@@ -476,18 +498,18 @@
 
   .ship-stealth .ship-core {
     opacity: 0.3;
-    filter: drop-shadow(0 0 5px #333);
+    filter: drop-shadow(0 0 5px #64748b);
     animation: flicker 2s ease-in-out infinite;
   }
 
   .ship-stealth .ship-effect {
     opacity: 0.2;
-    background: radial-gradient(circle, #333 0%, transparent 70%);
+    background: radial-gradient(circle, #64748b 0%, transparent 70%);
   }
 
   .ship-stealth .ship-status {
-    color: #555;
-    opacity: 0.5;
+    color: #64748b;
+    opacity: 0.6;
   }
 
   @keyframes flicker {
@@ -501,19 +523,19 @@
   }
 
   .ship-attack .ship-core {
-    filter: drop-shadow(0 0 40px #9f1d1d);
+    filter: drop-shadow(0 0 40px #ef4444);
     animation: shake 0.3s ease-in-out infinite;
   }
 
   .ship-attack .ship-effect {
     opacity: 0.9;
-    background: radial-gradient(circle, #9f1d1d 0%, transparent 70%);
+    background: radial-gradient(circle, #ef4444 0%, transparent 70%);
     animation: attackPulse 0.5s ease-in-out infinite;
   }
 
   .ship-attack .ship-status {
-    color: #9f1d1d;
-    text-shadow: 0 0 15px #9f1d1d;
+    color: #ef4444;
+    text-shadow: 0 0 15px #ef4444;
   }
 
   @keyframes shake {
@@ -542,7 +564,7 @@
   }
 
   .ship-shield .ship-core {
-    filter: drop-shadow(0 0 40px #2f9e44);
+    filter: drop-shadow(0 0 40px #10b981);
   }
 
   .ship-shield .ship-effect {
@@ -550,18 +572,18 @@
     background: radial-gradient(
       circle,
       transparent 40%,
-      #2f9e44 45%,
+      #10b981 45%,
       transparent 50%
     );
     width: 250px;
     height: 250px;
-    border: 3px solid #2f9e44;
+    border: 3px solid #10b981;
     animation: shieldRotate 2s linear infinite;
   }
 
   .ship-shield .ship-status {
-    color: #2f9e44;
-    text-shadow: 0 0 10px #2f9e44;
+    color: #10b981;
+    text-shadow: 0 0 15px #10b981;
   }
 
   @keyframes shieldRotate {
@@ -575,21 +597,21 @@
 
   /* Scan mode */
   .ship-scanning .ship-core {
-    filter: drop-shadow(0 0 40px #17a2b8);
+    filter: drop-shadow(0 0 40px #06b6d4);
     animation: scanPulse 2s ease-in-out infinite;
   }
 
   .ship-scanning .ship-effect {
     opacity: 0.8;
-    background: conic-gradient(from 0deg, transparent, #17a2b8, transparent);
+    background: conic-gradient(from 0deg, transparent, #06b6d4, transparent);
     width: 300px;
     height: 300px;
     animation: radar 2s linear infinite;
   }
 
   .ship-scanning .ship-status {
-    color: #17a2b8;
-    text-shadow: 0 0 10px #17a2b8;
+    color: #06b6d4;
+    text-shadow: 0 0 15px #06b6d4;
   }
 
   @keyframes scanPulse {
@@ -613,7 +635,7 @@
 
   /* Repair mode */
   .ship-repair .ship-core {
-    filter: drop-shadow(0 0 30px #f39c12);
+    filter: drop-shadow(0 0 30px #f59e0b);
     animation: repairBlink 1.5s ease-in-out infinite;
   }
 
@@ -622,7 +644,7 @@
     background: repeating-radial-gradient(
       circle,
       transparent 0px,
-      #f39c12 5px,
+      #f59e0b 5px,
       transparent 10px
     );
     width: 200px;
@@ -631,8 +653,8 @@
   }
 
   .ship-repair .ship-status {
-    color: #f39c12;
-    text-shadow: 0 0 10px #f39c12;
+    color: #f59e0b;
+    text-shadow: 0 0 15px #f59e0b;
   }
 
   @keyframes repairBlink {
@@ -659,50 +681,63 @@
 
   .definition-card {
     display: block;
-    border: 1px solid var(--form-element-border-color);
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+    border: 1px solid rgba(0, 242, 254, 0.3);
     border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 0.9rem;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+
+  .definition-card:hover {
+    border-color: rgba(0, 242, 254, 0.8);
+    transform: translateY(-2px);
   }
 
   .definition-title {
     margin: 0 0 0.5rem 0;
-    font-size: 1.05rem;
-    line-height: 1.3;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #00f2fe;
+    font-weight: 700;
   }
 
   .definition-content {
     margin: 0;
     line-height: 1.6;
-    color: var(--muted-color);
+    color: #94a3b8;
+    font-size: 0.95rem;
   }
 
   .definitions-meta {
-    text-align: center;
+    text-align: right;
     margin-top: 1rem;
-    color: var(--muted-color);
+    color: #64748b;
     font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   .keyword-chips {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
   }
 
   .keyword-chip {
     font-size: 0.75rem;
-    padding: 0.15rem 0.5rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 999px;
-    background: rgba(140, 255, 173, 0.12);
-    border: 1px solid rgba(140, 255, 173, 0.25);
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    color: #00f2fe;
+    font-family: 'JetBrains Mono', monospace;
   }
 </style>
 
 <script>
-  function switchDemo(demo) {
+  function switchDemo(demo, event) {
     // Hide all demos
     document.getElementById("movies-demo").style.display = "none";
     document.getElementById("spaceship-demo").style.display = "none";
@@ -710,16 +745,20 @@
 
     // Remove active state from all buttons
     document.querySelectorAll(".demo-tab-btn").forEach((btn) => {
-      btn.style.color = "var(--muted-color)";
-      btn.style.borderBottom = "none";
+      btn.style.color = "#94a3b8";
+      btn.style.background = "rgba(30, 41, 59, 0.6)";
+      btn.style.borderColor = "rgba(100, 116, 139, 0.3)";
     });
 
     // Show selected demo
     document.getElementById(demo + "-demo").style.display = "block";
 
     // Activate button
-    event.target.style.color = "var(--primary-color)";
-    event.target.style.borderBottom = "3px solid var(--primary-color)";
+    if (event && event.currentTarget) {
+      event.currentTarget.style.color = "#00f2fe";
+      event.currentTarget.style.background = "rgba(0, 242, 254, 0.1)";
+      event.currentTarget.style.borderColor = "rgba(0, 242, 254, 0.4)";
+    }
   }
 
   function reactToInput(query) {
