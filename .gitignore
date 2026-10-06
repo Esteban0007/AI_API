@@ -85,3 +85,8 @@ data/*.csv
 !data/data_demo_readyapi_instructions.json
 !data/data_demo_movies.json
 
+# AI Models
+models/arctic_onnx/
+
+# Environment backups
+.env.*
