@@ -71,7 +71,7 @@ class User(Base):
     name = Column(String, nullable=True)  
     company = Column(String, nullable=True)
 
-    shopify_domain = Column(String, unique=True, index=True, nullable=True)
+    #shopify_domain = Column(String, unique=True, index=True, nullable=True)
 
     # Authentication (for future web dashboard)
     hashed_password = Column(String, nullable=True)  

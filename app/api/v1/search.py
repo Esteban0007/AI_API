@@ -122,83 +122,81 @@ async def search(
         )
 
 
-@router.post("/shopify-query", response_model=SearchResponse)
-async def shopify_search_dynamic(
-    search_query: SearchQuery,
-    shop: Optional[str] = Query(None),  # Captura ?shop= enviado por Shopify
-    x_shopify_shop_domain: Optional[str] = Header(None, alias="X-Shopify-Shop-Domain"),
-) -> SearchResponse:
-    """
-    Endpoint POST dinámico para Shopify que soporta filtros complejos en el JSON.
-    Busca el dominio tanto en Query Params como en las Headers para ser compatible con el Proxy.
-    """
-    shop_domain = x_shopify_shop_domain or shop
-
-    if not shop_domain:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Falta el parámetro o cabecera del dominio de la tienda para identificarla",
-        )
-
-    from app.db.users import get_user_by_shopify_domain
-
-    user_context = get_user_by_shopify_domain(shop_domain)
-
-    if not user_context:
-        # Devolvemos una respuesta vacía limpia si la tienda no está indexada aún
-        # para evitar que el proxy de Shopify se asuste y tire un Error 500 genérico.
-        return SearchResponse(
-            query=search_query.query, total_results=0, results=[], execution_time_ms=0
-        )
-
-    try:
-        logger.info(
-            f"Búsqueda con filtros desde Shopify [{shop_domain}]: '{search_query.query}'"
-        )
-
-        tenant_id = (
-            user_context["tenant_id"]
-            if "tenant_id" in user_context
-            else f"user_{user_context['id']}"
-        )
-        search_engine = _get_search_engine_for_tenant(tenant_id)
-
-        results, execution_time = search_engine.search(
-            query=search_query.query,
-            top_k=search_query.top_k,
-            filters=search_query.filters,
-            include_content=search_query.include_content,
-        )
-
-        formatted_results = [
-            SearchResult(
-                id=result["id"],
-                title=result["title"],
-                score=result["score"],
-                content=result.get("content"),
-                metadata={
-                    k: v
-                    for k, v in result.get("metadata", {}).items()
-                    if k != "tenant_id"
-                },
-            )
-            for result in results
-        ]
-
-        return SearchResponse(
-            query=search_query.query,
-            total_results=len(formatted_results),
-            results=formatted_results,
-            execution_time_ms=execution_time,
-        )
-
-    except Exception as e:
-        logger.error(f"Error en búsqueda con filtros desde Shopify: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
-
-
+# @router.post("/shopify-query", response_model=SearchResponse)
+# async def shopify_search_dynamic(
+#     search_query: SearchQuery,
+#     shop: Optional[str] = Query(None),  # Captura ?shop= enviado por Shopify
+#     x_shopify_shop_domain: Optional[str] = Header(None, alias="X-Shopify-Shop-Domain"),
+# ) -> SearchResponse:
+#     """
+#     Endpoint POST dinámico para Shopify que soporta filtros complejos en el JSON.
+#     Busca el dominio tanto en Query Params como en las Headers para ser compatible con el Proxy.
+#     """
+#     shop_domain = x_shopify_shop_domain or shop
+#
+#     if not shop_domain:
+#         raise HTTPException(
+#             status_code=status.HTTP_400_BAD_REQUEST,
+#             detail="Falta el parámetro o cabecera del dominio de la tienda para identificarla",
+#         )
+#
+#     from app.db.users import get_user_by_shopify_domain
+#
+#     user_context = get_user_by_shopify_domain(shop_domain)
+#
+#     if not user_context:
+#         # Devolvemos una respuesta vacía limpia si la tienda no está indexada aún
+#         # para evitar que el proxy de Shopify se asuste y tire un Error 500 genérico.
+#         return SearchResponse(
+#             query=search_query.query, total_results=0, results=[], execution_time_ms=0
+#         )
+#
+#     try:
+#         logger.info(
+#             f"Búsqueda con filtros desde Shopify [{shop_domain}]: '{search_query.query}'"
+#         )
+#
+#         tenant_id = (
+#             user_context["tenant_id"]
+#             if "tenant_id" in user_context
+#             else f"user_{user_context['id']}"
+#         )
+#         search_engine = _get_search_engine_for_tenant(tenant_id)
+#
+#         results, execution_time = search_engine.search(
+#             query=search_query.query,
+#             top_k=search_query.top_k,
+#             filters=search_query.filters,
+#             include_content=search_query.include_content,
+#         )
+#
+#         formatted_results = [
+#             SearchResult(
+#                 id=result["id"],
+#                 title=result["title"],
+#                 score=result["score"],
+#                 content=result.get("content"),
+#                 metadata={
+#                     k: v
+#                     for k, v in result.get("metadata", {}).items()
+#                     if k != "tenant_id"
+#                 },
+#             )
+#             for result in results
+#         ]
+#
+#         return SearchResponse(
+#             query=search_query.query,
+#             total_results=len(formatted_results),
+#             results=formatted_results,
+#             execution_time_ms=execution_time,
+#         )
+#
+#     except Exception as e:
+#         logger.error(f"Error en búsqueda con filtros desde Shopify: {e}")
+#         raise HTTPException(
+#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+#         )
 @router.get("/health", tags=["Search"], include_in_schema=False)
 async def health_check() -> dict:
     try:
