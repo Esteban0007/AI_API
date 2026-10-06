@@ -1,11 +1,42 @@
 {% extends "base.html" %} {% block title %}Resend Confirmation -
 SemanticSearch{% endblock %} {% block content %}
-<div class="container" style="max-width: 500px; padding: 2.5rem 1rem;">
-  <div style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2.25rem; backdrop-filter: blur(10px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
-    
-    <h1 style="color: #f8fafc; font-size: 1.5rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem; text-align: center;">Resend Confirmation Email</h1>
-    <p style="color: #94a3b8; font-size: 0.9rem; text-align: center; margin-bottom: 1.75rem;">
-      Didn't receive the confirmation email? Enter your email address and we'll send it again[cite: 1].
+<div class="container" style="max-width: 500px; padding: 2.5rem 1rem">
+  <div
+    style="
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.9) 0%,
+        rgba(30, 41, 59, 0.75) 100%
+      );
+      border: 1px solid rgba(100, 116, 139, 0.3);
+      border-radius: 12px;
+      padding: 2.25rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    "
+  >
+    <h1
+      style="
+        color: #f8fafc;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      "
+    >
+      Resend Confirmation Email
+    </h1>
+    <p
+      style="
+        color: #94a3b8;
+        font-size: 0.9rem;
+        text-align: center;
+        margin-bottom: 1.75rem;
+      "
+    >
+      Didn't receive the confirmation email? Enter your email address and we'll
+      send it again.
     </p>
 
     {% if error %}
@@ -16,16 +47,14 @@ SemanticSearch{% endblock %} {% block content %}
         color: #f87171;
         border-radius: 8px;
         padding: 1rem;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: &quot;JetBrains Mono&quot;, monospace;
         font-size: 0.85rem;
         margin-bottom: 1.5rem;
       "
     >
-      <strong style="color: #ef4444;">[ERROR]:</strong> {{ error }}[cite: 1]
+      <strong style="color: #ef4444">[ERROR]:</strong> {{ error }}
     </article>
-    {% endif %} 
-    
-    {% if success %}
+    {% endif %} {% if success %}
     <article
       style="
         background: rgba(16, 185, 129, 0.1);
@@ -33,35 +62,80 @@ SemanticSearch{% endblock %} {% block content %}
         color: #34d399;
         border-radius: 8px;
         padding: 1rem;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: &quot;JetBrains Mono&quot;, monospace;
         font-size: 0.85rem;
         margin-bottom: 1.5rem;
       "
     >
-      <strong style="color: #10b981;">[SUCCESS]:</strong> {{ success }}[cite: 1]
+      <strong style="color: #10b981">[SUCCESS]:</strong> {{ success }}
     </article>
     {% endif %}
 
-    <form method="post" action="/resend-confirmation" style="margin-bottom: 1.5rem;">
-      <label for="email" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 1.25rem;">
+    <form
+      method="post"
+      action="/resend-confirmation"
+      style="margin-bottom: 1.5rem"
+    >
+      <label
+        for="email"
+        style="
+          color: #cbd5e1;
+          font-size: 0.85rem;
+          font-weight: 500;
+          display: block;
+          margin-bottom: 1.25rem;
+        "
+      >
         Email
         <input
           type="email"
           id="email"
           name="email"
-          placeholder="your@email.com"[cite: 1]
+          placeholder="your@email.com"
           required
-          style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem; width: 100%;"
+          style="
+            margin-top: 0.4rem;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            color: #f8fafc;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 100%;
+          "
         />
       </label>
 
-      <button type="submit" style="width: 100%; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);">Resend Confirmation Email</button>
+      <button
+        type="submit"
+        style="
+          width: 100%;
+          background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+          color: #0f172a;
+          padding: 0.6rem 1.4rem;
+          border-radius: 6px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+        "
+      >
+        Resend Confirmation Email
+      </button>
     </form>
 
-    <p style="text-align: center; margin-top: 1.5rem; color: #94a3b8; font-size: 0.85rem;">
-      Already confirmed? <a href="/login" style="color: #00f2fe; text-decoration: none;">Log in</a>[cite: 1]
+    <p
+      style="
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #94a3b8;
+        font-size: 0.85rem;
+      "
+    >
+      Already confirmed?
+      <a href="/login" style="color: #00f2fe; text-decoration: none">Log in</a>
     </p>
-
   </div>
 </div>
 {% endblock %}

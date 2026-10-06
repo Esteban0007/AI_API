@@ -1,15 +1,30 @@
 {% extends "base.html" %} {% block title %}Profile Settings - SemanticSearch{%
 endblock %} {% block content %}
-<div class="container" style="max-width: 680px; padding: 2.5rem 1rem;">
-  
-  <div style="margin-bottom: 2rem;">
-    <h1 style="color: #f8fafc; font-size: 1.6rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem;">Profile Settings</h1>
-    <p style="color: #94a3b8; font-size: 0.95rem; margin: 0;">
+<div class="container" style="max-width: 680px; padding: 2.5rem 1rem">
+  <div style="margin-bottom: 2rem">
+    <h1
+      style="
+        color: #f8fafc;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      "
+    >
+      Profile Settings
+    </h1>
+    <p style="color: #94a3b8; font-size: 0.95rem; margin: 0">
       Manage your account and security settings.
     </p>
   </div>
-  
-  <hr style="border: none; border-top: 1px solid rgba(100, 116, 139, 0.2); margin: 2rem 0;" />
+
+  <hr
+    style="
+      border: none;
+      border-top: 1px solid rgba(100, 116, 139, 0.2);
+      margin: 2rem 0;
+    "
+  />
 
   {% if error %}
   <article
@@ -19,16 +34,14 @@ endblock %} {% block content %}
       color: #f87171;
       border-radius: 8px;
       padding: 1rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: &quot;JetBrains Mono&quot;, monospace;
       font-size: 0.85rem;
       margin-bottom: 1.5rem;
     "
   >
-    <strong style="color: #ef4444;">[ERROR]:</strong>[cite: 1] {{ error }}
+    <strong style="color: #ef4444">[ERROR]:</strong> {{ error }}
   </article>
-  {% endif %} 
-
-  {% if success %}
+  {% endif %} {% if success %}
   <article
     style="
       background: rgba(16, 185, 129, 0.1);
@@ -36,74 +49,23 @@ endblock %} {% block content %}
       color: #34d399;
       border-radius: 8px;
       padding: 1rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: &quot;JetBrains Mono&quot;, monospace;
       font-size: 0.85rem;
       margin-bottom: 1.5rem;
     "
   >
-    <strong style="color: #10b981;">[SUCCESS]:</strong>[cite: 1] {{ success }}
+    <strong style="color: #10b981">[SUCCESS]:</strong> {{ success }}
   </article>
   {% endif %}
 
   <!-- Change Password Section -->
-  <section style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2rem; backdrop-filter: blur(10px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); margin-bottom: 2.5rem;">
-    <h2 style="color: #f8fafc; font-size: 1.2rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem;">Change Password</h2>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">
-      Update your password to keep your account secure.[cite: 1]
-    </p>
-
-    <form method="post" action="/change-password" style="margin-bottom: 0;">
-      <!-- Hidden field with API key from localStorage -->
-      <input type="hidden" id="api-key-field" name="api_key" value="" />[cite: 1]
-
-      <label for="current-password" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 1rem;">
-        Current Password
-        <input
-          type="password"
-          id="current-password"
-          name="current_password"
-          placeholder="Enter your current password"[cite: 1]
-          required
-          style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem; width: 100%;"
-        />
-      </label>
-
-      <label for="new-password" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 1rem;">
-        New Password
-        <input
-          type="password"
-          id="new-password"
-          name="new_password"
-          placeholder="Enter a strong password (min. 8 characters)"[cite: 1]
-          required
-          minlength="8"
-          style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem; width: 100%;"
-        />
-      </label>
-
-      <label for="confirm-password" style="color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 1.5rem;">
-        Confirm Password
-        <input
-          type="password"
-          id="confirm-password"
-          name="confirm_password"
-          placeholder="Confirm your new password"[cite: 1]
-          required
-          minlength="8"
-          style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem; width: 100%;"
-        />
-      </label>
-
-      <button type="submit" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);">
-        Update Password
-      </button>
-    </form>
-  </section>
-
-  <!-- Account Information -->
   <section
     style="
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%);
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.9) 0%,
+        rgba(30, 41, 59, 0.75) 100%
+      );
       border: 1px solid rgba(100, 116, 139, 0.3);
       border-radius: 12px;
       padding: 2rem;
@@ -112,30 +74,222 @@ endblock %} {% block content %}
       margin-bottom: 2.5rem;
     "
   >
-    <h2 style="color: #f8fafc; font-size: 1.2rem; font-weight: 700; margin-top: 0; margin-bottom: 1rem;">
-      Account Information[cite: 1]
+    <h2
+      style="
+        color: #f8fafc;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      "
+    >
+      Change Password
     </h2>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 0.75rem;">
-      <strong style="color: #cbd5e1;">Email:</strong> <span id="account-email" style="font-family: 'JetBrains Mono', monospace; color: #00f2fe;">Loading...</span>[cite: 1]
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem">
+      Update your password to keep your account secure.
     </p>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.25rem;">
-      <strong style="color: #cbd5e1;">Account Status:</strong>
-      <span style="color: #10b981; font-weight: 600; font-family: 'JetBrains Mono', monospace;">Active</span>[cite: 1]
+
+    <form method="post" action="/change-password" style="margin-bottom: 0">
+      <!-- Hidden field with API key from localStorage -->
+      <input type="hidden" id="api-key-field" name="api_key" value="" />
+
+      <label
+        for="current-password"
+        style="
+          color: #cbd5e1;
+          font-size: 0.85rem;
+          font-weight: 500;
+          display: block;
+          margin-bottom: 1rem;
+        "
+      >
+        Current Password
+        <input
+          type="password"
+          id="current-password"
+          name="current_password"
+          placeholder="Enter your current password"
+          required
+          style="
+            margin-top: 0.4rem;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            color: #f8fafc;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 100%;
+          "
+        />
+      </label>
+
+      <label
+        for="new-password"
+        style="
+          color: #cbd5e1;
+          font-size: 0.85rem;
+          font-weight: 500;
+          display: block;
+          margin-bottom: 1rem;
+        "
+      >
+        New Password
+        <input
+          type="password"
+          id="new-password"
+          name="new_password"
+          placeholder="Enter a strong password (min. 8 characters)"
+          required
+          minlength="8"
+          style="
+            margin-top: 0.4rem;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            color: #f8fafc;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 100%;
+          "
+        />
+      </label>
+
+      <label
+        for="confirm-password"
+        style="
+          color: #cbd5e1;
+          font-size: 0.85rem;
+          font-weight: 500;
+          display: block;
+          margin-bottom: 1.5rem;
+        "
+      >
+        Confirm Password
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm_password"
+          placeholder="Confirm your new password"
+          required
+          minlength="8"
+          style="
+            margin-top: 0.4rem;
+            background: rgba(10, 15, 30, 0.9);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            color: #f8fafc;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            width: 100%;
+          "
+        />
+      </label>
+
+      <button
+        type="submit"
+        style="
+          background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+          color: #0f172a;
+          padding: 0.6rem 1.4rem;
+          border-radius: 6px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+        "
+      >
+        Update Password
+      </button>
+    </form>
+  </section>
+
+  <!-- Account Information -->
+  <section
+    style="
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.9) 0%,
+        rgba(30, 41, 59, 0.75) 100%
+      );
+      border: 1px solid rgba(100, 116, 139, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: 2.5rem;
+    "
+  >
+    <h2
+      style="
+        color: #f8fafc;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 1rem;
+      "
+    >
+      Account Information
+    </h2>
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 0.75rem">
+      <strong style="color: #cbd5e1">Email:</strong>
+      <span
+        id="account-email"
+        style="
+          font-family: &quot;JetBrains Mono&quot;, monospace;
+          color: #00f2fe;
+        "
+        >Loading...</span
+      >
     </p>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">
-      <a href="/" style="color: #00f2fe; text-decoration: none; font-weight: 500;"
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.25rem">
+      <strong style="color: #cbd5e1">Account Status:</strong>
+      <span
+        style="
+          color: #10b981;
+          font-weight: 600;
+          font-family: &quot;JetBrains Mono&quot;, monospace;
+        "
+        >Active</span
+      >
+    </p>
+    <p style="color: #94a3b8; font-size: 0.9rem; margin: 0">
+      <a
+        href="/"
+        style="color: #00f2fe; text-decoration: none; font-weight: 500"
         >← Back to Home</a
-      >[cite: 1]
+      >
     </p>
   </section>
 
   <!-- Delete Account Section -->
-  <section style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.75) 100%); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 12px; padding: 2rem; backdrop-filter: blur(10px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
-    <h2 style="color: #f87171; font-size: 1.2rem; font-weight: 700; margin-top: 0; margin-bottom: 0.5rem;">
-      Danger Zone[cite: 1]
+  <section
+    style="
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.9) 0%,
+        rgba(30, 41, 59, 0.75) 100%
+      );
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 12px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    "
+  >
+    <h2
+      style="
+        color: #f87171;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      "
+    >
+      Danger Zone
     </h2>
-    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">
-      Permanently delete your account and all associated data.[cite: 1]
+    <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem">
+      Permanently delete your account and all associated data.
     </p>
 
     <div
@@ -146,19 +300,44 @@ endblock %} {% block content %}
         padding: 1.5rem;
       "
     >
-      <h3 style="margin-top: 0; color: #f87171; font-size: 1rem; font-family: 'JetBrains Mono', monospace;">Delete Account</h3>[cite: 1]
+      <h3
+        style="
+          margin-top: 0;
+          color: #f87171;
+          font-size: 1rem;
+          font-family: &quot;JetBrains Mono&quot;, monospace;
+        "
+      >
+        Delete Account
+      </h3>
 
-      <p style="color: #cbd5e1; font-size: 0.9rem; font-weight: 500; margin-bottom: 1rem; line-height: 1.5;">
-        This action is <strong style="color: #f87171;">IRREVERSIBLE</strong>. All your data will be[cite: 1]
-        permanently deleted:
+      <p
+        style="
+          color: #cbd5e1;
+          font-size: 0.9rem;
+          font-weight: 500;
+          margin-bottom: 1rem;
+          line-height: 1.5;
+        "
+      >
+        This action is <strong style="color: #f87171">IRREVERSIBLE</strong>. All
+        your data will be permanently deleted:
       </p>
 
-      <ul style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; padding-left: 1.25rem;">
-        <li>Your account and personal information[cite: 1]</li>
-        <li>All uploaded files and documents[cite: 1]</li>
-        <li>Your API keys and access tokens[cite: 1]</li>
-        <li>Your search history and logs[cite: 1]</li>
-        <li>Your vector embeddings[cite: 1]</li>
+      <ul
+        style="
+          color: #94a3b8;
+          font-size: 0.9rem;
+          line-height: 1.6;
+          margin-bottom: 1.5rem;
+          padding-left: 1.25rem;
+        "
+      >
+        <li>Your account and personal information</li>
+        <li>All uploaded files and documents</li>
+        <li>Your API keys and access tokens</li>
+        <li>Your search history and logs</li>
+        <li>Your vector embeddings</li>
       </ul>
 
       <div
@@ -170,18 +349,37 @@ endblock %} {% block content %}
           border-radius: 4px;
         "
       >
-        <p style="margin: 0; color: #fbbf24; font-size: 0.85rem; line-height: 1.5;">
-          <strong style="color: #f59e0b;">Note:</strong> Your consent records will be preserved for 6[cite: 1]
-          years per GDPR compliance requirements.
+        <p
+          style="
+            margin: 0;
+            color: #fbbf24;
+            font-size: 0.85rem;
+            line-height: 1.5;
+          "
+        >
+          <strong style="color: #f59e0b">Note:</strong> Your consent records
+          will be preserved for 6 years per GDPR compliance requirements.
         </p>
       </div>
 
       <form id="delete-account-form">
         <label
           for="delete-confirmation"
-          style="display: block; margin-bottom: 1rem; color: #cbd5e1; font-size: 0.85rem;"
+          style="
+            display: block;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-size: 0.85rem;
+          "
         >
-          <span style="color: #f87171; font-weight: 500; display: block; margin-bottom: 0.4rem;">
+          <span
+            style="
+              color: #f87171;
+              font-weight: 500;
+              display: block;
+              margin-bottom: 0.4rem;
+            "
+          >
             To confirm, type
             <code
               style="
@@ -190,18 +388,27 @@ endblock %} {% block content %}
                 border: 1px solid rgba(239, 68, 68, 0.4);
                 border-radius: 3px;
                 color: #f87171;
-                font-family: 'JetBrains Mono', monospace;
+                font-family: &quot;JetBrains Mono&quot;, monospace;
               "
               >DELETE</code
             >
-            in the box below:[cite: 1]
+            in the box below:
           </span>
           <input
             type="text"
             id="delete-confirmation"
-            placeholder='Type "DELETE" to confirm'[cite: 1]
-            style="margin-top: 0.2rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(239, 68, 68, 0.4); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem; width: 100%;"
-            autocomplete="off"[cite: 1]
+            placeholder='Type "DELETE" to confirm'
+            style="
+              margin-top: 0.2rem;
+              background: rgba(10, 15, 30, 0.9);
+              border: 1px solid rgba(239, 68, 68, 0.4);
+              color: #f8fafc;
+              padding: 0.6rem 0.8rem;
+              border-radius: 6px;
+              font-size: 0.9rem;
+              width: 100%;
+            "
+            autocomplete="off"
           />
           <small
             style="
@@ -211,20 +418,34 @@ endblock %} {% block content %}
               font-size: 0.75rem;
             "
           >
-            This field is case-sensitive[cite: 1]
+            This field is case-sensitive
           </small>
         </label>
 
         <label
           for="delete-password"
-          style="display: block; margin-bottom: 1.25rem; color: #cbd5e1; font-size: 0.85rem;"
+          style="
+            display: block;
+            margin-bottom: 1.25rem;
+            color: #cbd5e1;
+            font-size: 0.85rem;
+          "
         >
-          <span style="font-weight: 500;">Your Password:</span>[cite: 1]
+          <span style="font-weight: 500">Your Password:</span>
           <input
             type="password"
             id="delete-password"
-            placeholder="Enter your password to confirm"[cite: 1]
-            style="margin-top: 0.4rem; background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(100, 116, 139, 0.3); color: #f8fafc; padding: 0.6rem 0.8rem; border-radius: 6px; font-size: 0.9rem; width: 100%;"
+            placeholder="Enter your password to confirm"
+            style="
+              margin-top: 0.4rem;
+              background: rgba(10, 15, 30, 0.9);
+              border: 1px solid rgba(100, 116, 139, 0.3);
+              color: #f8fafc;
+              padding: 0.6rem 0.8rem;
+              border-radius: 6px;
+              font-size: 0.9rem;
+              width: 100%;
+            "
           />
         </label>
 
@@ -243,9 +464,9 @@ endblock %} {% block content %}
             opacity: 0.5;
             transition: all 0.2s ease;
           "
-          disabled[cite: 1]
+          disabled
         >
-          Delete Account Permanently[cite: 1]
+          Delete Account Permanently
         </button>
 
         <div
@@ -258,10 +479,10 @@ endblock %} {% block content %}
             padding: 1rem;
             border-radius: 6px;
             margin-top: 1rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
             font-size: 0.85rem;
           "
-        ></div>[cite: 1]
+        ></div>
 
         <div
           id="delete-success"
@@ -273,14 +494,14 @@ endblock %} {% block content %}
             padding: 1rem;
             border-radius: 6px;
             margin-top: 1rem;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
             font-size: 0.85rem;
           "
         >
-          <strong>[SUCCESS]: Account Deleted</strong>[cite: 1]
-          <p style="margin: 0.4rem 0 0 0; color: #cbd5e1;">
+          <strong>[SUCCESS]: Account Deleted</strong>
+          <p style="margin: 0.4rem 0 0 0; color: #cbd5e1">
             Your account has been permanently deleted. You will be redirected
-            shortly...[cite: 1]
+            shortly...
           </p>
         </div>
       </form>
@@ -291,112 +512,112 @@ endblock %} {% block content %}
 <script>
   // Display email from localStorage and fill API key in form
   document.addEventListener("DOMContentLoaded", function () {
-    const userEmail = localStorage.getItem("user_email");[cite: 1]
-    const apiKey = localStorage.getItem("api_key");[cite: 1]
+    const userEmail = localStorage.getItem("user_email");
+    const apiKey = localStorage.getItem("api_key");
 
-    const emailSpan = document.getElementById("account-email");[cite: 1]
+    const emailSpan = document.getElementById("account-email");
     if (userEmail && emailSpan) {
-      emailSpan.textContent = userEmail;[cite: 1]
+      emailSpan.textContent = userEmail;
     }
 
     // Fill the hidden API key field for form submission
-    const apiKeyField = document.getElementById("api-key-field");[cite: 1]
+    const apiKeyField = document.getElementById("api-key-field");
     if (apiKeyField && apiKey) {
-      apiKeyField.value = apiKey;[cite: 1]
+      apiKeyField.value = apiKey;
     }
 
     // Handle delete account form validation (GitHub-style)
-    const deleteForm = document.getElementById("delete-account-form");[cite: 1]
-    const deleteConfirmation = document.getElementById("delete-confirmation");[cite: 1]
-    const deletePassword = document.getElementById("delete-password");[cite: 1]
-    const deleteBtn = document.getElementById("delete-btn");[cite: 1]
+    const deleteForm = document.getElementById("delete-account-form");
+    const deleteConfirmation = document.getElementById("delete-confirmation");
+    const deletePassword = document.getElementById("delete-password");
+    const deleteBtn = document.getElementById("delete-btn");
 
     if (deleteForm && deleteConfirmation && deletePassword && deleteBtn) {
       // Validate both fields to enable button
       function validateDeleteForm() {
-        const confirmationValue = deleteConfirmation.value.trim();[cite: 1]
-        const passwordValue = deletePassword.value.trim();[cite: 1]
+        const confirmationValue = deleteConfirmation.value.trim();
+        const passwordValue = deletePassword.value.trim();
         const isValid =
-          confirmationValue === "DELETE" && passwordValue.length > 0;[cite: 1]
+          confirmationValue === "DELETE" && passwordValue.length > 0;
 
-        deleteBtn.disabled = !isValid;[cite: 1]
-        deleteBtn.style.opacity = isValid ? "1" : "0.5";[cite: 1]
-        deleteBtn.style.cursor = isValid ? "pointer" : "not-allowed";[cite: 1]
+        deleteBtn.disabled = !isValid;
+        deleteBtn.style.opacity = isValid ? "1" : "0.5";
+        deleteBtn.style.cursor = isValid ? "pointer" : "not-allowed";
       }
 
-      deleteConfirmation.addEventListener("input", validateDeleteForm);[cite: 1]
-      deletePassword.addEventListener("input", validateDeleteForm);[cite: 1]
+      deleteConfirmation.addEventListener("input", validateDeleteForm);
+      deletePassword.addEventListener("input", validateDeleteForm);
 
       // Handle form submission
       deleteForm.addEventListener("submit", async function (e) {
-        e.preventDefault();[cite: 1]
+        e.preventDefault();
 
-        const userEmail = localStorage.getItem("user_email");[cite: 1]
-        const password = deletePassword.value.trim();[cite: 1]
-        const deleteError = document.getElementById("delete-error");[cite: 1]
-        const deleteSuccess = document.getElementById("delete-success");[cite: 1]
+        const userEmail = localStorage.getItem("user_email");
+        const password = deletePassword.value.trim();
+        const deleteError = document.getElementById("delete-error");
+        const deleteSuccess = document.getElementById("delete-success");
 
         if (deleteConfirmation.value !== "DELETE") {
           deleteError.textContent =
-            "Error: You must type DELETE exactly to confirm.";[cite: 1]
-          deleteError.style.display = "block";[cite: 1]
+            "Error: You must type DELETE exactly to confirm.";
+          deleteError.style.display = "block";
           return;
         }
 
         if (!password) {
-          deleteError.textContent = "Error: Password is required.";[cite: 1]
-          deleteError.style.display = "block";[cite: 1]
+          deleteError.textContent = "Error: Password is required.";
+          deleteError.style.display = "block";
           return;
         }
 
         if (!userEmail) {
           deleteError.textContent =
-            "Error: Email not found. Please login again.";[cite: 1]
-          deleteError.style.display = "block";[cite: 1]
+            "Error: Email not found. Please login again.";
+          deleteError.style.display = "block";
           return;
         }
 
         try {
-          deleteBtn.disabled = true;[cite: 1]
-          deleteBtn.textContent = "Processing...";[cite: 1]
-          deleteError.style.display = "none";[cite: 1]
+          deleteBtn.disabled = true;
+          deleteBtn.textContent = "Processing...";
+          deleteError.style.display = "none";
 
           const response = await fetch("/api/delete-account", {
-            method: "POST",[cite: 1]
+            method: "POST",
             headers: {
-              "Content-Type": "application/json",[cite: 1]
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              email: userEmail,[cite: 1]
-              password: password,[cite: 1]
+              email: userEmail,
+              password: password,
             }),
           });
 
-          const data = await response.json();[cite: 1]
+          const data = await response.json();
 
           if (response.ok && data.success) {
             // Show success message
-            deleteForm.style.display = "none";[cite: 1]
-            deleteSuccess.style.display = "block";[cite: 1]
+            deleteForm.style.display = "none";
+            deleteSuccess.style.display = "block";
 
             // Clear storage and redirect after 2 seconds
             setTimeout(() => {
-              localStorage.removeItem("api_key");[cite: 1]
-              localStorage.removeItem("user_email");[cite: 1]
-              window.location.href = "/";[cite: 1]
+              localStorage.removeItem("api_key");
+              localStorage.removeItem("user_email");
+              window.location.href = "/";
             }, 2000);
           } else {
-            deleteError.textContent = `Error: ${data.message || "Failed to delete account."}`;[cite: 1]
-            deleteError.style.display = "block";[cite: 1]
-            deleteBtn.disabled = false;[cite: 1]
-            deleteBtn.textContent = "Delete Account Permanently";[cite: 1]
+            deleteError.textContent = `Error: ${data.message || "Failed to delete account."}`;
+            deleteError.style.display = "block";
+            deleteBtn.disabled = false;
+            deleteBtn.textContent = "Delete Account Permanently";
           }
         } catch (error) {
-          console.error("Delete account error:", error);[cite: 1]
-          deleteError.textContent = `Error: ${error.message}`;[cite: 1]
-          deleteError.style.display = "block";[cite: 1]
-          deleteBtn.disabled = false;[cite: 1]
-          deleteBtn.textContent = "Delete Account Permanently";[cite: 1]
+          console.error("Delete account error:", error);
+          deleteError.textContent = `Error: ${error.message}`;
+          deleteError.style.display = "block";
+          deleteBtn.disabled = false;
+          deleteBtn.textContent = "Delete Account Permanently";
         }
       });
     }
