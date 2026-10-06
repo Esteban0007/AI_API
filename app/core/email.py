@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 from app.core.config import get_settings
 
 from fastapi import APIRouter, Request, Depends
-from app.main import limiter
+from app.limiter import limiter
 
 logger = logging.getLogger(__name__)
 

@@ -16,9 +16,7 @@ from pathlib import Path
 
 from app.core.config import get_settings
 from app.api import router
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
+from app.limiter import limiter
 
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
