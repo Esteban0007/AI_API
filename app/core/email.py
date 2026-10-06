@@ -7,16 +7,14 @@ from email.mime.multipart import MIMEMultipart
 
 from app.core.config import get_settings
 
-from fastapi import APIRouter, Request, Depends
-from app.limiter import limiter
+
 
 logger = logging.getLogger(__name__)
 
 settings = get_settings()
 
 
-@router.post("/register")
-@limiter.limit("5/minute")
+
 def send_confirmation_email(to_email: str, confirmation_token: str) -> bool:
     """Send confirmation email to user."""
     try:

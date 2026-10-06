@@ -1,5 +1,18 @@
-{% extends "base.html" %} {% block title %}Sign Up - SemanticSearch{% endblock
-%} {% block content %}
+{% extends "base.html" %} {% block title %}Sign Up - SemanticSearch{% endblock %} 
+{% block content %}
+<style>
+  .hp-field-container {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: -9999px;
+    height: 0;
+    width: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+</style>
+
 <div class="container" style="max-width: 500px; padding: 2.5rem 1rem">
   <div
     style="
@@ -74,6 +87,20 @@
     {% endif %}
 
     <form method="post" action="/register" style="margin-bottom: 1.5rem">
+      <div class="hp-field-container" aria-hidden="true">
+        <label for="confirm_email_address">Confirm Email Address</label>
+        <input
+          type="email"
+          id="confirm_email_address"
+          name="confirm_email_address"
+          tabindex="-1"
+          autocomplete="off"
+          value=""
+        />
+      </div>
+
+      <input type="hidden" id="form_time" name="form_time" value="" />
+
       <label
         for="email"
         style="
@@ -241,7 +268,8 @@
 </div>
 
 <script>
-  // Save consent record when form is submitted
+  document.getElementById("form_time").value = Math.floor(Date.now() / 1000);
+
   async function saveConsentRecord(email) {
     try {
       const response = await fetch("/api/consent", {
@@ -267,7 +295,6 @@
     }
   }
 
-  // Handle form submission validation
   document.querySelector("form").addEventListener("submit", function (e) {
     const termsCheckbox = document.getElementById("terms-agreement");
     const emailInput = document.getElementById("email");
@@ -279,12 +306,10 @@
       );
       termsCheckbox.focus();
     } else {
-      // Save consent record before form submission
       saveConsentRecord(emailInput.value);
     }
   });
 
-  // Disable/enable submit button based on checkbox state
   const termsCheckbox = document.getElementById("terms-agreement");
   const signupBtn = document.getElementById("signup-btn");
 
@@ -294,10 +319,7 @@
     signupBtn.style.cursor = termsCheckbox.checked ? "pointer" : "not-allowed";
   }
 
-  // Initial state
   updateButtonState();
-
-  // Update state when checkbox changes
   termsCheckbox.addEventListener("change", updateButtonState);
 </script>
 {% endblock %}

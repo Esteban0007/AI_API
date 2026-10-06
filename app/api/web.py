@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 import os
 import logging
+import time
 
 from app.engine.searcher import SearchEngine
 from app.engine.store import VectorStore
@@ -29,6 +30,9 @@ from app.core.email import (
     send_password_reset_email,
 )
 from app.core.config import get_settings
+
+from app.limiter import limiter
+from disposable_email_domains import blocklist
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -118,6 +122,26 @@ def _get_definition_image(title: str) -> str:
         "fruit": "https://images.unsplash.com/photo-1619566636858-adf3ef46400b",
     }
     return image_map.get((title or "").strip().lower(), image_map["leaf"])
+
+
+def is_disposable_email(email: str, allowed_domains: list[str] | None = None) -> bool:
+    """
+    Verifica si una dirección de correo pertenece a un proveedor de correo desechable.
+
+    :param email: La dirección de correo a validar.
+    :param allowed_domains: Lista opcional de dominios exentos de la lista de bloqueo.
+    :return: True si es un correo temporal, False si es válido.
+    """
+    if not email or "@" not in email:
+        return False
+
+    domain = email.split("@")[-1].strip().lower()
+
+    # Si el dominio está explícitamente permitido en la lista de excepciones
+    if allowed_domains and domain in [d.lower() for d in allowed_domains]:
+        return False
+
+    return domain in blocklist
 
 
 @router.get("/", response_class=HTMLResponse, include_in_schema=False)
@@ -442,17 +466,78 @@ async def login(request: Request, email: str = Form(...), password: str = Form(.
 
 
 @router.post("/register", response_class=HTMLResponse, include_in_schema=False)
+@limiter.limit("5/minute")
 async def register(
     request: Request,
     email: str = Form(...),
     password: str = Form(...),
     password2: str = Form(...),
+    # Capturamos los datos del Honeypot desde la plantilla HTML
+    confirm_email_address: str = Form(default=""),
+    form_time: str = Form(default=""),
 ):
-    """Process user registration."""
+    """Process user registration with Honeypot and Time-Trap protection."""
+
+    # -------------------------------------------------------------
+    # 1. VERIFICACIÓN DEL HONEYPOT Y TIME-TRAP
+    # -------------------------------------------------------------
+    is_bot = False
+
+    # A) Trampa de campo invisible: si rellenó 'confirm_email_address', es un bot
+    if confirm_email_address.strip():
+        logger.warning(
+            f"Honeypot trap triggered! Bot filled invisible field. IP: {request.client.host}"
+        )
+        is_bot = True
+
+    # B) Trampa de tiempo: si envió el formulario en menos de 2 segundos, es automatizado
+    if form_time:
+        try:
+            current_time = int(time.time())
+            start_time = int(form_time)
+            time_elapsed = current_time - start_time
+
+            if time_elapsed < 2:  # Menos de 2 segundos de interacción
+                logger.warning(
+                    f"Time-trap triggered! Form submitted in {time_elapsed}s. IP: {request.client.host}"
+                )
+                is_bot = True
+        except (ValueError, TypeError):
+            pass
+
+    # C) Si se detecta un bot, simulamos éxito total (silencioso, sin guardar nada)
+    if is_bot:
+        return templates.TemplateResponse(
+            "register.html",
+            {
+                "request": request,
+                "success": f"Registration successful! Check your email ({email}) to confirm your account.",
+            },
+        )
+
+    # -------------------------------------------------------------
+    # 2. PROCESO REAL DE REGISTRO
+    # -------------------------------------------------------------
+    # Normalizar email
+    email_clean = email.strip().lower()
+
     # Validate inputs
-    if not email or "@" not in email:
+    if not email_clean or "@" not in email_clean:
         return templates.TemplateResponse(
             "register.html", {"request": request, "error": "Invalid email."}
+        )
+
+    # Validar correo desechable
+    if is_disposable_email(email_clean):
+        logger.warning(
+            f"Registration attempt blocked with disposable email: {email_clean}"
+        )
+        return templates.TemplateResponse(
+            "register.html",
+            {
+                "request": request,
+                "error": "Disposable or temporary email addresses are not allowed.",
+            },
         )
 
     if len(password) < 8:
@@ -468,25 +553,25 @@ async def register(
         )
 
     # Register user
-    result = register_user(email, password)
+    result = register_user(email_clean, password)
 
     if result["success"]:
         confirmation_url = f"{settings.BASE_URL}/confirm/{result['confirmation_token']}"
 
         # Send confirmation email
-        email_sent = send_confirmation_email(email, result["confirmation_token"])
+        email_sent = send_confirmation_email(email_clean, result["confirmation_token"])
         smtp_password = settings.SMTP_PASSWORD.strip()
         smtp_configured = bool(
             smtp_password and smtp_password.lower() != "your_password_here"
         )
 
         if email_sent and smtp_configured:
-            logger.info(f"User registered and confirmation email sent: {email}")
+            logger.info(f"User registered and confirmation email sent: {email_clean}")
             return templates.TemplateResponse(
                 "register.html",
                 {
                     "request": request,
-                    "success": f"Registration successful! Check your email ({email}) to confirm your account.",
+                    "success": f"Registration successful! Check your email ({email_clean}) to confirm your account.",
                 },
             )
         else:
@@ -586,29 +671,50 @@ async def forgot_password_page(request: Request):
 
 
 @router.post("/forgot-password", response_class=HTMLResponse, include_in_schema=False)
+@limiter.limit("3/minute")
 async def forgot_password(request: Request, email: str = Form(...)):
     """Process forgot password request."""
-    result = request_password_reset(email)
+    email_clean = email.strip().lower()
+
+    if not email_clean or "@" not in email_clean:
+        return templates.TemplateResponse(
+            "forgot_password.html",
+            {"request": request, "error": "Invalid email address."},
+        )
+
+    # Validar correo desechable
+    if is_disposable_email(email_clean):
+        logger.warning(f"Password reset blocked for disposable email: {email_clean}")
+        return templates.TemplateResponse(
+            "forgot_password.html",
+            {
+                "request": request,
+                "error": "Password reset is not available for disposable email addresses.",
+            },
+        )
+
+    result = request_password_reset(email_clean)
 
     if not result["success"]:
         return templates.TemplateResponse(
-            "forgot_password.html", {"request": request, "error": result["message"]}
+            "forgot_password.html",
+            {"request": request, "error": result["message"]},
         )
 
     # Send password reset email
-    email_sent = send_password_reset_email(email, result["reset_token"])
+    email_sent = send_password_reset_email(email_clean, result["reset_token"])
     smtp_password = settings.SMTP_PASSWORD.strip()
     smtp_configured = bool(
         smtp_password and smtp_password.lower() != "your_password_here"
     )
 
     if email_sent and smtp_configured:
-        logger.info(f"Password reset email sent to {email}")
+        logger.info(f"Password reset email sent to {email_clean}")
         return templates.TemplateResponse(
             "forgot_password.html",
             {
                 "request": request,
-                "success": f"Password reset email sent to {email}. Check your inbox for instructions.",
+                "success": f"Password reset email sent to {email_clean}. Check your inbox for instructions.",
             },
         )
     else:

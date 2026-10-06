@@ -14,15 +14,13 @@ from datetime import datetime, timedelta
 from typing import Callable
 from pathlib import Path
 
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
+
 from app.core.config import get_settings
 from app.api import router
 from app.limiter import limiter
-
-limiter = Limiter(key_func=get_remote_address)
-app = FastAPI()
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
+from app.core.middleware import setup_security_middlewares
 
 # Configure logging
 logging.basicConfig(
@@ -31,8 +29,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # In-memory rate limiter state.
-# This is intentionally simple and lightweight so it works on the VPS without
-# introducing new dependencies.
 _request_history: dict[str, deque[float]] = defaultdict(deque)
 
 
@@ -55,6 +51,13 @@ def create_app() -> FastAPI:
         redoc_url="/api/redoc",
     )
 
+    # Configurar SlowAPI
+    app.state.limiter = limiter
+    app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+    # Registrar middleware de seguridad (Cabeceras + User-Agent)
+    setup_security_middlewares(app)
+
     # Add CORS middleware
     app.add_middleware(
         CORSMiddleware,
@@ -63,9 +66,6 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-
-    # Mount templates for Jinja2
-    templates = Jinja2Templates(directory=str(Path(__file__).parent / "templates"))
 
     # Mount static files
     static_path = Path(__file__).parent / "static"
@@ -81,7 +81,6 @@ def create_app() -> FastAPI:
         settings = get_settings()
 
         # Lightweight IP-based rate limiting.
-        # When enabled, requests over the configured window return 429.
         if settings.RATE_LIMIT_ENABLED:
             client_ip = request.client.host if request.client else "unknown"
             current_time = time.time()
@@ -157,7 +156,6 @@ def create_app() -> FastAPI:
         from app.engine.embedder import Embedder
 
         try:
-            # Get current embedder status
             embedder = Embedder()
             model_type = "INT8 ONNX" if embedder.is_int8_quantized() else "Standard"
 
@@ -190,7 +188,7 @@ def create_app() -> FastAPI:
             status_code=500, content={"detail": "Internal server error"}
         )
 
-    logger.info(f"FastAPI application created successfully")
+    logger.info("FastAPI application created successfully")
     return app
 
 
