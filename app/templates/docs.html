@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Documentation | ReadyAPI.net</title>
+    <meta name="description" content="ReadyAPI.net Semantic Search API — Developer Documentation. Interactive API reference with Swagger UI.">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+    <link rel="apple-touch-icon" href="/static/logo.png" />
+    <!-- Google Fonts: Inter and Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Swagger UI CSS (CDN) -->
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.9.0/swagger-ui.css" />
+    <!-- Custom ReadyAPI dark theme CSS -->
+    <link rel="stylesheet" href="/static/css/docs.css" />
+  </head>
+  <body>
+    <!-- Custom Header -->
+    <header class="rapi-docs-header">
+      <div class="rapi-header-inner">
+        <a href="/" class="rapi-brand" aria-label="ReadyAPI.net — Home">
+          <img src="/static/logo.png" alt="ReadyAPI.net logo" width="32" height="32" />
+          <div class="rapi-brand-text">
+            <div class="rapi-brand-name">ReadyAPI.net</div>
+            <div class="rapi-brand-sub">Developer Documentation</div>
+          </div>
+        </a>
+        <div class="rapi-actions">
+          <a href="/" class="rapi-btn-home" aria-label="Back to Home">
+            <span>Back to Home</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Swagger UI Container -->
+    <div id="swagger-ui"></div>
+
+    <!-- Swagger UI Bundle (CDN) -->
+    <script src="https://unpkg.com/swagger-ui-dist@5.9.0/swagger-ui-bundle.js" crossorigin></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5.9.0/swagger-ui-standalone-preset.js" crossorigin></script>
+    <script>
+      window.onload = function() {
+        const ui = SwaggerUIBundle({
+          url: "/api/openapi.json",
+          dom_id: '#swagger-ui',
+          deepLinking: true,
+          displayOperationId: true,
+          displayRequestDuration: true,
+          filter: true,
+          tryItOutEnabled: true,
+          requestSnippetsEnabled: true,
+          persistAuthorization: true,
+          layout: "StandaloneLayout",
+          docExpansion: "list",
+          defaultModelsExpandDepth: 2,
+          defaultModelExpandDepth: 2,
+          showExtensions: true,
+          showCommonExtensions: true,
+          validatorUrl: null,
+          oauth2RedirectUrl: window.location.origin + "/api/docs/oauth2-redirect",
+          presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+          ],
+          plugins: [],
+          components: {}
+        });
+        window.ui = ui;
+      };
+    </script>
+  </body>
+</html>

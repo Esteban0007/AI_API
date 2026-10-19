@@ -7,7 +7,6 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 import logging
 import time
 from datetime import datetime, timedelta
@@ -47,7 +46,7 @@ def create_app() -> FastAPI:
         description=settings.API_DESCRIPTION,
         version=settings.API_VERSION,
         openapi_url="/api/openapi.json",
-        docs_url="/api/docs",
+        docs_url=None,
         redoc_url="/api/redoc",
     )
 
@@ -72,6 +71,13 @@ def create_app() -> FastAPI:
     if static_path.exists():
         app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
         logger.info(f"Static files mounted at /static from {static_path}")
+
+    # Custom docs route — serves a branded Swagger UI page
+    @app.get("/api/docs", response_class=HTMLResponse, include_in_schema=False)
+    async def custom_docs():
+        """Custom Swagger UI documentation page with ReadyAPI.net branding."""
+        docs_path = Path(__file__).parent / "templates" / "docs.html"
+        return HTMLResponse(content=docs_path.read_text(encoding="utf-8"))
 
     # Add request logging middleware
     @app.middleware("http")
