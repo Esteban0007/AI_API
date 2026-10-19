@@ -883,3 +883,8 @@ async def change_password(
 async def catch_all_404(request: Request, path_name: str):
     """Catch-all route for 404 errors."""
     return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
+
+
+@router.get("/sitemap.html", response_class=HTMLResponse)
+async def sitemap_view(request: Request):
+    return templates.TemplateResponse("sitemap.html", {"request": request})
