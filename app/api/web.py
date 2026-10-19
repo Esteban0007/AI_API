@@ -879,9 +879,12 @@ async def change_password(
         )
 
 
-@router.get("/sitemap.html", response_class=HTMLResponse)
-async def sitemap_view(request: Request):
-    return templates.TemplateResponse("sitemap.html", {"request": request})
+@router.get("/sitemap.xml", include_in_schema=False)
+async def sitemap_xml(request: Request):
+    """Sitemap in XML format for search engine bots."""
+    return templates.TemplateResponse(
+        "sitemap.xml", {"request": request}, media_type="application/xml"
+    )
 
 
 @router.api_route("/{path_name:path}", methods=["GET"], include_in_schema=False)
