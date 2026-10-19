@@ -78,13 +78,21 @@
     </script>
     <style>
       :root {
-        --form-element-border-color: rgba(0, 242, 254, 0.2);
+        --bg-primary: #080d19;
+        --bg-surface: #10182a;
+        --bg-surface-2: #162137;
+        --text-primary: #f8fafc;
+        --text-muted: #94a3b8;
+        --accent: #22d3ee;
+        --accent-2: #2dd4bf;
+        --border-soft: rgba(148, 163, 184, 0.26);
+        --form-element-border-color: rgba(34, 211, 238, 0.28);
         --muted-color: #94a3b8;
       }
 
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background-color: #030712;
+        background-color: var(--bg-primary);
         color: #f8fafc;
         background-image: 
           radial-gradient(circle at 50% 0%, rgba(79, 172, 254, 0.08) 0%, transparent 50%),
@@ -115,12 +123,42 @@
       }
 
       nav {
-        padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+        padding: 0.9rem 2rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
       }
       nav a {
-        margin-right: 2rem;
         text-decoration: none;
+      }
+      .site-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        flex-wrap: nowrap;
+        background: rgba(8, 13, 25, 0.86);
+        backdrop-filter: blur(16px);
+        gap: 1rem;
+      }
+      .nav-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        min-width: fit-content;
+        margin-right: 1.25rem;
+      }
+      .nav-brand img {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        object-fit: cover;
+        border: 1px solid rgba(34, 211, 238, 0.35);
+      }
+      .nav-brand span {
+        color: var(--text-primary);
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        letter-spacing: 0.01em;
       }
       .container {
         max-width: 1200px;
@@ -253,30 +291,107 @@
         justify-content: center !important;
       }
       .nav-menu a {
-        color: #94a3b8 !important;
-        padding: 0.5rem 1rem !important;
+        color: var(--text-muted) !important;
+        padding: 0.48rem 0.82rem !important;
         border: 1px solid transparent !important;
-        border-radius: 8px !important;
+        border-radius: 10px !important;
         background: transparent !important;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         display: inline-block !important;
         font-weight: 500 !important;
-        font-size: 0.95rem !important;
+        font-size: 0.9rem !important;
         box-shadow: none !important;
       }
       .nav-menu a:hover {
-        background: rgba(0, 242, 254, 0.08) !important;
-        color: #00f2fe !important;
-        border-color: rgba(0, 242, 254, 0.3) !important;
+        background: rgba(34, 211, 238, 0.08) !important;
+        color: var(--text-primary) !important;
+        border-color: rgba(34, 211, 238, 0.32) !important;
         transform: translateY(-1px) !important;
-        box-shadow: 0 0 15px rgba(0, 242, 254, 0.15) !important;
+        box-shadow: 0 8px 20px rgba(34, 211, 238, 0.16) !important;
       }
       .nav-menu a.active {
-        background: rgba(0, 242, 254, 0.12) !important;
-        color: #00f2fe !important;
-        border-color: rgba(0, 242, 254, 0.4) !important;
+        background: rgba(34, 211, 238, 0.12) !important;
+        color: var(--text-primary) !important;
+        border-color: rgba(34, 211, 238, 0.45) !important;
         font-weight: 600 !important;
-        box-shadow: 0 0 20px rgba(0, 242, 254, 0.2) !important;
+        box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.24) inset !important;
+      }
+      .nav-action-link {
+        text-decoration: none;
+        padding: 0.56rem 1.05rem;
+        font-size: 0.88rem;
+        border-radius: 10px;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        font-weight: 600;
+      }
+      .nav-action-link-secondary {
+        border-color: var(--border-soft);
+        color: var(--text-primary);
+        background: rgba(16, 24, 42, 0.72);
+      }
+      .nav-action-link-secondary:hover {
+        border-color: rgba(34, 211, 238, 0.4);
+        background: rgba(34, 211, 238, 0.08);
+      }
+      .nav-action-link-primary {
+        background: linear-gradient(130deg, var(--accent), var(--accent-2));
+        color: #04202a;
+        box-shadow: 0 8px 24px rgba(34, 211, 238, 0.3);
+      }
+      .nav-action-link-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px rgba(34, 211, 238, 0.38);
+      }
+      .user-trigger {
+        background: rgba(16, 24, 42, 0.78);
+        border: 1px solid var(--border-soft);
+        padding: 0.56rem 0.9rem;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        width: auto;
+        justify-content: center;
+        font-weight: 500;
+        font-size: 0.88rem;
+        transition: all 0.3s ease;
+      }
+      .user-trigger:hover {
+        background: rgba(34, 211, 238, 0.1);
+        border-color: rgba(34, 211, 238, 0.55);
+      }
+      .user-dropdown-link {
+        display: block;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        color: var(--text-primary);
+        transition: background-color 0.2s;
+      }
+      .user-dropdown-link:hover {
+        background-color: rgba(34, 211, 238, 0.14);
+      }
+      .footer-shell {
+        text-align: center;
+        padding: 2.5rem 2rem;
+        color: var(--muted-color);
+        border-top: 1px solid rgba(148, 163, 184, 0.2);
+        margin-top: 4rem;
+        background: rgba(8, 13, 25, 0.75);
+        backdrop-filter: blur(10px);
+      }
+      .footer-link {
+        color: #7dd3fc;
+        text-decoration: none;
+      }
+      .footer-link:hover {
+        text-decoration: underline;
       }
       @media (max-width: 768px) {
         nav {
@@ -288,18 +403,13 @@
           position: relative;
           overflow: visible;
         }
-        .nav-logo {
-          font-weight: bold;
-          font-size: 0.95rem;
-          text-decoration: none;
-          white-space: nowrap;
-          order: 1;
-          display: none;
+        .nav-brand span {
+          font-size: 0.92rem;
         }
         .hamburger-btn {
           display: block;
-          background: rgba(17, 24, 39, 0.8);
-          border: 1px solid rgba(0, 242, 254, 0.3);
+          background: rgba(16, 24, 42, 0.85);
+          border: 1px solid rgba(148, 163, 184, 0.35);
           border-radius: 8px;
           cursor: pointer;
           font-size: 1.5rem;
@@ -321,8 +431,8 @@
           right: 0 !important;
           background: rgba(3, 7, 18, 0.98) !important;
           backdrop-filter: blur(24px) !important;
-          border-bottom: 2px solid rgba(0, 242, 254, 0.4) !important;
-          border-top: 2px solid rgba(0, 242, 254, 0.4) !important;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.28) !important;
+          border-top: 1px solid rgba(148, 163, 184, 0.28) !important;
           padding: 1rem 0 !important;
           gap: 0.5rem !important;
           width: 100% !important;
@@ -413,6 +523,9 @@
           flex: none;
           font-size: 0.85rem;
         }
+        .nav-action-link-primary {
+          padding: 0.5rem 0.8rem;
+        }
         .container {
           padding: 1rem;
         }
@@ -445,20 +558,11 @@
     {% block extra_css %}{% endblock %}
   </head>
   <body class="bg-cyber-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
-    <nav
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        border-bottom: 1px solid rgba(0, 242, 254, 0.2);
-        position: relative;
-        flex-wrap: nowrap;
-        background: rgba(10, 15, 29, 0.85);
-        backdrop-filter: blur(16px);
-        gap: 2rem;
-      "
-    >
+    <nav class="site-nav">
+      <a href="/" class="nav-brand" aria-label="ReadyAPI.net">
+        <img src="/static/logo.png" alt="ReadyAPI.net logo" />
+        <span>ReadyAPI.net</span>
+      </a>
       <!-- Hamburger Button - Left -->
       <button
         class="hamburger-btn"
@@ -482,7 +586,7 @@
 
       <!-- Navigation Menu - Center -->
       <div class="nav-menu" id="nav-menu" style="margin: 0 auto">
-        <a href="/" style="text-decoration: none" class="font-display tracking-wide">SemanticSearch</a>
+        <a href="/" style="text-decoration: none">Home</a>
         <a href="/dashboard" id="nav-dashboard" style="text-decoration: none"
           >Dashboard</a
         >
@@ -507,35 +611,8 @@
         >
           <button
             onclick="toggleUserMenu(event)"
-            style="
-              background: rgba(17, 24, 39, 0.8);
-              border: 1px solid rgba(0, 242, 254, 0.3);
-              padding: 0.6rem 1rem;
-              border-radius: 8px;
-              cursor: pointer;
-              display: flex;
-              align-items: center;
-              gap: 0.75rem;
-              width: auto;
-              justify-content: center;
-              font-weight: 500;
-              font-size: 0.9rem;
-              transition: all 0.3s ease;
-            "
-            onmouseover="
-              this.style.backgroundColor = 'rgba(0, 242, 254, 0.1)';
-              this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
-              this.style.transform = 'translateY(-2px)';
-              this.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.2)';
-            "
-            onmouseout="
-              this.style.backgroundColor = 'rgba(17, 24, 39, 0.8)';
-              this.style.borderColor = 'rgba(0, 242, 254, 0.3)';
-              this.style.transform = 'translateY(0)';
-              this.style.boxShadow = 'none';
-            "
+            class="user-trigger"
           >
-            <span class="text-cyan-400">⚡</span>
             <span
               id="user-email"
               style="
@@ -567,34 +644,8 @@
               overflow: hidden;
             "
           >
-            <a
-              href="/dashboard"
-              style="
-                display: block;
-                padding: 0.75rem 1rem;
-                text-decoration: none;
-                border-bottom: 1px solid rgba(0, 242, 254, 0.15);
-                color: #f8fafc;
-                transition: background-color 0.2s;
-              "
-              onmouseover="this.style.backgroundColor = 'rgba(0, 242, 254, 0.15)'"
-              onmouseout="this.style.backgroundColor = 'transparent'"
-              >📊 Dashboard</a
-            >
-            <a
-              href="/profile"
-              style="
-                display: block;
-                padding: 0.75rem 1rem;
-                text-decoration: none;
-                border-bottom: 1px solid rgba(0, 242, 254, 0.15);
-                color: #f8fafc;
-                transition: background-color 0.2s;
-              "
-              onmouseover="this.style.backgroundColor = 'rgba(0, 242, 254, 0.15)'"
-              onmouseout="this.style.backgroundColor = 'transparent'"
-              >⚙️ Profile Settings</a
-            >
+            <a href="/dashboard" class="user-dropdown-link">Dashboard</a>
+            <a href="/profile" class="user-dropdown-link">Profile Settings</a>
             <button
               onclick="logout()"
               style="
@@ -613,7 +664,7 @@
               "
               onmouseout="this.style.backgroundColor = 'transparent'"
             >
-              🚪 Logout
+              Log out
             </button>
           </div>
         </div>
@@ -623,57 +674,10 @@
           id="auth-links"
           style="display: flex; gap: 1rem; align-items: center"
         >
-          <a
-            href="/register"
-            style="
-              text-decoration: none;
-              padding: 0.6rem 1.2rem;
-              font-size: 0.9rem;
-              border: 1px solid rgba(0, 242, 254, 0.3);
-              border-radius: 8px;
-              transition: all 0.3s ease;
-              display: inline-block;
-              font-weight: 500;
-              background: rgba(17, 24, 39, 0.6);
-              color: #f8fafc;
-            "
-            onmouseover="
-              this.style.backgroundColor = 'rgba(0, 242, 254, 0.1)';
-              this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
-              this.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.15)';
-            "
-            onmouseout="
-              this.style.backgroundColor = 'rgba(17, 24, 39, 0.6)';
-              this.style.borderColor = 'rgba(0, 242, 254, 0.3)';
-              this.style.boxShadow = 'none';
-            "
+          <a href="/register" class="nav-action-link nav-action-link-secondary"
             >Sign Up</a
           >
-          <a
-            href="/login"
-            style="
-              background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-              color: #030712;
-              padding: 0.6rem 1.4rem;
-              border-radius: 8px;
-              text-decoration: none;
-              font-size: 0.9rem;
-              white-space: nowrap;
-              font-weight: 700;
-              border: none;
-              transition: all 0.3s ease;
-              display: inline-block;
-              cursor: pointer;
-              box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-            "
-            onmouseover="
-              this.style.transform = 'translateY(-2px)';
-              this.style.boxShadow = '0 0 30px rgba(0, 242, 254, 0.5)';
-            "
-            onmouseout="
-              this.style.transform = 'translateY(0)';
-              this.style.boxShadow = '0 0 20px rgba(0, 242, 254, 0.3)';
-            "
+          <a href="/login" class="nav-action-link nav-action-link-primary"
             >Log In</a
           >
         </div>
@@ -682,34 +686,16 @@
 
     <main>{% block content %}{% endblock %}</main>
 
-    <footer
-      style="
-        text-align: center;
-        padding: 2.5rem 2rem;
-        color: var(--muted-color);
-        border-top: 1px solid rgba(0, 242, 254, 0.15);
-        margin-top: 4rem;
-        background: rgba(3, 7, 18, 0.6);
-        backdrop-filter: blur(10px);
-      "
-    >
-      <p class="font-medium text-slate-400">&copy; 2026 SemanticSearch API. By Esteban Bardolet</p>
+    <footer class="footer-shell">
+      <p class="font-medium text-slate-400">&copy; 2026 ReadyAPI.net</p>
       <p class="mt-2 text-sm">
-        <a
-          href="/privacy-policy"
-          style="color: #00f2fe; text-decoration: none; margin-right: 1rem"
-          class="hover:underline"
+        <a href="/privacy-policy" class="footer-link" style="margin-right: 1rem"
           >Privacy Policy</a
         >
         |
         <span style="margin-left: 1rem">
           Contact:
-          <a
-            href="mailto:info@readyapi.net"
-            style="color: #00f2fe; text-decoration: none"
-            class="hover:underline"
-            >info@readyapi.net</a
-          >
+          <a href="mailto:info@readyapi.net" class="footer-link">info@readyapi.net</a>
         </span>
       </p>
     </footer>
