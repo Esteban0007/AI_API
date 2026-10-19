@@ -1,0 +1,77 @@
+# User-agent rules for readyapi.net
+
+User-agent: *
+
+
+
+# Publicly accessible pages intended for indexing
+
+Allow: /
+
+Allow: /index.html
+
+Allow: /demos.html
+
+Allow: /privacy_policy.html
+
+Disallow: /profile
+
+
+
+# Block internal dashboards and private account management
+
+Disallow: /dashboard
+
+Disallow: /dashboard.html
+
+Disallow: /profile.html
+
+Disallow: /delete_account
+
+Disallow: /delete_account.html
+
+
+
+# Block authentication flows (Login, Register, Password Recovery)
+
+Disallow: /login
+
+Disallow: /login.html
+
+Allow: /register
+
+Disallow: /register.html
+
+Disallow: /forgot_password
+
+Disallow: /forgot_password.html
+
+Disallow: /reset_password
+
+Disallow: /reset_password.html
+
+Disallow: /resend_confirmation
+
+Disallow: /resend_confirmation.html
+
+
+
+# Block dynamic/internal template result views from direct indexing
+
+Disallow: /results_list
+
+Disallow: /results_list.html
+
+Disallow: /definitions_results
+
+Disallow: /definitions_results.html
+
+Disallow: /spaceship_results
+
+Disallow: /spaceship_results.html
+
+
+
+# XML Sitemap location
+
+Sitemap: https://readyapi.net/sitemap.xml

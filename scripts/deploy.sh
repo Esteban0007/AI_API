@@ -111,7 +111,7 @@ User=www-data
 WorkingDirectory=/var/www/readyapi
 Environment="PATH=/var/www/readyapi/venv/bin"
 ExecStart=/var/www/readyapi/venv/bin/gunicorn \
-    --workers 4 \
+    --workers 2 \
     --worker-class uvicorn.workers.UvicornWorker \
     --bind 127.0.0.1:8000 \
     app.main:app
