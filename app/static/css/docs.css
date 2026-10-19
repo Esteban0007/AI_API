@@ -198,30 +198,30 @@ body {
 .swagger-ui .info .version {
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 0.875rem !important;
-  color: #030712 !important;
-  background: var(--rapi-cyan) !important;
-  padding: 0.35rem 0.75rem !important;
-  border-radius: 6px !important;
-  border: none !important;
+  color: var(--rapi-cyan) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--rapi-cyan) !important;
   display: inline-block !important;
   margin-top: 0.5rem !important;
-  font-weight: 700 !important;
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
 }
 
 .swagger-ui .info .openapi-version {
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 0.875rem !important;
-  color: #030712 !important;
-  background: var(--rapi-post) !important;
-  padding: 0.35rem 0.75rem !important;
-  border-radius: 6px !important;
-  border: none !important;
+  color: var(--rapi-turquoise) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 1px solid var(--rapi-turquoise) !important;
   display: inline-block !important;
   margin-top: 0.5rem !important;
   margin-left: 0.5rem !important;
-  font-weight: 700 !important;
-  box-shadow: 0 0 15px rgba(52, 211, 153, 0.4) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
 }
 
 /* ── Operation blocks ── */
@@ -328,8 +328,8 @@ body {
 /* ── Try it out / Execute button ── */
 .swagger-ui .btn.execute {
   background-color: var(--rapi-cyan) !important;
-  color: #030712 !important;
-  border: none !important;
+  color: var(--rapi-get) !important;
+  border: 1px solid var(--rapi-get) !important;
   border-radius: var(--rapi-radius) !important;
   padding: 0.75rem 1.5rem !important;
   font-weight: 700 !important;
@@ -341,14 +341,14 @@ body {
 }
 
 .swagger-ui .btn.execute:hover {
-  background-color: #4FE1F5 !important;
+  background-color: var(--rapi-get) !important;
   color: #030712 !important;
-  box-shadow: 0 0 30px rgba(34, 211, 238, 0.7) !important;
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.7) !important;
   transform: translateY(-1px) !important;
 }
 
 .swagger-ui .btn.execute:focus {
-  outline: 2px solid var(--rapi-cyan) !important;
+  outline: 2px solid var(--rapi-get) !important;
   outline-offset: 2px !important;
 }
 
@@ -771,10 +771,30 @@ body {
 /* ── Endpoint operation ID text (small text on the right) ── */
 .swagger-ui .opblock .opblock-summary .opblock-summary-operation-id {
   font-family: 'JetBrains Mono', monospace !important;
-  font-size: 0.75rem !important;
-  color: var(--rapi-text-dim) !important;
+  font-size: 0.8125rem !important;
+  color: var(--rapi-text-muted) !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+/* ── Mejorar contraste de textos finos en general ── */
+.swagger-ui .param .parameter-type,
+.swagger-ui .param .param-description,
+.swagger-ui .response-col .status-code,
+.swagger-ui .model-property .model-property-type,
+.swagger-ui .info p,
+.swagger-ui .tag-description {
+  color: var(--rapi-text-muted) !important;
   font-weight: 500 !important;
-  opacity: 0.85 !important;
+  opacity: 1 !important;
+}
+
+/* ── Ocultar buscador/filter de Swagger UI ── */
+.swagger-ui .filter,
+.swagger-ui input[placeholder="Filter by tag"],
+.swagger-ui .filter-wrapper,
+.swagger-ui [aria-label="Filter by tag"] {
+  display: none !important;
 }
 
 /* ── Operation content ── */
