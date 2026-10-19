@@ -198,13 +198,30 @@ body {
 .swagger-ui .info .version {
   font-family: 'JetBrains Mono', monospace !important;
   font-size: 0.875rem !important;
-  color: var(--rapi-cyan) !important;
-  background: rgba(34, 211, 238, 0.1) !important;
-  padding: 0.25rem 0.6rem !important;
-  border-radius: 4px !important;
-  border: 1px solid rgba(34, 211, 238, 0.2) !important;
+  color: #030712 !important;
+  background: var(--rapi-cyan) !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 6px !important;
+  border: none !important;
   display: inline-block !important;
   margin-top: 0.5rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.4) !important;
+}
+
+.swagger-ui .info .openapi-version {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.875rem !important;
+  color: #030712 !important;
+  background: var(--rapi-post) !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 6px !important;
+  border: none !important;
+  display: inline-block !important;
+  margin-top: 0.5rem !important;
+  margin-left: 0.5rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.4) !important;
 }
 
 /* ── Operation blocks ── */
@@ -314,17 +331,20 @@ body {
   color: #030712 !important;
   border: none !important;
   border-radius: var(--rapi-radius) !important;
-  padding: 0.6rem 1.25rem !important;
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
   font-family: 'Inter', sans-serif !important;
   transition: all var(--rapi-transition);
   cursor: pointer !important;
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.5) !important;
 }
 
 .swagger-ui .btn.execute:hover {
   background-color: #4FE1F5 !important;
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.4) !important;
+  color: #030712 !important;
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.7) !important;
+  transform: translateY(-1px) !important;
 }
 
 .swagger-ui .btn.execute:focus {
@@ -407,6 +427,61 @@ body {
 
 .swagger-ui .model .model-title a {
   color: var(--rapi-cyan) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(34, 211, 238, 0.4) !important;
+}
+
+.swagger-ui .model .model-title a:hover {
+  color: var(--rapi-turquoise) !important;
+  text-decoration-color: var(--rapi-turquoise) !important;
+}
+
+.swagger-ui .model .model-title a:focus {
+  outline: 2px solid var(--rapi-cyan) !important;
+  outline-offset: 2px !important;
+}
+
+/* ── Schema expand/collapse all buttons (links in models section) ── */
+.swagger-ui .models a,
+.swagger-ui .models button {
+  color: var(--rapi-cyan) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(34, 211, 238, 0.4) !important;
+}
+
+.swagger-ui .models a:hover,
+.swagger-ui .models button:hover {
+  color: var(--rapi-turquoise) !important;
+  text-decoration-color: var(--rapi-turquoise) !important;
+}
+
+.swagger-ui .models a:focus,
+.swagger-ui .models button:focus {
+  outline: 2px solid var(--rapi-cyan) !important;
+  outline-offset: 2px !important;
+}
+
+/* ── Model property names ── */
+.swagger-ui .model-property .model-property-name {
+  color: var(--rapi-text) !important;
+  font-weight: 600 !important;
+}
+
+/* ── Model property types ── */
+.swagger-ui .model-property .model-property-type {
+  color: var(--rapi-text-muted) !important;
+  font-weight: 500 !important;
+}
+
+/* ── Model property required badges ── */
+.swagger-ui .model-property .model-property-required {
+  color: var(--rapi-cyan) !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
 }
 
 .swagger-ui .model .model-serialized {
@@ -678,6 +753,7 @@ body {
   font-size: 0.875rem !important;
   color: var(--rapi-text-muted) !important;
   margin: 0.25rem 0 0 !important;
+  font-weight: 600 !important;
 }
 
 .swagger-ui .opblock .opblock-summary .opblock-summary-method {
@@ -689,6 +765,16 @@ body {
   font-size: 0.8125rem !important;
   color: var(--rapi-text-muted) !important;
   text-transform: none !important;
+  font-weight: 600 !important;
+}
+
+/* ── Endpoint operation ID text (small text on the right) ── */
+.swagger-ui .opblock .opblock-summary .opblock-summary-operation-id {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.75rem !important;
+  color: var(--rapi-text-dim) !important;
+  font-weight: 500 !important;
+  opacity: 0.85 !important;
 }
 
 /* ── Operation content ── */
