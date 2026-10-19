@@ -1,7 +1,7 @@
 /*
- * ReadyAPI.net — FastAPI / Swagger UI standard-style documentation
- * Keep Swagger UI's native light theme and HTTP method colors.
- * Custom CSS is limited to the ReadyAPI header and page spacing.
+- ReadyAPI.net — FastAPI / Swagger UI standard-style documentation
+- Keep Swagger UI's native light theme and HTTP method colors.
+- Custom CSS is limited to the ReadyAPI header and page spacing.
  */
 
 /* Page: restore the clean, white FastAPI documentation appearance. */
@@ -113,9 +113,9 @@ body {
 }
 
 /*
- * Swagger UI: intentionally do not restyle endpoint cards, method badges,
- * version stamps, forms, models, response panels, or buttons. Let the
- * official Swagger UI stylesheet provide its native FastAPI appearance.
+- Swagger UI: intentionally do not restyle endpoint cards, method badges,
+- version stamps, forms, models, response panels, or buttons. Let the
+- official Swagger UI stylesheet provide its native FastAPI appearance.
  */
 #swagger-ui {
   max-width: 1460px;
@@ -123,6 +123,11 @@ body {
   padding: 1.5rem 1.25rem 3rem;
   box-sizing: border-box;
   background: #fff;
+}
+
+/* Ocultar la barra superior de Swagger (la de la URL y el botón Explore) */
+html body #swagger-ui .swagger-ui .scheme-container {
+  display: none !important;
 }
 
 /* Ensure old custom dark-theme declarations cannot override Swagger's light theme. */
@@ -152,7 +157,6 @@ html body #swagger-ui .swagger-ui .renderedMarkdown p {
 html body #swagger-ui .swagger-ui .opblock,
 html body #swagger-ui .swagger-ui .model-box,
 html body #swagger-ui .swagger-ui section.models,
-html body #swagger-ui .swagger-ui .scheme-container,
 html body #swagger-ui .swagger-ui .responses-wrapper,
 html body #swagger-ui .swagger-ui .opblock-body,
 html body #swagger-ui .swagger-ui .opblock-section-header {

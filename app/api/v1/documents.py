@@ -32,7 +32,7 @@ def _get_vector_store_for_tenant(tenant_id: str) -> VectorStore:
     return _vector_store_cache[tenant_id]
 
 
-@router.post("/upload", response_model=DocumentUploadResponse)
+@router.post("/upload", tags=["documents"], response_model=DocumentUploadResponse)
 async def upload_documents(
     batch: DocumentBatch,
     x_api_key: Optional[str] = Header(None),
@@ -131,7 +131,7 @@ async def upload_documents(
         )
 
 
-@router.get("/stats")
+@router.get("/stats", tags=["documents"])
 async def get_stats(x_api_key: Optional[str] = Header(None)) -> dict:
     """
     Get statistics about the document collection.
@@ -200,7 +200,7 @@ async def get_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
         )
 
 
-@router.delete("/clear-all")
+@router.delete("/clear-all", tags=["documents"])
 async def clear_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
     """
     Delete ALL documents from the collection.
@@ -226,7 +226,7 @@ async def clear_all_documents(x_api_key: Optional[str] = Header(None)) -> dict:
         )
 
 
-@router.delete("/{doc_id}")
+@router.delete("/{doc_id}", tags=["documents"])
 async def delete_document(
     doc_id: str,
     x_api_key: Optional[str] = Header(None),
