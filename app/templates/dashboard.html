@@ -277,9 +277,38 @@
         </div>
       </div>
 
+      <!-- API Keys Section -->
+      <article style="margin-top: 3rem;">
+        <h2 class="section-title">🔐 API Key</h2>
+        
+        <p style="color: #94a3b8; margin-bottom: 1.5rem;">
+          Secure access token for programmatic requests to the SemanticSearch AI core. Keep this confidential.
+        </p>
+
+        <div class="api-key-container">
+          <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">ACTIVE ACCESS TOKEN</label>
+          <input 
+            type="password" 
+            value="${API_KEY}" 
+            readonly 
+            style="width: 100%; padding: 0.85rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 1rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; background: rgba(10, 15, 30, 0.9); color: #00f2fe;"
+            id="api-key-input"
+          >
+          
+          <div class="btn-group">
+            <button type="button" onclick="copyAPI()" style="flex: 1;">📋 Copy Token</button>
+            <button type="button" onclick="revealKey()" class="secondary" style="flex: 1;">👁️ Toggle Visibility</button>
+          </div>
+
+          <p style="color: #10b981; margin-top: 1rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>🟢</span> <strong>Status: Authorized & Active</strong>
+          </p>
+        </div>
+      </article>
+      
       <!-- Documents Section -->
       <article style="margin-top: 3rem;">
-        <h2 class="section-title">📚 Neural Document Registry</h2>
+        <h2 class="section-title">Document Registry</h2>
         
         <p style="color: #94a3b8; margin-bottom: 1.5rem;">
           Query and manage your dataset indexed through the SemanticSearch API engine.
@@ -336,38 +365,11 @@
         }
       </article>
 
-      <!-- API Keys Section -->
-      <article style="margin-top: 3rem;">
-        <h2 class="section-title">🔐 Neural API Key Cryptographic Token</h2>
-        
-        <p style="color: #94a3b8; margin-bottom: 1.5rem;">
-          Secure access token for programmatic requests to the SemanticSearch AI core. Keep this confidential.
-        </p>
-
-        <div class="api-key-container">
-          <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">ACTIVE ACCESS TOKEN</label>
-          <input 
-            type="password" 
-            value="${API_KEY}" 
-            readonly 
-            style="width: 100%; padding: 0.85rem 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 1rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 8px; background: rgba(10, 15, 30, 0.9); color: #00f2fe;"
-            id="api-key-input"
-          >
-          
-          <div class="btn-group">
-            <button type="button" onclick="copyAPI()" style="flex: 1;">📋 Copy Token</button>
-            <button type="button" onclick="revealKey()" class="secondary" style="flex: 1;">👁️ Toggle Visibility</button>
-          </div>
-
-          <p style="color: #10b981; margin-top: 1rem; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span>🟢</span> <strong>Status: Authorized & Active</strong>
-          </p>
-        </div>
-      </article>
+      
 
       <!-- Usage Instructions -->
       <article style="margin-top: 2rem;">
-        <h3 style="color: #f8fafc; font-size: 1.2rem; margin-bottom: 0.75rem;">⚡ Programmatic Execution Example</h3>
+        <h3 style="color: #f8fafc; font-size: 1.2rem; margin-bottom: 0.75rem;">Programmatic Execution Example</h3>
         <p style="color: #94a3b8;">Pass your token via the <code>X-API-Key</code> request header:</p>
         <pre style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(0, 242, 254, 0.3); padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; color: #00f2fe;"><code>curl -H "X-API-Key: YOUR_API_KEY" https://api.semanticsearch.io/api/v1/search/query</code></pre>
         <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 1rem;">
