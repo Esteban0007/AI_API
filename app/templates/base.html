@@ -90,6 +90,11 @@
         --muted-color: #94a3b8;
       }
 
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
       body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         background-color: var(--bg-primary);
@@ -101,7 +106,7 @@
         background-size: 100% 100%, 40px 40px, 40px 40px;
         min-height: 100vh;
         overflow-x: hidden;
-        padding-top: 4.5rem;
+        padding-top: 4.5rem; /* Deja espacio exacto para que el contenido no quede debajo del nav fijo */
       }
 
       /* Cybernetic Glow Elements */
@@ -124,13 +129,17 @@
       }
 
       nav {
-        padding: 0.9rem 2rem;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
         position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        z-index: 9999; /* Máxima prioridad para que la barra y sus menús estén siempre arriba */
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.8rem 2rem;
+        background: rgba(8, 13, 25, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+        z-index: 9999;
       }
       nav a {
         text-decoration: none;
@@ -141,9 +150,9 @@
         align-items: center;
         position: relative;
         flex-wrap: nowrap;
-        background: rgba(8, 13, 25, 0.92);
-        backdrop-filter: blur(16px);
+        background: transparent;
         gap: 1rem;
+        width: 100%;
       }
       .nav-brand {
         display: inline-flex;
@@ -409,7 +418,8 @@
           position: fixed;
           top: 0;
           left: 0;
-          right: 0;
+          width: 100%;
+          box-sizing: border-box;
           z-index: 9999;
           overflow: visible;
         }
@@ -507,7 +517,7 @@
           width: auto !important;
           margin-top: 0.5rem !important;
           border-radius: 8px !important;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9) !important;
           border: 1px solid rgba(0, 242, 254, 0.3) !important;
           min-width: 180px !important;
           z-index: 10000 !important;
@@ -569,128 +579,130 @@
     {% block extra_css %}{% endblock %}
   </head>
   <body class="bg-cyber-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
-    <nav class="site-nav">
-      <a href="/" class="nav-brand" aria-label="ReadyAPI.net">
-        <img src="/static/logo.png" alt="ReadyAPI.net logo" />
-        <span>ReadyAPI.net</span>
-      </a>
-      <!-- Hamburger Button - Left -->
-      <button
-        class="hamburger-btn"
-        id="hamburger-btn"
-        onclick="toggleMobileMenu(event)"
-        style="
-          display: none;
-          min-width: fit-content;
-          cursor: pointer;
-          padding: 0.5rem;
-          background: rgba(17, 24, 39, 0.8);
-          border: 1px solid rgba(0, 242, 254, 0.3);
-          border-radius: 8px;
-          font-size: 1.5rem;
-          color: #00f2fe;
-        "
-        aria-label="Toggle menu"
-      >
-        ☰
-      </button>
-
-      <!-- Navigation Menu - Center -->
-      <div class="nav-menu" id="nav-menu" style="margin: 0 auto">
-        <a href="/" style="text-decoration: none">Home</a>
-        <a href="/dashboard" id="nav-dashboard" style="text-decoration: none"
-          >Dashboard</a
+    <nav>
+      <div class="site-nav">
+        <a href="/" class="nav-brand" aria-label="ReadyAPI.net">
+          <img src="/static/logo.png" alt="ReadyAPI.net logo" />
+          <span>ReadyAPI.net</span>
+        </a>
+        <!-- Hamburger Button - Left -->
+        <button
+          class="hamburger-btn"
+          id="hamburger-btn"
+          onclick="toggleMobileMenu(event)"
+          style="
+            display: none;
+            min-width: fit-content;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 8px;
+            font-size: 1.5rem;
+            color: #00f2fe;
+          "
+          aria-label="Toggle menu"
         >
-        <a href="/demos" style="text-decoration: none">Demos</a>
-        <a href="/api-docs" style="text-decoration: none">API Docs</a>
-      </div>
+          ☰
+        </button>
 
-      <!-- Auth/User Menu - Right -->
-      <div
-        style="
-          display: flex;
-          gap: 1rem;
-          align-items: center;
-          margin-left: auto;
-          min-width: fit-content;
-        "
-      >
-        <!-- User Menu (shown when logged in) -->
-        <div
-          id="user-menu"
-          style="display: none; position: relative; width: 100%; z-index: 10000;"
-        >
-          <button
-            onclick="toggleUserMenu(event)"
-            class="user-trigger"
+        <!-- Navigation Menu - Center -->
+        <div class="nav-menu" id="nav-menu" style="margin: 0 auto">
+          <a href="/" style="text-decoration: none">Home</a>
+          <a href="/dashboard" id="nav-dashboard" style="text-decoration: none"
+            >Dashboard</a
           >
-            <span
-              id="user-email"
-              style="
-                font-size: 0.9rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 150px;
-                color: #00f2fe;
-                font-weight: 600;
-              "
-            ></span>
-            <span id="menu-arrow" class="text-xs text-cyan-400">▼</span>
-          </button>
-
-          <div
-            id="user-dropdown"
-            class="glass-dropdown"
-            style="
-              display: none;
-              position: absolute;
-              top: 100%;
-              right: 0;
-              border-radius: 10px;
-              margin-top: 0.5rem;
-              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
-              z-index: 10000;
-              min-width: 200px;
-              overflow: hidden;
-            "
-          >
-            <a href="/dashboard" class="user-dropdown-link">Dashboard</a>
-            <a href="/profile" class="user-dropdown-link">Profile Settings</a>
-            <button
-              onclick="logout()"
-              style="
-                width: 100%;
-                text-align: left;
-                padding: 0.75rem 1rem;
-                background: none;
-                border: none;
-                cursor: pointer;
-                color: #f87171;
-                font-weight: 500;
-                transition: background-color 0.2s;
-              "
-              onmouseover="
-                this.style.backgroundColor = 'rgba(239, 68, 68, 0.15)'
-              "
-              onmouseout="this.style.backgroundColor = 'transparent'"
-            >
-              Log out
-            </button>
-          </div>
+          <a href="/demos" style="text-decoration: none">Demos</a>
+          <a href="/api-docs" style="text-decoration: none">API Docs</a>
         </div>
 
-        <!-- Auth Links (shown when not logged in) -->
+        <!-- Auth/User Menu - Right -->
         <div
-          id="auth-links"
-          style="display: flex; gap: 1rem; align-items: center"
+          style="
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-left: auto;
+            min-width: fit-content;
+          "
         >
-          <a href="/register" class="nav-action-link nav-action-link-secondary"
-            >Sign Up</a
+          <!-- User Menu (shown when logged in) -->
+          <div
+            id="user-menu"
+            style="display: none; position: relative; width: 100%; z-index: 10000;"
           >
-          <a href="/login" class="nav-action-link nav-action-link-primary"
-            >Log In</a
+            <button
+              onclick="toggleUserMenu(event)"
+              class="user-trigger"
+            >
+              <span
+                id="user-email"
+                style="
+                  font-size: 0.9rem;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  max-width: 150px;
+                  color: #00f2fe;
+                  font-weight: 600;
+                "
+              ></span>
+              <span id="menu-arrow" class="text-xs text-cyan-400">▼</span>
+            </button>
+
+            <div
+              id="user-dropdown"
+              class="glass-dropdown"
+              style="
+                display: none;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                border-radius: 10px;
+                margin-top: 0.5rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+                z-index: 10000;
+                min-width: 200px;
+                overflow: hidden;
+              "
+            >
+              <a href="/dashboard" class="user-dropdown-link">Dashboard</a>
+              <a href="/profile" class="user-dropdown-link">Profile Settings</a>
+              <button
+                onclick="logout()"
+                style="
+                  width: 100%;
+                  text-align: left;
+                  padding: 0.75rem 1rem;
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  color: #f87171;
+                  font-weight: 500;
+                  transition: background-color 0.2s;
+                "
+                onmouseover="
+                  this.style.backgroundColor = 'rgba(239, 68, 68, 0.15)'
+                "
+                onmouseout="this.style.backgroundColor = 'transparent'"
+              >
+                Log out
+              </button>
+            </div>
+          </div>
+
+          <!-- Auth Links (shown when not logged in) -->
+          <div
+            id="auth-links"
+            style="display: flex; gap: 1rem; align-items: center"
           >
+            <a href="/register" class="nav-action-link nav-action-link-secondary"
+              >Sign Up</a
+            >
+            <a href="/login" class="nav-action-link nav-action-link-primary"
+              >Log In</a
+            >
+          </div>
         </div>
       </div>
     </nav>
