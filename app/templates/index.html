@@ -228,18 +228,33 @@
       <p style="color: #94a3b8; font-size: 0.95rem;">A clean, streamlined example using 3 core system documents.</p>
     </div>
 
-    <!-- STEP 01: Optimized 3 IDs JSON Document -->
-    <div style="margin: 2rem 0; padding: 2rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-        <h3 style="margin: 0; color: #00f2fe; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace;">
-          [01] Prepare Your JSON Payload
+    <!-- STEP 01: Optimized 3 IDs JSON Document (VS Code Style) -->
+    <div style="margin: 2rem 0; display: flex; flex-direction: column; gap: 1rem;">
+      <div>
+        <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+          <span>[01]</span> Prepare Your JSON Payload
         </h3>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
+          Send your data payload to the upload endpoint. ReadyAPI automatically generates embeddings under the hood.
+        </p>
       </div>
-      <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem;">
-        Send your data payload to the upload endpoint. ReadyAPI automatically generates embeddings under the hood.
-      </p>
 
-      <pre style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(0, 242, 254, 0.2); padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: #00f2fe; line-height: 1.5;"><code>{
+      <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+        <!-- VS Code Title Bar -->
+        <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">payload.json</span>
+          </div>
+          
+          <button onclick="navigator.clipboard.writeText('{\n  &quot;documents&quot;: [\n    {\n      &quot;id&quot;: &quot;part-001&quot;,\n      &quot;title&quot;: &quot;Charge System&quot;,\n      &quot;content&quot;: &quot;solar panels energy reactor battery charging power recharge fuel cells electricity&quot;,\n      &quot;metadata&quot;: {&quot;state&quot;: &quot;idle&quot;}\n    },\n    {\n      &quot;id&quot;: &quot;part-002&quot;,\n      &quot;title&quot;: &quot;Flight System&quot;,\n      &quot;content&quot;: &quot;thruster engine propulsion fly speed boost travel navigate rocket jet turbine&quot;,\n      &quot;metadata&quot;: {&quot;state&quot;: &quot;active&quot;}\n    },\n    {\n      &quot;id&quot;: &quot;part-003&quot;,\n      &quot;title&quot;: &quot;Stealth System&quot;,\n      &quot;content&quot;: &quot;cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise&quot;,\n      &quot;metadata&quot;: {&quot;state&quot;: &quot;hidden&quot;}\n    }\n  ]\n}'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
+        </div>
+
+        <div style="padding: 1.25rem;">
+          <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5;">
+<pre style="margin: 0; font-family: inherit; color: inherit;">{
   "documents": [
     {
       "id": "part-001",
@@ -260,113 +275,83 @@
       "metadata": {"state": "hidden"}
     }
   ]
-}</code></pre>
+}</pre>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- STEP 02 & 03: Sleek Two-Column Grid for Request & Response -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
       
-    <!-- Left Column: Search Request (VS Code Style with interactive Copy Button) -->
-<div style="display: flex; flex-direction: column; gap: 1rem;">
-  
-  <!-- Texto y título fuera de la tarjeta, en la parte superior -->
-  <div>
-    <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
-      <span>[02]</span> Natural Language Query
-    </h3>
-    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
-      Query using natural human concepts directly from your terminal or script.
-    </p>
-  </div>
+      <!-- Left Column: Search Request (VS Code Style with interactive Copy Button) -->
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+            <span>[02]</span> Natural Language Query
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
+            Query using natural human concepts directly from your terminal or script.
+          </p>
+        </div>
 
-  <!-- Tarjeta de VS Code -->
-  <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
-    <!-- VS Code Title Bar -->
-    <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
-      <div style="display: flex; align-items: center; gap: 0.4rem;">
-        <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-        <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
-        <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-        <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">query.py</span>
-      </div>
-      
-      <!-- Botón Copy -->
-      <button onclick="navigator.clipboard.writeText('import requests\n\nurl = &quot;https://readyapi.net/api/v1/search/query&quot;\nheaders = {&quot;x-api-key&quot;: &quot;YOUR_API_KEY&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;}\npayload = {&quot;query&quot;: &quot;I need to travel far away quickly&quot;, &quot;top_k&quot;: 2}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
-    </div>
+        <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+          <!-- VS Code Title Bar -->
+          <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+              <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+              <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+              <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">query.py</span>
+            </div>
+            
+            <button onclick="navigator.clipboard.writeText('import requests\n\nurl = &quot;https://readyapi.net/api/v1/search/query&quot;\nheaders = {&quot;x-api-key&quot;: &quot;YOUR_API_KEY&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;}\npayload = {&quot;query&quot;: &quot;I need to travel far away quickly&quot;, &quot;top_k&quot;: 2}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
+          </div>
 
-    <!-- Cuerpo del código -->
-    <div style="padding: 1.25rem;">
-      <div id="code-snippet" style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; color: #d4d4d4; font-family: 'Cascadia Code', 'Cascadia Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size: 1.05rem; font-weight: 500; line-height: 1.65; padding: 0.75rem 0; font-variant-ligatures: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;">
-        <div style="min-width: max-content; width: 100%;">
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">1</span><span><span style="color:#c586c0;">import</span> <span style="color:#4ec9b0;">requests</span></span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">2</span><span>&nbsp;</span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">3</span><span><span style="color:#9cdcfe;">url</span> = <span style="color:#ce9178;">"https://readyapi.net/api/v1/search/query"</span></span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">4</span><span><span style="color:#9cdcfe;">headers</span> = {<span style="color:#ce9178;">"x-api-key"</span>: <span style="color:#ce9178;">"YOUR_API_KEY"</span>, <span style="color:#ce9178;">"Content-Type"</span>: <span style="color:#ce9178;">"application/json"</span>}</span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">5</span><span><span style="color:#9cdcfe;">payload</span> = {<span style="color:#ce9178;">"query"</span>: <span style="color:#ce9178;">"I need to travel far away quickly"</span>, <span style="color:#ce9178;">"top_k"</span>: <span style="color:#b5cea8;">2</span>}</span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">6</span><span>&nbsp;</span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">7</span><span><span style="color:#9cdcfe;">response</span> = <span style="color:#4ec9b0;">requests</span>.<span style="color:#dcdcaa;">post</span>(<span style="color:#9cdcfe;">url</span>, <span style="color:#9cdcfe;">json</span>=<span style="color:#9cdcfe;">payload</span>, <span style="color:#9cdcfe;">headers</span>=<span style="color:#9cdcfe;">headers</span>)</span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">8</span><span><span style="color:#dcdcaa;">print</span>(<span style="color:#9cdcfe;">response</span>.<span style="color:#dcdcaa;">json</span>())</span></div>
-          <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">9</span><span>&nbsp;</span></div>
+          <!-- Cuerpo del código -->
+          <div style="padding: 1.25rem;">
+            <div id="code-snippet" style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; color: #d4d4d4; font-family: 'Cascadia Code', 'Cascadia Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size: 0.95rem; font-weight: 500; line-height: 1.65; padding: 0.75rem 0; font-variant-ligatures: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;">
+              <div style="min-width: max-content; width: 100%;">
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">1</span><span><span style="color:#c586c0;">import</span> <span style="color:#4ec9b0;">requests</span></span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">2</span><span>&nbsp;</span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">3</span><span><span style="color:#9cdcfe;">url</span> = <span style="color:#ce9178;">"https://readyapi.net/api/v1/search/query"</span></span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">4</span><span><span style="color:#9cdcfe;">headers</span> = {<span style="color:#ce9178;">"x-api-key"</span>: <span style="color:#ce9178;">"YOUR_API_KEY"</span>, <span style="color:#ce9178;">"Content-Type"</span>: <span style="color:#ce9178;">"application/json"</span>}</span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">5</span><span><span style="color:#9cdcfe;">payload</span> = {<span style="color:#ce9178;">"query"</span>: <span style="color:#ce9178;">"I need to travel far away quickly"</span>, <span style="color:#ce9178;">"top_k"</span>: <span style="color:#b5cea8;">2</span>}</span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">6</span><span>&nbsp;</span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">7</span><span><span style="color:#9cdcfe;">response</span> = <span style="color:#4ec9b0;">requests</span>.<span style="color:#dcdcaa;">post</span>(<span style="color:#9cdcfe;">url</span>, <span style="color:#9cdcfe;">json</span>=<span style="color:#9cdcfe;">payload</span>, <span style="color:#9cdcfe;">headers</span>=<span style="color:#9cdcfe;">headers</span>)</span></div>
+                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">8</span><span><span style="color:#dcdcaa;">print</span>(<span style="color:#9cdcfe;">response</span>.<span style="color:#dcdcaa;">json</span>())</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-    
-    <!-- BOTÓN CORREGIDO -->
-    <button onclick="navigator.clipboard.writeText('import requests\n\nurl = &quot;https://readyapi.net/api/v1/search/query&quot;\nheaders = {&quot;x-api-key&quot;: &quot;YOUR_API_KEY&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;}\npayload = {&quot;query&quot;: &quot;I need to travel far away quickly&quot;, &quot;top_k&quot;: 2}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
-  </div>
-
-  <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-    <div>
-      <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-        <span>[02]</span> Natural Language Query
-      </h3>
-      <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">
-        Query using natural human concepts directly from your terminal or script.
-      </p>
-    </div>
-
-    <div id="code-snippet" style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; color: #d4d4d4; font-family: 'Cascadia Code', 'Cascadia Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size: 1.05rem; font-weight: 500; line-height: 1.65; padding: 0.75rem 0; font-variant-ligatures: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;">
-      <div style="min-width: max-content; width: 100%;">
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">1</span><span><span style="color:#c586c0;">import</span> <span style="color:#4ec9b0;">requests</span></span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">2</span><span>&nbsp;</span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">3</span><span><span style="color:#9cdcfe;">url</span> = <span style="color:#ce9178;">"https://readyapi.net/api/v1/search/query"</span></span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">4</span><span><span style="color:#9cdcfe;">headers</span> = {<span style="color:#ce9178;">"x-api-key"</span>: <span style="color:#ce9178;">"YOUR_API_KEY"</span>, <span style="color:#ce9178;">"Content-Type"</span>: <span style="color:#ce9178;">"application/json"</span>}</span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">5</span><span><span style="color:#9cdcfe;">payload</span> = {<span style="color:#ce9178;">"query"</span>: <span style="color:#ce9178;">"I need to travel far away quickly"</span>, <span style="color:#ce9178;">"top_k"</span>: <span style="color:#b5cea8;">2</span>}</span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">6</span><span>&nbsp;</span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">7</span><span><span style="color:#9cdcfe;">response</span> = <span style="color:#4ec9b0;">requests</span>.<span style="color:#dcdcaa;">post</span>(<span style="color:#9cdcfe;">url</span>, <span style="color:#9cdcfe;">json</span>=<span style="color:#9cdcfe;">payload</span>, <span style="color:#9cdcfe;">headers</span>=<span style="color:#9cdcfe;">headers</span>)</span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">8</span><span><span style="color:#dcdcaa;">print</span>(<span style="color:#9cdcfe;">response</span>.<span style="color:#dcdcaa;">json</span>())</span></div>
-        <div style="display:grid; grid-template-columns:54px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:20px;user-select:none;">9</span><span>&nbsp;</span></div>
-      </div>
-    </div>
-  </div>
-</div>
 
       <!-- Right Column: API Response -->
-      <div style="border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
-        <!-- VS Code Title Bar (Green accent for response) -->
-        <div style="background: rgba(10, 15, 30, 0.95); padding: 0.75rem 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 0.4rem;">
-            <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-            <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
-            <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #34d399; font-family: 'JetBrains Mono', monospace;">response.json</span>
-          </div>
-          <span style="font-size: 0.7rem; color: #34d399; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Status 200 OK</span>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <h3 style="margin-top: 0; color: #10b981; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+            <span>[03]</span> Instant JSON Response (~124ms)
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
+            Get ranked, highly relevant semantic matches scored from 0 to 1.
+          </p>
         </div>
 
-        <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <h3 style="margin-top: 0; color: #34d399; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-              <span>[03]</span> Instant JSON Response (~124ms)
-            </h3>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">
-              Get ranked, highly relevant semantic matches scored from 0 to 1.
-            </p>
+        <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+          <!-- VS Code Title Bar (Green accent for response) -->
+          <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+              <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+              <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+              <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #34d399; font-family: 'JetBrains Mono', monospace;">response.json</span>
+            </div>
+            <span style="font-size: 0.7rem; color: #34d399; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Status 200 OK</span>
           </div>
 
-          <pre style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(16, 185, 129, 0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #34d399; line-height: 1.5; margin: 0;"><code>{
+          <div style="padding: 1.25rem;">
+            <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #34d399; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5;">
+<pre style="margin: 0; font-family: inherit; color: inherit;">{
   "results": [
     {
       "id": "part-002",
@@ -381,7 +366,9 @@
   ],
   "count": 2,
   "processing_ms": 124
-}</code></pre>
+}</pre>
+            </div>
+          </div>
         </div>
       </div>
 
