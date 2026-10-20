@@ -190,54 +190,55 @@
       <p style="color: #94a3b8; font-size: 0.95rem;">A clean, streamlined example using 3 core system documents.</p>
     </div>
 
-    <!-- STEP 01: Optimized 3 IDs JSON Document (VS Code Style) -->
-    <div style="margin: 2rem 0; display: flex; flex-direction: column; gap: 1rem;">
-      <div>
-        <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
-          <span>[01]</span> Prepare Your JSON Payload
-        </h3>
-        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
-          Send your data payload to the upload endpoint. ReadyAPI automatically generates embeddings under the hood.
-        </p>
+    <!-- STEP 01: LLM Prompt Generator Card (VS Code Style) -->
+<div style="margin: 2rem 0; display: flex; flex-direction: column; gap: 1rem;">
+  <div>
+    <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+      <span>[01]</span> Format Any Document via LLM
+    </h3>
+    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
+      Got text, notes, or PDFs? Copy this prompt into ChatGPT or Claude to instantly format your data into ReadyAPI payload.
+    </p>
+  </div>
+
+  <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+    <!-- VS Code Title Bar -->
+    <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 0.4rem;">
+        <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+        <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+        <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+        <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">llm_prompt.txt</span>
       </div>
+      
+      <!-- Botón para copiar el prompt en inglés -->
+      <button onclick="navigator.clipboard.writeText('Act as a data conversion engine for ReadyAPI. Transform the following text or document into a valid JSON that strictly matches this schema structure:\n\n{\n  &quot;documents&quot;: [\n    {\n      &quot;id&quot;: &quot;part-001&quot;,\n      &quot;title&quot;: &quot;Descriptive title of the chunk&quot;,\n      &quot;content&quot;: &quot;Context-rich text optimized for semantic search.&quot;,\n      &quot;keywords&quot;: [&quot;keyword1&quot;, &quot;keyword2&quot;],\n      &quot;metadata&quot;: {&quot;category&quot;: &quot;example&quot;}\n    }\n  ]\n}\n\nStrict rules:\n1. If the text is long, split it into logical chunks and number the ids sequentially (part-001, part-002, etc.).\n2. Do not invent information not present in the original text.\n3. IMPORTANT: Return EXCLUSIVELY pure JSON code. No introductory text, no greetings, and no markdown blocks outside the JSON.\n\nText to process:\n[PASTE YOUR TEXT, ARTICLE OR PDF HERE]'); this.textContent='Copied Prompt!'; setTimeout(()=>this.textContent='Copy LLM Prompt', 2000);" style="background: #252526; color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.4); padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy LLM Prompt</button>
+    </div>
 
-      <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
-        <!-- VS Code Title Bar -->
-        <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 0.4rem;">
-            <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-            <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
-            <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">payload.json</span>
-          </div>
-          
-          <button onclick="navigator.clipboard.writeText('{\n  &quot;documents&quot;: [\n    {\n      &quot;id&quot;: &quot;part-001&quot;,\n      &quot;title&quot;: &quot;Charge System&quot;,\n      &quot;content&quot;: &quot;solar panels energy reactor battery charging power recharge fuel cells electricity&quot;,\n      &quot;metadata&quot;: {&quot;state&quot;: &quot;idle&quot;}\n    },\n    {\n      &quot;id&quot;: &quot;part-002&quot;,\n      &quot;title&quot;: &quot;Flight System&quot;,\n      &quot;content&quot;: &quot;thruster engine propulsion fly speed boost travel navigate rocket jet turbine&quot;,\n      &quot;metadata&quot;: {&quot;state&quot;: &quot;active&quot;}\n    },\n    {\n      &quot;id&quot;: &quot;part-003&quot;,\n      &quot;title&quot;: &quot;Stealth System&quot;,\n      &quot;content&quot;: &quot;cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise&quot;,\n      &quot;metadata&quot;: {&quot;state&quot;: &quot;hidden&quot;}\n    }\n  ]\n}'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
-        </div>
+    <!-- Contenido visual del prompt en inglés -->
+    <div style="padding: 1.25rem;">
+      <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #9cdcfe; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.5;">
+<pre style="margin: 0; font-family: inherit; color: inherit;">Act as a data conversion engine for ReadyAPI. Transform the following text or document into a valid JSON that strictly matches this schema structure:
 
-        <div style="padding: 1.25rem;">
-          <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5;">
-<pre style="margin: 0; font-family: inherit; color: inherit;">{
+{
   "documents": [
     {
       "id": "part-001",
-      "title": "Charge System",
-      "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",
-      "metadata": {"state": "idle"}
-    },
-    {
-      "id": "part-002",
-      "title": "Flight System",
-      "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine",
-      "metadata": {"state": "active"}
-    },
-    {
-      "id": "part-003",
-      "title": "Stealth System",
-      "content": "cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise",
-      "metadata": {"state": "hidden"}
+      "title": "Descriptive title of the chunk",
+      "content": "Context-rich text optimized for semantic search.",
+      "keywords": ["keyword1", "keyword2"],
+      "metadata": {"category": "example"}
     }
   ]
-}</pre>
+}
+
+Strict rules:
+1. If the text is long, split it into logical chunks and number the ids sequentially.
+2. Do not invent information not present in the original text.
+3. Return EXCLUSIVELY pure JSON code without additional text.
+
+Text to process:
+[PASTE YOUR TEXT, ARTICLE OR PDF HERE]</pre>
           </div>
         </div>
       </div>
