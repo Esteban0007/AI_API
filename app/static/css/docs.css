@@ -111,7 +111,7 @@ html body #swagger-ui .swagger-ui {
   font-family: inherit !important;
 }
 
-/* Títulos y Descripciones */
+/* Títulos y Descripciones Principales */
 html body #swagger-ui .swagger-ui .info .title,
 html body #swagger-ui .swagger-ui .info h1,
 html body #swagger-ui .swagger-ui .info h2,
@@ -152,17 +152,32 @@ html body #swagger-ui .swagger-ui .opblock {
   backdrop-filter: blur(8px);
 }
 
+/* Ruta del endpoint (ej. /api/v1/search/query) */
 html body #swagger-ui .swagger-ui .opblock .opblock-summary-path {
   color: #f1f5f9 !important;
   font-family: monospace !important;
   font-weight: 600 !important;
 }
 
+/* Textos de la derecha (IDs de la operación) y descripciones en Azul Futurista */
+html body #swagger-ui .swagger-ui .opblock .opblock-summary-operation-id,
 html body #swagger-ui .swagger-ui .opblock .opblock-summary-description {
-  color: #64748b !important;
+  color: #38bdf8 !important;
+  font-weight: 500 !important;
 }
 
-/* Cajas desplegadas y tablas */
+/* Flechas de ocultar/desplegar en Azul Futurista */
+html body #swagger-ui .swagger-ui .opblock .opblock-summary-control svg,
+html body #swagger-ui .swagger-ui .opblock-tag small,
+html body #swagger-ui .swagger-ui .arrow,
+html body #swagger-ui .swagger-ui .opblock-control-arrow,
+html body #swagger-ui .swagger-ui .expand-operation,
+html body #swagger-ui .swagger-ui .opblock-tag [data-name] svg {
+  fill: #38bdf8 !important;
+  color: #38bdf8 !important;
+}
+
+/* 7. Cajas desplegadas y tablas */
 html body #swagger-ui .swagger-ui .opblock-body {
   background: rgba(11, 15, 25, 0.6) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
@@ -181,7 +196,7 @@ html body #swagger-ui .swagger-ui .prop-type {
   color: #cbd5e1 !important;
 }
 
-/* Modelos y Schemas */
+/* 8. Modelos y Schemas */
 html body #swagger-ui .swagger-ui section.models {
   background: rgba(15, 23, 42, 0.3) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -192,7 +207,7 @@ html body #swagger-ui .swagger-ui section.models h4 {
   color: #f8fafc !important;
 }
 
-/* Adaptación responsive */
+/* 9. Adaptación responsive */
 @media (max-width: 640px) {
   #swagger-ui {
     padding: 1rem 0.75rem 2rem;
