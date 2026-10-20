@@ -1,24 +1,62 @@
 {% extends "base.html" %} {% block title %}SemanticSearch - Home{% endblock %}
 {% block content %}
-<div class="container" style="max-width: 1000px; padding: 1.5rem 1rem;">
+<div class="container" style="max-width: 1000px; padding: 1.5rem 1rem">
   {% if message %}
   <article
-    style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; border-radius: 8px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 1.5rem;"
+    style="
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: &quot;JetBrains Mono&quot;, monospace;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    "
   >
-    <strong style="color: #10b981;">[SUCCESS]:</strong> {{ message }}
+    <strong style="color: #10b981">[SUCCESS]:</strong> {{ message }}
   </article>
   {% endif %} {% if error %}
   <article
-    style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; border-radius: 8px; padding: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 1.5rem;"
+    style="
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: &quot;JetBrains Mono&quot;, monospace;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    "
   >
-    <strong style="color: #ef4444;">[ERROR]:</strong> {{ error }}
+    <strong style="color: #ef4444">[ERROR]:</strong> {{ error }}
   </article>
   {% endif %}
 
   <!-- Hero Section -->
-  <div class="hero" style="text-align: center; padding: 2.5rem 1rem; position: relative;">
-    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 250px; height: 250px; background: radial-gradient(circle, rgba(0, 242, 254, 0.1) 0%, transparent 70%); filter: blur(40px); pointer-events: none; z-index: -1;"></div>
-    
+  <div
+    class="hero"
+    style="text-align: center; padding: 2.5rem 1rem; position: relative"
+  >
+    <div
+      style="
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(
+          circle,
+          rgba(0, 242, 254, 0.1) 0%,
+          transparent 70%
+        );
+        filter: blur(40px);
+        pointer-events: none;
+        z-index: -1;
+      "
+    ></div>
+
     <img
       src="/static/logo.png"
       alt="SemanticSearch Logo"
@@ -33,50 +71,247 @@
         object-fit: cover;
       "
     />
-    <h1 style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #667eea 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 2.2rem; margin-bottom: 0.75rem; letter-spacing: -0.025em;">
+    <h1
+      style="
+        background: linear-gradient(
+          135deg,
+          #00f2fe 0%,
+          #4facfe 50%,
+          #667eea 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.025em;
+      "
+    >
       Semantic Search API, Simplified.
     </h1>
-   
-    <p style="font-size: 1.05rem; color: #cbd5e1; max-width: 650px; margin: 0 auto 1.75rem; line-height: 1.6;">
-      Embed powerful semantic search into your app with a single JSON request. No vector databases, no model downloads—just instant meaning-based results.
+
+    <p
+      style="
+        font-size: 1.05rem;
+        color: #cbd5e1;
+        max-width: 650px;
+        margin: 0 auto 1.75rem;
+        line-height: 1.6;
+      "
+    >
+      Embed powerful semantic search into your app with a single JSON request.
+      No vector databases, no model downloads—just instant meaning-based
+      results.
     </p>
-    <div class="btn-group" style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-      <a href="/demos" role="button" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25); transition: all 0.2s;">Try Demo</a>
-      <a href="/api/docs" role="button" class="secondary" style="background: rgba(30, 41, 59, 0.8); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.3); padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 500; font-size: 0.9rem; text-decoration: none; backdrop-filter: blur(8px); transition: all 0.2s;">Read the Docs</a>
+    <div
+      class="btn-group"
+      style="
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      "
+    >
+      <a
+        href="/demos"
+        role="button"
+        style="
+          background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+          color: #0f172a;
+          padding: 0.6rem 1.4rem;
+          border-radius: 6px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          text-decoration: none;
+          box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+          transition: all 0.2s;
+        "
+        >Try Demo</a
+      >
+      <a
+        href="/api/docs"
+        role="button"
+        class="secondary"
+        style="
+          background: rgba(30, 41, 59, 0.8);
+          color: #00f2fe;
+          border: 1px solid rgba(0, 242, 254, 0.3);
+          padding: 0.6rem 1.4rem;
+          border-radius: 6px;
+          font-weight: 500;
+          font-size: 0.9rem;
+          text-decoration: none;
+          backdrop-filter: blur(8px);
+          transition: all 0.2s;
+        "
+        >Read the Docs</a
+      >
     </div>
   </div>
 
   <!-- Features Grid (Symmetric 2x2 Grid - No hanging cards) -->
-  <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin: 2.5rem 0;">
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; padding: 1.5rem; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 0.8rem; color: #00f2fe; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">[01]</div>
-      <h3 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0; font-weight: 600; margin-bottom: 0.5rem;">Forget Vector Databases</h3>
-      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0;">
-        No Pinecone, Qdrant, or pgvector setup required. We handle all vector storage and infrastructure out of the box.
+  <div
+    class="features"
+    style="
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin: 2.5rem 0;
+    "
+  >
+    <div
+      class="feature-card"
+      style="
+        background: linear-gradient(
+          145deg,
+          rgba(15, 23, 42, 0.9) 0%,
+          rgba(30, 41, 59, 0.8) 100%
+        );
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: all 0.25s ease;
+      "
+      onmouseover="
+        this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
+        this.style.transform = 'translateY(-2px)';
+      "
+      onmouseout="
+        this.style.borderColor = 'rgba(100, 116, 139, 0.3)';
+        this.style.transform = 'translateY(0)';
+      "
+    >
+      <h3
+        style="
+          color: #f8fafc;
+          font-size: 1.05rem;
+          margin-top: 0;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        "
+      >
+        Forget Vector Databases
+      </h3>
+      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0">
+        No Pinecone, Qdrant, or pgvector setup required. We handle all vector
+        storage and infrastructure out of the box.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; padding: 1.5rem; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 0.8rem; color: #00f2fe; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">[02]</div>
-      <h3 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0; font-weight: 600; margin-bottom: 0.5rem;">Zero Model Downloads</h3>
-      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0;">
-        Stop downloading heavy model weights or managing PyTorch runtimes. Leverage state-of-the-art semantic models instantly.
+    <div
+      class="feature-card"
+      style="
+        background: linear-gradient(
+          145deg,
+          rgba(15, 23, 42, 0.9) 0%,
+          rgba(30, 41, 59, 0.8) 100%
+        );
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: all 0.25s ease;
+      "
+      onmouseover="
+        this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
+        this.style.transform = 'translateY(-2px)';
+      "
+      onmouseout="
+        this.style.borderColor = 'rgba(100, 116, 139, 0.3)';
+        this.style.transform = 'translateY(0)';
+      "
+    >
+      <h3
+        style="
+          color: #f8fafc;
+          font-size: 1.05rem;
+          margin-top: 0;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        "
+      >
+        Zero Model Downloads
+      </h3>
+      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0">
+        Stop downloading heavy model weights or managing PyTorch runtimes.
+        Leverage state-of-the-art semantic models instantly.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; padding: 1.5rem; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 0.8rem; color: #00f2fe; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">[03]</div>
-      <h3 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0; font-weight: 600; margin-bottom: 0.5rem;">Ultra-Fast & Multilingual</h3>
-      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0;">
-        Sub-200ms searches powered by optimized embeddings. Seamlessly understand queries in English, Spanish, and over 50 languages.
+    <div
+      class="feature-card"
+      style="
+        background: linear-gradient(
+          145deg,
+          rgba(15, 23, 42, 0.9) 0%,
+          rgba(30, 41, 59, 0.8) 100%
+        );
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: all 0.25s ease;
+      "
+      onmouseover="
+        this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
+        this.style.transform = 'translateY(-2px)';
+      "
+      onmouseout="
+        this.style.borderColor = 'rgba(100, 116, 139, 0.3)';
+        this.style.transform = 'translateY(0)';
+      "
+    >
+      <h3
+        style="
+          color: #f8fafc;
+          font-size: 1.05rem;
+          margin-top: 0;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        "
+      >
+        Ultra-Fast & Multilingual
+      </h3>
+      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0">
+        Sub-200ms searches powered by optimized embeddings. Seamlessly
+        understand queries in English, Spanish, and over 50 languages.
       </p>
     </div>
 
-    <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; padding: 1.5rem; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
-      <div style="font-size: 0.8rem; color: #00f2fe; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">[04]</div>
-      <h3 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0; font-weight: 600; margin-bottom: 0.5rem;">Plug-and-Play RESTful API</h3>
-      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0;">
-        Clean JSON in, clean JSON out. Integrate into any backend stack in minutes with interactive documentation.
+    <div
+      class="feature-card"
+      style="
+        background: linear-gradient(
+          145deg,
+          rgba(15, 23, 42, 0.9) 0%,
+          rgba(30, 41, 59, 0.8) 100%
+        );
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        transition: all 0.25s ease;
+      "
+      onmouseover="
+        this.style.borderColor = 'rgba(0, 242, 254, 0.6)';
+        this.style.transform = 'translateY(-2px)';
+      "
+      onmouseout="
+        this.style.borderColor = 'rgba(100, 116, 139, 0.3)';
+        this.style.transform = 'translateY(0)';
+      "
+    >
+      <h3
+        style="
+          color: #f8fafc;
+          font-size: 1.05rem;
+          margin-top: 0;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        "
+      >
+        Plug-and-Play RESTful API
+      </h3>
+      <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin: 0">
+        Clean JSON in, clean JSON out. Integrate into any backend stack in
+        minutes with interactive documentation.
       </p>
     </div>
   </div>
@@ -88,7 +323,11 @@
       display: none;
       margin: 3rem 0;
       padding: 2rem;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.95) 0%,
+        rgba(30, 41, 59, 0.9) 100%
+      );
       border: 1px solid rgba(0, 242, 254, 0.4);
       border-radius: 12px;
       color: white;
@@ -96,9 +335,28 @@
       backdrop-filter: blur(10px);
     "
   >
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-      <h2 style="margin: 0; color: #f8fafc; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-        <span style="color: #00f2fe;">[01]</span> Your Stats
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      "
+    >
+      <h2
+        style="
+          margin: 0;
+          color: #f8fafc;
+          font-size: 1.3rem;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        "
+      >
+        <span style="color: #00f2fe">[01]</span> Your Stats
       </h2>
       <a
         href="/dashboard"
@@ -111,10 +369,11 @@
           text-decoration: none;
           font-weight: 500;
           font-size: 0.85rem;
-          font-family: 'JetBrains Mono', monospace;
+          font-family: &quot;JetBrains Mono&quot;, monospace;
           transition: all 0.2s;
         "
-      >View Full Dashboard →</a>
+        >View Full Dashboard →</a
+      >
     </div>
 
     <div
@@ -135,20 +394,35 @@
           text-align: center;
         "
       >
-        <h3 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">Monthly Searches</h3>
+        <h3
+          style="
+            margin: 0 0 0.5rem 0;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
+            text-transform: uppercase;
+          "
+        >
+          Monthly Searches
+        </h3>
         <div
           style="
             font-size: 2.2rem;
             font-weight: 700;
             margin: 0.5rem 0;
             color: #00f2fe;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
           "
         >
           <span id="monthly-searches">0</span>
         </div>
         <p
-          style="margin: 0; font-size: 0.85rem; color: #64748b; font-family: 'JetBrains Mono', monospace;"
+          style="
+            margin: 0;
+            font-size: 0.85rem;
+            color: #64748b;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
+          "
           id="monthly-label"
         >
           -
@@ -165,77 +439,249 @@
           text-align: center;
         "
       >
-        <h3 style="margin: 0 0 0.5rem 0; color: #94a3b8; font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">API Status</h3>
+        <h3
+          style="
+            margin: 0 0 0.5rem 0;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
+            text-transform: uppercase;
+          "
+        >
+          API Status
+        </h3>
         <div
           style="
             font-size: 1.8rem;
             font-weight: 700;
             margin: 0.5rem 0;
             color: #10b981;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
           "
         >
           Active
         </div>
-        <p style="margin: 0; font-size: 0.85rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">Ready to use</p>
+        <p
+          style="
+            margin: 0;
+            font-size: 0.85rem;
+            color: #64748b;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
+          "
+        >
+          Ready to use
+        </p>
       </div>
     </div>
   </div>
 
-
   <!-- Interactive & Clean Example Section -->
-  <section style="margin: 3.5rem 0;">
-    <div style="text-align: center; margin-bottom: 2.5rem;">
-      <h2 style="color: #f8fafc; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">See It in Action</h2>
-      <p style="color: #94a3b8; font-size: 0.95rem;">A clean, streamlined example using 3 core system documents.</p>
+  <section style="margin: 3.5rem 0">
+    <div style="text-align: center; margin-bottom: 2.5rem">
+      <h2
+        style="
+          color: #f8fafc;
+          font-size: 1.8rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+        "
+      >
+        See It in Action
+      </h2>
+      <p style="color: #94a3b8; font-size: 0.95rem">
+        A clean, streamlined example using 3 core system documents.
+      </p>
     </div>
 
     <!-- STEP 01: Dual Tab Payload & Prompt Component (VS Code Style) -->
-<div style="margin: 2rem 0; display: flex; flex-direction: column; gap: 1rem;">
-  <div>
-    <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
-      <span>[01]</span> Prepare Your JSON Payload
-    </h3>
-    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
-      Use the sample payload or switch to the LLM prompt tab to format your unstructured PDFs and documents instantly.
-    </p>
-  </div>
-
-  <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
-    <!-- VS Code Top Bar / Tabs -->
-    <div style="background: #111111; padding: 0 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between; height: 42px;">
-      
-      <!-- Left side: Mac Window Buttons + Tabs -->
-      <div style="display: flex; align-items: center; gap: 1rem; height: 100%;">
-        <div style="display: flex; align-items: center; gap: 0.4rem; padding-right: 0.5rem; border-right: 1px solid #222;">
-          <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-          <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
-          <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-        </div>
-
-        <!-- Interactive Tabs -->
-        <div style="display: flex; gap: 0.2rem; height: 100%; align-items: flex-end;">
-          <button id="tab-json" onclick="switchReadyTab('json')" style="background: #1e1e1e; color: #00f2fe; border: none; border-top: 2px solid #00f2fe; padding: 0.5rem 0.85rem; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; cursor: pointer; height: 34px; border-top-left-radius: 4px; border-top-right-radius: 4px; transition: all 0.2s;">
-            payload.json
-          </button>
-          <button id="tab-prompt" onclick="switchReadyTab('prompt')" style="background: transparent; color: #64748b; border: none; border-top: 2px solid transparent; padding: 0.5rem 0.85rem; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; cursor: pointer; height: 34px; border-top-left-radius: 4px; border-top-right-radius: 4px; transition: all 0.2s;">
-            llm_prompt.txt
-          </button>
-        </div>
+    <div
+      style="margin: 2rem 0; display: flex; flex-direction: column; gap: 1rem"
+    >
+      <div>
+        <h3
+          style="
+            margin-top: 0;
+            color: #00f2fe;
+            font-size: 1.05rem;
+            font-family: &quot;JetBrains Mono&quot;, monospace;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+          "
+        >
+          <span>[01]</span> Prepare Your JSON Payload
+        </h3>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0">
+          Use the sample payload or switch to the LLM prompt tab to format your
+          unstructured PDFs and documents instantly.
+        </p>
       </div>
 
-      <!-- Right side: Dynamic Copy Button -->
-      <button id="ready-copy-btn" onclick="copyReadyTabContent()" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.3rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">
-        Copy JSON
-      </button>
-    </div>
+      <div
+        style="
+          border: 1px solid #333333;
+          border-radius: 12px;
+          background: #1e1e1e;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        "
+      >
+        <!-- VS Code Top Bar / Tabs -->
+        <div
+          style="
+            background: #111111;
+            padding: 0 1rem;
+            border-bottom: 1px solid #292929;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 42px;
+          "
+        >
+          <!-- Left side: Mac Window Buttons + Tabs -->
+          <div
+            style="display: flex; align-items: center; gap: 1rem; height: 100%"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                padding-right: 0.5rem;
+                border-right: 1px solid #222;
+              "
+            >
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #ef4444;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #f59e0b;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #10b981;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+            </div>
 
-    <!-- Code Display Area -->
-    <div style="padding: 1.25rem;">
-      <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.5;">
-        
-        <!-- Tab 1 Content: JSON Payload -->
-        <pre id="content-json" style="margin: 0; font-family: inherit; color: inherit; display: block;">{
+            <!-- Interactive Tabs -->
+            <div
+              style="
+                display: flex;
+                gap: 0.2rem;
+                height: 100%;
+                align-items: flex-end;
+              "
+            >
+              <button
+                id="tab-json"
+                onclick="switchReadyTab('json')"
+                style="
+                  background: #1e1e1e;
+                  color: #00f2fe;
+                  border: none;
+                  border-top: 2px solid #00f2fe;
+                  padding: 0.5rem 0.85rem;
+                  font-size: 0.75rem;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  cursor: pointer;
+                  height: 34px;
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
+                  transition: all 0.2s;
+                "
+              >
+                payload.json
+              </button>
+              <button
+                id="tab-prompt"
+                onclick="switchReadyTab('prompt')"
+                style="
+                  background: transparent;
+                  color: #64748b;
+                  border: none;
+                  border-top: 2px solid transparent;
+                  padding: 0.5rem 0.85rem;
+                  font-size: 0.75rem;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  cursor: pointer;
+                  height: 34px;
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
+                  transition: all 0.2s;
+                "
+              >
+                llm_prompt.txt
+              </button>
+            </div>
+          </div>
+
+          <!-- Right side: Dynamic Copy Button -->
+          <button
+            id="ready-copy-btn"
+            onclick="copyReadyTabContent()"
+            style="
+              background: #252526;
+              color: #d4d4d4;
+              border: 1px solid #3c3c3c;
+              padding: 0.3rem 0.75rem;
+              border-radius: 4px;
+              font-size: 0.75rem;
+              font-family: Consolas, &quot;Courier New&quot;, monospace;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+          >
+            Copy JSON
+          </button>
+        </div>
+
+        <!-- Code Display Area -->
+        <div style="padding: 1.25rem">
+          <div
+            style="
+              background: #111111;
+              border: 1px solid #292929;
+              border-radius: 8px;
+              overflow-x: auto;
+              margin: 0;
+              padding: 1rem;
+              color: #00f2fe;
+              font-family: &quot;JetBrains Mono&quot;, monospace;
+              font-size: 0.82rem;
+              line-height: 1.5;
+            "
+          >
+            <!-- Tab 1 Content: JSON Payload -->
+            <pre
+              id="content-json"
+              style="
+                margin: 0;
+                font-family: inherit;
+                color: inherit;
+                display: block;
+              "
+            >
+{
   "documents": [
     {
       "id": "part-001",
@@ -256,10 +702,20 @@
       "metadata": {"state": "hidden"}
     }
   ]
-}</pre>
+}</pre
+            >
 
-        <!-- Tab 2 Content: LLM Prompt -->
-        <pre id="content-prompt" style="margin: 0; font-family: inherit; color: #9cdcfe; display: none;">Act as a data conversion engine for ReadyAPI.net . Transform the following text or document into a valid JSON that strictly matches this schema structure:
+            <!-- Tab 2 Content: LLM Prompt -->
+            <pre
+              id="content-prompt"
+              style="
+                margin: 0;
+                font-family: inherit;
+                color: #9cdcfe;
+                display: none;
+              "
+            >
+Act as a data conversion engine for ReadyAPI.net . Transform the following text or document into a valid JSON that strictly matches this schema structure:
 
 {
   "documents": [
@@ -279,115 +735,414 @@ Strict rules:
 3. Return EXCLUSIVELY pure JSON code without introductory text or explanations.
 
 Text to process:
-[PASTE YOUR TEXT, ARTICLE OR PDF HERE]</pre>
-
+[PASTE YOUR TEXT, ARTICLE OR PDF HERE]</pre
+            >
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Inline Tab Control Script -->
-<script>
-  let currentReadyTab = 'json';
+    <!-- Inline Tab Control Script -->
+    <script>
+      let currentReadyTab = "json";
 
-  const jsonPayloadText = `{\n  "documents": [\n    {\n      "id": "part-001",\n      "title": "Charge System",\n      "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",\n      "metadata": {"state": "idle"}\n    },\n    {\n      "id": "part-002",\n      "title": "Flight System",\n      "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine",\n      "metadata": {"state": "active"}\n    },\n    {\n      "id": "part-003",\n      "title": "Stealth System",\n      "content": "cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise",\n      "metadata": {"state": "hidden"}\n    }\n  ]\n}`;
+      const jsonPayloadText = `{\n  "documents": [\n    {\n      "id": "part-001",\n      "title": "Charge System",\n      "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",\n      "metadata": {"state": "idle"}\n    },\n    {\n      "id": "part-002",\n      "title": "Flight System",\n      "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine",\n      "metadata": {"state": "active"}\n    },\n    {\n      "id": "part-003",\n      "title": "Stealth System",\n      "content": "cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise",\n      "metadata": {"state": "hidden"}\n    }\n  ]\n}`;
 
-  const llmPromptText = `Act as a data conversion engine for ReadyAPI. Transform the following text or document into a valid JSON that strictly matches this schema structure:\n\n{\n  "documents": [\n    {\n      "id": "part-001",\n      "title": "Descriptive title of the chunk",\n      "content": "Context-rich text optimized for semantic search.",\n      "keywords": ["keyword1", "keyword2"],\n      "metadata": {"category": "example"}\n    }\n  ]\n}\n\nStrict rules:\n1. If the text is long, split it into logical chunks and number the ids sequentially (part-001, part-002, etc.).\n2. Do not invent information not present in the original text.\n3. Return EXCLUSIVELY pure JSON code without introductory text or explanations.\n\nText to process:\n[PASTE YOUR TEXT, ARTICLE OR PDF HERE]`;
+      const llmPromptText = `Act as a data conversion engine for ReadyAPI. Transform the following text or document into a valid JSON that strictly matches this schema structure:\n\n{\n  "documents": [\n    {\n      "id": "part-001",\n      "title": "Descriptive title of the chunk",\n      "content": "Context-rich text optimized for semantic search.",\n      "keywords": ["keyword1", "keyword2"],\n      "metadata": {"category": "example"}\n    }\n  ]\n}\n\nStrict rules:\n1. If the text is long, split it into logical chunks and number the ids sequentially (part-001, part-002, etc.).\n2. Do not invent information not present in the original text.\n3. Return EXCLUSIVELY pure JSON code without introductory text or explanations.\n\nText to process:\n[PASTE YOUR TEXT, ARTICLE OR PDF HERE]`;
 
-  function switchReadyTab(tab) {
-    currentReadyTab = tab;
-    const btnJson = document.getElementById('tab-json');
-    const btnPrompt = document.getElementById('tab-prompt');
-    const contentJson = document.getElementById('content-json');
-    const contentPrompt = document.getElementById('content-prompt');
-    const copyBtn = document.getElementById('ready-copy-btn');
+      function switchReadyTab(tab) {
+        currentReadyTab = tab;
+        const btnJson = document.getElementById("tab-json");
+        const btnPrompt = document.getElementById("tab-prompt");
+        const contentJson = document.getElementById("content-json");
+        const contentPrompt = document.getElementById("content-prompt");
+        const copyBtn = document.getElementById("ready-copy-btn");
 
-    if (tab === 'json') {
-      btnJson.style.background = '#1e1e1e';
-      btnJson.style.color = '#00f2fe';
-      btnJson.style.borderTopColor = '#00f2fe';
+        if (tab === "json") {
+          btnJson.style.background = "#1e1e1e";
+          btnJson.style.color = "#00f2fe";
+          btnJson.style.borderTopColor = "#00f2fe";
 
-      btnPrompt.style.background = 'transparent';
-      btnPrompt.style.color = '#64748b';
-      btnPrompt.style.borderTopColor = 'transparent';
+          btnPrompt.style.background = "transparent";
+          btnPrompt.style.color = "#64748b";
+          btnPrompt.style.borderTopColor = "transparent";
 
-      contentJson.style.display = 'block';
-      contentPrompt.style.display = 'none';
+          contentJson.style.display = "block";
+          contentPrompt.style.display = "none";
 
-      copyBtn.textContent = 'Copy JSON';
-      copyBtn.style.color = '#d4d4d4';
-      copyBtn.style.borderColor = '#3c3c3c';
-    } else {
-      btnPrompt.style.background = '#1e1e1e';
-      btnPrompt.style.color = '#00f2fe';
-      btnPrompt.style.borderTopColor = '#00f2fe';
+          copyBtn.textContent = "Copy JSON";
+          copyBtn.style.color = "#d4d4d4";
+          copyBtn.style.borderColor = "#3c3c3c";
+        } else {
+          btnPrompt.style.background = "#1e1e1e";
+          btnPrompt.style.color = "#00f2fe";
+          btnPrompt.style.borderTopColor = "#00f2fe";
 
-      btnJson.style.background = 'transparent';
-      btnJson.style.color = '#64748b';
-      btnJson.style.borderTopColor = 'transparent';
+          btnJson.style.background = "transparent";
+          btnJson.style.color = "#64748b";
+          btnJson.style.borderTopColor = "transparent";
 
-      contentPrompt.style.display = 'block';
-      contentJson.style.display = 'none';
+          contentPrompt.style.display = "block";
+          contentJson.style.display = "none";
 
-      copyBtn.textContent = 'Copy LLM Prompt';
-      copyBtn.style.color = '#00f2fe';
-      copyBtn.style.borderColor = 'rgba(0, 242, 254, 0.4)';
-    }
-  }
+          copyBtn.textContent = "Copy LLM Prompt";
+          copyBtn.style.color = "#00f2fe";
+          copyBtn.style.borderColor = "rgba(0, 242, 254, 0.4)";
+        }
+      }
 
-  function copyReadyTabContent() {
-    const copyBtn = document.getElementById('ready-copy-btn');
-    const textToCopy = currentReadyTab === 'json' ? jsonPayloadText : llmPromptText;
-    
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      const originalText = copyBtn.textContent;
-      copyBtn.textContent = 'Copied!';
-      setTimeout(() => {
-        copyBtn.textContent = originalText;
-      }, 2000);
-    });
-  }
-</script>
+      function copyReadyTabContent() {
+        const copyBtn = document.getElementById("ready-copy-btn");
+        const textToCopy =
+          currentReadyTab === "json" ? jsonPayloadText : llmPromptText;
+
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+          }, 2000);
+        });
+      }
+    </script>
 
     <!-- STEP 02 & 03: Sleek Two-Column Grid for Request & Response -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
-      
+    <div
+      style="
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      "
+    >
       <!-- Left Column: Search Request (VS Code Style with interactive Copy Button) -->
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <div style="display: flex; flex-direction: column; gap: 1rem">
         <div>
-          <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+          <h3
+            style="
+              margin-top: 0;
+              color: #00f2fe;
+              font-size: 1.05rem;
+              font-family: &quot;JetBrains Mono&quot;, monospace;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-bottom: 0.3rem;
+            "
+          >
             <span>[02]</span> Natural Language Query
           </h3>
-          <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
-            Query using natural human concepts directly from your terminal or script.
+          <p style="color: #94a3b8; font-size: 0.85rem; margin: 0">
+            Query using natural human concepts directly from your terminal or
+            script.
           </p>
         </div>
 
-        <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+        <div
+          style="
+            border: 1px solid #333333;
+            border-radius: 12px;
+            background: #1e1e1e;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+          "
+        >
           <!-- VS Code Title Bar -->
-          <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 0.4rem;">
-              <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-              <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
-              <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-              <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">query.py</span>
+          <div
+            style="
+              background: #111111;
+              padding: 0.75rem 1rem;
+              border-bottom: 1px solid #292929;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 0.4rem">
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #ef4444;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #f59e0b;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #10b981;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  margin-left: 0.5rem;
+                  font-size: 0.75rem;
+                  color: #94a3b8;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                "
+                >query.py</span
+              >
             </div>
-            
-            <button onclick="navigator.clipboard.writeText('import requests\n\nurl = &quot;https://readyapi.net/api/v1/search/query&quot;\nheaders = {&quot;x-api-key&quot;: &quot;YOUR_API_KEY&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;}\npayload = {&quot;query&quot;: &quot;I need to travel far away quickly&quot;, &quot;top_k&quot;: 2}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())'); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
+
+            <button
+              onclick="
+                navigator.clipboard.writeText(
+                  'import requests\n\nurl = &quot;https://readyapi.net/api/v1/search/query&quot;\nheaders = {&quot;x-api-key&quot;: &quot;YOUR_API_KEY&quot;, &quot;Content-Type&quot;: &quot;application/json&quot;}\npayload = {&quot;query&quot;: &quot;I need to travel far away quickly&quot;, &quot;top_k&quot;: 2}\n\nresponse = requests.post(url, json=payload, headers=headers)\nprint(response.json())',
+                );
+                this.textContent = 'Copied!';
+                setTimeout(() => (this.textContent = 'Copy'), 2000);
+              "
+              style="
+                background: #252526;
+                color: #d4d4d4;
+                border: 1px solid #3c3c3c;
+                padding: 0.35rem 0.75rem;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                font-family: Consolas, &quot;Courier New&quot;, monospace;
+                cursor: pointer;
+                transition: all 0.2s;
+              "
+            >
+              Copy
+            </button>
           </div>
 
           <!-- Cuerpo del código -->
-          <div style="padding: 1.25rem;">
-            <div id="code-snippet" style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; color: #d4d4d4; font-family: 'Cascadia Code', 'Cascadia Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; font-size: 0.95rem; font-weight: 500; line-height: 1.65; padding: 0.75rem 0; font-variant-ligatures: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;">
-              <div style="min-width: max-content; width: 100%;">
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">1</span><span><span style="color:#c586c0;">import</span> <span style="color:#4ec9b0;">requests</span></span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">2</span><span>&nbsp;</span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">3</span><span><span style="color:#9cdcfe;">url</span> = <span style="color:#ce9178;">"https://readyapi.net/api/v1/search/query"</span></span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">4</span><span><span style="color:#9cdcfe;">headers</span> = {<span style="color:#ce9178;">"x-api-key"</span>: <span style="color:#ce9178;">"YOUR_API_KEY"</span>, <span style="color:#ce9178;">"Content-Type"</span>: <span style="color:#ce9178;">"application/json"</span>}</span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">5</span><span><span style="color:#9cdcfe;">payload</span> = {<span style="color:#ce9178;">"query"</span>: <span style="color:#ce9178;">"I need to travel far away quickly"</span>, <span style="color:#ce9178;">"top_k"</span>: <span style="color:#b5cea8;">2</span>}</span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">6</span><span>&nbsp;</span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">7</span><span><span style="color:#9cdcfe;">response</span> = <span style="color:#4ec9b0;">requests</span>.<span style="color:#dcdcaa;">post</span>(<span style="color:#9cdcfe;">url</span>, <span style="color:#9cdcfe;">json</span>=<span style="color:#9cdcfe;">payload</span>, <span style="color:#9cdcfe;">headers</span>=<span style="color:#9cdcfe;">headers</span>)</span></div>
-                <div style="display:grid; grid-template-columns:40px max-content; min-height:1.65em; white-space:pre; padding-right:20px;"><span style="color:#858585;text-align:right;padding-right:15px;user-select:none;">8</span><span><span style="color:#dcdcaa;">print</span>(<span style="color:#9cdcfe;">response</span>.<span style="color:#dcdcaa;">json</span>())</span></div>
+          <div style="padding: 1.25rem">
+            <div
+              id="code-snippet"
+              style="
+                background: #111111;
+                border: 1px solid #292929;
+                border-radius: 8px;
+                overflow-x: auto;
+                margin: 0;
+                color: #d4d4d4;
+                font-family:
+                  &quot;Cascadia Code&quot;, &quot;Cascadia Mono&quot;,
+                  &quot;SFMono-Regular&quot;, Consolas,
+                  &quot;Liberation Mono&quot;, monospace;
+                font-size: 0.95rem;
+                font-weight: 500;
+                line-height: 1.65;
+                padding: 0.75rem 0;
+                font-variant-ligatures: none;
+                -webkit-font-smoothing: antialiased;
+                text-rendering: optimizeLegibility;
+              "
+            >
+              <div style="min-width: max-content; width: 100%">
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >1</span
+                  ><span
+                    ><span style="color: #c586c0">import</span>
+                    <span style="color: #4ec9b0">requests</span></span
+                  >
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >2</span
+                  ><span>&nbsp;</span>
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >3</span
+                  ><span
+                    ><span style="color: #9cdcfe">url</span> =
+                    <span style="color: #ce9178"
+                      >"https://readyapi.net/api/v1/search/query"</span
+                    ></span
+                  >
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >4</span
+                  ><span
+                    ><span style="color: #9cdcfe">headers</span> = {<span
+                      style="color: #ce9178"
+                      >"x-api-key"</span
+                    >: <span style="color: #ce9178">"YOUR_API_KEY"</span>,
+                    <span style="color: #ce9178">"Content-Type"</span>:
+                    <span style="color: #ce9178">"application/json"</span
+                    >}</span
+                  >
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >5</span
+                  ><span
+                    ><span style="color: #9cdcfe">payload</span> = {<span
+                      style="color: #ce9178"
+                      >"query"</span
+                    >:
+                    <span style="color: #ce9178"
+                      >"I need to travel far away quickly"</span
+                    >, <span style="color: #ce9178">"top_k"</span>:
+                    <span style="color: #b5cea8">2</span>}</span
+                  >
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >6</span
+                  ><span>&nbsp;</span>
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >7</span
+                  ><span
+                    ><span style="color: #9cdcfe">response</span> =
+                    <span style="color: #4ec9b0">requests</span>.<span
+                      style="color: #dcdcaa"
+                      >post</span
+                    >(<span style="color: #9cdcfe">url</span>,
+                    <span style="color: #9cdcfe">json</span>=<span
+                      style="color: #9cdcfe"
+                      >payload</span
+                    >, <span style="color: #9cdcfe">headers</span>=<span
+                      style="color: #9cdcfe"
+                      >headers</span
+                    >)</span
+                  >
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 40px max-content;
+                    min-height: 1.65em;
+                    white-space: pre;
+                    padding-right: 20px;
+                  "
+                >
+                  <span
+                    style="
+                      color: #858585;
+                      text-align: right;
+                      padding-right: 15px;
+                      user-select: none;
+                    "
+                    >8</span
+                  ><span
+                    ><span style="color: #dcdcaa">print</span>(<span
+                      style="color: #9cdcfe"
+                      >response</span
+                    >.<span style="color: #dcdcaa">json</span>())</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -395,31 +1150,117 @@ Text to process:
       </div>
 
       <!-- Right Column: API Response -->
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <div style="display: flex; flex-direction: column; gap: 1rem">
         <div>
-          <h3 style="margin-top: 0; color: #10b981; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+          <h3
+            style="
+              margin-top: 0;
+              color: #10b981;
+              font-size: 1.05rem;
+              font-family: &quot;JetBrains Mono&quot;, monospace;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-bottom: 0.3rem;
+            "
+          >
             <span>[03]</span> Instant JSON Response (~124ms)
           </h3>
-          <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
+          <p style="color: #94a3b8; font-size: 0.85rem; margin: 0">
             Get ranked, highly relevant semantic matches scored from 0 to 1.
           </p>
         </div>
 
-        <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+        <div
+          style="
+            border: 1px solid #333333;
+            border-radius: 12px;
+            background: #1e1e1e;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+          "
+        >
           <!-- VS Code Title Bar (Green accent for response) -->
-          <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 0.4rem;">
-              <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-              <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
-              <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-              <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #34d399; font-family: 'JetBrains Mono', monospace;">response.json</span>
+          <div
+            style="
+              background: #111111;
+              padding: 0.75rem 1rem;
+              border-bottom: 1px solid #292929;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 0.4rem">
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #ef4444;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #f59e0b;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  width: 10px;
+                  height: 10px;
+                  background: #10b981;
+                  border-radius: 50%;
+                  display: inline-block;
+                "
+              ></span>
+              <span
+                style="
+                  margin-left: 0.5rem;
+                  font-size: 0.75rem;
+                  color: #34d399;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                "
+                >response.json</span
+              >
             </div>
-            <span style="font-size: 0.7rem; color: #34d399; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Status 200 OK</span>
+            <span
+              style="
+                font-size: 0.7rem;
+                color: #34d399;
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+                background: rgba(16, 185, 129, 0.1);
+                padding: 0.2rem 0.5rem;
+                border-radius: 4px;
+              "
+              >Status 200 OK</span
+            >
           </div>
 
-          <div style="padding: 1.25rem;">
-            <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #34d399; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 1.5;">
-<pre style="margin: 0; font-family: inherit; color: inherit;">{
+          <div style="padding: 1.25rem">
+            <div
+              style="
+                background: #111111;
+                border: 1px solid #292929;
+                border-radius: 8px;
+                overflow-x: auto;
+                margin: 0;
+                padding: 1rem;
+                color: #34d399;
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+                font-size: 0.85rem;
+                line-height: 1.5;
+              "
+            >
+              <pre style="margin: 0; font-family: inherit; color: inherit">
+{
   "results": [
     {
       "id": "part-002",
@@ -434,64 +1275,198 @@ Text to process:
   ],
   "count": 2,
   "processing_ms": 124
-}</pre>
+}</pre
+              >
             </div>
           </div>
         </div>
       </div>
-
     </div>
-
 
     <!-- What is Semantic Search & Comparison Section -->
-  <section style="margin: 3.5rem 0; background: linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 12px; padding: 2.25rem; backdrop-filter: blur(10px);">
-    <h2 style="color: #f8fafc; font-size: 1.5rem; font-weight: 700; margin-top: 0; margin-bottom: 1rem;">What is Semantic Search?</h2>
+    <section
+      style="
+        margin: 3.5rem 0;
+        background: linear-gradient(
+          145deg,
+          rgba(15, 23, 42, 0.8) 0%,
+          rgba(30, 41, 59, 0.6) 100%
+        );
+        border: 1px solid rgba(100, 116, 139, 0.3);
+        border-radius: 12px;
+        padding: 2.25rem;
+        backdrop-filter: blur(10px);
+      "
+    >
+      <h2
+        style="
+          color: #f8fafc;
+          font-size: 1.5rem;
+          font-weight: 700;
+          margin-top: 0;
+          margin-bottom: 1rem;
+        "
+      >
+        What is Semantic Search?
+      </h2>
 
-    <p style="font-size: 0.95rem; line-height: 1.6; color: #94a3b8; margin-bottom: 1.75rem;">
-      <strong>Semantic Search</strong> understands the intent and contextual meaning of a query rather than just matching literal keywords. By converting text into vector concept maps, the system identifies relationships, synonyms, and crosses languages instantly.
-    </p>
+      <p
+        style="
+          font-size: 0.95rem;
+          line-height: 1.6;
+          color: #94a3b8;
+          margin-bottom: 1.75rem;
+        "
+      >
+        <strong>Semantic Search</strong> understands the intent and contextual
+        meaning of a query rather than just matching literal keywords. By
+        converting text into vector concept maps, the system identifies
+        relationships, synonyms, and crosses languages instantly.
+      </p>
 
-    <!-- Comparison Table -->
-    <div style="overflow-x: auto; margin: 1.5rem 0;">
-      <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 650px; border-radius: 8px; overflow: hidden;">
-        <thead>
-          <tr style="background: rgba(0, 242, 254, 0.1); border-bottom: 1px solid rgba(0, 242, 254, 0.3);">
-            <th style="padding: 0.85rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Feature</th>
-            <th style="padding: 0.85rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Traditional Search (Lexical)</th>
-            <th style="padding: 0.85rem; text-align: left; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Semantic Search (ReadyAPI)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
-            <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc;">Search Logic</td>
-            <td style="padding: 0.85rem; color: #94a3b8;">Matches exact characters/keywords.</td>
-            <td style="padding: 0.85rem; color: #cbd5e1;">Understands intent and concepts.</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2); background: rgba(30, 41, 59, 0.4);">
-            <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc;">Language</td>
-            <td style="padding: 0.85rem; color: #94a3b8;">Limited to document language.</td>
-            <td style="padding: 0.85rem; color: #cbd5e1;">Multilingual: Search English, find Spanish.</td>
-          </tr>
-          <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
-            <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc;">Synonyms</td>
-            <td style="padding: 0.85rem; color: #94a3b8;">Fails unless words match exactly.</td>
-            <td style="padding: 0.85rem; color: #cbd5e1;">Succeeds by meaning ("broken screen" = "my display is shattered").</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
+      <!-- Comparison Table -->
+      <div style="overflow-x: auto; margin: 1.5rem 0">
+        <table
+          style="
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 650px;
+            border-radius: 8px;
+            overflow: hidden;
+          "
+        >
+          <thead>
+            <tr
+              style="
+                background: rgba(0, 242, 254, 0.1);
+                border-bottom: 1px solid rgba(0, 242, 254, 0.3);
+              "
+            >
+              <th
+                style="
+                  padding: 0.85rem;
+                  text-align: left;
+                  color: #00f2fe;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 0.85rem;
+                "
+              >
+                Feature
+              </th>
+              <th
+                style="
+                  padding: 0.85rem;
+                  text-align: left;
+                  color: #00f2fe;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 0.85rem;
+                "
+              >
+                Traditional Search (Lexical)
+              </th>
+              <th
+                style="
+                  padding: 0.85rem;
+                  text-align: left;
+                  color: #00f2fe;
+                  font-family: &quot;JetBrains Mono&quot;, monospace;
+                  font-size: 0.85rem;
+                "
+              >
+                Semantic Search (ReadyAPI)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2)">
+              <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc">
+                Search Logic
+              </td>
+              <td style="padding: 0.85rem; color: #94a3b8">
+                Matches exact characters/keywords.
+              </td>
+              <td style="padding: 0.85rem; color: #cbd5e1">
+                Understands intent and concepts.
+              </td>
+            </tr>
+            <tr
+              style="
+                border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+                background: rgba(30, 41, 59, 0.4);
+              "
+            >
+              <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc">
+                Language
+              </td>
+              <td style="padding: 0.85rem; color: #94a3b8">
+                Limited to document language.
+              </td>
+              <td style="padding: 0.85rem; color: #cbd5e1">
+                Multilingual: Search English, find Spanish.
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2)">
+              <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc">
+                Synonyms
+              </td>
+              <td style="padding: 0.85rem; color: #94a3b8">
+                Fails unless words match exactly.
+              </td>
+              <td style="padding: 0.85rem; color: #cbd5e1">
+                Succeeds by meaning ("broken screen" = "my display is
+                shattered").
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
     <!-- Final Pro Banner -->
-    <div style="margin: 2.5rem 0; padding: 1.75rem; background: linear-gradient(135deg, rgba(0, 242, 254, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%); border-radius: 10px; border: 1px solid rgba(0, 242, 254, 0.3); border-left: 4px solid #00f2fe; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+    <div
+      style="
+        margin: 2.5rem 0;
+        padding: 1.75rem;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 242, 254, 0.1) 0%,
+          rgba(102, 126, 234, 0.1) 100%
+        );
+        border-radius: 10px;
+        border: 1px solid rgba(0, 242, 254, 0.3);
+        border-left: 4px solid #00f2fe;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      "
+    >
       <div>
-        <h3 style="margin: 0 0 0.3rem 0; color: #00f2fe; font-size: 1.15rem;">Ready to build?</h3>
-        <p style="margin: 0; color: #94a3b8; font-size: 0.9rem;">Get your free API key instantly and integrate search in under 5 minutes.</p>
+        <h3 style="margin: 0 0 0.3rem 0; color: #00f2fe; font-size: 1.15rem">
+          Ready to build?
+        </h3>
+        <p style="margin: 0; color: #94a3b8; font-size: 0.9rem">
+          Get your free API key instantly and integrate search in under 5
+          minutes.
+        </p>
       </div>
-      <a href="/register" style="background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0f172a; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);">Get Free API Key</a>
+      <a
+        href="/register"
+        style="
+          background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+          color: #0f172a;
+          padding: 0.6rem 1.4rem;
+          border-radius: 6px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          text-decoration: none;
+          box-shadow: 0 4px 15px rgba(0, 242, 254, 0.25);
+        "
+        >Get Free API Key</a
+      >
     </div>
-
   </section>
 </div>
 
