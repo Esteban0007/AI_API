@@ -356,7 +356,7 @@
           gap: 0.5rem;
         "
       >
-       Your Stats
+      Your Stats
       </h2>
       <a
         href="/dashboard"
@@ -923,7 +923,7 @@ Text to process:
             </button>
           </div>
 
-          <!-- Cuerpo del código -->
+          <!-- Cuerpo del código corregido (Estilo fluido profesional sin grillas rotas) -->
           <div style="padding: 1.25rem">
             <div
               id="code-snippet"
@@ -933,217 +933,21 @@ Text to process:
                 border-radius: 8px;
                 overflow-x: auto;
                 margin: 0;
+                padding: 1rem;
                 color: #d4d4d4;
-                font-family:
-                  &quot;Cascadia Code&quot;, &quot;Cascadia Mono&quot;,
-                  &quot;SFMono-Regular&quot;, Consolas,
-                  &quot;Liberation Mono&quot;, monospace;
-                font-size: 0.95rem;
-                font-weight: 500;
-                line-height: 1.65;
-                padding: 0.75rem 0;
-                font-variant-ligatures: none;
-                -webkit-font-smoothing: antialiased;
-                text-rendering: optimizeLegibility;
+                font-family: &quot;JetBrains Mono&quot;, Consolas, monospace;
+                font-size: 0.85rem;
+                line-height: 1.6;
               "
             >
-              <div style="min-width: max-content; width: 100%">
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >1</span
-                  ><span
-                    ><span style="color: #c586c0">import</span>
-                    <span style="color: #4ec9b0">requests</span></span
-                  >
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >2</span
-                  ><span>&nbsp;</span>
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >3</span
-                  ><span
-                    ><span style="color: #9cdcfe">url</span> =
-                    <span style="color: #ce9178"
-                      >"https://readyapi.net/api/v1/search/query"</span
-                    ></span
-                  >
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >4</span
-                  ><span
-                    ><span style="color: #9cdcfe">headers</span> = {<span
-                      style="color: #ce9178"
-                      >"x-api-key"</span
-                    >: <span style="color: #ce9178">"YOUR_API_KEY"</span>,
-                    <span style="color: #ce9178">"Content-Type"</span>:
-                    <span style="color: #ce9178">"application/json"</span
-                    >}</span
-                  >
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >5</span
-                  ><span
-                    ><span style="color: #9cdcfe">payload</span> = {<span
-                      style="color: #ce9178"
-                      >"query"</span
-                    >:
-                    <span style="color: #ce9178"
-                      >"I need to travel far away quickly"</span
-                    >, <span style="color: #ce9178">"top_k"</span>:
-                    <span style="color: #b5cea8">2</span>}</span
-                  >
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >6</span
-                  ><span>&nbsp;</span>
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >7</span
-                  ><span
-                    ><span style="color: #9cdcfe">response</span> =
-                    <span style="color: #4ec9b0">requests</span>.<span
-                      style="color: #dcdcaa"
-                      >post</span
-                    >(<span style="color: #9cdcfe">url</span>,
-                    <span style="color: #9cdcfe">json</span>=<span
-                      style="color: #9cdcfe"
-                      >payload</span
-                    >, <span style="color: #9cdcfe">headers</span>=<span
-                      style="color: #9cdcfe"
-                      >headers</span
-                    >)</span
-                  >
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 40px max-content;
-                    min-height: 1.65em;
-                    white-space: pre;
-                    padding-right: 20px;
-                  "
-                >
-                  <span
-                    style="
-                      color: #858585;
-                      text-align: right;
-                      padding-right: 15px;
-                      user-select: none;
-                    "
-                    >8</span
-                  ><span
-                    ><span style="color: #dcdcaa">print</span>(<span
-                      style="color: #9cdcfe"
-                      >response</span
-                    >.<span style="color: #dcdcaa">json</span>())</span
-                  >
-                </div>
-              </div>
+              <pre style="margin: 0; font-family: inherit; color: inherit; white-space: pre;"><span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">1</span><span style="color: #c586c0">import</span> <span style="color: #4ec9b0">requests</span>
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">2</span>
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">3</span><span style="color: #9cdcfe">url</span> = <span style="color: #ce9178">"https://readyapi.net/api/v1/search/query"</span>
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">4</span><span style="color: #9cdcfe">headers</span> = {<span style="color: #ce9178">"x-api-key"</span>: <span style="color: #ce9178">"YOUR_API_KEY"</span>, <span style="color: #ce9178">"Content-Type"</span>: <span style="color: #ce9178">"application/json"</span>}
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">5</span><span style="color: #9cdcfe">payload</span> = {<span style="color: #ce9178">"query"</span>: <span style="color: #ce9178">"I need to travel far away quickly"</span>, <span style="color: #ce9178">"top_k"</span>: <span style="color: #b5cea8">2</span>}
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">6</span>
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">7</span><span style="color: #9cdcfe">response</span> = <span style="color: #4ec9b0">requests</span>.<span style="color: #dcdcaa">post</span>(<span style="color: #9cdcfe">url</span>, <span style="color: #9cdcfe">json</span>=<span style="color: #9cdcfe">payload</span>, <span style="color: #9cdcfe">headers</span>=<span style="color: #9cdcfe">headers</span>)
+<span style="color: #858585; user-select: none; display: inline-block; width: 25px; text-align: right; margin-right: 15px;">8</span><span style="color: #dcdcaa">print</span>(<span style="color: #9cdcfe">response</span>.<span style="color: #dcdcaa">json</span>())</pre>
             </div>
           </div>
         </div>
