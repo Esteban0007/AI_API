@@ -62,30 +62,45 @@ def test_searcher():
         embedder = Embedder()
         store = VectorStore(embedder=embedder)
         searcher = SearchEngine(vector_store=store, embedder=embedder)
-        
+
         # Add test documents
         test_docs = [
             {
-                "id": "search-test-1",
-                "title": "Machine Learning Basics",
-                "content": "Machine learning is a type of artificial intelligence.",
-                "keywords": ["ml", "ai"],
-                "metadata": {"category": "tutorial", "language": "en"}
+                "id": "part-001",
+                "title": "Charge System",
+                "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",
+                "keywords": ["energy", "battery", "power"],
+                "metadata": {"state": "idle", "category": "systems", "language": "en"},
             },
             {
-                "id": "search-test-2",
-                "title": "Neural Networks",
-                "content": "Neural networks are inspired by biological neurons.",
-                "keywords": ["neural", "deep-learning"],
-                "metadata": {"category": "advanced", "language": "en"}
-            }
+                "id": "part-002",
+                "title": "Flight System",
+                "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine",
+                "keywords": ["engine", "flight"],
+                "metadata": {
+                    "state": "active",
+                    "category": "systems",
+                    "language": "en",
+                },
+            },
+            {
+                "id": "part-003",
+                "title": "Stealth System",
+                "content": "cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise",
+                "keywords": ["cloak", "stealth"],
+                "metadata": {
+                    "state": "hidden",
+                    "category": "systems",
+                    "language": "en",
+                },
+            },
         ]
-        
+
         store.add_documents_batch(test_docs)
-        
+
         # Perform search
         results, exec_time = searcher.search("How does machine learning work?", top_k=2)
-        
+
         assert len(results) > 0
         assert "score" in results[0]
         print(f"✅ SearchEngine working. Found {len(results)} results in {exec_time:.2f}ms")

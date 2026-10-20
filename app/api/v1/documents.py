@@ -49,18 +49,27 @@ async def upload_documents(
     ```json
     {
         "documents": [
-            {
-                "id": "doc-001",
-                "title": "Machine Learning Basics",
-                "content": "Machine learning is a subset of artificial intelligence...",
-                "keywords": ["ml", "ai"],
-                "metadata": {
-                    "category": "tutorial",
-                    "language": "es",
-                    "source": "https://example.com"
-                }
+        {
+            "id": "part-001",
+            "title": "Charge System",
+            "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",
+            "keywords": ["energy", "battery"],
+            "metadata": {
+                "state": "idle",
+                "category": "systems"
             }
-        ]
+        },
+        {
+            "id": "part-002",
+            "title": "Flight System",
+            "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine",
+            "keywords": ["engine", "flight"],
+            "metadata": {
+                "state": "active",
+                "category": "systems"
+            }
+        }
+    ]
     }
     ```
 
@@ -69,6 +78,7 @@ async def upload_documents(
     - `uploaded_count`: Number of documents successfully uploaded
     - `failed_count`: Number of documents that failed
     """
+
     # Validate API key
     user_context = await _validate_api_key_internal(x_api_key)
     try:
