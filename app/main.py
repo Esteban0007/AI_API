@@ -156,7 +156,7 @@ def create_app() -> FastAPI:
         logger.info("Database initialized successfully")
 
     # Health check endpoint
-    @app.get("/health", tags=["System"])
+    @app.get("/api/v1/health", tags=["System"])
     async def health():
         """Health check endpoint with model information."""
         from app.engine.embedder import Embedder
