@@ -24,17 +24,17 @@ class DocumentCreate(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "id": "doc-001",
-                "title": "Machine Learning Basics",
-                "content": "Machine learning is a subset of artificial intelligence...",
-                "keywords": ["ml", "ai", "learning"],
+                "id": "part-001",
+                "title": "Charge System",
+                "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",
+                "keywords": ["energy", "battery", "power"],
                 "metadata": {
-                    "category": "tutorial",
-                    "language": "es",
-                    "source": "https://example.com/ml-basics",
-                    "author": "John Doe",
-                    "date": "2024-01-15",
-                    "custom_field": "any_value",
+                    "category": "systems",
+                    "state": "idle",
+                    "source": "manual-v2",
+                    "author": "Engineering Team",
+                    "date": "2026-01-15",
+                    "custom_field": "priority_high",
                 },
             }
         }
@@ -52,11 +52,26 @@ class DocumentBatch(BaseModel):
             "example": {
                 "documents": [
                     {
-                        "id": "doc-001",
-                        "title": "Title 1",
-                        "content": "Content 1...",
-                        "metadata": {},
-                    }
+                        "id": "part-001",
+                        "title": "Charge System",
+                        "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",
+                        "keywords": ["energy", "battery"],
+                        "metadata": {"state": "idle"},
+                    },
+                    {
+                        "id": "part-002",
+                        "title": "Flight System",
+                        "content": "thruster engine propulsion fly speed boost travel navigate rocket jet turbine",
+                        "keywords": ["engine", "flight"],
+                        "metadata": {"state": "active"},
+                    },
+                    {
+                        "id": "part-003",
+                        "title": "Stealth System",
+                        "content": "cloak invisibility hide camouflage stealth radar ghost disappear vanish disguise",
+                        "keywords": ["cloak", "stealth"],
+                        "metadata": {"state": "hidden"},
+                    },
                 ]
             }
         }
@@ -75,11 +90,11 @@ class DocumentResponse(BaseModel):
     class Config:
         json_schema_extra = {
             "example": {
-                "id": "doc-001",
-                "title": "Machine Learning Basics",
-                "content": "Machine learning is...",
-                "keywords": ["ml", "ai"],
-                "metadata": {},
-                "score": 0.94,
+                "id": "part-001",
+                "title": "Charge System",
+                "content": "solar panels energy reactor battery charging power recharge fuel cells electricity",
+                "keywords": ["energy", "battery", "power"],
+                "metadata": {"state": "idle"},
+                "score": 0.98,
             }
         }
