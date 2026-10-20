@@ -305,7 +305,7 @@
           </p>
         </div>
       </article>
-      
+
       <!-- Documents Section -->
       <article style="margin-top: 3rem;">
         <h2 class="section-title">Document Registry</h2>
@@ -367,15 +367,47 @@
 
       
 
-      <!-- Usage Instructions -->
-      <article style="margin-top: 2rem;">
-        <h3 style="color: #f8fafc; font-size: 1.2rem; margin-bottom: 0.75rem;">Programmatic Execution Example</h3>
-        <p style="color: #94a3b8;">Pass your token via the <code>X-API-Key</code> request header:</p>
-        <pre style="background: rgba(10, 15, 30, 0.9); border: 1px solid rgba(0, 242, 254, 0.3); padding: 1.25rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; color: #00f2fe;"><code>curl -H "X-API-Key: YOUR_API_KEY" https://api.semanticsearch.io/api/v1/search/query</code></pre>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 1rem;">
-          Review complete reference manuals in the <a href="/api-docs" style="color: #00f2fe; text-decoration: none;">API Docs</a>.
+     <!-- Programmatic Execution Example (VS Code Style) -->
+    <article style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+      <div>
+        <h3 style="color: #f8fafc; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>[02]</span> Programmatic Execution
+        </h3>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">
+          Send your payload and authenticate instantly via the <code>X-API-Key</code> header.
         </p>
-      </article>
+      </div>
+
+      <div style="border: 1px solid #333333; border-radius: 12px; background: #1e1e1e; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+        
+        <!-- VS Code Title Bar -->
+        <div style="background: #111111; padding: 0.75rem 1rem; border-bottom: 1px solid #292929; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">request.sh</span>
+          </div>
+          
+          <!-- Botón de copiar dinámico -->
+          <button onclick="navigator.clipboard.writeText('curl -X POST https://api.semanticsearch.io/api/v1/search/query \\\n  -H &quot;X-API-Key: YOUR_API_KEY&quot; \\\n  -H &quot;Content-Type: application/json&quot; \\\n  -d \'@payload.json\''); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy cURL', 2000);" style="background: #252526; color: #d4d4d4; border: 1px solid #3c3c3c; padding: 0.35rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-family: Consolas, 'Courier New', monospace; cursor: pointer; transition: all 0.2s;">Copy cURL</button>
+        </div>
+
+        <!-- Código del cURL -->
+        <div style="padding: 1.25rem;">
+          <div style="background: #111111; border: 1px solid #292929; border-radius: 8px; overflow-x: auto; margin: 0; padding: 1rem; color: #00f2fe; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.5;">
+    <pre style="margin: 0; font-family: inherit; color: inherit;">curl -X POST https://api.semanticsearch.io/api/v1/search/query \
+      -H "X-API-Key: YOUR_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '@payload.json'</pre>
+          </div>
+        </div>
+      </div>
+
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.2rem;">
+        Review complete reference manuals in the <a href="/api-docs" style="color: #00f2fe; text-decoration: none; border-bottom: 1px dashed rgba(0,242,254,0.4);">API Docs &rarr;</a>
+      </p>
+    </article>
     `;
 
     document.getElementById("dashboard").innerHTML = html;
