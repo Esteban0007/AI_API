@@ -46,8 +46,8 @@
     </div>
   </div>
 
-  <!-- Features Grid (Exact 4 Pillars - No hanging cards) -->
-  <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin: 2.5rem 0;">
+  <!-- Features Grid (Symmetric 2x2 Grid - No hanging cards) -->
+  <div class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem; margin: 2.5rem 0;">
     <div class="feature-card" style="background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 10px; padding: 1.5rem; transition: all 0.25s ease;" onmouseover="this.style.borderColor='rgba(0, 242, 254, 0.6)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(100, 116, 139, 0.3)'; this.style.transform='translateY(0)'">
       <div style="font-size: 0.8rem; color: #00f2fe; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-weight: 600;">[01]</div>
       <h3 style="color: #f8fafc; font-size: 1.05rem; margin-top: 0; font-weight: 600; margin-bottom: 0.5rem;">Forget Vector Databases</h3>
@@ -214,14 +214,14 @@
           <tr style="border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
             <td style="padding: 0.85rem; font-weight: 600; color: #f8fafc;">Synonyms</td>
             <td style="padding: 0.85rem; color: #94a3b8;">Fails unless words match exactly.</td>
-            <td style="padding: 0.85rem; color: #cbd5e1;">Succeeds by meaning ("broken screen" = "my display is shattered and won't turn on").</td>
+            <td style="padding: 0.85rem; color: #cbd5e1;">Succeeds by meaning ("broken screen" = "my display is shattered").</td>
           </tr>
         </tbody>
       </table>
     </div>
   </section>
 
-  <!-- Interactive & Clean Example Section (Optimized with 3 Core IDs) -->
+  <!-- Interactive & Clean Example Section -->
   <section style="margin: 3.5rem 0;">
     <div style="text-align: center; margin-bottom: 2.5rem;">
       <h2 style="color: #f8fafc; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">See It in Action</h2>
@@ -266,34 +266,63 @@
     <!-- STEP 02 & 03: Sleek Two-Column Grid for Request & Response -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
       
-      <!-- Left Column: Search Request -->
-      <div style="padding: 1.75rem; border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
-        <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-          <span>[02]</span> Natural Language Query
-        </h3>
-        <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">
-          Query using natural human concepts (e.g., finding fast travel without mentioning exact words).
-        </p>
+      <!-- Left Column: Search Request (VS Code Style with interactive Copy Button) -->
+      <div style="border: 1px solid rgba(0, 242, 254, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+        <!-- VS Code Title Bar -->
+        <div style="background: rgba(10, 15, 30, 0.95); padding: 0.75rem 1rem; border-bottom: 1px solid rgba(0, 242, 254, 0.2); display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">terminal.sh</span>
+          </div>
+          <button onclick="navigator.clipboard.writeText(document.getElementById('code-snippet').innerText); this.textContent='Copied!'; setTimeout(()=>this.textContent='Copy', 2000);" style="background: rgba(0, 242, 254, 0.1); color: #00f2fe; border: 1px solid rgba(0, 242, 254, 0.3); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; cursor: pointer; transition: all 0.2s;">Copy</button>
+        </div>
 
-        <pre style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(0, 242, 254, 0.2); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #cbd5e1; line-height: 1.5;"><code>curl -X POST https://readyapi.net/api/v1/search/query \
+        <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <h3 style="margin-top: 0; color: #00f2fe; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
+              <span>[02]</span> Natural Language Query
+            </h3>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">
+              Query using natural human concepts directly from your terminal or script.
+            </p>
+          </div>
+
+          <pre id="code-snippet" style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(0, 242, 254, 0.2); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #cbd5e1; line-height: 1.5; margin: 0;"><code>curl -X POST https://readyapi.net/api/v1/search/query \
   -H "x-api-key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "query": "I need to travel far away quickly",
     "top_k": 2
   }'</code></pre>
+        </div>
       </div>
 
       <!-- Right Column: API Response -->
-      <div style="padding: 1.75rem; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
-        <h3 style="margin-top: 0; color: #34d399; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
-          <span>[03]</span> Instant JSON Response (~124ms)
-        </h3>
-        <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">
-          Get ranked, highly relevant semantic matches scored from 0 to 1.
-        </p>
+      <div style="border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; background: linear-gradient(145deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); overflow: hidden; display: flex; flex-direction: column;">
+        <!-- VS Code Title Bar (Green accent for response) -->
+        <div style="background: rgba(10, 15, 30, 0.95); padding: 0.75rem 1rem; border-bottom: 1px solid rgba(16, 185, 129, 0.3); display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #f59e0b; border-radius: 50%; display: inline-block;"></span>
+            <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+            <span style="margin-left: 0.5rem; font-size: 0.75rem; color: #34d399; font-family: 'JetBrains Mono', monospace;">response.json</span>
+          </div>
+          <span style="font-size: 0.7rem; color: #34d399; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px;">Status 200 OK</span>
+        </div>
 
-        <pre style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(16, 185, 129, 0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #34d399; line-height: 1.5;"><code>{
+        <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <h3 style="margin-top: 0; color: #34d399; font-size: 1.05rem; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 0.5rem;">
+              <span>[03]</span> Instant JSON Response (~124ms)
+            </h3>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">
+              Get ranked, highly relevant semantic matches scored from 0 to 1.
+            </p>
+          </div>
+
+          <pre style="background: rgba(10, 15, 30, 0.95); border: 1px solid rgba(16, 185, 129, 0.3); padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; color: #34d399; line-height: 1.5; margin: 0;"><code>{
   "results": [
     {
       "id": "part-002",
@@ -309,6 +338,7 @@
   "count": 2,
   "processing_ms": 124
 }</code></pre>
+        </div>
       </div>
 
     </div>
